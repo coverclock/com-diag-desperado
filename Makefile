@@ -58,11 +58,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	hurricane
+RELEASE		=	imperial
 MAJOR		=	2
-MINOR		=	1
+MINOR		=	2
 BUILD		=	0
-PRERELEASE	=	imperial
+PRERELEASE	=	jupiter
 
 #
 # Indicate the platform, target and compiler you are using.

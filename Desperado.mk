@@ -296,7 +296,7 @@ pristine:	clean
 #	release (BETA)					most recent tagged version
 #	prerelease (ALPHA)				most recent checked-in version
 #
-#	Using CVS (of historical interest only):
+#	Using CVS:
 #
 #	checkout the next release:		cvs checkout diag.com/desperado
 #	commit the latest revisions:	cvs commit .
@@ -317,6 +317,9 @@ pristine:	clean
 #	download the latest release:	wget [ -Y on ] ftp://ftp.webcom.com/pub2/jsloan/www/ftp/ desperado-$(RELEASE).tgz
 #
 
+freeze:
+	${SVN} copy ${SVNTRUNK} ${SVNTAG}/$(RELEASE)
+
 manifest:	manifest.txt
 	cat manifest.txt
 	
@@ -326,8 +329,7 @@ manifest.txt:	$(MANIFEST)
 beta:	release
 
 release:
-	mkdir -p $(TMPDIR)/$(BETA)
-	rm -rf $(TMPDIR)/$(BETA)/*
+	rm -rf $(TMPDIR)/$(BETA)
 	${SVN} export ${SVNTAG}/$(RELEASE)/${PROJECT} $(TMPDIR)/$(BETA)
 	sh prepare.sh $(TMPDIR)/$(BETA)
 	(cd $(TMPDIR); tar cvf - ./$(BETA) > $(PRODUCT)-$(RELEASE).tar)
@@ -337,8 +339,7 @@ release:
 alpha:	prerelease
 
 prerelease:
-	mkdir -p $(TMPDIR)/$(ALPHA)
-	rm -rf $(TMPDIR)/$(ALPHA)/*
+	rm -rf $(TMPDIR)/$(ALPHA)
 	${SVN} export ${SVNTRUNK}/${PROJECT} $(TMPDIR)/$(ALPHA)
 	sh prepare.sh $(TMPDIR)/$(ALPHA)
 	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-ALPHA.tar)
