@@ -301,11 +301,24 @@ pristine:	clean
 #
 #	To...
 #
+#	Using CVS (of historical interest only):
+#
 #	checkout the next release:		cvs checkout diag.com/desperado
 #	commit the latest revisions:	cvs commit .
 #	generate the current relase:	cvs export -r $(RELEASE) diag.com/desperado
 #	generate the next release:		cvs export -D $(LATEST) diag.com/desperado
 #	freeze the next release:		cvs tag $(RELEASE) .
+#
+#	Using SVN:
+#
+#	checkout the next release:		svn checkout svn://localhost/desperado/trunk/Desperado
+#	commit the latest revisions:	svn commit .
+#	generate the current relase:	svn checkout svn://localhost/desperado/tags/$(RELEASE)
+#	generate the next release:		svn checkout svn://localhost/desperado/trunk/Desperado
+#	freeze the next relase:			svn copy svn://localhost/desperado/trunk svn://localhost/desperado/tags/$(RELEASE)
+#
+#	Other stuff:
+#
 #	download the latest release:	wget [ -Y on ] ftp://ftp.webcom.com/
 #										pub2/jsloan/www/ftp/
 #										desperado-$(RELEASE).tar.gz
@@ -322,7 +335,7 @@ beta:	release
 release:
 	mkdir -p $(TMPDIR)/$(BETA)
 	rm -rf $(TMPDIR)/$(BETA)/*
-	cvs export -r $(RELEASE) -d $(TMPDIR)/$(BETA) $(DOMAIN)/$(PRODUCT)
+	svn checkout svn://localhost/desperado/tags/$(RELEASE)/Desperado $(TMPDIR)/$(BETA)
 	sh prepare.sh $(TMPDIR)/$(BETA)
 	(cd $(TMPDIR); tar cvf - ./$(BETA) > $(PRODUCT)-$(RELEASE).tar)
 	gzip -f $(TMPDIR)/$(PRODUCT)-$(RELEASE).tar
@@ -333,16 +346,17 @@ alpha:	prerelease
 prerelease:
 	mkdir -p $(TMPDIR)/$(ALPHA)
 	rm -rf $(TMPDIR)/$(ALPHA)/*
+	svn checkout svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
 	cvs export -D "$(LATEST)" -d $(TMPDIR)/$(ALPHA) $(DOMAIN)/$(PRODUCT)
 	sh prepare.sh $(TMPDIR)/$(ALPHA)
-	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-BETA.tar)
-	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-BETA.tar
-	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-BETA.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-BETA.tgz
+	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-ALPHA.tar)
+	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar
+	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tgz
 
 snapshot:
 	mkdir -p $(TMPDIR)/$(ALPHA)
 	rm -rf $(TMPDIR)/$(ALPHA)/*
-	cvs export -D "$(LATEST)" -d $(TMPDIR)/$(ALPHA) $(DOMAIN)/$(PRODUCT)
+	svn checkout svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
 	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar)
 	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar
 	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tgz
