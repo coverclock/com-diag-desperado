@@ -1,0 +1,306 @@
+/* vim: set ts=4 expandtab shiftwidth=4: */
+
+/******************************************************************************
+
+    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    This file is part of the Digital Aggregates Desperado library.
+    
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    As a special exception, if other files instantiate templates or
+    use macros or inline functions from this file, or you compile
+    this file and link it with other works to produce a work based on
+    this file, this file does not by itself cause the resulting work
+    to be covered by the GNU Lesser General Public License. However
+    the source code for this file must still be made available in
+    accordance with the GNU Lesser General Public License.
+
+    This exception does not invalidate any other reasons why a work
+    based on this file might be covered by the GNU Lesser General
+    Public License.
+
+    Alternative commercial licensing terms are available from the copyright
+    holder. Contact Digital Aggregates Corporation for more information.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General
+    Public License along with this library; if not, write to the
+    Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+    Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
+
+    $Name:  $
+
+    $Id: Logger.cpp,v 1.7 2006/02/07 00:07:03 jsloan Exp $
+
+******************************************************************************/
+
+
+/**
+ *  @file
+ *
+ *  Implements the Logger class.
+ *
+ *  @see    Logger
+ *
+ *  @author $Author: jsloan $
+ *
+ *  @version    $Revision: 1.7 $
+ *
+ *  @date   $Date: 2006/02/07 00:07:03 $
+ */
+
+
+#include <new>
+#include <cstdarg>
+#include "string.h"
+#include "generics.h"
+#include "Logger.h"
+#include "Platform.h"
+#include "TimeStamp.h"
+
+
+const char* Logger::labels[] = {
+    "FNST",
+    "FNER",
+    "FINE",
+    "TRCE",
+    "DEBG",
+    "INFO",
+    "CNFG",
+    "NOTE",
+    "WARN",
+    "ERRO",
+    "SEVR",
+    "CRIT",
+    "ALRT",
+    "FATL",
+    "EMER",
+    "PRNT",
+    0
+};
+
+
+//
+//  Constructor.
+//
+Logger::Logger(Output* po) :
+    ou(po)
+{
+}
+
+
+//
+//  Constructor.
+//
+Logger::Logger(Output& ro) :
+    ou(&ro)
+{
+}
+
+
+//
+//  Destructor.
+//
+Logger::~Logger() {
+}
+
+
+//
+//    Initializer.
+//
+bool Logger::initialize(Output* po) {
+    bool rc = false;
+    try {
+        this->Logger::~Logger();
+        new(this) Logger(po);
+        rc = true;
+    } catch (...) {
+        rc = false;
+    }
+    return rc;
+}
+
+
+//
+//    Initializer.
+//
+bool Logger::initialize(Output& ro) {
+    bool rc = false;
+    try {
+        this->Logger::~Logger();
+        new(this) Logger(ro);
+        rc = true;
+    } catch (...) {
+        rc = false;
+    }
+    return rc;
+}
+
+
+//
+//  Returns current output object.
+//
+Output& Logger::output() const {
+    return this->ou ? *this->ou : Platform::instance().log();
+}
+
+
+//
+//  Return the logging level encoded (or not) in the buffer.
+//  This is a hack, but like many hacks, it works.
+//
+Logger::Level Logger::level(const char* buffer, size_t size) {
+    Level rc = INFORMATION;
+
+    do {
+
+        if (0 == size) {
+            break;
+        }
+
+        const char* lhs = strnchr(buffer, size, '[');
+        if (0 == lhs) {
+            break;
+        }
+
+        size -= lhs - buffer;
+        if (0 == size) {
+            break;
+        }
+
+        const char* rhs = ::strnchr(lhs, size , ']');
+        if (0 == rhs) {
+            break;
+        }
+
+        size = rhs - lhs - 1;
+        if ((sizeof("XXXX") - 1) != size) {
+            break;
+        }
+
+        for (int ll = 0; 0 != this->labels[ll]; ++ll) {
+            if (0 == std::strncmp(this->labels[ll], lhs + 1, size)) {
+                rc = static_cast<Level>(ll);
+                break;
+            }
+        }
+
+    } while (false);
+
+#if DESPERADO_HAS_DEBUGGING
+    Print printf;
+    printf("%s[%d]: \"%s\" %d\n",
+        __FILE__, __LINE__, buffer, rc);
+#endif
+
+    return rc;
+}
+
+
+//
+//  All levels are always enabled in the base class.
+//
+bool Logger::isEnabled(Level /* level */) {
+    return true;
+}
+
+
+//
+//  Format the log string with a prefix into the provided buffer.
+//
+ssize_t Logger::format(
+    char* buffer,
+    size_t size,
+    Level level,
+    const char* format,
+    va_list ap
+) {
+    TimeStamp timestamp;
+    const char* stamp = timestamp.log();
+    identity_t identity = Platform::instance().identity();
+    if (!((0 <= level) &&
+          (static_cast<size_t>(level) < countof(this->labels)))) {
+        level = Logger::PRINT;
+    }
+    int octets = ::snprintf(buffer, size, "%s (0x%016llx) [%4.4s] ",
+            stamp, identity, this->labels[level]);
+    ssize_t rc = ::vsnprintf(buffer + octets, sizeof(buffer) - octets,
+                                 format, ap);
+    return octets + rc;
+}
+
+
+//
+//  Emit the log string.
+//
+ssize_t Logger::emit(const char* buffer, size_t size) {
+    Output& out = this->output();
+    ssize_t rc = out(buffer, size);
+    out();
+    return rc;
+}
+
+
+//
+//  Log the variadic argument list.
+//
+ssize_t Logger::log(Level level, const char* format ...) {
+    va_list ap;
+    va_start(ap, format);
+    ssize_t rc = this->log(level, format, ap);
+    va_end(ap);
+    return rc;
+}
+
+
+#define DESPERADO_LOGGER(_FUNCTION_, _LEVEL_) \
+ssize_t Logger::_FUNCTION_(const char* format ...) { \
+    va_list ap; \
+    va_start(ap, format); \
+    ssize_t rc = this->log(this->_LEVEL_, format, ap); \
+    va_end(ap); \
+    return rc; \
+}
+
+
+DESPERADO_LOGGER(   finest,         FINEST          )
+DESPERADO_LOGGER(   finer,          FINER           )
+DESPERADO_LOGGER(   fine,           FINE            )
+DESPERADO_LOGGER(   trace,          TRACE           )
+DESPERADO_LOGGER(   debug,          DEBUG           )
+DESPERADO_LOGGER(   information,    INFORMATION     )
+DESPERADO_LOGGER(   configuration,  CONFIGURATION   )
+DESPERADO_LOGGER(   notice,         NOTICE          )
+DESPERADO_LOGGER(   warning,        WARNING         )
+DESPERADO_LOGGER(   error,          ERROR           )
+DESPERADO_LOGGER(   severe,         SEVERE          )
+DESPERADO_LOGGER(   critical,       CRITICAL        )
+DESPERADO_LOGGER(   alert,          ALERT           )
+DESPERADO_LOGGER(   fatal,          FATAL           )
+DESPERADO_LOGGER(   emergency,      EMERGENCY       )
+DESPERADO_LOGGER(   print,          PRINT           )
+
+
+//
+//  Show this object on the output object.
+//
+void Logger::show(int level, Output* display, int indent) const {
+    Platform& pl = Platform::instance();
+    Print printf(display);
+    const char* sp = printf.output().indentation(indent);
+    char component[sizeof(__FILE__)];
+    printf("%s%s(%p)[%lu]:\n",
+        sp, pl.component(__FILE__, component, sizeof(component)),
+        this, sizeof(*this));
+    printf("%s ou=%p\n", sp, this->ou);
+    if (this->ou) {
+        this->ou->show(level, display, indent + 2);
+    }
+}
