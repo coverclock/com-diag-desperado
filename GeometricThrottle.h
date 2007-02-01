@@ -123,9 +123,6 @@ public:
      *  Resets the throttle to its just-constructed state. This may
      *  allow traffic contract violations to occur since subsequent
      *  admission decisions will be based on the reinitialized state.
-     *
-     *  @param  ticks           is the current time in ticks. This
-     *                          parameter has no effect on this throttle.
      */
     virtual void reset();
 

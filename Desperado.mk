@@ -313,7 +313,7 @@ pristine:	clean
 #
 #	checkout the next release:		svn checkout svn://localhost/desperado/trunk/Desperado
 #	commit the latest revisions:	svn commit .
-#	generate the current relase:	svn checkout svn://localhost/desperado/tags/$(RELEASE)
+#	generate the current relase:	svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado $(RELEASE)
 #	generate the next release:		svn checkout svn://localhost/desperado/trunk/Desperado
 #	freeze the next relase:			svn copy svn://localhost/desperado/trunk svn://localhost/desperado/tags/$(RELEASE)
 #
@@ -335,7 +335,7 @@ beta:	release
 release:
 	mkdir -p $(TMPDIR)/$(BETA)
 	rm -rf $(TMPDIR)/$(BETA)/*
-	svn checkout svn://localhost/desperado/tags/$(RELEASE)/Desperado $(TMPDIR)/$(BETA)
+	svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado $(TMPDIR)/$(BETA)
 	sh prepare.sh $(TMPDIR)/$(BETA)
 	(cd $(TMPDIR); tar cvf - ./$(BETA) > $(PRODUCT)-$(RELEASE).tar)
 	gzip -f $(TMPDIR)/$(PRODUCT)-$(RELEASE).tar
@@ -346,7 +346,7 @@ alpha:	prerelease
 prerelease:
 	mkdir -p $(TMPDIR)/$(ALPHA)
 	rm -rf $(TMPDIR)/$(ALPHA)/*
-	svn checkout svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
+	svn export svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
 	cvs export -D "$(LATEST)" -d $(TMPDIR)/$(ALPHA) $(DOMAIN)/$(PRODUCT)
 	sh prepare.sh $(TMPDIR)/$(ALPHA)
 	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-ALPHA.tar)
@@ -356,7 +356,7 @@ prerelease:
 snapshot:
 	mkdir -p $(TMPDIR)/$(ALPHA)
 	rm -rf $(TMPDIR)/$(ALPHA)/*
-	svn checkout svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
+	svn export svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
 	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar)
 	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar
 	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tgz

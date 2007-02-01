@@ -88,11 +88,9 @@ VARIABLE errors
     unittesttarget (()) tally
     unittesttarget2 (()) tally
     unittestThrottle (()) tally
-    unittestExponentialThrottle (( 250000000 )) tally
-    unittestDelayThrottle (()) tally
-    unittestContractThrottle (( 5 10 30 )) tally
-    unittestBandwidthThrottle (( 1024 60 )) tally
-    unittestCellRateThrottle (( 10 150 2 5 30 )) tally
+    unittestGeometricThrottle (( 250000000 )) tally
+    unittestBandwidthThrottle (( 10240 250000 1024 10 100000 )) tally
+    unittestCellRateThrottle (( 200 250 100 5 10000000 )) tally
     unittestFifo (()) tally
     unittestCommonEra (()) tally
     unittestsuiteend

@@ -210,14 +210,6 @@ public:
      *
      *  @param  jt          is the jitter tolerance in nanoseconds.
      *
-     *  @param  sbps        is the sustained rate in bytes per second.
-     *
-     *  @param  mbs         is the maximum burst size in bytes.
-     *
-     *  @param  per         is the peak cell rate in bytes per second.
-     *
-     *  @param  jt          is the jitter tolerance in nanoseconds.
-     *
      *  @return true if successful, false otherwise.
      */
     virtual bool initialize(unsigned int pbps, unsigned int jt);

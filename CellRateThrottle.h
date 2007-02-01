@@ -69,9 +69,7 @@
  *  Implements a throttle that enforces a traffic contract based on
  *  a virtual scheduler implementation of a Generic Cell Rate Algorithm
  *  (GCRA) as defined in the ATM Forum Traffic Management 4.1 specification.
- *  This throttle is similar in concept to ContractThrottle,
- *  but differs in some important respects. This throttle actually
- *  implements the ATM Forum cell rate traffic contracts using peak
+ *  This throttle implements the cell rate traffic contracts using peak
  *  cell rate (PCR), cell delay variation tolerance (CDVT), sustainable
  *  cell rate (SCR), and maximum burst size (MBS), while the contract
  *  throttle implements a simpler approximation. This throttle uses
