@@ -1,0 +1,251 @@
+The Embedded Muse
+
+--------------------------------------------------------------
+Embedded Muse 111    Copyright 2005 TGG      March 4, 2005
+--------------------------------------------------------------
+You may redistribute this newsletter for noncommercial purposes. For 
+commercial use contact info@ganssle.com.
+
+EDITOR: Jack Ganssle, jack@ganssle.com
+
+CONTENTS:
+- Editor's Notes
+- That Fiendishly Clever Circular Buffer and Testing
+- The Zuse Machines
+- Consulting - For the Boss
+- USB
+- Jobs!
+- Joke for the Week
+- About The Embedded Muse
+
+
+Editor's Notes
+--------------
+Want to increase your team's productivity? Reduce bugs? Meet deadlines? 
+Take my one day Better Firmware Faster seminar. You'll learn how to 
+estimate a schedule accurately, thwart schedule-killing bugs, manage reuse, 
+build predictable real-time code, better ways to deal with uniquely 
+embedded problems like reentrancy, heaps, stacks and hardware drivers, and 
+much, much more.
+
+I'm presenting this:
+- Austin, TX on April 18
+- Baltimore, MD on April 20
+
+Want to be your company's embedded guru? Join us! There's more info at 
+http://www.ganssle.com/classes.htm, including cheap flights to these cities 
+from around the USA.
+
+If your outfit has a dozen or more engineers who can benefit from this 
+training I can present the seminar on-site.
+
+
+Next week the Embedded Systems Conference runs at the Moscone Center in San 
+Francisco. It's always a fascinating event; the days just fly by. I'll be 
+giving three talks there (Managing Embedded Projects, Learning from 
+Disaster, and Really Real Time), so if you're there stop by and say hello.
+
+
+That Fiendishly Clever Circular Buffer and Testing
+--------------------------------------------------
+Last issue I published a cool circular buffer routine. Turns out there's an 
+error in the code - the macro should have been casted (unsigned char). Many 
+people have pointed this out; several have also noted that the code is not 
+re-entrant. My thanks to all.
+
+Interestingly, the code passed all of my tests since I never constructed 
+one to check for the buffer full condition. Once again, this points out the 
+importance - and the difficulty of constructing - good tests. Though I 
+disagree with some of the philosophy behind Test Driven Development (TDD), 
+their relentless focus on constructing great tests in parallel with writing 
+the code is spot on.
+
+To those unfamiliar with TDD, the canonical book is Kent Beck's Test Driven 
+Development. He believes that to write, for instance, a factorial routine 
+one should start with a test for the simplest condition.
+
+So we'd write code that looks like:
+if(factorial(1) != 1) printf("error at 1");
+
+and
+
+int factorial(int i)
+{return 1}
+
+The next test is:
+if(factorial(2) != 2) printf("error at 2");
+
+Obviously, this test will fail, so the factorial code is improved till it 
+passes.
+
+The resulting tests can be fabulous, but I argue there are better ways to 
+craft the function. This is too much like a random walk that converges on a 
+solution.
+
+The TDD approach will yield code that must be tossed. Iterating in this 
+fashion gives code that looks something like:
+
+int factorial(int i)
+{
+if(i==1)return 1;
+if(i==2)return 2;
+if(i==3)return 6;
+etc.
+}
+
+We know a better solution is recursive. All of this code will ultimately be 
+deleted once the developer spots the emerging pattern.
+
+Better: craft a careful design from the start. But do develop tests in 
+parallel to catch all possible conditions.
+
+
+The Zuse Machines
+-----------------
+Imagine a programmable computer that's purely mechanical, no tubes, 
+transistors or relays, using no electricity at all, except to turn one 
+motor. Let's say it has 64 words, each 22 bits long, with 8 instructions. 
+including floating point.
+
+Impossible? Or just implausible?
+
+Apparently not. Konrad Zuse built this machine in his parent's living room 
+(they must have been very patient people) in 1938.
+
+It was programmable from a paper tape and ran at a blistering 1 Hz, yet 
+Zuse had no knowledge of Babbage or any other computer work. He apparently 
+invented all of the concepts independently.
+
+By 1941 he created his Z3 machine which used relays. Still no tubes. This 
+computer had 9 instructions, though no conditional branches, and ran at 5.3 Hz.
+
+Zuse built a computer company and sold many machines. It wasn't till his 
+1957 Z22 that he created an electronic computer.
+
+While at the Deutsches Museum in Munich last year I saw a replica of the Z3 
+and the original Z4, but their place in history eluded me at the time. 
+(More here: 
+http://www.deutsches-museum.de/ausstell/dauer/inform/e_infor3.htm ). Then I 
+came across this site: http://www.epemag.com/zuse , which is a fascinating 
+history of Zuse the man and Zuse the company. Though the site is written 
+worshipfully by his son Horst, it's still an amazing story that has been 
+all but neglected in the USA. Recommended for those interested in the 
+history of this field.
+
+
+Consulting - For the Boss
+-------------------------
+There's an interesting white paper on the web called "How to Buy 
+Consultancy and Survive" by Stephen Summers, at 
+http://www.praxis-his.com/pdfs/buying.pdf . At only 6 pages it's a quick 
+primer about managing outside consultants, and has some good advice.
+
+I'd add one important point: never contract out core competencies. If you 
+build cell phones it might make sense to put the consultants on GUI 
+features or gaming functions, but never on the CDMA/GSM protocols and the 
+like. There are many reasons for buying consultant services; an important 
+and oft-forgotten one is that consultants are easy to fire.
+
+Why doesn't Ford use an in-house ad agency? When the advertisements flop 
+they can fire the agency and hire another.
+
+But if you fire outsiders who are masters of critical parts of your 
+technology, you're doomed.
+
+
+USB
+---
+I'm getting a lot of email from people looking for help in putting USB into 
+their products. USB is somewhat complex and can be trickier than folks 
+initially realize.
+
+Jan Axelson's USB Complete is a great reference on the subject. Her web 
+page (http://www.lvr.com ) has information about the book, and other USB 
+resources.
+
+I recently came across a tool that writes USB code after you answer 
+questions about your application. See 
+http://tracesystemsinc.com/usb_tools.ivnu . It's cheap ($399), and a 
+related tool will create test code that watches your device's USB traffic. 
+Though I have no experience with these products, Jeff Bachiochi reviewed 
+them in Circuit Cellar Ink last year. See 
+http://www.circuitcellar.com/library/print/0504/Bachiochi166/5.htm for the 
+review.
+
+
+Jobs!
+-----
+Let me know if you're hiring firmware or embedded designers. I'll continue 
+to run notices for embedded developers as long as the job situation stays 
+in the dumper. No recruiters please.
+
+InHand Electronics, Rockville, MD, is seeking a highly-motivated individual 
+with excellent engineering and leadership skills for a rewarding position 
+designing electronics board-level solutions and managing InHand's 
+electronics engineering staff. The successful candidate will have strong 
+working knowledge of system design and be eager to learn about exciting new 
+technologies in the world of wireless and handheld devices. The successful 
+candidate will create/modify electronic board-level design procedures, 
+manage hardware engineering employees, create and document hardware 
+designs, interface with other InHand managers and executives for technical 
+and business issues, and interface with customers as necessary during the 
+completion of projects. A complete job listing is at 
+www.inhandelectronics.com/careers.asp .
+
+InHand is also seeking a highly-motivated individual with excellent 
+engineering for a rewarding position designing electronics board-level 
+solutions for handheld and wireless devices. The successful candidate 
+should have strong working knowledge of system design and be eager to learn 
+about exciting new technologies in the world of wireless and handheld 
+devices. The successful candidate will create and document hardware 
+designs, interface with the Director of Hardware Engineering for technical 
+and management issues, and interface with customers as necessary during the 
+completion of projects. A complete job listing is at 
+www.inhandelectronics.com/careers.asp .
+
+
+Creative Lab's Advanced Technology Center in Scotts Valley, CA has an 
+opening for an experienced Embedded Firmware Engineer. Responsibilities 
+will include working as part of a multi-disciplinary engineering team to 
+define and implement overall system requirements, and assisting in the 
+specification and implementation of VLSI, board and firmware architectures 
+from concept through production design.
+
+The ideal candidate will have experience in all aspects of firmware 
+development for embedded systems, a Bachelors degree in Computer Science, 
+Electrical Engineering or related field, a minimum 7 years experience 
+developing embedded firmware, demonstrated proficiency in structured C and 
+C++ development, proficiency in assembly language programming, excellent 
+written and oral communication skills, and the ablility to work as part of 
+a small but highly capable engineering team
+
+Send your resume to recruiter@creativelabs.com or fax to 831-430-1725. 
+Check us out at us.creative.com .
+
+
+Joke for the Week
+-----------------
+Christian A. Schreiner sent along this Valentine Day's joke:
+
+The ring thou wearest is not a mere token ring.  Its depth arcs from the 
+highest ether to the most concrete devotion one CAN have.
+
+(which of course plays on token ring arcnet, ethernet, and CAN networks.)
+
+
+About The Embedded Muse
+-----------------------
+The Embedded Muse is an occasional newsletter sent via email by Jack 
+Ganssle. Send complaints, comments, and contributions to me at 
+jack@ganssle.com.
+
+To subscribe, send a message to majordomo@ganssle.com, with the words 
+"subscribe embedded email-address" in the body. To unsubscribe, change the 
+message to "unsubscribe embedded email-address". BUT - please use YOUR 
+email address in place of "email-address".
+
+The Embedded Muse is supported by The Ganssle Group, whose mission is to 
+help embedded folks get better products to market faster. We offer seminars 
+at your site offering hard-hitting ideas - and action - you can take now to 
+improve firmware quality and decrease development time.  Contact us at 
+info@ganssle.com for more information.
