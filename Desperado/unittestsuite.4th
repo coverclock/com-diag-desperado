@@ -50,25 +50,32 @@ VARIABLE errors
     unittestArgument (()) tally
     unittestAscii (()) tally
     unittestAttribute (( 0 )) tally
+    unittestBandwidthThrottle (( 10240 250000 1024 10 100000 )) tally
+    unittestCellRateThrottle (( 200 250 100 5 10000000 )) tally
     unittestChain (()) tally
-    unittestLinkType (()) tally
+    unittestCommonEra (()) tally
     unittestCounters (()) tally
     unittestCrc (()) tally
+    unittestDelayThrottle (()) tally
     unittestDump (()) tally
     unittestEncode (()) tally
     unittestEscape (()) tally
     unittestException (()) tally
     unittestFicl (( 0 )) tally
     unittestFiclShell (( 0 )) tally
+    unittestFifo (()) tally
+    unittestGeometricThrottle (( 250000000 )) tally
     unittestGrayCode (()) tally
     unittestHeap (()) tally
     unittestHeap2 (()) tally
     unittestHeap3 (()) tally
-    unittestLogger (()) tally
-    unittestLogger2 (()) tally
     unittestImplementation (()) tally
     unittestInputOutputStatic (()) tally
     unittestIso3166 (()) tally
+    unittestJavaVirtualMachine (()) tally
+    unittestLinkType (()) tally
+    unittestLogger (()) tally
+    unittestLogger2 (()) tally
     unittestMeter (()) tally
     unittestMinimumMaximum (()) tally
     unittestMutex (()) tally
@@ -76,22 +83,19 @@ VARIABLE errors
     unittestPlatform (()) tally
     unittestPlatform2 (()) tally
     unittestRam (()) tally
-    unittestDelayThrottle (()) tally
+    unittestService (()) tally
+    unittestStreamSocket (()) tally
+    unittestThrottle (()) tally
     unittestVintage (()) tally
     unittestWord (( 0 )) tally
     unittestbarrier (()) tally
     unittestcxxcapi (()) tally
+    unittestcxxjapi (()) tally
     unittestgenerics (()) tally
     unittestgenerics2 (()) tally
     unittestnamespace (()) tally
     unitteststring (()) tally
     unittesttarget (()) tally
     unittesttarget2 (()) tally
-    unittestThrottle (()) tally
-    unittestGeometricThrottle (( 250000000 )) tally
-    unittestBandwidthThrottle (( 10240 250000 1024 10 100000 )) tally
-    unittestCellRateThrottle (( 200 250 100 5 10000000 )) tally
-    unittestFifo (()) tally
-    unittestCommonEra (()) tally
     unittestsuiteend
 ;
