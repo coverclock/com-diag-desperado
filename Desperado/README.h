@@ -191,7 +191,8 @@
         firefly         1.32.0   2007-01-29
         grizzly         1.33.0   2007-01-29
         hurricane       2.1.0    2007-01-31
-        imperial        2.2.0    TBD
+        imperial        2.2.0    2007-02-01
+        jupiter         2.3.0    TBD
 
     The compressed tar file of the latest release can be found here:
 
