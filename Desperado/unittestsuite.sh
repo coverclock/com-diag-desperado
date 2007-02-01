@@ -75,10 +75,8 @@ unittestBandwidthThrottle
 unittestCellRateThrottle
 unittestChain
 unittestCommonEra
-unittestContractThrottle
 unittestCounters
 unittestCrc
-unittestDelayThrottle
 unittestDump
 unittestEncode
 unittestEscape
