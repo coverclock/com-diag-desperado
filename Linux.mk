@@ -61,6 +61,8 @@ PS2PDF		=	ps2pdf
 RANLIB		=	ranlib
 READER		=	acroread
 STRIP		=	strip
+CVS			=	cvs
+SVN			=	svn
 
 CPPONLY		=	-E
 

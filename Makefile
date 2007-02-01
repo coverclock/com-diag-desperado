@@ -57,6 +57,7 @@
 
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
+PROJECT		=	Desperado
 RELEASE		=	hurricane
 MAJOR		=	2
 MINOR		=	1
@@ -95,6 +96,15 @@ DYNAMIC		=	shared
 
 PUBDIR		=	/usr/local
 TMPDIR		=	/usr/tmp
+
+#
+# Define how and where you get to Subversion.
+#
+
+SVNPROTO	=	svn
+SVNHOST		=	localhost
+SVNTRUNK	=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/trunk
+SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 
 #
 # Indicate the adjuncts you want built.

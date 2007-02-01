@@ -212,7 +212,7 @@ public:
      *
      *  @return true if successful, false otherwise.
      */
-    virtual bool initialize(unsigned int pbps, unsigned int jt);
+    virtual bool initialize(uint32_t pbps, uint32_t jt);
 
     /**
      *  Initializes this object, returning it to its just constructed state.

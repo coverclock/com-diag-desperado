@@ -155,8 +155,6 @@ MANIFEST	=	$(sort $(SOURCES) $(MAKEFILES) $(ANTFILES) $(EXTRAS) $(LICENSES) $(IN
 
 BETA		=	$(DOMAIN)/$(PRODUCT)/$(RELEASE)
 ALPHA		=	$(DOMAIN)/$(PRODUCT)/$(PRERELEASE)
-CHECKEDIN	=	$(DOMAIN)/$(PRODUCT)/$(PRERELEASE)
-CHECKEDOUT	=	$(DOMAIN)/$(PRODUCT)/$(PRERELEASE)
 
 ROOT		=	$(shell pwd)
 
@@ -296,10 +294,7 @@ pristine:	clean
 #	Distribution
 #	
 #	release (BETA)					most recent tagged version
-#	prerelease (SNAPSHOT)			most recent checked-in version
-#	workspace (WORKSPACE)			current checked-out version
-#
-#	To...
+#	prerelease (ALPHA)				most recent checked-in version
 #
 #	Using CVS (of historical interest only):
 #
@@ -311,17 +306,15 @@ pristine:	clean
 #
 #	Using SVN:
 #
-#	checkout the next release:		svn checkout svn://localhost/desperado/trunk/Desperado
+#	checkout the next release:		svn checkout svn://localhost/desperado/trunk/Desperado diag.com/desperado
 #	commit the latest revisions:	svn commit .
-#	generate the current relase:	svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado $(RELEASE)
-#	generate the next release:		svn checkout svn://localhost/desperado/trunk/Desperado
+#	generate the current relase:	svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado diag.com/desperado
+#	generate the next release:		svn checkout svn://localhost/desperado/trunk/Desperado diag.com/desperado
 #	freeze the next relase:			svn copy svn://localhost/desperado/trunk svn://localhost/desperado/tags/$(RELEASE)
 #
 #	Other stuff:
 #
-#	download the latest release:	wget [ -Y on ] ftp://ftp.webcom.com/
-#										pub2/jsloan/www/ftp/
-#										desperado-$(RELEASE).tar.gz
+#	download the latest release:	wget [ -Y on ] ftp://ftp.webcom.com/pub2/jsloan/www/ftp/ desperado-$(RELEASE).tgz
 #
 
 manifest:	manifest.txt
@@ -335,7 +328,7 @@ beta:	release
 release:
 	mkdir -p $(TMPDIR)/$(BETA)
 	rm -rf $(TMPDIR)/$(BETA)/*
-	svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado $(TMPDIR)/$(BETA)
+	${SVN} export ${SVNTAG}/$(RELEASE)/${PROJECT} $(TMPDIR)/$(BETA)
 	sh prepare.sh $(TMPDIR)/$(BETA)
 	(cd $(TMPDIR); tar cvf - ./$(BETA) > $(PRODUCT)-$(RELEASE).tar)
 	gzip -f $(TMPDIR)/$(PRODUCT)-$(RELEASE).tar
@@ -346,28 +339,11 @@ alpha:	prerelease
 prerelease:
 	mkdir -p $(TMPDIR)/$(ALPHA)
 	rm -rf $(TMPDIR)/$(ALPHA)/*
-	svn export svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
-	cvs export -D "$(LATEST)" -d $(TMPDIR)/$(ALPHA) $(DOMAIN)/$(PRODUCT)
+	${SVN} export ${SVNTRUNK}/${PROJECT} $(TMPDIR)/$(ALPHA)
 	sh prepare.sh $(TMPDIR)/$(ALPHA)
 	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-ALPHA.tar)
 	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar
 	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tgz
-
-snapshot:
-	mkdir -p $(TMPDIR)/$(ALPHA)
-	rm -rf $(TMPDIR)/$(ALPHA)/*
-	svn export svn://localhost/desperado/trunk/Desperado $(TMPDIR)/$(ALPHA)
-	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar)
-	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar
-	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-SNAPSHOT.tgz
-
-workspace:
-	mkdir -p $(TMPDIR)/$(ALPHA)
-	rm -rf $(TMPDIR)/$(ALPHA)/*
-	cp -i $(MANIFEST) $(TMPDIR)/$(CHECKEDOUT)
-	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-WORKSPACE.tar)
-	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-WORKSPACE.tar
-	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-WORKSPACE.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-WORKSPACE.tgz
 
 distribution:	release
 
