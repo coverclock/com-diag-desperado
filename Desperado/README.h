@@ -5,7 +5,7 @@
 
 /*******************************************************************************
 
-    Copyright 2006 by the Digital Aggregates Corp., Arvada CO 80001-0587 USA.
+    Copyright 2007 by the Digital Aggregates Corp., Arvada CO 80001-0587 USA.
 
     ----------------------------------------------------------------------
 
@@ -192,11 +192,8 @@
         grizzly         1.33.0   2007-01-29
         hurricane       2.1.0    2007-01-31
         imperial        2.2.0    2007-02-01
-        jupiter         2.3.0    TBD
-
-    The compressed tar file of the latest release can be found here:
-
-        http://www.diag.com/ftp/desperado-wildcat.tgz
+        jupiter         2.3.0    2007-08-15
+        keystone		2.4.0	 TBD
 
     Information regarding Desperado can be found here:
 
@@ -356,9 +353,9 @@
             jdk1.5.0_08
             apache-ant-1.6.5
 
-            Cygwin CYGWIN_NT-5.1 1.5.19 (0.150/4/2)
+            Cygwin CYGWIN_NT-5.1 1.5.24 (0.156/4/2)
             gcc 3.4.4
-            GNU Make 3.80
+            GNU Make 3.81
             ficl4.0.31
 
         Prior releases have been built on
