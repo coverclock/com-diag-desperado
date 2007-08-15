@@ -51,6 +51,7 @@ AR			=	ar
 BROWSER		=	mozilla
 CC			=	gcc
 CSCOPE		=	cscope -R
+CVS			=	cvs
 CXX			=	g++
 DOXYGEN		=	doxygen
 EXEDITOR	=	ex
@@ -61,19 +62,28 @@ PS2PDF		=	ps2pdf
 RANLIB		=	ranlib
 READER		=	acroread
 STRIP		=	strip
-CVS			=	cvs
 SVN			=	svn
 
 CPPONLY		=	-E
 
 ASMONLY		=	-S
 
+ifdef INT64
+CDEFINES	=	-DDESPERADO_TARGET_IS_$(TARGET) \
+				-DDESPERADO_TARGET_NAME="\"$(TARGET)\"" \
+				-DDESPERADO_PLATFORM_IS_$(PLATFORM) \
+				-DDESPERADO_PLATFORM_NAME="\"$(PLATFORM)\""  \
+				-DDESPERADO_PLATFORM_CLASS=$(PLATFORM) \
+				-D__int64="$(INT64)" \
+				$(ADJUNCTDEF) -D_REENTRANT -D_GNU_SOURCE
+else
 CDEFINES	=	-DDESPERADO_TARGET_IS_$(TARGET) \
 				-DDESPERADO_TARGET_NAME="\"$(TARGET)\"" \
 				-DDESPERADO_PLATFORM_IS_$(PLATFORM) \
 				-DDESPERADO_PLATFORM_NAME="\"$(PLATFORM)\""  \
 				-DDESPERADO_PLATFORM_CLASS=$(PLATFORM) \
 				$(ADJUNCTDEF) -D_REENTRANT -D_GNU_SOURCE
+endif
 
 ifdef IQUOTE
 CINCLUDES	=	-iquote. $(ADJUNCTINCDIR)
@@ -116,13 +126,7 @@ CINCPATH	=	/usr/lib/gcc-lib/$(GCCMACHINE)/$(GCCVERSION)/include
 # CXXINCPATH	=	/usr/include/$(CXX)
 CXXINCPATH	=	/usr/include/c++/$(GCCVERSION)
 
-#
-#	The building of the shared object is here because it is pretty
-#	platform specific. Trying to some up with a generic pattern for
-#	generating a shared object is probably not worth the effort, and
-#	anyway it is impossible to do so until I have some more examples
-#	from other platforms.
-#
+# Shared Object (like a DLL under Windows)
 
 SO			=	g++
 

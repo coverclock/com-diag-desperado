@@ -179,23 +179,14 @@ eclipse-clean:
 #
 #	Adjuncts
 #
-#	To compile in support for a FICL interpreter, add ficl to the list
-#	of adjuncts in the variable ADJUNCTS and set FICLHOME to point to your
-#	FICL source distribution directory.
-#
-#	To add support for using a Java Virtual Machine, add java to the list
-#	of adjuncts in the variable ADJUNCTS and set JAVAHOME to point to your
-#	Java Development Kit distribution home directory. This option will
-#	use the shared object version of the Desperado library.
-#
-
-adjuncts:	$(ADJUNCTS)
 
 ifdef FICLHOME
+FICLADJUNCT	=	ficl
 include Ficl.mk
 endif
 
 ifdef JAVAHOME
+JAVAADJUNCT	=	java
 include Java.mk
 endif
 
@@ -203,6 +194,8 @@ ADJUNCTDEF		=	$(FICLDEF) $(JAVADEF)
 ADJUNCTINCDIR	=	$(FICLINCDIR) $(JAVAINCDIR)
 ADJUNCTLIBDIR	=	$(FICLLIBDIR) $(JAVALIBDIR)
 ADJUNCTLIBRARY	=	$(FICLLIBRARY) $(JAVALIBRARY)
+
+adjuncts:	$(FICLADJUNCT) $(JAVAADJUNCT)
 
 #
 #	Parameters

@@ -106,12 +106,16 @@ int unittestbarrier2() {
         __FILE__, __LINE__, dbafter - dbbefore);
 
 #if defined(__GNUC__)
+#    if defined(__GNUC_MINOR__)
+#        if ((((__GNUC__)*1000)+(__GNUC_MINOR__))>=4001)
     dbbefore = platform_time();
     __sync_synchronize();
     dbafter = platform_time();
     print_f(platform_output(),
         "%s[%d]: __sync_synchronize(): %llu ticks\n",
         __FILE__, __LINE__, dbafter - dbbefore);
+#        endif
+#    endif
 #endif
 
     print_f(platform_output(), "%s[%d]: end errors=%d\n",

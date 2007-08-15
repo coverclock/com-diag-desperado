@@ -54,7 +54,6 @@
  *  @date   $Date: 2006/09/13 16:46:50 $
  */
 
-
 #include <cstdlib>
 extern "C" {
 #   include <signal.h>
@@ -77,6 +76,12 @@ static void interrupted(int /* signalnumber */) {
     }
 }
 
+/*
+ * Not all operating systems that are POSIX compliant or compilers that are
+ * otherwise ANSI C compliant define the type sighandler_t like GCC under Linux
+ * does. So we'll just define it ourselves.
+ */
+typedef void (*signalhandler)(int);
 
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());
@@ -86,7 +91,7 @@ int main(int, char **, char **) {
 
     interruptable = 0;
 
-    sighandler_t handler = ::signal(SIGINT, interrupted);
+    signalhandler handler = ::signal(SIGINT, interrupted);
     if (SIG_ERR == handler) {
         errorf("%s[%d]: signal(SIGINT) failed (%d)!\n",
             __FILE__, __LINE__, errno);
