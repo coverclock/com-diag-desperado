@@ -68,8 +68,8 @@ PRERELEASE	=	jupiter
 # Indicate the platform, target and compiler you are using.
 #
 
-#PLATFORM	=	Cygwin
-PLATFORM	=	Linux
+PLATFORM	=	Cygwin
+#PLATFORM	=	Linux
 TARGET		=	IA32
 COMPILER	=	gcc
 
@@ -78,7 +78,7 @@ COMPILER	=	gcc
 # Comment out if your compiler uses -I-.
 #
 
-IQUOTE		=	iquote
+#IQUOTE		=	iquote
 
 #
 # Define if you want to build using dynamic linking.
@@ -87,7 +87,7 @@ IQUOTE		=	iquote
 # Dynamic linking requires that Ficl, if used, also be dynamically linked.
 #
 
-DYNAMIC		=	shared
+#DYNAMIC		=	shared
 
 #
 # Specify where your public and temporary directories are for make install.
@@ -102,38 +102,30 @@ TMPDIR		=	/usr/tmp
 #
 
 SVNPROTO	=	svn
-SVNHOST		=	localhost
+SVNHOST		=	192.168.1.220
 SVNTRUNK	=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/trunk
 SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
-
-#
-# Indicate the adjuncts you want built.
-# Choices are ficl and/or java.
-#
-
-ADJUNCTS	=	ficl java
-#ADJUNCTS	=
 
 # If you are using Ficl, specify where it is.
 # Comment out otherwise.
 
-FICLHOME	=	/home/jsloan/src/ficl4.0.31
-#FICLHOME	=	/cygdrive/c/home/jsloan/src/ficl4.0.31
+#FICLHOME	=	/home/jsloan/src/ficl4.0.31
+FICLHOME	=	/cygdrive/c/Users/jsloan/Desktop/Home/Sources/ficl4.0.31
 
 # If you are using Java, specify where it is.
 # Comment out otherwise.
 
-JAVAHOME	=	/usr/local/apps/jdk1.5.0_08
-#JAVAHOME	=	/cygdrive/c/Java/jdk1.5.0_08
+#JAVAHOME	=	/usr/local/apps/jdk1.5.0_08
+#JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02
 
 #
 # If you are using Java, say more about its platform and target.
 # These are actually subdirectory names inside the JAVAHOME.
 #
 
-JAVAPLAT	=	linux
+#JAVAPLAT	=	linux
 #JAVAPLAT	=	win32
-JAVATARG	=	i386
+#JAVATARG	=	i386
 
 #
 #	Targets

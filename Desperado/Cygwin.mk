@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2007 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -47,18 +47,18 @@
 #	@author	coverclock@diag.com (Chip Overclock)
 #
 
-CXX			=	g++
-CC			=	gcc
-LD			=	g++
-AR			=	ar
-RANLIB		=	ranlib
-NCSL		=	sclc
-DOXYGEN		=	doxygen
-PS2PDF		=	ps2pdf
-CSCOPE		=	cscope -R
-EXEDITOR	=	ex
-MAN2PS		=	groff -man -Tps -
+AR			=	strace ar
 BROWSER		=	mozilla
+CC			=	gcc
+CSCOPE		=	cscope -R
+CXX			=	g++
+DOXYGEN		=	doxygen
+EXEDITOR	=	ex
+LD			=	g++
+MAN2PS		=	groff -man -Tps -
+NCSL		=	sclc
+PS2PDF		=	ps2pdf
+RANLIB		=	ranlib
 READER		=	acroread
 
 CPPONLY		=	-E
@@ -99,4 +99,43 @@ LDFLAGS		=	$(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)
 GCCMACHINE	=	$(shell $(CC) -dumpmachine)
 GCCVERSION	=	$(shell $(CC) -dumpversion)
 CINCPATH	=	/usr/lib/gcc/$(GCCMACHINE)/$(GCCVERSION)/include
-CXXINCPATH	=	/usr/include/boost-1_33_1/boost/compatibility/cpp_c_headers
+CXXINCPATH	=	/usr/lib/gcc/$(GCCMACHINE)/$(GCCVERSION)/c++/include
+#CXXINCPATH	=	/usr/include/boost-1_33_1/boost/compatibility/cpp_c_headers
+
+# Shared Object (like a DLL under Windows)
+
+SO			=	g++
+
+SOPREFIX	=	$(CDEBUG) -shared -Wl,-soname,$(SONAME) -Wl,-export-dynamic
+SOSUFFIX	=	-Wl,-Bdynamic $(LDDYNAMIC)
+
+LD_LIBRARY_PATH	=	$(ROOT):$(FICLHOME):$(JAVAHOME)/jre/lib/$(JAVATARG)/server
+export LD_LIBRARY_PATH
+
+$(SONAME):	$(SOFILE)
+	rm -f $(SONAME)
+	ln -s $(SOFILE) $(SONAME)
+
+$(SONAME2):	$(SOFILE)
+	rm -f $(SONAME2)
+	ln -s $(SOFILE) $(SONAME2)
+
+$(SHAREDOBJ):	$(SOFILE)
+	rm -f $(SHAREDOBJ)
+	ln -s $(SOFILE) $(SHAREDOBJ)
+
+so-links:	$(SOFILE) $(SONAME) $(SONAME2) $(SHAREDOBJ)
+
+so-path:
+	@echo export LD_LIBRARY_PATH=\"$(LD_LIBRARY_PATH)\"
+
+$(SOFILE):	$(SHARED)
+	$(SO) $(SOPREFIX) -o $(SOFILE) $(SHARED) $(SOSUFFIX)
+
+shared:	so
+
+so:	$(SOFILE) so-links so-path
+
+sostripped:	$(STRIPPED)
+	$(SO) $(SOPREFIX) -o $(SOFILE) $(STRIPPED) $(SOSUFFIX)
+
