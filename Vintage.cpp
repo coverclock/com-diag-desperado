@@ -68,7 +68,7 @@ const char Vintage::product[] =     "$Product: Desperado $";
 
 const char Vintage::license[] =     "$License: Modified GNU Lesser Public License $";
 
-const char Vintage::copyright[] =   "$Copyright: Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA $";
+const char Vintage::copyright[] =   "$Copyright: Copyright 2007 Digital Aggregates Corp., Arvada CO 80001-0587, USA $";
 
 const char Vintage::contact[] =     "$Contact: coverclock@diag.com (Chip Overclock) $";
 
@@ -76,9 +76,9 @@ const char Vintage::url[] =         "$Url: http://www.diag.com $";
 
 const char Vintage::uri[] =         "$Uri: sip:600@sip.diag.dnsalias.com $";
 
-const char Vintage::date[] =        "$Date: 2006/02/07 00:07:03 $";
+const char Vintage::date[] =        "$Date: 2007-08-15T23:00:00+00 $";
 
-const char Vintage::release[] =     "$Name:  $";
+const char Vintage::release[] =     "$Name: jupiter $";
 
 const char Vintage::build[] =       "$Build: " __DATE__ " " __TIME__ " $";
 
