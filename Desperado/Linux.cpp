@@ -151,9 +151,7 @@ Linux::Linux() :
     tzset();
     this->setOffset(-timezone);
     DaylightSavingTime* dst = &dstnever;
-    if (0 == daylight) {
-       dst = &dstus;
-    }
+    if (daylight) { dst = &dstus; }
     this->setDaylightSavingTime(*dst);
 
     //  Set the epoch to the fixed value of the Linux epoch,
