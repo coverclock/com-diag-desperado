@@ -119,7 +119,7 @@ int main(int argc, char **argv, char **) {
     bool debug = false;
     bool help = false;
 
-    char *outname = "-";
+    const char *outname = "-";
     char method = 0;
     char object = 0;
     char* cmdname;
@@ -243,7 +243,7 @@ int main(int argc, char **argv, char **) {
 
     }
 
-    char *inname = "-";
+    const char *inname = "-";
     FILE* infile = 0;
     int insocket = EOF;
     char* instring = 0;

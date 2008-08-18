@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2007 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -113,12 +113,12 @@ GENERATED	=	$(CGEN) $(CXXGEN) $(HGEN) $(TXTGEN)
 CXXCAPI		=	crcmodel.c barrierApi.c ficlApi.c
 COMMANDS	=	dates cpdate
 SCRIPTS		=	cpdate.sh dates.sh ficlshell-Cygwin.sh ficlshell-Linux.sh ficlshell.sh iso3166.awk prepare.ex prepare.sh toolong.awk unittestInputOutput.sh unittestsuite.sh
-MAKEFILES	=	Makefile Makefile.ficl.desperado $(MKFILES)
+MAKESFILES	=	Makefile Makefile.ficl.desperado $(MKFILES)
 ANTFILES	=	$(JAVADIR)/build.xml
 EXTRAS		=	doxygen.cf footer.html ficldesperadoc.txt
 LICENSES	=	lesser.txt gpl.txt fdl.txt LICENSE-2.0.txt
 DOCUMENTS	=	doc/pdf/refman.pdf doc/pdf/manpages.pdf doc/pdf/manpages.ps
-TEMPORARIES	=	manifest.txt doxygen-local.cf dependencies.mk $(GENERATED)
+TEMPORARIES	=	doxygen-local.cf dependencies.mk $(GENERATED)
 
 #
 #	Derivatives
@@ -151,7 +151,7 @@ WINTOOLS	=	$(foreach T,$(TOOLS),$(T).exe)
 BINARIES	=	$(UNITMAINS) $(TOOLS) $(COMMANDS)
 WINBINARIES	=	$(WINMAINS) $(WINTOOLS)
 
-MANIFEST	=	$(sort $(SOURCES) $(MAKEFILES) $(ANTFILES) $(EXTRAS) $(LICENSES) $(INTERPRETED) $(DOTFILES) $(FICLSOURCES) $(SCRIPTS))
+MANIFEST	=	$(sort $(SOURCES) $(MAKESFILES) $(ANTFILES) $(EXTRAS) $(LICENSES) $(INTERPRETED) $(DOTFILES) $(FICLSOURCES) $(SCRIPTS))
 
 BETA		=	$(DOMAIN)/$(PRODUCT)/$(RELEASE)
 ALPHA		=	$(DOMAIN)/$(PRODUCT)/$(PRERELEASE)
@@ -163,18 +163,18 @@ ROOT		=	$(shell pwd)
 #
 
 eclipse-build:
-	make -k depend
-	make -k library
+	$(MAKE) -k depend
+	$(MAKE) -k library
 
 eclipse-rebuild:
-	make -k clean
-	make -k depend
-	make -k library
-	make -k adjuncts
-	make -k binaries
+	$(MAKE) -k clean
+	$(MAKE) -k depend
+	$(MAKE) -k library
+	$(MAKE) -k adjuncts
+	$(MAKE) -k binaries
 
 eclipse-clean:
-	make -k clean
+	$(MAKE) -k clean
 
 #
 #	Adjuncts
@@ -182,11 +182,13 @@ eclipse-clean:
 
 ifdef FICLHOME
 FICLADJUNCT	=	ficl
+FICLCLEAN	=	ficl-clean
 include Ficl.mk
 endif
 
 ifdef JAVAHOME
 JAVAADJUNCT	=	java
+JAVACLEAN	=	java-clean
 include Java.mk
 endif
 
@@ -197,8 +199,10 @@ ADJUNCTLIBRARY	=	$(FICLLIBRARY) $(JAVALIBRARY)
 
 adjuncts:	$(FICLADJUNCT) $(JAVAADJUNCT)
 
+adjuncts-clean:	$(FICLCLEAN) $(JAVACLEAN)
+
 #
-#	Parameters
+#	Platform
 #
 
 include $(PLATFORM).mk
@@ -209,13 +213,10 @@ include $(PLATFORM).mk
 #	Dependencies are made on demand, not whenever anything changes.
 #
 
-depend:
+dependencies:
 	$(CXX) $(CPPFLAGS) -M -MG $(COMPILABLES) > dependencies.mk
 
-dependencies:	dependencies.mk
-
-dependencies.mk:
-	$(CXX) $(CPPFLAGS) -M -MG $(COMPILABLES) > dependencies.mk
+depend:	dependencies
 
 -include dependencies.mk
 
@@ -230,7 +231,7 @@ vintage:
 	touch Vintage.cpp
 
 ifdef DYNAMIC
-library:	dynamic
+library:	static dynamic
 else
 library:	static
 endif
@@ -243,14 +244,55 @@ binaries:	$(BINARIES)
 
 unittests:	$(UNITMAINS)
 
-install:	$(HEADERS) $(ARCHIVE) $(SHARED)
-	cp $(HEADERS) $(PUBDIR)/include
-	cp $(ARCHIVE) $(PUBDIR)/lib
-	cp $(SHARED) $(PUBDIR)/lib
-
 objects:	$(OBJECTS)
 
 repositories:	$(REPOS)
+
+headers:	$(HEADERS)
+
+#
+#	Install
+#
+
+SHAREDOBJ	=	lib$(LIBRARY).so
+SONAME		=	$(SHAREDOBJ).$(MAJOR)
+SONAME2		=	$(SHAREDOBJ).$(MAJOR).$(MINOR)
+SOFILE		=	$(SHAREDOBJ).$(MAJOR).$(MINOR).$(BUILD)
+
+install:	$(PUBDIR)/include $(PUBDIR)/lib $(PUBDIR)/bin headers library binaries
+	cp $(BINARIES) $(PUBDIR)/bin
+	cp $(HEADERS) $(PUBDIR)/include
+	make desperado-install INSTALLDIR=$(PUBDIR)/lib
+	make ficl-install INSTALLDIR=$(PUBDIR)/lib
+
+#
+#	Target
+#
+
+target:		../diminuto.tar.bz2
+
+../diminuto.tar.bz2:	targetable
+	tar cvjf - $(TGTDIR) > ../diminuto.tar.bz2
+
+targetable:		$(TGTDIR) headers library binaries
+	cp $(BINARIES) $(TGTDIR)
+	make desperado-target INSTALLDIR=$(TGTDIR)
+	make ficl-target INSTALLDIR=$(TGTDIR)
+
+#
+#	Helpers
+#
+
+desperado-install:	library desperado-target
+	cp $(ARCHIVE) $(INSTALLDIR)
+
+desperado-target:	library
+ifdef DYNAMIC
+	cp $(SOFILE) $(INSTALLDIR)
+	ln -s $(SOFILE) $(INSTALLDIR)/$(SONAME2)
+	ln -s $(SOFILE) $(INSTALLDIR)/$(SONAME)
+	ln -s $(SOFILE) $(INSTALLDIR)/$(SHAREDOBJ)
+endif
 
 #
 #	Test
@@ -275,8 +317,10 @@ unittest:	$(TEST)
 clean:
 	-rm -f $(TEMPORARIES) $(OBJECTS) $(STRIPPED) $(REPOS) $(DOCUMENTS) $(BINARIES) $(WINBINARIES) $(ARCHIVE) $(SHAREDOBJS)
 
-pristine:	clean
-	-(cd doc/latex; make clean)
+mrproper:	pristine
+
+pristine:	clean adjuncts-clean
+	-(cd doc/latex; $(MAKE) clean)
 	-rm -f doc/latex/*.eps doc/latex/*.pdf doc/latex/*.tex
 	-rm -f doc/html/*.gif doc/html/*.ttf
 	-rm -f doc/html/*.html doc/html/*.png doc/html/*.css
@@ -286,28 +330,28 @@ pristine:	clean
 #
 #	Distribution
 #	
-#	release (BETA)					most recent tagged version
-#	prerelease (ALPHA)				most recent checked-in version
+# release (BETA)                most recent tagged version
+# prerelease (ALPHA)            most recent checked-in version
 #
 #	Using CVS:
 #
-#	checkout the next release:		cvs checkout diag.com/desperado
-#	commit the latest revisions:	cvs commit .
-#	generate the current relase:	cvs export -r $(RELEASE) diag.com/desperado
-#	generate the next release:		cvs export -D $(LATEST) diag.com/desperado
-#	freeze the next release:		cvs tag $(RELEASE) .
+# checkout the next release:    cvs checkout diag.com/desperado
+# commit the latest revisions:  cvs commit .
+# generate the current relase:  cvs export -r $(RELEASE) diag.com/desperado
+# generate the next release:    cvs export -D $(LATEST) diag.com/desperado
+# freeze the next release:      cvs tag $(RELEASE) .
 #
 #	Using SVN:
 #
-#	checkout the next release:		svn checkout svn://localhost/desperado/trunk/Desperado diag.com/desperado
-#	commit the latest revisions:	svn commit .
-#	generate the current relase:	svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado diag.com/desperado
-#	generate the next release:		svn checkout svn://localhost/desperado/trunk/Desperado diag.com/desperado
-#	freeze the next relase:			svn copy svn://localhost/desperado/trunk svn://localhost/desperado/tags/$(RELEASE)
+# checkout the next release:    svn checkout svn://localhost/desperado/trunk/Desperado diag.com/desperado
+# commit the latest revisions:  svn commit .
+# generate the current relase:  svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado diag.com/desperado
+# generate the next release:    svn checkout svn://localhost/desperado/trunk/Desperado diag.com/desperado
+# freeze the next relase:       svn copy svn://localhost/desperado/trunk svn://localhost/desperado/tags/$(RELEASE)
 #
 #	Other stuff:
 #
-#	download the latest release:	wget [ -Y on ] ftp://ftp.webcom.com/pub2/jsloan/www/ftp/ desperado-$(RELEASE).tgz
+# download the latest release:  wget [ -Y on ] ftp://ftp.webcom.com/pub2/jsloan/www/ftp/ desperado-$(RELEASE).tgz
 #
 
 freeze:
@@ -315,7 +359,7 @@ freeze:
 
 manifest:	manifest.txt
 	cat manifest.txt
-	
+
 manifest.txt:	$(MANIFEST)
 	ls $(MANIFEST) | sort | uniq > manifest.txt
 
@@ -346,13 +390,10 @@ distribution:	release
 #
 
 backup:	../$(PRODUCT).bak.tar.gz
-	mv -i ../$(PRODUCT).bak.tar.gz ../$(PRODUCT).$(TIMESTAMP).tgz
+	mv -i ../$(PRODUCT).bak.tar.gz ../$(PRODUCT).$(TIMESTAMP).tar.gz
 
-../$(PRODUCT).bak.tar.gz:	../$(PRODUCT).bak.tar
-	gzip -f ../$(PRODUCT).bak.tar
-
-../$(PRODUCT).bak.tar:
-	tar cvf - . > ../$(PRODUCT).bak.tar
+../$(PRODUCT).bak.tar.gz:
+	tar cvzf - . > ../$(PRODUCT).bak.tar.gz
 
 #
 #	Documentation
@@ -365,11 +406,10 @@ backup:	../$(PRODUCT).bak.tar.gz
 #		zcat desperado-$(RELEASE)-doc.tgz | tar xvpf -
 #
 
-documentation:
-	mkdir -p doc/pdf
+documentation:	doc/pdf
 	sed -e "s/\\\$$Name.*\\\$$/$(RELEASE)/" < doxygen.cf > doxygen-local.cf
 	$(DOXYGEN) doxygen-local.cf
-	(cd doc/latex; make refman.pdf; cp refman.pdf ../pdf)
+	(cd doc/latex; $(MAKE) refman.pdf; cp refman.pdf ../pdf)
 	cat doc/man/man3/*.3 | $(MAN2PS) > doc/pdf/manpages.ps
 	$(PS2PDF) doc/pdf/manpages.ps doc/pdf/manpages.pdf
 
@@ -647,3 +687,22 @@ desperado_ficl_shell.c:	ficlshell.sh desperado_ficl_shell.txt
 
 ficlsh:	toolficlsh.o $(ARCHIVE)
 	$(LD) -o ficlsh toolficlsh.o $(LDFLAGS)
+
+#
+#	Directories
+#
+
+$(PUBDIR)/include:
+	mkdir -p $(PUBDIR)/include
+
+$(PUBDIR)/lib:
+	mkdir -p $(PUBDIR)/lib
+
+$(PUBDIR)/bin:
+	mkdir -p $(PUBDIR)/bin
+
+$(TGTDIR):
+	mkdir -p $(TGTDIR)
+
+doc/pdf:
+	mkdir -p doc/pdf

@@ -62,8 +62,8 @@
 #include "Linux.h"
 #elif defined(DESPERADO_PLATFORM_IS_Cygwin)
 #include "Cygwin.h"
-#elif defined(DESPERADO_PLATFORM_IS_Ucosii)
-#include "Ucosii.h"
+#elif defined(DESPERADO_PLATFORM_IS_Diminuto)
+#include "Diminuto.h"
 #endif
 
 

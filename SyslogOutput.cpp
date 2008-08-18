@@ -57,9 +57,6 @@
  */
 
 
-#if defined(DESPERADO_PLATFORM_IS_Linux)
-
-
 #include <new>
 #include <cstdarg>
 #include "string.h"
@@ -69,7 +66,8 @@
 #include "Print.h"
 
 
-int SyslogOutput::priorities[] = {
+int SyslogOutput::priorities[16] = {
+#if defined(DESPERADO_HAS_SYSLOG)
     LOG_INFO,
     LOG_INFO,
     LOG_INFO,
@@ -86,34 +84,47 @@ int SyslogOutput::priorities[] = {
     LOG_EMERG,
     LOG_EMERG,
     LOG_INFO
+#else
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+#endif
 };
 
 
 //
 //  Constructor.
 //
-SyslogOutput::SyslogOutput(Logger& rl, const char* id, int opt, int fac) :
-    Output(),
-    lo(&rl),
-    ident(id),
-    option(opt),
-    facility(fac)
+SyslogOutput::SyslogOutput(Logger& rl, const char* id, int opt, int fac)
+: Output()
+, lo(&rl)
+, ident(id)
+, option(opt)
+, facility(fac)
+#if !defined(DESPERADO_HAS_SYSLOG)
+, error(stderr)
+#endif
 {
+#if defined(DESPERADO_HAS_SYSLOG)
     ::openlog(id, opt, fac);
+#endif
 }
 
 
 //
 //  Constructor.
 //
-SyslogOutput::SyslogOutput(Logger* pl, const char* id, int opt, int fac) :
-    Output(),
-    lo(pl),
-    ident(id),
-    option(opt),
-    facility(fac)
+SyslogOutput::SyslogOutput(Logger* pl, const char* id, int opt, int fac)
+: Output()
+, lo(pl)
+, ident(id)
+, option(opt)
+, facility(fac)
+#if !defined(DESPERADO_HAS_SYSLOG)
+, error(stderr)
+#endif
 {
+#if defined(DESPERADO_HAS_SYSLOG)
     ::openlog(id, opt, fac);
+#endif
 }
 
 
@@ -121,7 +132,9 @@ SyslogOutput::SyslogOutput(Logger* pl, const char* id, int opt, int fac) :
 //  Destructor.
 //
 SyslogOutput::~SyslogOutput() {
+#if defined(DESPERADO_HAS_SYSLOG)
     ::closelog();
+#endif
 }
 
 
@@ -185,8 +198,12 @@ int SyslogOutput::priority(const char* buffer, size_t size) {
 //  Output a character.
 //
 int SyslogOutput::operator() (int c) {
+#if defined(DESPERADO_HAS_SYSLOG)
     ::syslog(LOG_INFO, "%c", c);
     return c;
+#else
+    return error(c);
+#endif
 }
 
 
@@ -194,10 +211,14 @@ int SyslogOutput::operator() (int c) {
 //  Format and output a variable length argument list.
 //
 ssize_t SyslogOutput::operator() (const char* format, va_list ap) {
+#if defined(DESPERADO_HAS_SYSLOG)
     char buffer[minimum_buffer_size];
     ssize_t octets = ::vsnprintf(buffer, minimum_buffer_size, format, ap);
     ::syslog(LOG_INFO, "%s", buffer);
     return octets;
+#else
+    return error(format, ap);
+#endif
 }
 
 
@@ -205,9 +226,13 @@ ssize_t SyslogOutput::operator() (const char* format, va_list ap) {
 //  Output a string of no more than the specified size.
 //
 ssize_t SyslogOutput::operator() (const char* s, size_t size) {
+#if defined(DESPERADO_HAS_SYSLOG)
     int priority = this->priority(s, size);
     ::syslog(priority, "%.*s", size, s);
     return ::strnlen(s, size);
+#else
+    return error(s, size);
+#endif
 }
 
 
@@ -217,10 +242,18 @@ ssize_t SyslogOutput::operator() (const char* s, size_t size) {
 ssize_t SyslogOutput::operator() (
     const void* buffer,
     size_t minimum,
+#if defined(DESPERADO_HAS_SYSLOG)
     size_t  /* maximum */
+#else
+    size_t maximum 
+#endif
 ) {
+#if defined(DESPERADO_HAS_SYSLOG)
     ::syslog(LOG_DEBUG, "%.*s", minimum, reinterpret_cast<const char*>(buffer));
     return minimum;
+#else
+    return error(buffer, minimum, maximum);
+#endif
 }
 
 
@@ -228,7 +261,11 @@ ssize_t SyslogOutput::operator() (
 //  Flush buffered data.
 //
 int SyslogOutput::operator() () {
+#if defined(DESPERADO_HAS_SYSLOG)
     return 0;
+#else
+    return error();
+#endif
 }
 
 
@@ -250,6 +287,3 @@ void SyslogOutput::show(int level, Output* display, int indent) const {
     printf("%s option=0x%x\n", sp, this->option);
     printf("%s facility=0x%x\n", sp, this->facility);
 }
-
-
-#endif

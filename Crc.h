@@ -350,7 +350,7 @@ void Crc<_TYPE_>::show(int level, Output* display, int indent) const {
         sp, this->table, countof(this->table), sizeof(this->table),
         (0 < level) ? ":" : "");
     if (0 < level) {
-        char* format;
+        const char* format;
         unsigned int per;
         switch (width) {
         case widthof(uint16_t):

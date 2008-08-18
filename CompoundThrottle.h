@@ -170,7 +170,7 @@ public:
      */
     virtual void reset(ticks_t ticks);
 
-   using Throttle::admissible;
+    using Throttle::admissible;
 
     /**
      *  Returns the number of ticks, in units indicated by the frequency

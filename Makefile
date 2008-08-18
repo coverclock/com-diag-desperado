@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005-2007 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -68,9 +68,11 @@ PRERELEASE	=	keystone
 # Indicate the platform, target and compiler you are using.
 #
 
+PLATFORM	=	Diminuto
+#PLATFORM	=	Linux
 #PLATFORM	=	Cygwin
-PLATFORM	=	Linux
-TARGET		=	IA32
+#TARGET		=	IA32
+TARGET		=	ARM
 COMPILER	=	gcc
 
 #
@@ -92,10 +94,12 @@ DYNAMIC		=	shared
 #
 # Specify where your public and temporary directories are for make install.
 # The public directory will be assumed to have include and lib subdirectories.
+# The target directory is where files destined for an embedded target go.
 #
 
-PUBDIR		=	/usr/local
 TMPDIR		=	/usr/tmp
+PUBDIR		=	/usr/local
+TGTDIR		=	diminuto
 
 #
 # Define how and where you get to Subversion.
@@ -109,13 +113,14 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # If you are using Ficl, specify where it is.
 # Comment out otherwise.
 
-FICLHOME	=	/home/jsloan/src/ficl4.0.31
+FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
+#FICLHOME	=	/home/jsloan/src/ficl4.0.31
 #FICLHOME	=	/cygdrive/c/Users/jsloan/Desktop/Home/Sources/ficl4.0.31
 
 # If you are using Java, specify where it is.
 # Comment out otherwise.
 
-JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
+#JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
 #JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02
 
 #
@@ -131,11 +136,15 @@ JAVATARG	=	i386
 #	Targets
 #
 
-default:	library $(DYNAMIC) binaries
+default:	library binaries
 
-all:	adjuncts default
+all:
+	$(MAKE) depend
+	$(MAKE) adjuncts
+	$(MAKE) library
+	$(MAKE) binaries
 
-preface:	clean dependencies
+preface:	clean depend
 
 build:	preface all
 

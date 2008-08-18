@@ -59,11 +59,14 @@
 #include "Platform.h"
 #include "JavaVirtualMachine.h"
 
+#if defined(DESPERADO_HAS_JAVA)
 int main(int argc, char**) {
     Platform::instance(Platform::factory());
-#if defined(DESPERADO_HAS_JAVA)
     exit(unittestJavaVirtualMachine(argc > 1));
-#else
-    exit(0);
-#endif
 }
+#else
+int main(int, char**) {
+    Platform::instance(Platform::factory());
+    exit(0);
+}
+#endif

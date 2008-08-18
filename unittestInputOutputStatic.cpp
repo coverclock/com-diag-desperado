@@ -102,7 +102,7 @@ static Input staticInput;
 static Output staticOutput;
 static PathInput staticPathInput;
 static PathOutput staticPathOutput;
-#if defined(DESPERADO_PLATFORM_IS_Linux)
+#if defined(DESPERADO_HAS_SYSLOG)
 static SyslogOutput staticSyslogOutput;
 #endif
 
@@ -124,7 +124,7 @@ extern "C" int unittestInputOutputStatic() {
     ::staticOutput.show();
     ::staticPathInput.show();
     ::staticPathOutput.show();
-#if defined(DESPERADO_PLATFORM_IS_Linux)
+#if defined(DESPERADO_HAS_SYSLOG)
     ::staticSyslogOutput.show();
 #endif
 

@@ -1498,7 +1498,7 @@ extern "C" int unittestCommonEra() {
     righthere.fromNow();
     LocalTime maximumhere;
     maximumhere.fromSeconds(unsignedintmaxof(uint64_t), 999999999);
-    char* label;
+    const char* label;
 
     timestamp.show();
 

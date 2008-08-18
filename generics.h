@@ -446,19 +446,3 @@ extern int unittestgenerics2(void);
 
 
 #endif
-
-
-/*
- *  Yes, this really is done unconditionally.
- */
-
-#undef offsetof
-
-/**
- *  @def    offsetof(_STRUCT_, _MEMBER_)
- *
- *  Generates the byte offset of the member @a _MEMBER_ within the class or
- *  struct @a _STRUCT_.
- */
-#define offsetof(_STRUCT_, _MEMBER_) \
-    desperado_offsetof(_STRUCT_, _MEMBER_)

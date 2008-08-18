@@ -190,7 +190,7 @@ man ascii (SunOS 5.1 maybe):
 #include "Platform.h"
 #include "Print.h"
 
-static char *ascii[]={
+static const char *ascii[]={
     "NUL","SOH","STX","ETX",
     "EOT","ENQ","ACK","BEL",
     "BS", "HT", "LF", "VT",
@@ -202,7 +202,7 @@ static char *ascii[]={
     "SP", "DEL"
 };
 
-static char *c[]={
+static const char *c[]={
     "NUL","SOH","STX","ETX",
     "EOT","ENQ","ACK","BEL",
     "BS", "HT", "NL", "VT",
@@ -214,7 +214,7 @@ static char *c[]={
     "SP", "DEL"
 };
 
-static char *octal[]={
+static const char *octal[]={
     "\\\\0",  "\\\\001","\\\\002","\\\\003",
     "\\\\004","\\\\005","\\\\006","\\\\a",
     "\\\\b",  "\\\\t",  "\\\\n",  "\\\\v",
@@ -226,7 +226,7 @@ static char *octal[]={
     "\\\\040","\\\\177"
 };
 
-static char *hexadecimal[]={
+static const char *hexadecimal[]={
     "\\\\0",   "\\\\x001","\\\\x002","\\\\x003",
     "\\\\x004","\\\\x005","\\\\x006","\\\\a",
     "\\\\b",   "\\\\t",   "\\\\n",   "\\\\v",
@@ -243,10 +243,10 @@ int main() {
     Print printf(Platform::instance().output());
 
     int ch;
-    char *n;
-    char *a;
-    char *o;
-    char *h;
+    const char *n;
+    const char *a;
+    const char *o;
+    const char *h;
     char s[2];
 
     s[1] = '\0';

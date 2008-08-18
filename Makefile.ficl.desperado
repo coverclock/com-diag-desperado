@@ -2,12 +2,11 @@ OBJECTS= dictionary.o system.o fileaccess.o float.o double.o prefix.o search.o s
 HEADERS= ficl.h ficllocal.h
 #
 # Flags for shared library
-TARGET= -Ddesperado
-SHFLAGS = 
-CFLAGS= -O -c $(SHFLAGS) $(TARGET)
-CC=gcc
-LIB = ar cr
-RANLIB = ranlib
+SHFLAGS = -Ddesperado -fPIC
+CFLAGS	= -O -c $(SHFLAGS)
+CC		= $(CROSS_COMPILE)gcc
+LIB		= $(CROSS_COMPILE)ar cr
+RANLIB	= $(CROSS_COMPILE)ranlib
 
 MAJOR = 4
 MINOR = 0

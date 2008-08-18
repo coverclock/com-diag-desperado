@@ -84,7 +84,6 @@ extern "C" int unittestArgument() {
     argument3 = argument;
     argument3.show();
 
-    char* empty = "";
     const char* string = "Every good boy does fine.";
     const char* alternate = "Every&good&boy&does&fine.";
     const char* tokens[] = { "Every", "good", "boy", "does", "fine." };
@@ -94,6 +93,7 @@ extern "C" int unittestArgument() {
     int expected;
     int actual;
     char buffer[256];
+    char empty[1] = { '\0' };
 
     printf("%s[%d]: default delimiters\n", __FILE__, __LINE__);
 

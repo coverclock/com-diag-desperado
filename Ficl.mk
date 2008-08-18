@@ -68,9 +68,9 @@ endif
 #	Install the ficllocal.h customization file in the Ficl directory.
 #
 
-ficl:	ficllocalize ficlbuild
+ficl:	ficl-localize ficl-clean ficl-build
 
-ficllocalize:	Makefile.ficl.desperado ficllocal.h ficldesperado.h ficldesperadoc.txt
+ficl-localize:	Makefile.ficl.desperado ficllocal.h ficldesperado.h ficldesperadoc.txt
 	-mv -i $(FICLHOME)/Makefile.ficl.desperado $(FICLHOME)/Makefile.ficl.desperado-$(TIMESTAMP)
 	cp -i Makefile.ficl.desperado $(FICLHOME)
 	-mv -i $(FICLHOME)/ficllocal.h $(FICLHOME)/ficllocal.h-$(TIMESTAMP)
@@ -80,5 +80,23 @@ ficllocalize:	Makefile.ficl.desperado ficllocal.h ficldesperado.h ficldesperadoc
 	-mv -i $(FICLHOME)/ficldesperado.c $(FICLHOME)/ficldesperado.c-$(TIMESTAMP)
 	cp -i ficldesperadoc.txt $(FICLHOME)/ficldesperado.c
 
-ficlbuild:
-	(cd $(FICLHOME); make -f Makefile.ficl.desperado clean libficl.a libficl.so)
+ficl-build:
+ifdef DYNAMIC
+	( cd $(FICLHOME); $(MAKE) -f Makefile.ficl.desperado libficl.a libficl.so )
+else
+	( cd $(FICLHOME); $(MAKE) -f Makefile.ficl.desperado libficl.a )
+endif
+
+ficl-clean:
+	( cd $(FICLHOME); $(MAKE) -f Makefile.ficl.desperado clean )
+
+ficl-install:	ficl-target
+	cp $(FICLHOME)/libficl.a $(INSTALLDIR)
+
+ficl-target:
+ifdef DYNAMIC
+	cp $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)
+	ln -s $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)/libficl.so.4.0
+	ln -s $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)/libficl.so.4
+	ln -s $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)/libficl.so
+endif

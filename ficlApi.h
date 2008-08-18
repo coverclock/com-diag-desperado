@@ -66,6 +66,9 @@
  */
 
 
+#include "cxxcapi.h"
+
+
 #if defined(DESPERADO_HAS_FICL)
 
 
@@ -76,7 +79,6 @@ extern "C" {
 #if defined(__CPLUSPLUS)
 }
 #endif
-#include "cxxcapi.h"
 
 
 /**
@@ -199,6 +201,12 @@ CXXCAPI void desperado_ficl_null(ficlVm* pVM);
  *  @param  pVM     points to the Ficl machine to execute this word.
  */
 CXXCAPI void desperado_ficl_parens(ficlVm* pVM);
+
+
+#else
+
+
+CXXCAPI void desperado_ficl_shell(void*);
 
 
 #endif
