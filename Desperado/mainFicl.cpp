@@ -61,11 +61,14 @@
 #include "Platform.h"
 #include "FiclSystem.h"
 
+#if defined(DESPERADO_HAS_FICL)
 int main(int argc, char**) {
     Platform::instance(Platform::factory());
-#if defined(DESPERADO_HAS_FICL)
     std::exit(unittestFicl(0, 1 < argc ? 1 : 0));
-#else
-    std::exit(0);
-#endif
 }
+#else
+int main(int, char**) {
+    Platform::instance(Platform::factory());
+    std::exit(0);
+}
+#endif

@@ -5,7 +5,7 @@
 
 /*******************************************************************************
 
-    Copyright 2007 by the Digital Aggregates Corp., Arvada CO 80001-0587 USA.
+    Copyright 2005-2008 by the Digital Aggregates Corp., Arvada CO 80001-0587 USA.
 
     ----------------------------------------------------------------------
 
@@ -93,14 +93,7 @@
     o   POSIX threads, and
     o   support for 64-bit integral types.
 
-    For administrative, licensing or general information, contact
-
-        Dot Starr
-        mailto:dstarr@diag.com
-        Digital Aggregates Corporation
-        Arvada CO 80001-0587 USA
-
-    For technical information or to report bugs, contact
+    Contact
 
         Chip Overclock
         mailto:coverclock@diag.com
@@ -126,8 +119,7 @@
     make clean                  # make clean
     make depend                 # establish dependencies
     make adjuncts               # builds adjuncts if you want Ficl and/or Java
-    make library                # builds the archive for static linking
-    make shared                 # builds the shared object for dynamic linking
+    make library                # builds the archive or shared object
     make binaries               # builds unit tests and tools
 
     To run the unit tests when using dynamic linking, you will need to
@@ -193,7 +185,7 @@
         hurricane       2.1.0    2007-01-31
         imperial        2.2.0    2007-02-01
         jupiter         2.3.0    2007-08-15
-        keystone		2.4.0	 TBD
+        keystone        2.4.0    TBD
 
     Information regarding Desperado can be found here:
 
@@ -344,7 +336,12 @@
 
     What is your build target?
 
-        This release was built and tested on
+        This release was built for and tested on
+
+            Linux 2.6.25.10 for the Atmel AT91RM9200-EK board
+            gcc 4.2.4
+
+        Prior releases have been built and tested on
 
             Linux 2.6.15-1.2054_FC5
             gcc 4.1.0 20060304
@@ -357,8 +354,6 @@
             gcc 3.4.4
             GNU Make 3.81
             ficl4.0.31
-
-        Prior releases have been built on
 
             Linux 2.4.22-1.2115.nptlsmp
             gcc 3.3.2 20031022
@@ -389,14 +384,15 @@
         said that, we love junit and cannot imagine not using it when
         we write Java applications.
 
-    Are Chip Overclock and Dot Starr real people?
+    Is Chip Overclock a real person?
 
-        They are as real as Betty Crocker, Captain Morgan, Aunt Jemima,
+        He is as real as Betty Crocker, Captain Morgan, Aunt Jemima,
         Cap'n Crunch, Uncle Ben, Cracker Jack, and any number of
         folks who proudly put their names on the stuff that they make.
-        Chip Overclock and Dot Starr are alter egos of real people and
-        represent an experiment in both product branding and process
-        improvement.
+        Chip Overclock is an alter ego of a real person and
+        represents an experiment in both product branding and process
+        improvement. This is the same Chip Overclock who blogs at
+        http://www.chipoverclock.com .
 
     Why didn't you implement design pattern Foo?
 

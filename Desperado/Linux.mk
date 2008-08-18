@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005-2007 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -74,6 +74,7 @@ CDEFINES	=	-DDESPERADO_TARGET_IS_$(TARGET) \
 				-DDESPERADO_PLATFORM_IS_$(PLATFORM) \
 				-DDESPERADO_PLATFORM_NAME="\"$(PLATFORM)\""  \
 				-DDESPERADO_PLATFORM_CLASS=$(PLATFORM) \
+				-DDESPERADO_HAS_SYSLOG \
 				-D__int64="$(INT64)" \
 				$(ADJUNCTDEF) -D_REENTRANT -D_GNU_SOURCE
 else
@@ -82,6 +83,7 @@ CDEFINES	=	-DDESPERADO_TARGET_IS_$(TARGET) \
 				-DDESPERADO_PLATFORM_IS_$(PLATFORM) \
 				-DDESPERADO_PLATFORM_NAME="\"$(PLATFORM)\""  \
 				-DDESPERADO_PLATFORM_CLASS=$(PLATFORM) \
+				-DDESPERADO_HAS_SYSLOG \
 				$(ADJUNCTDEF) -D_REENTRANT -D_GNU_SOURCE
 endif
 

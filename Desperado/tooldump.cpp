@@ -78,7 +78,7 @@ int main(int argc, char **argv, char **) {
     bool help = false;
     bool words = true;
     bool debug = false;
-    char* outname = "-";
+    const char* outname = "-";
 
     usage = 0;
     while (0 <= (opt = ::getopt(argc, argv, "?bdo:w"))) {
@@ -140,7 +140,7 @@ int main(int argc, char **argv, char **) {
 
     do {
 
-        char* inname = "-";
+        const char* inname = "-";
         if (0 != argv[optind]) {
             inname = argv[optind++];
         }

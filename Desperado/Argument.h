@@ -117,8 +117,9 @@ public:
      *  
      *  char argv[64];<BR>
      *  int argc;<BR>
-     *  argc = Argument::vector("Every good boy does fine.",argv, <BR>
-     *                          sizeof(argv)/sizeof(argv[0]);<BR>
+     *  char string[64];
+     *  strcpy(string, "Every good boy does fine.");
+     *  argc = Argument::vector(string, argv, sizeof(argv)/sizeof(argv[0]);<BR>
      *  
      *
      *  yields

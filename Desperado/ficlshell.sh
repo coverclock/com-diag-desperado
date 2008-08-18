@@ -3,7 +3,7 @@
 
 ###############################################################################
 #
-#   Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#   Copyright 2006-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
 #   This file is part of the Digital Aggregates Desperado library.
 #   
 #   This library is free software; you can redistribute it and/or
@@ -56,16 +56,16 @@ fi
 TIMESTAMP="`date`"
 
 echo "/*"
-echo " * Copyright 2006 Digital Aggregates Corp.,"
+echo " * Copyright 2006-2008 Digital Aggregates Corp.,"
 echo " * Arvada CO 80001-0587, USA. Licensed under"
 echo " * the same terms as the Desperado library."
 echo " * This file was generated automatically"
 echo " * by the Desperado $0 script"
 echo " * on ${TIMESTAMP}."
 echo " */"
-echo "#if defined(DESPERADO_HAS_FICL)"
 echo "#include \"target.h\""
 echo "#include \"ficlApi.h\""
+echo "#if defined(DESPERADO_HAS_FICL)"
 
 for FILE in $*; do
     (
@@ -107,7 +107,7 @@ done
 echo "    ficlDictionaryLock(d, 0);"
 echo "}"
 echo "#else"
-echo "void desperado_ficl_shell(void*) {"
+echo "void desperado_ficl_shell(void* unused) {"
 echo "}"
 echo "#endif"
 

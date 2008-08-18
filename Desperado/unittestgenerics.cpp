@@ -96,6 +96,9 @@
 #include "generics.h"
 #include "generics.h"
 
+#undef offsetof
+#define offsetof(_STRUCT_, _MEMBER_) desperado_offsetof(_STRUCT_, _MEMBER_)
+
 extern "C" int unittestgenerics() {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
@@ -1712,7 +1715,7 @@ extern "C" int unittestgenerics() {
             ++errors;
         }
 
-        DEBUG_TRACE();
+        DEBUG_TRACE(((void)0));
     }
 
     {
@@ -1788,7 +1791,7 @@ extern "C" int unittestgenerics() {
             ++errors;
         }
 
-        DEBUG_TRACE();
+        DEBUG_TRACE(((void)0));
     }
 
     {
@@ -1974,7 +1977,7 @@ extern "C" int unittestgenerics() {
             ++errors;
         }
 
-        DEBUG_TRACE();
+        DEBUG_TRACE(((void)0));
     }
 
     printf("%s[%d]: end errors=%d\n",

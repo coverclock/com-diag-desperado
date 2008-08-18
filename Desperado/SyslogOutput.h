@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -60,11 +60,12 @@
  */
 
 
-#if defined(DESPERADO_PLATFORM_IS_Linux)
-
-
 #include "stdio.h"
+#if defined(DESPERADO_HAS_SYSLOG)
 #include <syslog.h>
+#else
+#include "FileOutput.h"
+#endif
 #include "Output.h"
 #include "Logger.h"
 
@@ -103,8 +104,13 @@ public:
     explicit SyslogOutput(
         Logger& rl,
         const char* id = __FILE__,
+#if defined(DESPERADO_HAS_SYSLOG)
         int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
         int fac = LOG_USER
+#else
+	int opt = 0,
+	int fac = 0
+#endif
    );
 
     /**
@@ -123,8 +129,13 @@ public:
     explicit SyslogOutput(
         Logger* pl = 0,
         const char* id = __FILE__,
+#if defined(DESPERADO_HAS_SYSLOG)
         int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
         int fac = LOG_USER
+#else
+	int opt = 0,
+	int fac = 0
+#endif
     );
 
     /**
@@ -160,8 +171,13 @@ public:
     virtual bool initialize(
         Logger& rl,
         const char* id = __FILE__,
+#if defined(DESPERADO_HAS_SYSLOG)
         int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
         int fac = LOG_USER
+#else
+	int opt = 0,
+	int fac = 0
+#endif
    );
 
     /**
@@ -192,8 +208,13 @@ public:
     virtual bool initialize(
         Logger* pl = 0,
         const char* id = __FILE__,
+#if defined(DESPERADO_HAS_SYSLOG)
         int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
         int fac = LOG_USER
+#else
+	int opt = 0,
+	int fac = 0
+#endif
     );
 
     /**
@@ -342,6 +363,13 @@ private:
      */
     int facility;
 
+#if !defined(DESPERADO_HAS_SYSLOG)
+    /**
+     *	This is the output functor used to print log messages to stderr.
+     */
+    FileOutput error;
+#endif
+
 };
 
 
@@ -367,9 +395,6 @@ inline int SyslogOutput::getOption() const {
 inline int SyslogOutput::getFacility() const {
     return this->facility;
 }
-
-
-#endif
 
 
 #endif
