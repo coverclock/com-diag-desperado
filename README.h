@@ -185,7 +185,8 @@
         hurricane       2.1.0    2007-01-31
         imperial        2.2.0    2007-02-01
         jupiter         2.3.0    2007-08-15
-        keystone        2.4.0    TBD
+        keystone        2.4.0    2008-08-21
+	lucky           2.5.0    TBD
 
     Information regarding Desperado can be found here:
 

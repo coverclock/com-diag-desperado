@@ -57,11 +57,11 @@ FICLINCDIR		=	-iquote$(FICLHOME)
 else
 FICLINCDIR		=	-I$(FICLHOME)
 endif
-FICLLIBDIR		=	-L$(FICLHOME)
+FICLLIBDIR		=	-Wl,-L$(FICLHOME)
 ifdef DYNAMIC
-FICLLIBRARY		=	-Bdynamic -lficl
+FICLLIBRARY		=	-Wl,-Bdynamic -Wl,-lficl
 else
-FICLLIBRARY		=	-Bstatic -lficl
+FICLLIBRARY		=	-Wl,-Bstatic -Wl,-lficl
 endif
 
 #
@@ -96,7 +96,7 @@ ficl-install:	ficl-target
 ficl-target:
 ifdef DYNAMIC
 	cp $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)
-	ln -s $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)/libficl.so.4.0
-	ln -s $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)/libficl.so.4
-	ln -s $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)/libficl.so
+	( cd $(INSTALLDIR); rm -f libficl.so.4.0; ln -s libficl.so.4.0.31 libficl.so.4.0 )
+	( cd $(INSTALLDIR); rm -f libficl.so.4; ln -s libficl.so.4.0.31 libficl.so.4 )
+	( cd $(INSTALLDIR); rm -f libficl.so; ln -s libficl.so.4.0.31 libficl.so )
 endif

@@ -289,9 +289,9 @@ desperado-install:	library desperado-target
 desperado-target:	library
 ifdef DYNAMIC
 	cp $(SOFILE) $(INSTALLDIR)
-	ln -s $(SOFILE) $(INSTALLDIR)/$(SONAME2)
-	ln -s $(SOFILE) $(INSTALLDIR)/$(SONAME)
-	ln -s $(SOFILE) $(INSTALLDIR)/$(SHAREDOBJ)
+	( cd $(INSTALLDIR); rm -f $(SONAME2); ln -s $(SOFILE) $(SONAME2) )
+	( cd $(INSTALLDIR); rm -f $(SONAME); ln -s $(SOFILE) $(SONAME) )
+	( cd $(INSTALLDIR); rm  -f $(SHAREDOBJ); ln -s $(SOFILE) $(SHAREDOBJ) )
 endif
 
 #
@@ -348,6 +348,7 @@ pristine:	clean adjuncts-clean
 # generate the current relase:  svn export svn://localhost/desperado/tags/$(RELEASE)/Desperado diag.com/desperado
 # generate the next release:    svn checkout svn://localhost/desperado/trunk/Desperado diag.com/desperado
 # freeze the next relase:       svn copy svn://localhost/desperado/trunk svn://localhost/desperado/tags/$(RELEASE)
+# add a new element:            svn add [filename]
 #
 #	Other stuff:
 #

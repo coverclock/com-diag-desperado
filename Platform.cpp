@@ -59,6 +59,9 @@
 
 #include <new>
 #include <cstdarg>
+#if defined(DESPERADO_PLATFORM_IS_Diminuto)
+#include <cstdio>
+#endif
 #include "littleendian.h"
 #include "lowtohigh.h"
 #include "main.h"
@@ -108,7 +111,22 @@ Platform* Platform::singleton = 0;
 //  reference to it.
 //
 Platform& Platform::factory() {
+#if defined(DESPERADO_PLATFORM_IS_Diminuto)
+    // There is a bug either in Desperado or in uClibc such that
+    // this static method seg faults unless this print statement
+    // (or something similar) is executed. If the former, the bug is
+    // well hidden since this code worked fine on a P4 under Linux 2.4
+    // and 2.6 as well as under Cygwin on Windows XP. Unfortunately,
+    // gdbserver seems to be broken on the buildroot revision I'm using
+    // so there's no simple way to debug this further than this. I
+    // suspect the issue is somehow related to the C or C++ run-time
+    // initialization.
+    Platform& platform = desperado_platform_factory();
+    fprintf(stderr, "platform=Diminuto@%p\n", static_cast<void*>(&platform));
+    return platform;
+#else
     return desperado_platform_factory();
+#endif
 }
 
 

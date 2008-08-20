@@ -58,11 +58,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	jupiter
+RELEASE		=	keystone
 MAJOR		=	2
-MINOR		=	3
+MINOR		=	4
 BUILD		=	0
-PRERELEASE	=	keystone
+PRERELEASE	=	lucky
 
 #
 # Indicate the platform, target and compiler you are using.
@@ -71,8 +71,10 @@ PRERELEASE	=	keystone
 PLATFORM	=	Diminuto
 #PLATFORM	=	Linux
 #PLATFORM	=	Cygwin
+
 #TARGET		=	IA32
 TARGET		=	ARM
+
 COMPILER	=	gcc
 
 #
@@ -130,24 +132,22 @@ FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
 
 JAVAPLAT	=	linux
 #JAVAPLAT	=	win32
-JAVATARG	=	i386
+
+#JAVATARG	=	i386
+JAVATARG	=	arm
 
 #
 #	Targets
 #
 
-default:	library binaries
+default:
+	$(MAKE) library
+	$(MAKE) binaries
 
 all:
 	$(MAKE) depend
 	$(MAKE) adjuncts
 	$(MAKE) library
 	$(MAKE) binaries
-
-preface:	clean depend
-
-build:	preface all
-
-complete:	build
 
 include Desperado.mk
