@@ -55,7 +55,7 @@ JAVAINCPLATPATH	=	$(JAVAHOME)/include/$(JAVAPLAT)
 JAVADEF			=	-DDESPERADO_HAS_JAVA
 JAVAINCDIR		=	-I$(JAVAINCPATH) -I$(JAVAINCPLATPATH)
 JAVALIBDIR		=	-L$(JAVAHOME)/jre/lib/i386/server
-JAVALIBRARY		=	-Bdynamic -ljvm
+JAVALIBRARY		=	-Wl,-Bdynamic -Wl,-ljvm
 
 JARFILE			=	$(PRODUCT).jar
 PLATFORMJNIH	=	com_diag_desperado_Platform.h

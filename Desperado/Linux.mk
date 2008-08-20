@@ -112,20 +112,20 @@ ARFLAGS		=	rcv
 
 STRIPFLAGS	=	--strip-unneeded --remove-section=.comment
 
-LDLIBDIRS	=	-L. $(ADJUNCTLIBDIR) $(PLATFORMLIBDIR) $(TARGETLIBDIR)
+LDLIBDIRS	=	-Wl,-L. $(ADJUNCTLIBDIR) $(PLATFORMLIBDIR) $(TARGETLIBDIR)
 
 ifdef DYNAMIC
-LDLIBRARIES	=	-Bdynamic -l$(LIBRARY) $(ADJUNCTLIBRARY) -Bdynamic -lpthread -Bdynamic -lrt -Bdynamic -lm
+LDLIBRARIES	=	-Wl,-Bdynamic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bdynamic -Wl,-lpthread -Wl,-Bdynamic -Wl,-lrt -Wl,-Bdynamic -Wl,-lm
 else
-LDLIBRARIES	=	-Bstatic -l$(LIBRARY) $(ADJUNCTLIBRARY) -Bstatic -lpthread -Bstatic -lrt -Bstatic -lm -Bstatic -l$(LIBRARY) $(ADJUNCTLIBRARY)
+LDLIBRARIES	=	-Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bstatic -Wl,-lpthread -Wl,-Bstatic -Wl,-lrt -Wl,-Bstatic -Wl,-lm -Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY)
 endif
 
 LDFLAGS		=	$(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)
 
 GCCMACHINE	=	$(shell $(CC) -dumpmachine)
 GCCVERSION	=	$(shell $(CC) -dumpversion)
+
 CINCPATH	=	/usr/lib/gcc-lib/$(GCCMACHINE)/$(GCCVERSION)/include
-# CXXINCPATH	=	/usr/include/$(CXX)
 CXXINCPATH	=	/usr/include/c++/$(GCCVERSION)
 
 # Shared Object (like a DLL under Windows)
