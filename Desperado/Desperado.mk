@@ -452,12 +452,6 @@ $(ARCHIVE)($%):	$%
 #	Utilities
 #
 
-cscope:
-	$(CSCOPE) -I/usr/include -I$(CINCPATH) -I$(CXXINCPATH) -I$(FICLINCPATH)
-
-cscope-includes:
-	$(CSCOPE) -s /usr/include -s $(CINCPATH) -s $(CXXINCPATH)
-
 transmogrify:
 	$(EXEDITOR) "+source $(SCRIPT)" $(SOURCES)
 

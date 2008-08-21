@@ -50,7 +50,6 @@
 #	@author	coverclock@diag.com (Chip Overclock)
 #
 
-FICLINCPATH		=	$(FICLHOME)
 FICLDEF			=	-DDESPERADO_HAS_FICL
 ifdef IQUOTE
 FICLINCDIR		=	-iquote$(FICLHOME)

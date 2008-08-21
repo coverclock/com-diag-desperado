@@ -47,7 +47,7 @@
 #	@author	coverclock@diag.com (Chip Overclock)
 #
 
-AR			=	strace ar
+AR			=	ar
 BROWSER		=	mozilla
 CC			=	gcc
 CSCOPE		=	cscope -R
@@ -76,7 +76,7 @@ else
 CINCLUDES	=	-I. $(ADJUNCTINCDIR) -I-
 endif
 
-CDEBUG		=	-g3 -O3 -pg
+CDEBUG		=	-g3 -O3
 
 COPTIONS	=	-pipe -Wall -W -Wno-long-long -Wmissing-prototypes
 
@@ -98,9 +98,6 @@ LDFLAGS		=	$(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)
 
 GCCMACHINE	=	$(shell $(CC) -dumpmachine)
 GCCVERSION	=	$(shell $(CC) -dumpversion)
-CINCPATH	=	/usr/lib/gcc/$(GCCMACHINE)/$(GCCVERSION)/include
-CXXINCPATH	=	/usr/lib/gcc/$(GCCMACHINE)/$(GCCVERSION)/c++/include
-#CXXINCPATH	=	/usr/include/boost-1_33_1/boost/compatibility/cpp_c_headers
 
 # Shared Object (like a DLL under Windows)
 

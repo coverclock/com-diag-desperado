@@ -47,21 +47,27 @@
 #	@author	coverclock@diag.com (Chip Overclock)
 #
 
-AR			=	ar
-BROWSER		=	mozilla
-CC			=	gcc
+AR			=	${CROSS_COMPILE}ar
+AS			=	${CROSS_COMPILE}as
+CC			=	${CROSS_COMPILE}gcc
+CXX			=	${CROSS_COMPILE}g++
+GDB			=	${CROSS_COMPILE}gdb
+LD			=	${CROSS_COMPILE}g++
+NM			=	${CROSS_COMPILE}nm
+RANLIB		=	${CROSS_COMPILE}ranlib
+SO			=	$(CROSS_COMPILE)g++
+STRINGS		=	${CROSS_COMPILE}strings
+STRIP		=	${CROSS_COMPILE}strip
+
+BROWSER		=	firefox
 CSCOPE		=	cscope -R
 CVS			=	cvs
-CXX			=	g++
 DOXYGEN		=	doxygen
 EXEDITOR	=	ex
-LD			=	g++
 MAN2PS		=	groff -man -Tps -
 NCSL		=	sclc
 PS2PDF		=	ps2pdf
-RANLIB		=	ranlib
 READER		=	acroread
-STRIP		=	strip
 SVN			=	svn
 
 CPPONLY		=	-E
@@ -93,7 +99,7 @@ else
 CINCLUDES	=	-I. $(ADJUNCTINCDIR) -I-
 endif
 
-CDEBUG		=	-g3 -O3 -pg
+CDEBUG		=	-g3 -O3
 
 # -pedantic may cause problems depending on the compiler version.
 # -Werror may cause heartache with certain gcc versions regarding inlines.
@@ -115,9 +121,9 @@ STRIPFLAGS	=	--strip-unneeded --remove-section=.comment
 LDLIBDIRS	=	-Wl,-L. $(ADJUNCTLIBDIR) $(PLATFORMLIBDIR) $(TARGETLIBDIR)
 
 ifdef DYNAMIC
-LDLIBRARIES	=	-Wl,-Bdynamic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bdynamic -Wl,-lpthread -Wl,-Bdynamic -Wl,-lrt -Wl,-Bdynamic -Wl,-lm
+LDLIBRARIES	=	-Wl,-Bdynamic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bdynamic -Wl,-l$(LIBRARY) -Wl,-Bdynamic -Wl,-lpthread -Wl,-Bdynamic -Wl,-lrt -Wl,-Bdynamic -Wl,-lm
 else
-LDLIBRARIES	=	-Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bstatic -Wl,-lpthread -Wl,-Bstatic -Wl,-lrt -Wl,-Bstatic -Wl,-lm -Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY)
+LDLIBRARIES	=	-Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bstatic -Wl,-l$(LIBRARY) -Wl,-Bstatic -Wl,-lpthread -Wl,-Bstatic -Wl,-lrt -Wl,-Bstatic -Wl,-lm
 endif
 
 LDFLAGS		=	$(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)
@@ -125,12 +131,7 @@ LDFLAGS		=	$(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)
 GCCMACHINE	=	$(shell $(CC) -dumpmachine)
 GCCVERSION	=	$(shell $(CC) -dumpversion)
 
-CINCPATH	=	/usr/lib/gcc-lib/$(GCCMACHINE)/$(GCCVERSION)/include
-CXXINCPATH	=	/usr/include/c++/$(GCCVERSION)
-
 # Shared Object (like a DLL under Windows)
-
-SO			=	g++
 
 SOPREFIX	=	$(CDEBUG) -shared -Wl,-soname,$(SONAME) -Wl,-export-dynamic
 SOSUFFIX	=	-Wl,-Bdynamic $(LDDYNAMIC)
@@ -142,11 +143,11 @@ $(SONAME):	$(SOFILE)
 	rm -f $(SONAME)
 	ln -s $(SOFILE) $(SONAME)
 
-$(SONAME2):	$(SOFILE)
+$(SONAME2):	$(SONAME)
 	rm -f $(SONAME2)
 	ln -s $(SOFILE) $(SONAME2)
 
-$(SHAREDOBJ):	$(SOFILE)
+$(SHAREDOBJ):	$(SONAME2)
 	rm -f $(SHAREDOBJ)
 	ln -s $(SOFILE) $(SHAREDOBJ)
 
