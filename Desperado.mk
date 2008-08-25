@@ -155,6 +155,7 @@ MANIFEST	=	$(sort $(SOURCES) $(MAKESFILES) $(ANTFILES) $(EXTRAS) $(LICENSES) $(I
 
 BETA		=	$(DOMAIN)/$(PRODUCT)/$(RELEASE)
 ALPHA		=	$(DOMAIN)/$(PRODUCT)/$(PRERELEASE)
+EMBED		=	$(DOMAIN)/$(PRODUCT)/diminuto
 
 ROOT		=	$(shell pwd)
 
@@ -269,15 +270,17 @@ install:	$(PUBDIR)/include $(PUBDIR)/lib $(PUBDIR)/bin headers library binaries
 #	Target
 #
 
-target:		../diminuto.tar.bz2
+target:		$(TMPDIR)/diminuto-$(PRODUCT)-$(RELEASE).tar.bz2
 
-../diminuto.tar.bz2:	targetable
-	tar cvjf - $(TGTDIR) > ../diminuto.tar.bz2
+$(TMPDIR)/diminuto-$(PRODUCT)-$(RELEASE).tar.bz2:	embeddable
+	( cd $(TMPDIR); tar cvjf - $(EMBED) > diminuto-$(PRODUCT)-$(RELEASE).tar.bz2 )
 
-targetable:		$(TGTDIR) headers library binaries
-	cp $(BINARIES) $(TGTDIR)
-	make desperado-target INSTALLDIR=$(TGTDIR)
-	make ficl-target INSTALLDIR=$(TGTDIR)
+embeddable:		headers library binaries
+	rm -rf $(TMPDIR)/$(EMBED)
+	mkdir -p $(TMPDIR)/$(EMBED)
+	cp $(BINARIES) $(TMPDIR)/$(EMBED)
+	make desperado-target INSTALLDIR=$(TMPDIR)/$(EMBED)
+	make ficl-target INSTALLDIR=$(TMPDIR)/$(EMBED)
 
 #
 #	Helpers
@@ -695,9 +698,6 @@ $(PUBDIR)/lib:
 
 $(PUBDIR)/bin:
 	mkdir -p $(PUBDIR)/bin
-
-$(TGTDIR):
-	mkdir -p $(TGTDIR)
 
 doc/pdf:
 	mkdir -p doc/pdf

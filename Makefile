@@ -65,17 +65,15 @@ BUILD		=	0
 PRERELEASE	=	lucky
 
 #
-# Indicate the platform, target and compiler you are using.
+# Indicate the platform and target you are using.
 #
 
 PLATFORM	=	Diminuto
 #PLATFORM	=	Linux
 #PLATFORM	=	Cygwin
 
+TARGET		=	ARM920T
 #TARGET		=	IA32
-TARGET		=	ARM
-
-COMPILER	=	gcc
 
 #
 # Define if your compiler uses -iquote.
@@ -96,15 +94,14 @@ DYNAMIC		=	shared
 #
 # Specify where your public and temporary directories are for make install.
 # The public directory will be assumed to have include and lib subdirectories.
-# The target directory is where files destined for an embedded target go.
 #
 
-TMPDIR		=	/usr/tmp
+TMPDIR		=	/tmp
 PUBDIR		=	/usr/local
-TGTDIR		=	diminuto
 
 #
 # Define how and where you get to Subversion.
+# This is mostly for my own use.
 #
 
 SVNPROTO	=	svn
@@ -122,19 +119,20 @@ FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
 # If you are using Java, specify where it is.
 # Comment out otherwise.
 
+#JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
 #JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02
 
 #
 # If you are using Java, say more about its platform and target.
-# These are actually subdirectory names inside the JAVAHOME.
+# These are actually subdirectory names inside the JAVAHOME/jre/lib.
 #
 
-JAVAPLAT	=	linux
+#JAVAPLAT	=	linux
 #JAVAPLAT	=	win32
 
 #JAVATARG	=	i386
-JAVATARG	=	arm
+#JAVATARG	=	arm
 
 #
 #	Targets
@@ -149,5 +147,6 @@ all:
 	$(MAKE) adjuncts
 	$(MAKE) library
 	$(MAKE) binaries
+	$(MAKE) target
 
 include Desperado.mk
