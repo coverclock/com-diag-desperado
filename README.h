@@ -93,7 +93,7 @@
     o   POSIX threads, and
     o   support for 64-bit integral types.
 
-    Contact
+    Contact:
 
         Chip Overclock
         mailto:coverclock@diag.com
@@ -261,10 +261,6 @@
 
         John Sadler
 
-        John Sloan
-        Digital Aggregates Corporation
-        Arvada CO 80001-0587 USA
-
         Ross Williams
         Rocksoft Pty. Ltd.
         Adelaide SA AUS
@@ -273,7 +269,7 @@
     making their software available.
 
     The design patterns implemented by this software benefitted from
-    the wisdom and experience of the following cast of thousands.
+    the wisdom and experience of the following cast of thousands:
 
         Bill Bahr
         Michael Barr
@@ -284,6 +280,7 @@
         Marshall Cline
         Dale Courte
         Jill Courte
+        Michael Dierks
         Bob Dixon
         Tom Doeppner
         Issac Eyeson
@@ -299,6 +296,7 @@
         Ken Jensen
         Chad Komer
         Don Leuenberger
+        Sam Linzell
         Joe McTee
         John Meiners
         Paul Moorman
@@ -306,12 +304,12 @@
         Tamarra Noirot
         Phil Ouellette
         Norm Petty
+        Ron Phillips
         Edward Reingold
         Gary Robertson
         Craig Ruff
         John Sadler
         Al Sanders
-        John Sloan
         Michael Tamny
         Steve Tarr
         Erich Thanhardt
@@ -322,7 +320,8 @@
         Wayne Zakowski
 
     The authors are grateful for their sometimes unwitting suggestions,
-    criticisms, insights, reviews, mentoring, and contributions.
+    criticisms, insights, reviews, mentoring, and strictly intellectual
+    contributions.
 
     ----------------------------------------------------------------------
 
@@ -337,27 +336,35 @@
 
     What is your build target?
 
-        This release was built for and tested on
+        Various releases of Desperado have been built for and tested on
+        the following targets (most recent to least recent):
 
-            Linux 2.6.25.10 for the Atmel AT91RM9200-EK board
+            Linux 2.6.25.10 for the Atmel AT91RM9200-EK (ARM9)
             gcc 4.2.4
+            GNU Make 3.81
+            uClibc 0.9.29
+            ficl4.0.31
 
-        Prior releases have been built and tested on
+            Linux 2.6.22 for the i486
+            gcc 4.1.3
+            GNU Make 3.81
+            glibc 2.6.1
+            ficl4.0.31
 
-            Linux 2.6.15-1.2054_FC5
-            gcc 4.1.0 20060304
+            Linux 2.6.15-1.2054_FC5 for the i486
+            gcc 4.1.0
             GNU Make 3.80
             ficl4.0.31
             jdk1.5.0_08
             apache-ant-1.6.5
 
-            Cygwin CYGWIN_NT-5.1 1.5.24 (0.156/4/2)
+            Cygwin CYGWIN_NT-5.1 1.5.24 (0.156/4/2) for the i486
             gcc 3.4.4
             GNU Make 3.81
             ficl4.0.31
 
-            Linux 2.4.22-1.2115.nptlsmp
-            gcc 3.3.2 20031022
+            Linux 2.4.22-1.2115.nptlsmp for the i386
+            gcc 3.3.2
             GNU Make 3.79.1
 
         One of our goals is to learn about the portability issues of
