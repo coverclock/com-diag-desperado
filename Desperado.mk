@@ -387,6 +387,8 @@ prerelease:
 	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar
 	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tgz
 
+dist:	distribution
+
 distribution:	release
 
 #
