@@ -468,11 +468,25 @@ preprocess-c:	$(NAME)
 preprocess-cxx:	$(NAME)
 	$(CXX) $(CPPONLY) $(CPPFLAGS) $(NAME)
 
-assemble-c:	$(NAME)
+preassemble-c:	$(NAME)
 	$(CC) $(ASMONLY) $(CPPFLAGS) $(CFLAGS) $(NAME)
 
-assemble-cxx:	$(NAME)
+preassemble-cxx:	$(NAME)
 	$(CXX) $(ASMONLY) $(CPPFLAGS) $(CXXFLAGS) $(NAME)
+
+compile-c:	$(NAME) $(ARCHIVE)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(NAME)
+
+compile-cxx:	$(NAME) $(ARCHIVE)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) $(NAME)
+
+simple-c:	$(NAME)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(NAME)
+	# $(CC) $(NAME)
+
+simple-cxx:	$(NAME)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(NAME)
+	# $(CXX) $(NAME)
 
 #
 #	Metrics

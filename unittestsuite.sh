@@ -46,7 +46,7 @@ TOTAL=0
 NAME="`basename $0`"
 PID=$$
 if [ "$TMPDIR" = "" ]; then
-    TMPDIR="/usr/tmp"
+    TMPDIR="/var/tmp"
 fi
 SCRIPT1=$TMPDIR/$NAME.$PID.1.sh
 SCRIPT2=$TMPDIR/$NAME.$PID.2.sh

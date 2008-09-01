@@ -55,24 +55,14 @@
  *  convention of the standard sizeof() operator. None of these macros
  *  implement rocket science, but they sure are handy to have around.
  *
- *  This header file redefines the offsetof() macro. Unfortunately, at
- *  least when using GCC, the offsetof() macro is unconditionally redefined
- *  in the stddef.h header file every time it is included (directly, or
- *  indirectly by another header file), not just the first time. (This
- *  is a bug, in my opinion.)
- *
- *  The typical (including GCC) definition of offsetof() is incorrect
- *  for some hardware architectures (in my experience, the Cray Y-MP
- *  specifically) because it assumes that the beginning of a structure
- *  is at offset zero. While that sounds reasonable, it is not always the
- *  the case. And, because the typical offsetof() uses old-style casts,
- *  warnings are generated for C++ translation units being compiled with
- *  strict C++ compliance, even when cstddef is being used instead of
- *  stddef.h.
- *
- *  You may choose to use the desperado_offsetof() macro instead,
- *  which is equivalent but does not conflict with the system header
- *  definition.
+ *  What's the deal with desperado_offsetof()? Decades ago (no, really)
+ *  the offsetof() macro didn't exist. So we wrote our own, But at the
+ *  time we were working at place that pretty much one of everything.
+ *  Fun to play, nightmare to write portable code. Epecially, for the
+ *  CRAY Y-MP, for which (among other weirdnesses) the first field in a
+ *  C structure was not at offset zero. So we had to come up with an
+ *  implementation that worked on everything. This is a reimplementation
+ *  that works on the Y-MP. Now we would just use the standard offsetof().
  *
  *  The use of preprocessor macros here is troublesome. Preprocessor
  *  symbols are like old landmines, hiding just below the surface

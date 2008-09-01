@@ -72,7 +72,7 @@ SVN			=	svn
 
 CPPONLY		=	-E
 
-ASMONLY		=	-S
+ASMONLY		=	-S -dA
 
 ifdef INT64
 CDEFINES	=	-DDESPERADO_TARGET_IS_$(TARGET) \
@@ -99,7 +99,7 @@ else
 CINCLUDES	=	-I. $(ADJUNCTINCDIR) -I-
 endif
 
-CDEBUG		=	-g3 -O3
+CDEBUG		=	-g -O
 
 # -pedantic may cause problems depending on the compiler version.
 # -Werror may cause heartache with certain gcc versions regarding inlines.

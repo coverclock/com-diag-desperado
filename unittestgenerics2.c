@@ -155,6 +155,74 @@ int unittestgenerics2() {
     print_f(platform_output(), "%s[%d]: begin\n",
         __FILE__, __LINE__);
 
+    print_f(platform_output(), "%s[%d]: sizeof\n", __FILE__, __LINE__);
+
+#define psizeof(_TYPE_) \
+    print_f(platform_output(), "%s[%d]: sizeof(" #_TYPE_ ")=%u\n", __FILE__, __LINE__, sizeof(_TYPE_))
+
+    psizeof(char);
+    psizeof(int8_t);
+    psizeof(uint8_t);
+    psizeof(short);
+    psizeof(int16_t);
+    psizeof(uint16_t);
+    psizeof(int);
+    psizeof(unsigned);
+    psizeof(unsigned int);
+    psizeof(int32_t);
+    psizeof(uint32_t);
+    psizeof(void*);
+    psizeof(intptr_t);
+    psizeof(size_t);
+    psizeof(ssize_t);
+    psizeof(float);
+    psizeof(long);
+    psizeof(unsigned long);
+    psizeof(double);
+    psizeof(long long);
+    psizeof(unsigned long long);
+    psizeof(int64_t);
+    psizeof(uint64_t);
+
+    print_f(platform_output(), "%s[%d]: desperado_offsetof\n",
+        __FILE__, __LINE__);
+
+#define poffsetof(_FIELD_) \
+    print_f(platform_output(), "%s[%d]: desperado_offsetof(" #_FIELD_ ")=%u\n", __FILE__, __LINE__, desperado_offsetof(Type, _FIELD_))
+
+    poffsetof(cc);
+    poffsetof(ss);
+    poffsetof(ll);
+    poffsetof(dd);
+
+    offset = desperado_offsetof(Type, dd);
+    if (8 != offset) {
+        print_f(platform_error(), "%s[%d]: (%u!=%u)!\n",
+            __FILE__, __LINE__, 8, offset);
+        ++errors;
+    }
+
+    offset = desperado_offsetof(Type, ll);
+    if (4 != offset) {
+        print_f(platform_error(), "%s[%d]: (%u!=%u)!\n",
+            __FILE__, __LINE__, 4, offset);
+        ++errors;
+    }
+
+    offset = desperado_offsetof(Type, ss);
+    if (2 != offset) {
+        print_f(platform_error(), "%s[%d]: (%u!=%u)!\n",
+            __FILE__, __LINE__, 2, offset);
+        ++errors;
+    }
+
+    offset = desperado_offsetof(Type, cc);
+    if (0 != offset) {
+        print_f(platform_error(), "%s[%d]: (%u!=%u)!\n",
+            __FILE__, __LINE__, 0, offset);
+        ++errors;
+    }
+
     print_f(platform_output(), "%s[%d]: offsetof\n",
         __FILE__, __LINE__);
 
