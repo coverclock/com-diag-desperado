@@ -96,8 +96,10 @@
 #include "generics.h"
 #include "generics.h"
 
+#if 0
 #undef offsetof
 #define offsetof(_STRUCT_, _MEMBER_) desperado_offsetof(_STRUCT_, _MEMBER_)
+#endif
 
 extern "C" int unittestgenerics() {
     Print printf(Platform::instance().output());
@@ -105,6 +107,35 @@ extern "C" int unittestgenerics() {
     int errors = 0;
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
+
+    printf("%s[%d]: sizeof\n", __FILE__, __LINE__);
+
+#define psizeof(_TYPE_) \
+    printf("%s[%d]: sizeof(" #_TYPE_ ")=%u\n", __FILE__, __LINE__, sizeof(_TYPE_))
+
+    psizeof(char);
+    psizeof(int8_t);
+    psizeof(uint8_t);
+    psizeof(short);
+    psizeof(int16_t);
+    psizeof(uint16_t);
+    psizeof(int);
+    psizeof(unsigned);
+    psizeof(unsigned int);
+    psizeof(int32_t);
+    psizeof(uint32_t);
+    psizeof(void*);
+    psizeof(intptr_t);
+    psizeof(size_t);
+    psizeof(ssize_t);
+    psizeof(float);
+    psizeof(long);
+    psizeof(unsigned long);
+    psizeof(double);
+    psizeof(long long);
+    psizeof(unsigned long long);
+    psizeof(int64_t);
+    psizeof(uint64_t);
 
     printf("%s[%d]: desperado_offsetof\n", __FILE__, __LINE__);
 
@@ -114,6 +145,14 @@ extern "C" int unittestgenerics() {
         int32_t ll;
         int64_t dd;
     };
+
+#define poffsetof(_FIELD_) \
+    printf("%s[%d]: desperado_offsetof(" #_FIELD_ ")=%u\n", __FILE__, __LINE__, desperado_offsetof(Type, _FIELD_))
+
+    poffsetof(cc);
+    poffsetof(ss);
+    poffsetof(ll);
+    poffsetof(dd);
 
     Type object;
 
