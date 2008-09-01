@@ -107,10 +107,11 @@ Platform* Platform::singleton = 0;
 //  reference to it.
 //
 Platform& Platform::factory() {
-    Platform & platform = platform_factory();
+    Platform& platform = platform_factory();
 #if defined(DESPERADO_PLATFORM_IS_Diminuto)
-    extern int printf (const char *format, ...);
-    printf("platform=%p\n", &platform);
+    extern FILE* stderr;
+    extern int fprintf(FILE* stream, const char* format, ...);
+    fprintf(stderr, "platform=%p\n", &platform);
 #endif
     return platform;
 }
