@@ -107,13 +107,7 @@ Platform* Platform::singleton = 0;
 //  reference to it.
 //
 Platform& Platform::factory() {
-    Platform& platform = platform_factory();
-#if defined(DESPERADO_PLATFORM_IS_Diminuto)
-    extern FILE* stderr;
-    extern int fprintf(FILE* stream, const char* format, ...);
-    fprintf(stderr, "platform=%p\n", &platform);
-#endif
-    return platform;
+    return *platform_factory();
 }
 
 
@@ -173,13 +167,11 @@ ticks_t Platform::frequency() {
 //  Show this object on the output object.
 //
 void Platform::show(int level, Output* display, int indent) const {
-    Platform& pl = Platform::instance();
     Print printf(display);
     const char* sp = printf.output().indentation(indent);
-    char component[sizeof(__FILE__)];
-    printf("%s%s(%p)[%lu]:\n",
-        sp, pl.component(__FILE__, component, sizeof(component)),
-        this, sizeof(*this));
+    char buffer[sizeof(__FILE__)];
+    const char* bp = this->component(__FILE__, buffer, sizeof(buffer));
+    printf("%s%s(%p)[%lu]:\n", sp, bp, this, sizeof(*this));
     printf("%s singleton=%p\n", sp, this->singleton);
     printf("%s leapseconds=%d\n", sp, this->leapseconds);
     if (lsrule) {

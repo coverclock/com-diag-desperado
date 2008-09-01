@@ -465,7 +465,7 @@ public:
      *
      *  @return a pointer to the buffer.
      */
-    virtual char* component(const char* path, char* buffer, size_t size) = 0;
+    virtual char* component(const char* path, char* buffer, size_t size) const = 0;
 
     /**
      *  Returns a pointer to the errno variable appropriate for the calling
@@ -677,13 +677,13 @@ inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
 
 
 /**
- * Allocates, constructs, and returns a reference to a Platform object
+ * Allocates, constructs, and returns a pointer to a Platform object
  * of the appropriate type. If the allocation or construction fails, the
  * result is undefined.
  *
- * @return a reference to a newly allocated and constructed Platform object.
+ * @return a pointer to a newly allocated and constructed Platform object.
  */
-extern Platform& platform_factory();
+extern Platform* platform_factory();
 
 
 /**

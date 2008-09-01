@@ -465,7 +465,7 @@ Logger& Linux::logger() {
 //  Extract the component name from a path and store it in a
 //  buffer of a specified size.
 //
-char* Linux::component(const char* path, char* buffer, size_t size) {
+char* Linux::component(const char* path, char* buffer, size_t size) const {
     if (path && buffer && size) {
         const char* here = path;
         const char* beginning;

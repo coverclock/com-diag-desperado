@@ -61,8 +61,8 @@
 /**
  *  Create a Desperado Platform object of the appropriate derived class.
  * 
- *  @return a reference to the created Platform object.
+ *  @return a pointer to the created Platform object.
  */
-Platform& platform_factory() {
-    return *(new DESPERADO_PLATFORM_CLASS);
+Platform* platform_factory() {
+    return new DESPERADO_PLATFORM_CLASS;
 }

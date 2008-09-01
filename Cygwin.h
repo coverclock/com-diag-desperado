@@ -288,7 +288,7 @@ public:
      *
      *  @return a pointer to the buffer.
      */
-    virtual char* component(const char* path, char* buffer, size_t size);
+    virtual char* component(const char* path, char* buffer, size_t size) const;
 
     /**
      *  Returns a pointer to the errno variable appropriate for the calling
