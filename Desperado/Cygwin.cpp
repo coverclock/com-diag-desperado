@@ -473,7 +473,7 @@ Logger& Cygwin::logger() {
 //  Extract the component name from a path and store it in a
 //  buffer of a specified size.
 //
-char* Cygwin::component(const char* path, char* buffer, size_t size) {
+char* Cygwin::component(const char* path, char* buffer, size_t size) const {
     if (path && buffer && size) {
         const char* here = path;
         const char* beginning;
