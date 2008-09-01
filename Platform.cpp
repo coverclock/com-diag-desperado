@@ -59,12 +59,8 @@
 
 #include <new>
 #include <cstdarg>
-#if defined(DESPERADO_PLATFORM_IS_Diminuto)
-#include <cstdio>
-#endif
 #include "littleendian.h"
 #include "lowtohigh.h"
-#include "main.h"
 #include "Platform.h"
 #include "Vintage.h"
 #include "Ticks.h"
@@ -111,7 +107,12 @@ Platform* Platform::singleton = 0;
 //  reference to it.
 //
 Platform& Platform::factory() {
-    return desperado_platform_factory();
+    Platform & platform = platform_factory();
+#if defined(DESPERADO_PLATFORM_IS_Diminuto)
+    extern int printf (const char *format, ...);
+    printf("platform=%p\n", &platform);
+#endif
+    return platform;
 }
 
 

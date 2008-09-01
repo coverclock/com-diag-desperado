@@ -1,11 +1,8 @@
-#ifndef _DESPERADO_MAIN_H_
-#define _DESPERADO_MAIN_H_
-
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -38,23 +35,15 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: main.h,v 1.3 2006/07/24 16:01:46 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Handles some of the boilerplate of being a main program.
- * 
- *  @author $Author: jsloan $
+ *  Implements the platform factory.
  *
- *  @version    $Revision: 1.3 $
- *
- *  @date   $Date: 2006/07/24 16:01:46 $
+ *  @see    Platform
  */
 
 
@@ -64,6 +53,8 @@
 #include "Cygwin.h"
 #elif defined(DESPERADO_PLATFORM_IS_Diminuto)
 #include "Diminuto.h"
+#else
+#include "Platform.h"
 #endif
 
 
@@ -72,9 +63,6 @@
  * 
  *  @return a reference to the created Platform object.
  */
-static inline Platform& desperado_platform_factory() {
+Platform& platform_factory() {
     return *(new DESPERADO_PLATFORM_CLASS);
 }
-
-
-#endif

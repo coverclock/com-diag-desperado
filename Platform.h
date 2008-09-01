@@ -677,6 +677,16 @@ inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
 
 
 /**
+ * Allocates, constructs, and returns a reference to a Platform object
+ * of the appropriate type. If the allocation or construction fails, the
+ * result is undefined.
+ *
+ * @return a reference to a newly allocated and constructed Platform object.
+ */
+extern Platform& platform_factory();
+
+
+/**
  *  Run the Platform unit test.
  *
  *  @return the number of errors detected.
