@@ -99,7 +99,7 @@ else
 CINCLUDES	=	-I. $(ADJUNCTINCDIR) -I-
 endif
 
-CDEBUG		=	-g
+CDEBUG		=	-g -O3
 
 # -pedantic may cause problems depending on the compiler version.
 # -Werror may cause heartache with certain gcc versions regarding inlines.

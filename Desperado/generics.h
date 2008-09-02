@@ -57,12 +57,13 @@
  *
  *  What's the deal with desperado_offsetof()? Decades ago (no, really)
  *  the offsetof() macro didn't exist. So we wrote our own, But at the
- *  time we were working at place that pretty much one of everything.
+ *  time we were working at place that pretty much had one of everything.
  *  Fun to play, nightmare to write portable code. Epecially, for the
- *  CRAY Y-MP, for which (among other weirdnesses) the first field in a
+ *  CRAY Y-MP, for which (among other weirdnesses) the base address of a
  *  C structure was not at offset zero. So we had to come up with an
  *  implementation that worked on everything. This is a reimplementation
- *  that works on the Y-MP. Now we would just use the standard offsetof().
+ *  that works on the Y-MP. Now we would just use the standard offsetof(),
+ *  which I would expect to work on any platform.
  *
  *  The use of preprocessor macros here is troublesome. Preprocessor
  *  symbols are like old landmines, hiding just below the surface
@@ -152,8 +153,13 @@
  *  typical implementation assumes that the beginning of the structure
  *  starts at offset zero; this is not the case on some architectures.
  */
+#if 0
 #define desperado_offsetof(_STRUCT_, _MEMBER_) \
     staticcastto(size_t, reinterpretcastto(char*, &(nullpointerto(_STRUCT_)->_MEMBER_)) - reinterpretcastto(char*, nullpointerto(_STRUCT_)))
+#else
+#define desperado_offsetof(_STRUCT_, _MEMBER_) \
+    staticcastto(size_t, reinterpretcastto(uintptr_t, &(nullpointerto(_STRUCT_)->_MEMBER_)) - reinterpretcastto(uintptr_t, nullpointerto(_STRUCT_)))
+#endif
 
 
 /**

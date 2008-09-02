@@ -104,19 +104,18 @@ Platform* Platform::singleton = 0;
 
 //
 //  Allocate and construct a suitable Platform object and return a
-//  reference to it.
+//  pointer to it.
 //
-Platform& Platform::factory() {
-    return *platform_factory();
+Platform* Platform::factory() {
+    return platform_factory();
 }
 
 
 //
-//  Set the system platform. The argument is a reference to make it
-//  challenging for the caller to pass a null pointer.
+//  Set the system platform.
 //
-void Platform::instance(Platform& that) {
-    Platform::singleton = &that;
+void Platform::instance(Platform* that) {
+    Platform::singleton = that;
 }
 
 
