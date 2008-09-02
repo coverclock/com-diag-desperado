@@ -57,16 +57,26 @@
 #include "Platform.h"
 #endif
 
+Platform* platform_factory_cache = 0;
+
 
 /**
  *  Return a Desperado Platform object of the appropriate derived class.
+ *
+ *  On the uClibc-based Diminuto platform, there is either a bug in the
+ *  arm-linux-g++ compiler, or a very subtle bug in this code. The store
+ *  to the platform_factory_cache is only there to force the compiler to
+ *  generate code to implement the reference; without it (or some other
+ *  forcing function, like printing the address of the reference to
+ *  standard error), this function core dumps with a Segmentation Fault.
+ *  Turning off optimization does not fix this.
  * 
- *  @return a pointer to the created Platform object.
+ *  @return a reference to the newly created Platform object.
  */
-Platform* platform_factory() {
+Platform& platform_factory() {
     DESPERADO_PLATFORM_CLASS* derived = new DESPERADO_PLATFORM_CLASS;
-    fprintf(stderr, "platform_factory: derived=%p\n", derived);
     Platform* base = derived;
-    fprintf(stderr, "platform_factory: base=%p\n", base);
-    return base;
+    Platform& result = *base;
+    platform_factory_cache = &result;
+    return result;
 }

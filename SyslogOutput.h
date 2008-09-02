@@ -60,7 +60,7 @@
  */
 
 
-#include "io.h"
+#include "stdio.h"
 #if defined(DESPERADO_HAS_SYSLOG)
 #include <syslog.h>
 #else

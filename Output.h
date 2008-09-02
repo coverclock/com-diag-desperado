@@ -62,7 +62,7 @@
 
 #include "target.h"
 #include "cxxcapi.h"
-#include "io.h"
+#include "stdio.h"
 
 
 #if defined(__cplusplus)

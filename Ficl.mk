@@ -51,11 +51,7 @@
 #
 
 FICLDEF			=	-DDESPERADO_HAS_FICL
-ifdef IQUOTE
 FICLINCDIR		=	-iquote$(FICLHOME)
-else
-FICLINCDIR		=	-I$(FICLHOME)
-endif
 FICLLIBDIR		=	-Wl,-L$(FICLHOME)
 ifdef DYNAMIC
 FICLLIBRARY		=	-Wl,-Bdynamic -Wl,-lficl
