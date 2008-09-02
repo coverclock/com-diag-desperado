@@ -104,9 +104,9 @@ Platform* Platform::singleton = 0;
 
 //
 //  Allocate and construct a suitable Platform object and return a
-//  pointer to it.
+//  reference to it.
 //
-Platform* Platform::factory() {
+Platform& Platform::factory() {
     return platform_factory();
 }
 
@@ -114,8 +114,8 @@ Platform* Platform::factory() {
 //
 //  Set the system platform.
 //
-void Platform::instance(Platform* that) {
-    Platform::singleton = that;
+void Platform::instance(Platform& that) {
+    Platform::singleton = &that;
 }
 
 

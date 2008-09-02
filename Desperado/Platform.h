@@ -111,25 +111,25 @@ public:
 
     /**
      *  Allocates and constructs an instance of a derived class object and
-     *  returns a base class pointer to it. Exactly what kind of derived
-     *  class object is implementation dependent. Passing this pointer to
+     *  returns a base class reference to it. Exactly what kind of derived
+     *  class object is implementation dependent. Passing this reference to
      *  the instance method is sufficient to initialize the interface to
      *  the underlying platform.
      *
-     *  @return a pointer to a platform object.
+     *  @return a reference to a platform object.
      */
-    static Platform* factory();
+    static Platform& factory();
 
     /**
      *  Sets the system platform object. Creating a system platform
      *  object and setting it should be done before using any of the
-     *  other classes in this library. Passing a null pointer results
-     *  in undefined behavior.
+     *  other classes in this library. Passing a reference to a null
+     *  pointer results in undefined behavior.
      *
-     *  @param  that        points to the system platform object
+     *  @param  that        refers to the system platform object
      *                      which will be used for platform requests.
      */
-    static void instance(Platform* that);
+    static void instance(Platform& that);
 
     /**
      *  Gets a reference to the system platform.
@@ -678,13 +678,13 @@ inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
 
 
 /**
- * Allocates, constructs, and pointer a reference to a Platform object
+ * Allocates, constructs, and returns a reference to a Platform object
  * of the appropriate type. If the allocation or construction fails, the
  * result is undefined.
  *
- * @return a pointer to a newly allocated and constructed Platform object.
+ * @return a reference to a newly allocated and constructed Platform object.
  */
-extern Platform* platform_factory();
+extern Platform& platform_factory();
 
 
 /**

@@ -1,5 +1,5 @@
-#ifndef _DESPERADO_IO_H_
-#define _DESPERADO_IO_H_
+#ifndef _DESPERADO_STDIO_H_
+#define _DESPERADO_STDIO_H_
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 

@@ -76,13 +76,6 @@ TARGET		=	ARM920T
 #TARGET		=	IA32
 
 #
-# Define if your compiler uses -iquote.
-# Comment out if your compiler uses -I-.
-#
-
-IQUOTE		=	iquote
-
-#
 # Define if you want to build using dynamic linking.
 # Comment out if you want to build using static linking.
 # The Java Native Interface requires dynamic linking.
