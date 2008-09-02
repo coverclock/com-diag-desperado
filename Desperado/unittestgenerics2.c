@@ -124,7 +124,7 @@ int unittestgenerics2() {
         uint16_t ss;    /* 12..13 */
         uint8_t cc;     /* 14..14 */
     } GoodOrder;
-    GoodOrder goodorder;
+    GoodOrder goodorder __attribute__ ((aligned (sizeof(uint64_t))));
     typedef struct BadOrder {
         uint64_t slack0;    /* 0..7 */
         uint8_t slack1[1];  /* 8..8 */
@@ -136,7 +136,7 @@ int unittestgenerics2() {
         uint8_t slack4[1];  /* 24 (25..31) */
         uint64_t dd;        /* 32..40 */
     } BadOrder;
-    BadOrder badorder;
+    BadOrder badorder __attribute__ ((aligned (sizeof(uint64_t))));
     int aligned;
     Type* pointer;
     size_t width;
@@ -485,9 +485,9 @@ int unittestgenerics2() {
         __FILE__, __LINE__);
 
     print_f(platform_output(),
-        "%s[%d]: &dd=%p &ll=%p &ss=%p &cc=%p\n",
+        "%s[%d]: &goodorder=%p &dd=%p &ll=%p &ss=%p &cc=%p\n",
         __FILE__, __LINE__,
-        &goodorder.dd, &goodorder.ll, &goodorder.ss, &goodorder.cc);
+        &goodorder, &goodorder.dd, &goodorder.ll, &goodorder.ss, &goodorder.cc);
 
     aligned = isalignedto(&goodorder.dd, uint64_t);
     if (!aligned) {
@@ -622,29 +622,9 @@ int unittestgenerics2() {
     }
 
     print_f(platform_output(),
-        "%s[%d]: &cc=%p &ss=%p &ll=%p &dd=%p\n",
+        "%s[%d]: &badorder=%p &cc=%p &ss=%p &ll=%p &dd=%p\n",
         __FILE__, __LINE__,
-        &badorder.cc, &badorder.ss, &badorder.ll, &badorder.dd);
-
-    /*
-     *  Some architectures double word align 64-bit integers,
-     *  some don't. IA32 appears not to. GCC allows the alignment
-     *  to be forced for a particular variable through the use
-     *  of an attribute.
-     *
-     *      uint64_t dd __attribute__ ((aligned (sizeof(uint64_t))));
-     *
-     *  All double word types may be forced to double word alignment
-     *  via the use of a command line option.
-     *
-     *      -malign-double
-     *
-     *  This has the risk that it will alter the layout of existing
-     *  structure definitions and possibly cause breakage.
-     *  Alignment may be tested for using a built-in.
-     *
-     *      (__alignof__(badorder.dd) == sizeof(uint64_t))
-     */
+        &badorder, &badorder.cc, &badorder.ss, &badorder.ll, &badorder.dd);
 
     aligned = isalignedto(&badorder.dd, uint64_t);
     if (!aligned) {
