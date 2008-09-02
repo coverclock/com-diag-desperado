@@ -97,7 +97,8 @@ DYNAMIC		=	shared
 #
 
 TMPDIR		=	/tmp
-PUBDIR		=	/usr/local
+#PUBDIR		=	/usr/local
+PUBDIR		=	/opt/diminuto/buildroot/usr/local
 
 #
 # Define how and where you get to Subversion.

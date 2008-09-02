@@ -270,10 +270,10 @@ install:	$(PUBDIR)/include $(PUBDIR)/lib $(PUBDIR)/bin headers library binaries
 #	Target
 #
 
-target:		$(TMPDIR)/diminuto-$(PRODUCT)-$(RELEASE).tar.bz2
+target:		$(TMPDIR)/$(PRODUCT)-diminuto.tar.bz2
 
-$(TMPDIR)/diminuto-$(PRODUCT)-$(RELEASE).tar.bz2:	embeddable
-	( cd $(TMPDIR); tar cvjf - $(EMBED) > diminuto-$(PRODUCT)-$(RELEASE).tar.bz2 )
+$(TMPDIR)/$(PRODUCT)-diminuto.tar.bz2:	embeddable
+	( cd $(TMPDIR); tar cvjf - $(EMBED) > $(PRODUCT)-diminuto.tar.bz2 )
 
 embeddable:		headers library binaries
 	rm -rf $(TMPDIR)/$(EMBED)
@@ -291,10 +291,11 @@ desperado-install:	library desperado-target
 
 desperado-target:	library
 ifdef DYNAMIC
+	( cd $(INSTALLDIR); rm -f $(SHAREDOBJ)* )
 	cp $(SOFILE) $(INSTALLDIR)
-	( cd $(INSTALLDIR); rm -f $(SONAME2); ln -s $(SOFILE) $(SONAME2) )
-	( cd $(INSTALLDIR); rm -f $(SONAME); ln -s $(SOFILE) $(SONAME) )
-	( cd $(INSTALLDIR); rm  -f $(SHAREDOBJ); ln -s $(SOFILE) $(SHAREDOBJ) )
+	( cd $(INSTALLDIR); ln -s $(SOFILE) $(SONAME2) )
+	( cd $(INSTALLDIR); ln -s $(SOFILE) $(SONAME) )
+	( cd $(INSTALLDIR); ln -s $(SOFILE) $(SHAREDOBJ) )
 endif
 
 #

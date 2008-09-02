@@ -59,10 +59,14 @@
 
 
 /**
- *  Create a Desperado Platform object of the appropriate derived class.
+ *  Return a Desperado Platform object of the appropriate derived class.
  * 
  *  @return a pointer to the created Platform object.
  */
 Platform* platform_factory() {
-    return new DESPERADO_PLATFORM_CLASS;
+    DESPERADO_PLATFORM_CLASS* derived = new DESPERADO_PLATFORM_CLASS;
+    fprintf(stderr, "platform_factory: derived=%p\n", derived);
+    Platform* base = derived;
+    fprintf(stderr, "platform_factory: base=%p\n", base);
+    return base;
 }

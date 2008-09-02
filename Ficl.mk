@@ -94,6 +94,7 @@ ficl-install:	ficl-target
 
 ficl-target:
 ifdef DYNAMIC
+	( cd $(INSTALLDIR); rm -f libficl.so* )
 	cp $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)
 	( cd $(INSTALLDIR); rm -f libficl.so.4.0; ln -s libficl.so.4.0.31 libficl.so.4.0 )
 	( cd $(INSTALLDIR); rm -f libficl.so.4; ln -s libficl.so.4.0.31 libficl.so.4 )

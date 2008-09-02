@@ -60,7 +60,7 @@
  */
 
 
-#include "stdio.h"
+#include "io.h"
 #include "Object.h"
 #include "Output.h"
 
