@@ -68,12 +68,12 @@ PRERELEASE	=	mercantile
 # Indicate the platform and target you are using.
 #
 
-PLATFORM	=	Diminuto
-#PLATFORM	=	Linux
+#PLATFORM	=	Diminuto
+PLATFORM	=	Linux
 #PLATFORM	=	Cygwin
 
-TARGET		=	ARM920T
-#TARGET		=	IA32
+#TARGET		=	ARM920T
+TARGET		=	IA32
 
 #
 # Define if you want to build using dynamic linking.
@@ -90,8 +90,8 @@ DYNAMIC		=	shared
 #
 
 TMPDIR		=	/tmp
-#PUBDIR		=	/usr/local
-PUBDIR		=	/opt/diminuto/buildroot/usr/local
+PUBDIR		=	/usr/local
+#PUBDIR		=	/opt/diminuto/buildroot/usr/local
 
 #
 # Define how and where you get to Subversion.
@@ -106,14 +106,14 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # If you are using Ficl, specify where it is.
 # Comment out otherwise.
 
-FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
-#FICLHOME	=	/home/jsloan/src/ficl4.0.31
+#FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
+FICLHOME	=	/home/jsloan/src/ficl4.0.31
 #FICLHOME	=	/cygdrive/c/Users/jsloan/Desktop/Home/Sources/ficl4.0.31
 
 # If you are using Java, specify where it is.
 # Comment out otherwise.
 
-#JAVAHOME	=	/opt/jdk1.6.0_07
+JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
 #JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02
 
@@ -122,10 +122,10 @@ FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
 # These are actually subdirectory names inside the JAVAHOME/jre/lib.
 #
 
-#JAVAPLAT	=	linux
+JAVAPLAT	=	linux
 #JAVAPLAT	=	win32
 
-#JAVATARG	=	i386
+JAVATARG	=	i386
 #JAVATARG	=	arm
 
 #
@@ -141,6 +141,5 @@ all:
 	$(MAKE) adjuncts
 	$(MAKE) library
 	$(MAKE) binaries
-	$(MAKE) target
 
 include Desperado.mk
