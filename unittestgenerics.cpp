@@ -484,11 +484,11 @@ extern "C" int unittestgenerics() {
         uint8_t cc;     // 14..14
     };
    
-    GoodOrder goodorder;
+    GoodOrder goodorder __attribute__ ((aligned (sizeof(uint64_t))));
 
-    printf("%s[%d]: &dd=%p &ll=%p &ss=%p &cc=%p\n",
+    printf("%s[%d]: &goodorder=%p &dd=%p &ll=%p &ss=%p &cc=%p\n",
         __FILE__, __LINE__,
-        &goodorder.dd, &goodorder.ll, &goodorder.ss, &goodorder.cc);
+        &goodorder, &goodorder.dd, &goodorder.ll, &goodorder.ss, &goodorder.cc);
 
     bool aligned;
 
@@ -636,11 +636,11 @@ extern "C" int unittestgenerics() {
         uint64_t dd;        // 32..40
     };
    
-    BadOrder badorder;
+    BadOrder badorder __attribute__ ((aligned (sizeof(uint64_t))));
 
-    printf("%s[%d]: &cc=%p &ss=%p &ll=%p &dd=%p\n",
+    printf("%s[%d]: &badorder=%p &cc=%p &ss=%p &ll=%p &dd=%p\n",
         __FILE__, __LINE__,
-        &badorder.cc, &badorder.ss, &badorder.ll, &badorder.dd);
+        &badorder, &badorder.cc, &badorder.ss, &badorder.ll, &badorder.dd);
 
     aligned = isalignedto(&badorder.dd, uint64_t);
     if (!aligned) {
