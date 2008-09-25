@@ -35,50 +35,82 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
+    $Name:  $
+
+    $Id: $
+
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Implements the platform factory.
+ *  Implements the Arroyo class.
  *
- *  @see    Platform
+ *  @see    Arroyo
+ *
+ *  @author $Author: jsloan $
+ *
+ *  @version    $Revision: 1.9 $
+ *
+ *  @date   $Date: 2006/09/07 16:09:01 $
  */
 
 
-#if defined(DESPERADO_PLATFORM_IS_Linux)
-#include "Linux.h"
-#elif defined(DESPERADO_PLATFORM_IS_Cygwin)
-#include "Cygwin.h"
-#elif defined(DESPERADO_PLATFORM_IS_Diminuto)
-#include "Diminuto.h"
-#elif defined(DESPERADO_PLATFORM_IS_Arroyo)
+#if defined(DESPERADO_PLATFORM_IS_Arroyo)
+
+
+#include <new>
 #include "Arroyo.h"
-#else
-#include "Platform.h"
-#endif
-
-Platform* platform_factory_cache = 0;
 
 
-/**
- *  Return a Desperado Platform object of the appropriate derived class.
- *
- *  On the uClibc-based Diminuto platform, there is either a bug in the
- *  arm-linux-g++ compiler, or a very subtle bug in this code. The store
- *  to the platform_factory_cache is only there to force the compiler to
- *  generate code to implement the reference; without it (or some other
- *  forcing function, like printing the address of the reference to
- *  standard error), this function core dumps with a Segmentation Fault.
- *  Turning off optimization does not fix this.
- * 
- *  @return a reference to the newly created Platform object.
- */
-Platform& platform_factory() {
-    DESPERADO_PLATFORM_CLASS* derived = new DESPERADO_PLATFORM_CLASS;
-    Platform* base = derived;
-    Platform& result = *base;
-    platform_factory_cache = &result;
-    return result;
+//
+//  Constructor.
+//
+//  You might consider passing argv and argc to the constructor of a
+//  derived class from the main and have it parse command line parameters.
+//  This would work for Linux but perhaps not other embedded platforms.
+//
+Arroyo::Arroyo() :
+    Linux()
+{
 }
+
+
+//
+//  Destructor.
+//
+Arroyo::~Arroyo() {
+}
+
+
+//
+//    Initializer.
+//
+bool Arroyo::initialize() {
+    bool rc = false;
+    try {
+        this->Arroyo::~Arroyo();
+        new(this) Arroyo;
+        rc = true;
+    } catch (...) {
+        rc = false;
+    }
+    return rc;
+}
+
+
+//
+//  Show this object on the output object.
+//
+void Arroyo::show(int level, Output* display, int indent) const {
+    Print printf(display);
+    const char* sp = printf.output().indentation(indent);
+    char buffer[sizeof(__FILE__)];
+    const char* bp = this->component(__FILE__, buffer, sizeof(buffer));
+    printf("%s%s(%p)[%lu]:\n", sp, bp, this, sizeof(*this));
+    this->Linux::show(level, display, indent + 1);
+}
+
+
+#endif
