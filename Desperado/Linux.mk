@@ -106,9 +106,9 @@ CXXOPTIONS	=	-fcheck-new -fno-rtti -Wabi -Wold-style-cast -Winline -fno-implicit
 
 CPPFLAGS	=	$(CDEFINES) $(CINCLUDES)
 
-CFLAGS		=	$(CDEBUG) $(GCCOPTIONS) $(COPTIONS)
+CFLAGS		=	$(CARCH) $(CDEBUG) $(GCCOPTIONS) $(COPTIONS)
 
-CXXFLAGS	=	$(CDEBUG) $(GCCOPTIONS) $(CXXOPTIONS)
+CXXFLAGS	=	$(CARCH) $(CDEBUG) $(GCCOPTIONS) $(CXXOPTIONS)
 
 ARFLAGS		=	rcv
 
@@ -122,14 +122,14 @@ else
 LDLIBRARIES	=	-Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bstatic -Wl,-l$(LIBRARY) -Wl,-Bstatic -Wl,-lpthread -Wl,-Bstatic -Wl,-lrt -Wl,-Bstatic -Wl,-lm
 endif
 
-LDFLAGS		=	$(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)
+LDFLAGS		=	$(CARCH) $(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)
 
 GCCMACHINE	=	$(shell $(CC) -dumpmachine)
 GCCVERSION	=	$(shell $(CC) -dumpversion)
 
 # Shared Object (like a DLL under Windows)
 
-SOPREFIX	=	$(CDEBUG) -shared -Wl,-soname,$(SONAME) -Wl,-export-dynamic
+SOPREFIX	=	$(CDEBUG) $(CARCH) -shared -Wl,-soname,$(SONAME) -Wl,-export-dynamic
 SOSUFFIX	=	-Wl,-Bdynamic $(LDDYNAMIC)
 
 LD_LIBRARY_PATH	=	$(ROOT):$(FICLHOME):$(JAVAHOME)/jre/lib/$(JAVATARG)/server

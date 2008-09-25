@@ -57,7 +57,7 @@
  */
 
 
-#if defined(DESPERADO_PLATFORM_IS_Linux) || defined(DESPERADO_PLATFORM_IS_Diminuto)
+#if defined(DESPERADO_PLATFORM_IS_Linux) || defined(DESPERADO_PLATFORM_IS_Diminuto) || defined(DESPERADO_PLATFORM_IS_Arroyo)
 
 
 #include <new>
