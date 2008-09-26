@@ -58,18 +58,18 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	neptune
+RELEASE		=	olympus
 MAJOR		=	2
 MINOR		=	7
 BUILD		=	0
-PRERELEASE	=	olympus
+PRERELEASE	=	porcupine
 
 #
 # Indicate the platform and target you are using.
 #
 
-PLATFORM	=	Arroyo
-#PLATFORM	=	Diminuto
+#PLATFORM	=	Arroyo
+PLATFORM	=	Diminuto
 #PLATFORM	=	Linux
 #PLATFORM	=	Cygwin
 
@@ -135,13 +135,13 @@ FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
 #
 
 default:
-	$(MAKE) library
-	$(MAKE) binaries
+	$(MAKE) -e library
+	$(MAKE) -e binaries
 
 all:
-	$(MAKE) depend
-	$(MAKE) adjuncts
-	$(MAKE) library
-	$(MAKE) binaries
+	$(MAKE) -e depend
+	$(MAKE) -e adjuncts
+	$(MAKE) -e library
+	$(MAKE) -e binaries
 
 include Desperado.mk
