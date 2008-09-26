@@ -164,18 +164,18 @@ ROOT		=	$(shell pwd)
 #
 
 eclipse-build:
-	$(MAKE) -k depend
-	$(MAKE) -k library
+	$(MAKE) -e -k depend
+	$(MAKE) -e -k library
 
 eclipse-rebuild:
-	$(MAKE) -k clean
-	$(MAKE) -k depend
-	$(MAKE) -k library
-	$(MAKE) -k adjuncts
-	$(MAKE) -k binaries
+	$(MAKE) -e -k clean
+	$(MAKE) -e -k depend
+	$(MAKE) -e -k library
+	$(MAKE) -e -k adjuncts
+	$(MAKE) -e -k binaries
 
 eclipse-clean:
-	$(MAKE) -k clean
+	$(MAKE) -e -k clean
 
 #
 #	Adjuncts
@@ -263,8 +263,8 @@ SOFILE		=	$(SHAREDOBJ).$(MAJOR).$(MINOR).$(BUILD)
 install:	$(PUBDIR)/include $(PUBDIR)/lib $(PUBDIR)/bin headers library binaries
 	cp $(BINARIES) $(PUBDIR)/bin
 	cp $(HEADERS) $(PUBDIR)/include
-	make desperado-install INSTALLDIR=$(PUBDIR)/lib
-	make ficl-install INSTALLDIR=$(PUBDIR)/lib
+	$(MAKE) -e desperado-install INSTALLDIR=$(PUBDIR)/lib
+	$(MAKE) -e ficl-install INSTALLDIR=$(PUBDIR)/lib
 
 #
 #	Target
@@ -279,8 +279,8 @@ embeddable:		headers library binaries
 	rm -rf $(TMPDIR)/$(EMBED)
 	mkdir -p $(TMPDIR)/$(EMBED)
 	cp $(BINARIES) $(TMPDIR)/$(EMBED)
-	make desperado-target INSTALLDIR=$(TMPDIR)/$(EMBED)
-	make ficl-target INSTALLDIR=$(TMPDIR)/$(EMBED)
+	$(MAKE) -e desperado-target INSTALLDIR=$(TMPDIR)/$(EMBED)
+	$(MAKE) -e ficl-target INSTALLDIR=$(TMPDIR)/$(EMBED)
 
 #
 #	Helpers
@@ -324,7 +324,7 @@ clean:
 mrproper:	pristine
 
 pristine:	clean adjuncts-clean
-	-(cd doc/latex; $(MAKE) clean)
+	-(cd doc/latex; $(MAKE) -e clean)
 	-rm -f doc/latex/*.eps doc/latex/*.pdf doc/latex/*.tex
 	-rm -f doc/html/*.gif doc/html/*.ttf
 	-rm -f doc/html/*.html doc/html/*.png doc/html/*.css
@@ -416,7 +416,7 @@ backup:	../$(PRODUCT).bak.tar.gz
 documentation:	doc/pdf
 	sed -e "s/\\\$$Name.*\\\$$/$(RELEASE)/" < doxygen.cf > doxygen-local.cf
 	$(DOXYGEN) doxygen-local.cf
-	(cd doc/latex; $(MAKE) refman.pdf; cp refman.pdf ../pdf)
+	(cd doc/latex; $(MAKE) -e refman.pdf; cp refman.pdf ../pdf)
 	cat doc/man/man3/*.3 | $(MAN2PS) > doc/pdf/manpages.ps
 	$(PS2PDF) doc/pdf/manpages.ps doc/pdf/manpages.pdf
 

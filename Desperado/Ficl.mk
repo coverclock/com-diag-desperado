@@ -77,13 +77,13 @@ ficl-localize:	Makefile.ficl.$(PLATFORM) ficllocal.h ficldesperado.h ficldespera
 
 ficl-build:
 ifdef DYNAMIC
-	( cd $(FICLHOME); $(MAKE) -f Makefile.ficl.desperado libficl.a libficl.so )
+	( cd $(FICLHOME); $(MAKE) -e -f Makefile.ficl.desperado libficl.a libficl.so )
 else
-	( cd $(FICLHOME); $(MAKE) -f Makefile.ficl.desperado libficl.a )
+	( cd $(FICLHOME); $(MAKE) -e -f Makefile.ficl.desperado libficl.a )
 endif
 
 ficl-clean:
-	( cd $(FICLHOME); $(MAKE) -f Makefile.ficl.desperado clean )
+	( cd $(FICLHOME); $(MAKE) -e -f Makefile.ficl.desperado clean )
 
 ficl-install:	ficl-target
 	cp $(FICLHOME)/libficl.a $(INSTALLDIR)
