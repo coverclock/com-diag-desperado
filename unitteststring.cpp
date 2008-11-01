@@ -121,6 +121,11 @@ extern "C" int unitteststring() {
         ++errors;
     }
 
+    const char * cc = "one";
+    const char aa[] = "two";
+    std::string ss = "three";
+    printf("%s[%d]: \"%s\" \"%s\" \"%s\" \"%s\" \"%s\"\n", _s(__FILE__), __LINE__,  _s(cc), _s(aa), _s(ss), _s(&ss), _s("four"));
+
     printf("%s[%d]: end errors=%d\n",
         __FILE__, __LINE__, errors);
 
