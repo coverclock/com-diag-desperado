@@ -65,6 +65,7 @@
 
 #if defined(__cplusplus)
 #   include <cstring>
+#   include <string>
 #else
 #   include <string.h>
 #endif
@@ -332,6 +333,40 @@ CXXCINLINE char* strnchr(const char* s, size_t count, int c) {
 CXXCINLINE char* strnrchr(const char* s, size_t count, int c) {
     return desperado_strnrchr(s, count, c);
 }
+
+#endif
+
+#if defined(__cplusplus)
+
+/**
+ *	Return a pointer to a character array suitable for printing
+ *	using a %s print format.
+ *
+ *	@param cp			points to a character array.
+ *
+ *	@return a pointer to a character array.
+ */
+inline const char* _s(const char* cp) { return cp; }
+
+/**
+ *	Return a pointer to a character array suitable for printing
+ *	using a %s print format.
+ *
+ *	@param sr			refers to a C++ string.
+ *
+ *	@return a pointer to a character array.
+ */
+inline const char* _s(const std::string & sr) { return sr.c_str(); }
+
+/**
+ *	Return a pointer to a character array suitable for printing
+ *	using a %s print format.
+ *
+ *	@param sp			points to a C++ string.
+ *
+ *	@return a pointer to a character array.
+ */
+inline const char* _s(const std::string * sp) { return sp->c_str(); }
 
 #endif
 
