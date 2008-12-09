@@ -285,6 +285,33 @@ extern "C" int unittestLogger() {
     DESPERADO_LOGGER_TEST_5(EMERGENCY)
     DESPERADO_LOGGER_TEST_5(PRINT)
 
+#define KERN_EMERG      "<0>"
+#define KERN_ALERT      "<1>"
+#define KERN_CRIT       "<2>"
+#define KERN_ERR        "<3>"
+#define KERN_WARNING    "<4>"
+#define KERN_NOTICE     "<5>"
+#define KERN_INFO       "<6>"
+#define KERN_DEBUG      "<7>"
+
+    Logger logger7;
+
+#define DESPERADO_LOGGER_TEST_7(_LEVEL_, _KERNEL_) \
+    if (Logger::_LEVEL_ != logger7.level(_KERNEL_ #_KERNEL_, sizeof(_KERNEL_ #_KERNEL_))) { \
+        errorf("%s[%d]: (%d!=%d)!\n", \
+            __FILE__, __LINE__, Logger::_LEVEL_, logger7.level(_KERNEL_ #_KERNEL_, sizeof(_KERNEL_ #_KERNEL_))); \
+        ++errors; \
+    }
+
+    DESPERADO_LOGGER_TEST_7(EMERGENCY,		KERN_EMERG);
+    DESPERADO_LOGGER_TEST_7(ALERT,	    	KERN_ALERT);
+    DESPERADO_LOGGER_TEST_7(CRITICAL,		KERN_CRIT);
+    DESPERADO_LOGGER_TEST_7(ERROR,	    	KERN_ERR);
+    DESPERADO_LOGGER_TEST_7(WARNING,		KERN_WARNING);
+    DESPERADO_LOGGER_TEST_7(NOTICE,	    	KERN_NOTICE);
+    DESPERADO_LOGGER_TEST_7(INFORMATION,	KERN_INFO);
+    DESPERADO_LOGGER_TEST_7(DEBUG,		    KERN_DEBUG);
+
     printf("%s[%d]: end errors=%d\n",
         __FILE__, __LINE__, errors);
 

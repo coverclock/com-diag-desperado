@@ -69,12 +69,12 @@ PRERELEASE	=	porcupine
 #
 
 #PLATFORM	=	Arroyo
-PLATFORM	=	Diminuto
-#PLATFORM	=	Linux
+#PLATFORM	=	Diminuto
+PLATFORM	=	Linux
 #PLATFORM	=	Cygwin
 
-TARGET		=	ARM920T
-#TARGET		=	IA32
+#TARGET		=	ARM920T
+TARGET		=	IA32
 
 #
 # Define if you want to build using dynamic linking.
@@ -115,7 +115,7 @@ FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
 # If you are using Java, specify where it is.
 # Comment out otherwise.
 
-#JAVAHOME	=	/opt/jdk1.6.0_07
+JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
 #JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02
 
@@ -124,8 +124,8 @@ FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
 # These are actually subdirectory names inside the JAVAHOME/jre/lib.
 #
 
-#JAVAPLAT	=	linux
-#JAVAPLAT	=	win32
+JAVAPLAT	=	linux
+JAVAPLAT	=	win32
 
 #JAVATARG	=	i386
 #JAVATARG	=	arm

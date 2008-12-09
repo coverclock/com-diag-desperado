@@ -61,7 +61,6 @@
 
 Platform* platform_factory_cache = 0;
 
-
 /**
  *  Return a Desperado Platform object of the appropriate derived class.
  *
@@ -76,7 +75,12 @@ Platform* platform_factory_cache = 0;
  *  @return a reference to the newly created Platform object.
  */
 Platform& platform_factory() {
+#if 0
     DESPERADO_PLATFORM_CLASS* derived = new DESPERADO_PLATFORM_CLASS;
+#else
+    static DESPERADO_PLATFORM_CLASS platform;
+    DESPERADO_PLATFORM_CLASS* derived = &platform;
+#endif
     Platform* base = derived;
     Platform& result = *base;
     platform_factory_cache = &result;
