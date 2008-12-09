@@ -86,6 +86,16 @@ const char* Logger::labels[] = {
     0
 };
 
+const Logger::Level Logger::kernel[] = {
+    Logger::EMERGENCY,      // KERN_EMERG
+    Logger::ALERT,          // KERN_ALERT
+    Logger::CRITICAL,       // KERN_CRIT
+    Logger::ERROR,          // KERN_ERR
+    Logger::WARNING,        // KERN_WARNING
+    Logger::NOTICE,         // KERN_NOTICE
+    Logger::INFORMATION,    // KERN_INFORMATION
+    Logger::DEBUG           // KERN_DEBUG
+};
 
 //
 //  Constructor.
@@ -165,7 +175,20 @@ Logger::Level Logger::level(const char* buffer, size_t size) {
             break;
         }
 
-        const char* lhs = strnchr(buffer, size, '[');
+        if (3 > size) {
+            // Do nothing.
+        } else if (buffer[0] != LHS_KERNEL) {
+            // Do nothing.
+        } else if (buffer[2] != RHS_KERNEL) {
+            // Do nothing.
+        } else if (!(('0' <= buffer[1]) && (buffer[1] <= '7'))) {
+            // Do nothing.
+        } else {
+            rc = kernel[buffer[1] - '0'];
+            break;
+        }
+
+        const char* lhs = ::strnchr(buffer, size, LHS_EXTENDED);
         if (0 == lhs) {
             break;
         }
@@ -175,15 +198,12 @@ Logger::Level Logger::level(const char* buffer, size_t size) {
             break;
         }
 
-        const char* rhs = ::strnchr(lhs, size , ']');
+        const char* rhs = ::strnchr(lhs, size, RHS_EXTENDED);
         if (0 == rhs) {
             break;
         }
 
         size = rhs - lhs - 1;
-        if ((sizeof("XXXX") - 1) != size) {
-            break;
-        }
 
         for (int ll = 0; 0 != this->labels[ll]; ++ll) {
             if (0 == std::strncmp(this->labels[ll], lhs + 1, size)) {

@@ -193,6 +193,27 @@ public:
     static const char* labels[PRINT + 2];
 
     /**
+     * These characters delimit the symbolic extended log levels.
+     */
+    static const char
+        LHS_EXTENDED = '[',
+        RHS_EXTENDED = ']';
+
+    /**
+     * This table maps from the kernel <0>..<7> log levels to the
+     * extended log levels.
+     */
+    static const Level kernel[8];
+
+    /**
+     * These characters delimit the numeric kernel log levels,
+     * mimicing how the Linux kernel works.
+     */
+    static const char
+        LHS_KERNEL = '<',
+        RHS_KERNEL = '>';
+
+    /**
      *  Given a log message in a buffer, determine its level.
      *
      *  @param  buffer      points to the buffer containing
