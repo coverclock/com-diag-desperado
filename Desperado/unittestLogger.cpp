@@ -285,6 +285,8 @@ extern "C" int unittestLogger() {
     DESPERADO_LOGGER_TEST_5(EMERGENCY)
     DESPERADO_LOGGER_TEST_5(PRINT)
 
+    Logger logger7;
+
 #define KERN_EMERG      "<0>"
 #define KERN_ALERT      "<1>"
 #define KERN_CRIT       "<2>"
@@ -294,14 +296,16 @@ extern "C" int unittestLogger() {
 #define KERN_INFO       "<6>"
 #define KERN_DEBUG      "<7>"
 
-    Logger logger7;
-
-#define DESPERADO_LOGGER_TEST_7(_LEVEL_, _KERNEL_) \
-    if (Logger::_LEVEL_ != logger7.level(_KERNEL_ #_KERNEL_, sizeof(_KERNEL_ #_KERNEL_))) { \
-        errorf("%s[%d]: (%d!=%d)!\n", \
-            __FILE__, __LINE__, Logger::_LEVEL_, logger7.level(_KERNEL_ #_KERNEL_, sizeof(_KERNEL_ #_KERNEL_))); \
+#define DESPERADO_LOGGER_TEST_7(_LEVEL_, _KERNEL_) { \
+    const char * message = _KERNEL_ #_KERNEL_; \
+    Logger::Level level = logger7.level(message, std::strlen(message)); \
+    if (Logger::_LEVEL_ != level) { \
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, Logger::_LEVEL_, level); \
         ++errors; \
-    }
+    } else { \
+        printf("%s[%d]: \"%s\" %d %s\n", __FILE__, __LINE__, message, level, Logger::labels[level]); \
+    } \
+}
 
     DESPERADO_LOGGER_TEST_7(EMERGENCY,		KERN_EMERG);
     DESPERADO_LOGGER_TEST_7(ALERT,	    	KERN_ALERT);
