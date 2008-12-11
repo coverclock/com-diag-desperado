@@ -58,11 +58,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	olympus
+RELEASE		=	porcupine
 MAJOR		=	2
-MINOR		=	7
+MINOR		=	8
 BUILD		=	0
-PRERELEASE	=	porcupine
+PRERELEASE	=	quinto
 
 #
 # Indicate the platform and target you are using.
@@ -125,9 +125,9 @@ JAVAHOME	=	/opt/jdk1.6.0_07
 #
 
 JAVAPLAT	=	linux
-JAVAPLAT	=	win32
+#JAVAPLAT	=	win32
 
-#JAVATARG	=	i386
+JAVATARG	=	i386
 #JAVATARG	=	arm
 
 #
