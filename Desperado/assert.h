@@ -1,4 +1,4 @@
-#ifdef _DESPERADO_ASSERT_H_
+#ifdef _COM_DIAG_DESPERADO_ASSERT_H_
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
