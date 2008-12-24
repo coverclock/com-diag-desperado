@@ -1,5 +1,5 @@
-#ifndef _DESPERADO_FIFO_H_
-#define _DESPERADO_FIFO_H_
+#ifndef _COM_DIAG_DESPERADO_FIFO_H_
+#define _COM_DIAG_DESPERADO_FIFO_H_
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 

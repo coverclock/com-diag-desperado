@@ -1,5 +1,5 @@
-#ifndef _DESPERADO_DSTGENERIC_H_
-#define _DESPERADO_DSTGENERIC_H_
+#ifndef _COM_DIAG_DESPERADO_DSTGENERIC_H_
+#define _COM_DIAG_DESPERADO_DSTGENERIC_H_
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
