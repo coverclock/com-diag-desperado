@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2005-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -95,7 +95,8 @@ static const CommonEra commoneras[] = {
     CommonEra(1995, 12, 31, 23, 59, 60),
     CommonEra(1997,  6, 30, 23, 59, 60),
     CommonEra(1998, 12, 31, 23, 59, 60),
-    CommonEra(2005, 12, 31, 23, 59, 60)
+    CommonEra(2005, 12, 31, 23, 59, 60),
+    CommonEra(2008, 12, 31, 23, 59, 60)
     //
     //  When another leap second occurs, insert
     //  its Common Era date and time here. It will
@@ -177,7 +178,8 @@ static const seconds_t utcseconds[] = {
     ::commoneras[19].toAtomicSeconds() + ::leapseconds[19],
     ::commoneras[20].toAtomicSeconds() + ::leapseconds[20],
     ::commoneras[21].toAtomicSeconds() + ::leapseconds[21],
-    ::commoneras[22].toAtomicSeconds() + ::leapseconds[22]
+    ::commoneras[22].toAtomicSeconds() + ::leapseconds[22],
+    ::commoneras[23].toAtomicSeconds() + ::leapseconds[23]
     //
     //  When another leap second occurs, insert a new entry
     //  here using the new values from the previous two tables.
