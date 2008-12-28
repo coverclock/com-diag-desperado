@@ -270,10 +270,10 @@ install:	$(PUBDIR)/include $(PUBDIR)/lib $(PUBDIR)/bin headers library binaries
 #	Target
 #
 
-target:		$(TMPDIR)/$(PRODUCT)-diminuto.tar.bz2
+target:		$(TMPDIR)/$(PRODUCT)-diminuto.tgz
 
-$(TMPDIR)/$(PRODUCT)-diminuto.tar.bz2:	embeddable
-	( cd $(TMPDIR); tar cvjf - $(EMBED) > $(PRODUCT)-diminuto.tar.bz2 )
+$(TMPDIR)/$(PRODUCT)-diminuto.tgz:	embeddable
+	( cd $(TMPDIR); tar cvzf - $(EMBED) > $(PRODUCT)-diminuto.tgz )
 
 embeddable:		headers library binaries
 	rm -rf $(TMPDIR)/$(EMBED)
@@ -374,9 +374,7 @@ release:
 	rm -rf $(TMPDIR)/$(BETA)
 	${SVN} export ${SVNTAG}/$(RELEASE)/${PROJECT} $(TMPDIR)/$(BETA)
 	sh prepare.sh $(TMPDIR)/$(BETA)
-	(cd $(TMPDIR); tar cvf - ./$(BETA) > $(PRODUCT)-$(RELEASE).tar)
-	gzip -f $(TMPDIR)/$(PRODUCT)-$(RELEASE).tar
-	mv $(TMPDIR)/$(PRODUCT)-$(RELEASE).tar.gz $(TMPDIR)/$(PRODUCT)-$(RELEASE).tgz
+	(cd $(TMPDIR); tar cvzf - ./$(BETA) > $(PRODUCT)-$(RELEASE).tgz)
 
 alpha:	prerelease
 
@@ -384,9 +382,7 @@ prerelease:
 	rm -rf $(TMPDIR)/$(ALPHA)
 	${SVN} export ${SVNTRUNK}/${PROJECT} $(TMPDIR)/$(ALPHA)
 	sh prepare.sh $(TMPDIR)/$(ALPHA)
-	(cd $(TMPDIR); tar cvf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-ALPHA.tar)
-	gzip -f $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar
-	mv $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tar.gz $(TMPDIR)/$(PRODUCT)-$(PRERELEASE)-ALPHA.tgz
+	(cd $(TMPDIR); tar cvzf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-ALPHA.tgz)
 
 dist:	distribution
 
@@ -396,11 +392,11 @@ distribution:	release
 #	Backup
 #
 
-backup:	../$(PRODUCT).bak.tar.gz
-	mv -i ../$(PRODUCT).bak.tar.gz ../$(PRODUCT).$(TIMESTAMP).tar.gz
+backup:	../$(PRODUCT).bak.tgz
+	mv -i ../$(PRODUCT).bak.tgz ../$(PRODUCT).$(TIMESTAMP).tgz
 
-../$(PRODUCT).bak.tar.gz:
-	tar cvzf - . > ../$(PRODUCT).bak.tar.gz
+../$(PRODUCT).bak.tgz:
+	tar cvzf - . > ../$(PRODUCT).bak.tgz
 
 #
 #	Documentation
@@ -410,7 +406,7 @@ backup:	../$(PRODUCT).bak.tar.gz
 #		cd ~apache/rnd/desperado
 #		rm -rf doc
 #		umask 022
-#		zcat desperado-$(RELEASE)-doc.tgz | tar xvpf -
+#		tarxvpzf desperado-$(RELEASE)-doc.tgz
 #
 
 documentation:	doc/pdf
@@ -430,9 +426,7 @@ man:
 	$(READER) file:$(ROOT)/doc/pdf/manpages.pdf
 
 bundle:
-	(cd ./doc; tar cvf - .) > $(TMPDIR)/$(PRODUCT)-$(RELEASE)-doc.tar
-	gzip $(TMPDIR)/$(PRODUCT)-$(RELEASE)-doc.tar
-	mv $(TMPDIR)/$(PRODUCT)-$(RELEASE)-doc.tar.gz $(TMPDIR)/$(PRODUCT)-$(RELEASE)-doc.tgz
+	(cd ./doc; tar cvzf - .) > $(TMPDIR)/$(PRODUCT)-$(RELEASE)-doc.tgz
 
 #
 #	Patterns
