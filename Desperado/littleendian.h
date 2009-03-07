@@ -51,6 +51,13 @@
  *  Implements the littleendian inline function. This can be included
  *  from either a C or a C++ translation unit.
  *
+ *  For years I used the first algorithm shown below, which is based on
+ *  a little trick I stole shamelessly from the original X11 distribution.
+ *  But interestingly enough, that trick doesn't work with many modern
+ *  processors and their optimizing C and C++ compilers because of
+ *  assumptions made about "aliasing" of pointers. So I had to invent
+ *  a new approach which used a mechanism C/C++ could understand.
+ *
  *  @author $Author: jsloan $
  *
  *  @version    $Revision: 1.21 $
@@ -60,8 +67,10 @@
 
 
 #include "cxxcapi.h"
-#include "generics.h"
 
+#if 0
+
+#include "generics.h"
 
 /**
  *  Returns non-zero if the target is little endian, zero if big endian.
@@ -78,6 +87,26 @@ CXXCINLINE int littleendian() {
     unsigned long word=1;
     return ((*(reinterpretcastto(char*, &word))) != 0) ? 1 : 0;
 }
+
+#else
+
+#include "target.h"
+
+/**
+ *  Returns non-zero if the target is little endian, zero if big endian.
+ *  Based on C++ code I wrote for a client for an embedded projet. This is
+ *  callable from C. Very likely optimized away to be a simple value.
+ *
+ *  @author coverclock@diag.com (Chip Overclock)
+ *
+ *  @return non-zero if little endian, zero if big endian.
+ */
+CXXCINLINE int littleendian() {
+    static union { uint32_t w; uint8_t b[sizeof(uint32_t)]; } d = { 1 };
+    return d.b[0];
+}
+
+#endif
 
 
 #endif
