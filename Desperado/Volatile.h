@@ -240,71 +240,141 @@ CXXCAPI volatile int8_t * volatile_address_int8(volatile int8_t * vp);
 
 #if defined(__cplusplus)
 
+/**
+ * The Volatile class defines polymorphic inline static C++ class methods
+ * to the C-callable value and address helper functions. Note that although
+ * these methods are inlined, the C-callable functions are not. This is
+ * crucial to implement Eide and Regher's volatile helper functions.
+ */
 class Volatile {
 
-    static inline uint64_t value(volatile uint64_t * vp) { return volatile_value_uint64(vp); }
+    static inline uint64_t value(volatile uint64_t * vp) {
+		return volatile_value_uint64(vp);
+	}
 
-    static inline uint32_t value(volatile uint32_t * vp) { return volatile_value_uint32(vp); }
+    static inline uint32_t value(volatile uint32_t * vp) {
+		return volatile_value_uint32(vp);
+	}
 
-    static inline uint16_t value(volatile uint16_t * vp) { return volatile_value_uint16(vp); }
+    static inline uint16_t value(volatile uint16_t * vp) {
+		return volatile_value_uint16(vp);
+	}
 
-    static inline uint8_t value(volatile uint8_t * vp) { return volatile_value_uint8(vp); }
+    static inline uint8_t value(volatile uint8_t * vp) {
+		return volatile_value_uint8(vp);
+	}
 
-    static inline int64_t value(volatile int64_t * vp) { return volatile_value_int64(vp); }
+    static inline int64_t value(volatile int64_t * vp) {
+		return volatile_value_int64(vp);
+	}
 
-    static inline int32_t value(volatile int32_t * vp) { return volatile_value_int32(vp); }
+    static inline int32_t value(volatile int32_t * vp) {
+		return volatile_value_int32(vp);
+	}
 
-    static inline int16_t value(volatile int16_t * vp) { return volatile_value_int16(vp); }
+    static inline int16_t value(volatile int16_t * vp) {
+		return volatile_value_int16(vp);
+	}
 
-    static inline int8_t value(volatile int8_t * vp) { return volatile_value_int8(vp); }
+    static inline int8_t value(volatile int8_t * vp) {
+		return volatile_value_int8(vp);
+	}
 
-    static inline uint64_t value(volatile uint64_t & vr) { return volatile_value_uint64(&vr); }
+    static inline uint64_t value(volatile uint64_t & vr) {
+		return volatile_value_uint64(&vr);
+	}
 
-    static inline uint32_t value(volatile uint32_t & vr) { return volatile_value_uint32(&vr); }
+    static inline uint32_t value(volatile uint32_t & vr) {
+		return volatile_value_uint32(&vr);
+	}
 
-    static inline uint16_t value(volatile uint16_t & vr) { return volatile_value_uint16(&vr); }
+    static inline uint16_t value(volatile uint16_t & vr) {
+		return volatile_value_uint16(&vr);
+	}
 
-    static inline uint8_t value(volatile uint8_t & vr) { return volatile_value_uint8(&vr); }
+    static inline uint8_t value(volatile uint8_t & vr) {
+		return volatile_value_uint8(&vr);
+	}
 
-    static inline int64_t value(volatile int64_t & vr) { return volatile_value_int64(&vr); }
+    static inline int64_t value(volatile int64_t & vr) {
+		return volatile_value_int64(&vr);
+	}
 
-    static inline int32_t value(volatile int32_t & vr) { return volatile_value_int32(&vr); }
+    static inline int32_t value(volatile int32_t & vr) {
+		return volatile_value_int32(&vr);
+	}
 
-    static inline int16_t value(volatile int16_t & vr) { return volatile_value_int16(&vr); }
+    static inline int16_t value(volatile int16_t & vr) {
+		return volatile_value_int16(&vr);
+	}
 
-    static inline int8_t value(volatile int8_t & vr) { return volatile_value_int8(&vr); }
+    static inline int8_t value(volatile int8_t & vr) {
+		return volatile_value_int8(&vr);
+	}
 
-    static inline volatile uint64_t * address(volatile uint64_t * vp) { return volatile_address_uint64(vp); }
+    static inline volatile uint64_t * address(volatile uint64_t * vp) {
+		return volatile_address_uint64(vp);
+	}
 
-    static inline volatile uint32_t * address(volatile uint32_t * vp) { return volatile_address_uint32(vp); }
+    static inline volatile uint32_t * address(volatile uint32_t * vp) {
+		return volatile_address_uint32(vp);
+	}
 
-    static inline volatile uint16_t * address(volatile uint16_t * vp) { return volatile_address_uint16(vp); }
+    static inline volatile uint16_t * address(volatile uint16_t * vp) {
+		return volatile_address_uint16(vp);
+	}
 
-    static inline volatile uint8_t * address(volatile uint8_t * vp) { return volatile_address_uint8(vp); }
+    static inline volatile uint8_t * address(volatile uint8_t * vp) {
+		return volatile_address_uint8(vp);
+	}
 
-    static inline volatile int64_t * address(volatile int64_t * vp) { return volatile_address_int64(vp); }
+    static inline volatile int64_t * address(volatile int64_t * vp) {
+		return volatile_address_int64(vp);
+	}
 
-    static inline volatile int32_t * address(volatile int32_t * vp) { return volatile_address_int32(vp); }
+    static inline volatile int32_t * address(volatile int32_t * vp) {
+		return volatile_address_int32(vp);
+	}
 
-    static inline volatile int16_t * address(volatile int16_t * vp) { return volatile_address_int16(vp); }
+    static inline volatile int16_t * address(volatile int16_t * vp) {
+		return volatile_address_int16(vp);
+	}
 
-    static inline volatile int8_t * address(volatile int8_t * vp) { return volatile_address_int8(vp); }
+    static inline volatile int8_t * address(volatile int8_t * vp) {
+		return volatile_address_int8(vp);
+	}
 
-    static inline volatile uint64_t & address(volatile uint64_t & vr) { return *volatile_address_uint64(&vr); }
+    static inline volatile uint64_t & address(volatile uint64_t & vr) {
+		return *volatile_address_uint64(&vr);
+	}
 
-    static inline volatile uint32_t & address(volatile uint32_t & vr) { return *volatile_address_uint32(&vr); }
+    static inline volatile uint32_t & address(volatile uint32_t & vr) {
+		return *volatile_address_uint32(&vr);
+	}
 
-    static inline volatile uint16_t & address(volatile uint16_t & vr) { return *volatile_address_uint16(&vr); }
+    static inline volatile uint16_t & address(volatile uint16_t & vr) {
+		return *volatile_address_uint16(&vr);
+	}
 
-    static inline volatile uint8_t & address(volatile uint8_t & vr) { return *volatile_address_uint8(&vr); }
+    static inline volatile uint8_t & address(volatile uint8_t & vr) {
+		return *volatile_address_uint8(&vr);
+	}
 
-    static inline volatile int64_t & address(volatile int64_t & vr) { return *volatile_address_int64(&vr); }
+    static inline volatile int64_t & address(volatile int64_t & vr) {
+		return *volatile_address_int64(&vr);
+	}
 
-    static inline volatile int32_t & address(volatile int32_t & vr) { return *volatile_address_int32(&vr); }
+    static inline volatile int32_t & address(volatile int32_t & vr) {
+		return *volatile_address_int32(&vr);
+	}
 
-    static inline volatile int16_t & address(volatile int16_t & vr) { return *volatile_address_int16(&vr); }
+    static inline volatile int16_t & address(volatile int16_t & vr) {
+		return *volatile_address_int16(&vr);
+	}
 
-    static inline volatile int8_t & address(volatile int8_t & vr) { return *volatile_address_int8(&vr); }
+    static inline volatile int8_t & address(volatile int8_t & vr) {
+		return *volatile_address_int8(&vr);
+	}
 
 };
 
