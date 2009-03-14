@@ -1,11 +1,11 @@
-#ifndef _COM_DIAG_DESPERADO_LITTLEENDIAN_H_
-#define _COM_DIAG_DESPERADO_LITTLEENDIAN_H_
+#ifndef _COM_DIAG_DESPERADO_BYTEORDER_H_
+#define _COM_DIAG_DESPERADO_BYTEORDER_H_
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2006-2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -38,75 +38,74 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: littleendian.h,v 1.21 2006/01/09 00:24:49 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Implements the littleendian inline function. This can be included
- *  from either a C or a C++ translation unit.
- *
- *  For years I used the first algorithm shown below, which is based on
- *  a little trick I stole shamelessly from the original X11 distribution.
- *  But interestingly enough, that trick doesn't work with many modern
- *  processors and their optimizing C and C++ compilers because of
- *  assumptions made about "aliasing" of pointers. So I had to invent
- *  a new approach which used a mechanism C/C++ could understand.
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.21 $
- *
- *  @date   $Date: 2006/01/09 00:24:49 $
+ *  Declares the ByteOrder class.
  */
 
 
-#include "cxxcapi.h"
+#if defined(__cplusplus)
 
-#if 0
 
-#include "generics.h"
+#include <stdint.h>
+#include <sys/types.h>
+
 
 /**
- *  Returns non-zero if the target is little endian, zero if big endian.
- *  Based on code in the original X11 distribution from MIT. This is
- *  callable from C. Very likely optimized away to be a simple value.
- *
  *  @author coverclock@diag.com (Chip Overclock)
- *
- *  @see X11
- *
- *  @return non-zero if little endian, zero if big endian.
  */
-CXXCINLINE int littleendian(void) {
-    unsigned long word=1;
-    return ((*(reinterpretcastto(char*, &word))) != 0) ? 1 : 0;
+template <typename _TYPE_>
+union ByteOrder {
+
+    _TYPE_ word;
+
+    uint8_t bytes[sizeof(_TYPE_)];
+
+    static bool mustswap() {
+        static const ByteOrder swappable = { 1 };
+        return swappable.bytes[0] != 0;
+    }
+
+    static _TYPE_ swap(_TYPE_ data) {
+        ByteOrder in;
+        ByteOrder out;
+        in.word = data;
+        for (size_t ii = 0; ii < sizeof(data); ++ii) {
+            out.bytes[ii] = in.bytes[sizeof(data) - 1 - ii];
+        }
+        return out.word;
+    }
+
+    static _TYPE_ swapif(_TYPE_ data) {
+        return mustswap() ? swap(data) : data;
+    }
+
+};
+
+
+inline uint64_t desperado_swap64(uint64_t data) {
+    return ByteOrder<uint64_t>::swapif(data);
 }
 
-#else
+inline uint32_t desperado_swap32(uint32_t data) {
+    return ByteOrder<uint32_t>::swapif(data);
+}
 
-#include "target.h"
+inline uint64_t desperado_swap16(uint16_t data) {
+    return ByteOrder<uint16_t>::swapif(data);
+}
+
 
 /**
- *  Returns non-zero if the target is little endian, zero if big endian.
- *  Based on C++ code I wrote for a client for an embedded projet. This is
- *  callable from C. Very likely optimized away to be a simple value.
- *
- *  @author coverclock@diag.com (Chip Overclock)
- *
- *  @return non-zero if little endian, zero if big endian.
+ *  Run the ByteOrder unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
  */
-CXXCINLINE int littleendian(void) {
-    static union { uint32_t w; uint8_t b[sizeof(uint32_t)]; } d = { 1 };
-    return d.b[0];
-}
-
-#endif
+extern "C" int unittestByteOrder();
 
 
 #endif
