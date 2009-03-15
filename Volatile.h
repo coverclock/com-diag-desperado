@@ -62,180 +62,63 @@
 #include "cxxcapi.h"
 
 
-/**
- *  Return the value of the specified volatile unsigned 64-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI uint64_t volatile_value_uint64(volatile uint64_t * vp);
+#define DESPERADO_VOLATILE_VALUE_C_DECL(_TYPE_) \
+CXXCAPI _TYPE_ volatile_value_##_TYPE_(volatile _TYPE_ * vp);
 
+#define DESPERADO_VOLATILE_ADDRESS_C_DECL(_TYPE_) \
+CXXCAPI volatile _TYPE_ * volatile_address_##_TYPE_(volatile _TYPE_ * vp);
 
-/**
- *  Return the value of the specified volatile unsigned 32-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI uint32_t volatile_value_uint32(volatile uint32_t * vp);
+#define DESPERADO_VOLATILE_VALUE_C_IMPL(_TYPE_) \
+CXXCAPI _TYPE_ volatile_value_##_TYPE_(volatile _TYPE_ * vp) { \
+    return *vp; \
+}
 
+#define DESPERADO_VOLATILE_ADDRESS_C_IMPL(_TYPE_) \
+CXXCAPI volatile _TYPE_ * volatile_address_##_TYPE_(volatile _TYPE_ * vp) { \
+    return vp; \
+}
 
-/**
- *  Return the value of the specified volatile unsigned 16-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI uint16_t volatile_value_uint16(volatile uint16_t * vp);
+#define DESPERADO_VOLATILE_VALUE_CXX(_TYPE_) \
+static inline _TYPE_ value(volatile _TYPE_ * vp) { \
+    return volatile_value_##_TYPE_(vp); \
+} \
+static inline _TYPE_ value(volatile _TYPE_ & vr) { \
+    return volatile_value_##_TYPE_(&vr); \
+}
 
+#define DESPERADO_VOLATILE_ADDRESS_CXX(_TYPE_) \
+static inline volatile _TYPE_ * address(volatile _TYPE_ * vp) { \
+    return volatile_address_##_TYPE_(vp); \
+} \
+static inline volatile _TYPE_ * address(volatile _TYPE_ & vr) { \
+    return volatile_address_##_TYPE_(&vr); \
+}
 
-/**
- *  Return the value of the specified volatile unsigned 8-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI uint8_t volatile_value_uint8(volatile uint8_t * vp);
+#define DESPERADO_VOLATILE_REFERENCE_CXX(_TYPE_) \
+static inline volatile _TYPE_ & reference(volatile _TYPE_ * vp) { \
+    return *volatile_address_##_TYPE_(vp); \
+} \
+static inline volatile _TYPE_ & reference(volatile _TYPE_ & vr) { \
+    return *volatile_address_##_TYPE_(&vr); \
+}
 
+DESPERADO_VOLATILE_VALUE_C_DECL(int8_t)
+DESPERADO_VOLATILE_VALUE_C_DECL(int16_t)
+DESPERADO_VOLATILE_VALUE_C_DECL(int32_t)
+DESPERADO_VOLATILE_VALUE_C_DECL(int64_t)
+DESPERADO_VOLATILE_VALUE_C_DECL(uint8_t)
+DESPERADO_VOLATILE_VALUE_C_DECL(uint16_t)
+DESPERADO_VOLATILE_VALUE_C_DECL(uint32_t)
+DESPERADO_VOLATILE_VALUE_C_DECL(uint64_t)
 
-/**
- *  Return the value of the specified volatile signed 64-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI int64_t volatile_value_int64(volatile int64_t * vp);
-
-
-/**
- *  Return the value of the specified volatile signed 32-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI int32_t volatile_value_int32(volatile int32_t * vp);
-
-
-/**
- *  Return the value of the specified volatile signed 16-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI int16_t volatile_value_int16(volatile int16_t * vp);
-
-
-/**
- *  Return the value of the specified volatile signed 8-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return the value of the volatile variable.
- */
-CXXCAPI int8_t volatile_value_int8(volatile int8_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile unsigned 64-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile uint64_t * volatile_address_uint64(volatile uint64_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile unsigned 32-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile uint32_t * volatile_address_uint32(volatile uint32_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile unsigned 16-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile uint16_t * volatile_address_uint16(volatile uint16_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile unsigned 8-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile uint8_t * volatile_address_uint8(volatile uint8_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile signed 64-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile int64_t * volatile_address_int64(volatile int64_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile signed 32-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile int32_t * volatile_address_int32(volatile int32_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile signed 16-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile int16_t * volatile_address_int16(volatile int16_t * vp);
-
-
-/**
- *  Return a pointer to of the specified volatile signed 8-bit
- *  integer variable. Must not be inlined.
- *
- *  @param vp points to the volatile variable.
- *
- *  @return a pointer to the volatile variable.
- */
-CXXCAPI volatile int8_t * volatile_address_int8(volatile int8_t * vp);
+DESPERADO_VOLATILE_ADDRESS_C_DECL(int8_t)
+DESPERADO_VOLATILE_ADDRESS_C_DECL(int16_t)
+DESPERADO_VOLATILE_ADDRESS_C_DECL(int32_t)
+DESPERADO_VOLATILE_ADDRESS_C_DECL(int64_t)
+DESPERADO_VOLATILE_ADDRESS_C_DECL(uint8_t)
+DESPERADO_VOLATILE_ADDRESS_C_DECL(uint16_t)
+DESPERADO_VOLATILE_ADDRESS_C_DECL(uint32_t)
+DESPERADO_VOLATILE_ADDRESS_C_DECL(uint64_t)
 
 
 #if defined(__cplusplus)
@@ -248,133 +131,34 @@ CXXCAPI volatile int8_t * volatile_address_int8(volatile int8_t * vp);
  */
 class Volatile {
 
-    static inline uint64_t value(volatile uint64_t * vp) {
-		return volatile_value_uint64(vp);
-	}
+public:
 
-    static inline uint32_t value(volatile uint32_t * vp) {
-		return volatile_value_uint32(vp);
-	}
+    DESPERADO_VOLATILE_VALUE_CXX(int8_t)
+    DESPERADO_VOLATILE_VALUE_CXX(int16_t)
+    DESPERADO_VOLATILE_VALUE_CXX(int32_t)
+    DESPERADO_VOLATILE_VALUE_CXX(int64_t)
+    DESPERADO_VOLATILE_VALUE_CXX(uint8_t)
+    DESPERADO_VOLATILE_VALUE_CXX(uint16_t)
+    DESPERADO_VOLATILE_VALUE_CXX(uint32_t)
+    DESPERADO_VOLATILE_VALUE_CXX(uint64_t)
 
-    static inline uint16_t value(volatile uint16_t * vp) {
-		return volatile_value_uint16(vp);
-	}
+    DESPERADO_VOLATILE_ADDRESS_CXX(int8_t)
+    DESPERADO_VOLATILE_ADDRESS_CXX(int16_t)
+    DESPERADO_VOLATILE_ADDRESS_CXX(int32_t)
+    DESPERADO_VOLATILE_ADDRESS_CXX(int64_t)
+    DESPERADO_VOLATILE_ADDRESS_CXX(uint8_t)
+    DESPERADO_VOLATILE_ADDRESS_CXX(uint16_t)
+    DESPERADO_VOLATILE_ADDRESS_CXX(uint32_t)
+    DESPERADO_VOLATILE_ADDRESS_CXX(uint64_t)
 
-    static inline uint8_t value(volatile uint8_t * vp) {
-		return volatile_value_uint8(vp);
-	}
-
-    static inline int64_t value(volatile int64_t * vp) {
-		return volatile_value_int64(vp);
-	}
-
-    static inline int32_t value(volatile int32_t * vp) {
-		return volatile_value_int32(vp);
-	}
-
-    static inline int16_t value(volatile int16_t * vp) {
-		return volatile_value_int16(vp);
-	}
-
-    static inline int8_t value(volatile int8_t * vp) {
-		return volatile_value_int8(vp);
-	}
-
-    static inline uint64_t value(volatile uint64_t & vr) {
-		return volatile_value_uint64(&vr);
-	}
-
-    static inline uint32_t value(volatile uint32_t & vr) {
-		return volatile_value_uint32(&vr);
-	}
-
-    static inline uint16_t value(volatile uint16_t & vr) {
-		return volatile_value_uint16(&vr);
-	}
-
-    static inline uint8_t value(volatile uint8_t & vr) {
-		return volatile_value_uint8(&vr);
-	}
-
-    static inline int64_t value(volatile int64_t & vr) {
-		return volatile_value_int64(&vr);
-	}
-
-    static inline int32_t value(volatile int32_t & vr) {
-		return volatile_value_int32(&vr);
-	}
-
-    static inline int16_t value(volatile int16_t & vr) {
-		return volatile_value_int16(&vr);
-	}
-
-    static inline int8_t value(volatile int8_t & vr) {
-		return volatile_value_int8(&vr);
-	}
-
-    static inline volatile uint64_t * address(volatile uint64_t * vp) {
-		return volatile_address_uint64(vp);
-	}
-
-    static inline volatile uint32_t * address(volatile uint32_t * vp) {
-		return volatile_address_uint32(vp);
-	}
-
-    static inline volatile uint16_t * address(volatile uint16_t * vp) {
-		return volatile_address_uint16(vp);
-	}
-
-    static inline volatile uint8_t * address(volatile uint8_t * vp) {
-		return volatile_address_uint8(vp);
-	}
-
-    static inline volatile int64_t * address(volatile int64_t * vp) {
-		return volatile_address_int64(vp);
-	}
-
-    static inline volatile int32_t * address(volatile int32_t * vp) {
-		return volatile_address_int32(vp);
-	}
-
-    static inline volatile int16_t * address(volatile int16_t * vp) {
-		return volatile_address_int16(vp);
-	}
-
-    static inline volatile int8_t * address(volatile int8_t * vp) {
-		return volatile_address_int8(vp);
-	}
-
-    static inline volatile uint64_t & address(volatile uint64_t & vr) {
-		return *volatile_address_uint64(&vr);
-	}
-
-    static inline volatile uint32_t & address(volatile uint32_t & vr) {
-		return *volatile_address_uint32(&vr);
-	}
-
-    static inline volatile uint16_t & address(volatile uint16_t & vr) {
-		return *volatile_address_uint16(&vr);
-	}
-
-    static inline volatile uint8_t & address(volatile uint8_t & vr) {
-		return *volatile_address_uint8(&vr);
-	}
-
-    static inline volatile int64_t & address(volatile int64_t & vr) {
-		return *volatile_address_int64(&vr);
-	}
-
-    static inline volatile int32_t & address(volatile int32_t & vr) {
-		return *volatile_address_int32(&vr);
-	}
-
-    static inline volatile int16_t & address(volatile int16_t & vr) {
-		return *volatile_address_int16(&vr);
-	}
-
-    static inline volatile int8_t & address(volatile int8_t & vr) {
-		return *volatile_address_int8(&vr);
-	}
+    DESPERADO_VOLATILE_REFERENCE_CXX(int8_t)
+    DESPERADO_VOLATILE_REFERENCE_CXX(int16_t)
+    DESPERADO_VOLATILE_REFERENCE_CXX(int32_t)
+    DESPERADO_VOLATILE_REFERENCE_CXX(int64_t)
+    DESPERADO_VOLATILE_REFERENCE_CXX(uint8_t)
+    DESPERADO_VOLATILE_REFERENCE_CXX(uint16_t)
+    DESPERADO_VOLATILE_REFERENCE_CXX(uint32_t)
+    DESPERADO_VOLATILE_REFERENCE_CXX(uint64_t)
 
 };
 

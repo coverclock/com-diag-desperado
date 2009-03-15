@@ -41,26 +41,19 @@
 /**
  *  @file
  *
- *  Implements the Desperado Volatile C-callable functions.
+ *  Implements the Volatile unit test main program.
+ *
+ *  @see    Volatile
+ *
+ *  @author $Author: jsloan $
  */
 
 
+#include <cstdlib>
+#include "Platform.h"
 #include "Volatile.h"
 
-DESPERADO_VOLATILE_VALUE_C_IMPL(int8_t)
-DESPERADO_VOLATILE_VALUE_C_IMPL(int16_t)
-DESPERADO_VOLATILE_VALUE_C_IMPL(int32_t)
-DESPERADO_VOLATILE_VALUE_C_IMPL(int64_t)
-DESPERADO_VOLATILE_VALUE_C_IMPL(uint8_t)
-DESPERADO_VOLATILE_VALUE_C_IMPL(uint16_t)
-DESPERADO_VOLATILE_VALUE_C_IMPL(uint32_t)
-DESPERADO_VOLATILE_VALUE_C_IMPL(uint64_t)
-
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(int8_t)
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(int16_t)
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(int32_t)
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(int64_t)
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(uint8_t)
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(uint16_t)
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(uint32_t)
-DESPERADO_VOLATILE_ADDRESS_C_IMPL(uint64_t)
+int main(int argc, char**) {
+    Platform::instance(Platform::factory());
+    exit(unittestVolatile());
+}
