@@ -639,6 +639,9 @@ unittestInputOutputStatic:	mainInputOutputStatic.o $(ARCHIVE)
 unittestVintage:	mainVintage.o $(ARCHIVE)
 	$(LD) -o unittestVintage mainVintage.o $(LDFLAGS)
 
+unittestVolatile:	mainVolatile.o $(ARCHIVE)
+	$(LD) -o unittestVolatile mainVolatile.o $(LDFLAGS)
+
 unittestWord:	mainWord.o $(ARCHIVE)
 	$(LD) -o unittestWord mainWord.o $(LDFLAGS)
 
