@@ -58,11 +58,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	quinto
+RELEASE		=	refuge
 MAJOR		=	2
-MINOR		=	9
+MINOR		=	10
 BUILD		=	0
-PRERELEASE	=	refuge
+PRERELEASE	=	syracuse
 
 #
 # Indicate the platform and target you are using.
