@@ -45,7 +45,28 @@
  *  @file
  *
  *  Defines the Desperado Volatile class that provides helper
- *  functions for volatile accesses.
+ *  functions for volatile accesses. The following C functions
+ *  are defined.
+ *
+ *  uint8_t volatile_value_uint8_t(volatile uint8_t *);
+ *  uint16_t volatile_value_uint16_t(volatile uint16_t *);
+ *  uint32_t volatile_value_uint32_t(volatile uint32_t *);
+ *  uint64_t volatile_value_uint64_t(volatile uint64_t *);
+ *
+ *  int8_t volatile_value_int8_t(volatile int8_t *);
+ *  int16_t volatile_value_int16_t(volatile int16_t *);
+ *  int32_t volatile_value_int32_t(volatile int32_t *);
+ *  int64_t volatile_value_int64_t(volatile int64_t *);
+ *
+ *  volatile uint8_t * volatile_address_uint8_t(volatile uint8_t *);
+ *  volatile uint16_t * volatile_address_uint16_t(volatile uint16_t *);
+ *  volatile uint32_t * volatile_address_uint32_t(volatile uint32_t *);
+ *  volatile uint64_t * volatile_address_uint64_t(volatile uint64_t *);
+ *
+ *  volatile int8_t * volatile_address_int8_t(volatile int8_t *);
+ *  volatile int16_t * volatile_address_int16_t(volatile int16_t *);
+ *  volatile int32_t * volatile_address_int32_t(volatile int32_t *);
+ *  volatile int64_t * volatile_address_int64_t(volatile int64_t *);
  *
  *  @see    E. Eide, J. Regehr, "Volatiles Are Miscompiled, and
  *          What to Do about It", <I>Proceedings of the Eighth
