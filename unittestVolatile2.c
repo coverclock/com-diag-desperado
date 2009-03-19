@@ -41,7 +41,7 @@
 /**
  *  @file
  *
- *  Implements the Volatile unit test main program.
+ *  Implements the Volatile unit test.
  *
  *  @see    Volatile
  *
@@ -49,11 +49,50 @@
  */
 
 
-#include <cstdlib>
-#include "Platform.h"
 #include "Volatile.h"
+#include "Volatile.h"
+#include "Print.h"
+#include "Print.h"
+#include "Platform.h"
+#include "Platform.h"
+#include "Output.h"
+#include "Output.h"
+#include "generics.h"
+#include "generics.h"
 
-int main(int argc, char**) {
-    Platform::instance(Platform::factory());
-    exit(unittestVolatile() + unittestVolatile2());
+#define unittestVolatileType(_TYPE_) \
+do { \
+    volatile _TYPE_ datum = -1; \
+    platform_printf("%s[%d]: sizeof=%zu issignedint=%d\n", \
+        __FILE__, __LINE__, sizeof(_TYPE_), issignedint(_TYPE_)); \
+    if (volatile_value_##_TYPE_(&datum) != datum) { \
+        platform_errorf("%s[%d]: (0x%x!=0x%x)!\n", \
+            __FILE__, __LINE__, volatile_value_##_TYPE_(&datum), datum); \
+        ++errors; \
+    } \
+    if (volatile_address_##_TYPE_(&datum) != &datum) { \
+        platform_errorf("%s[%d]: (%p!=%p)!\n", \
+            __FILE__, __LINE__, volatile_address_##_TYPE_(&datum), &datum); \
+        ++errors; \
+    } \
+} while (0)
+
+int unittestVolatile2(void) {
+    int errors = 0;
+
+    platform_printf("%s[%d]: begin\n", __FILE__, __LINE__);
+
+    unittestVolatileType(uint8_t);
+    unittestVolatileType(uint16_t);
+    unittestVolatileType(uint32_t);
+    unittestVolatileType(uint64_t);
+    unittestVolatileType(int8_t);
+    unittestVolatileType(int16_t);
+    unittestVolatileType(int32_t);
+    unittestVolatileType(int64_t);
+
+    platform_printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
+        errors);
+
+    return errors;
 }

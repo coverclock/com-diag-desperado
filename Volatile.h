@@ -180,6 +180,15 @@ extern "C" int unittestVolatile();
  */
 extern "C" int unittestVolatile2();
 
+#else
+
+/**
+ *  Run the Volatile2 unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
+ */
+extern int unittestVolatile2(void);
+
 #endif
 
 

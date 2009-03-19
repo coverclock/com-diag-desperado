@@ -80,5 +80,5 @@ int main(int, char**) {
     if (0 == ::sigaction(sig, &action, 0)) {
         printf("%s[%d]: kill -%d %d\n", __FILE__, __LINE__, sig, ::getpid());
     }
-    exit(unittestPlatform()+unittestPlatform2());
+    exit(unittestPlatform() + unittestPlatform2());
 }
