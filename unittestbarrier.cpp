@@ -119,9 +119,9 @@ extern "C" int unittestbarrier() {
         __FILE__, __LINE__, dbafter - dbbefore);
 
     dbbefore = dbplatform.time();
-    barrier();
+    desperado_memory_barrier();
     dbafter = dbplatform.time();
-    printf("%s[%d]: barrier(): %llu ticks\n",
+    printf("%s[%d]: desperado_memory_barrier(): %llu ticks\n",
         __FILE__, __LINE__, dbafter - dbbefore);
 
     dbbefore = dbplatform.time();

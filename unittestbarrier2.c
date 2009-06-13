@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2005-2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -99,10 +99,10 @@ int unittestbarrier2() {
         __FILE__, __LINE__, dbafter - dbbefore);
 
     dbbefore = platform_time();
-    barrier();
+    desperado_memory_barrier();
     dbafter = platform_time();
     print_f(platform_output(),
-        "%s[%d]: barrier(): %llu ticks\n",
+        "%s[%d]: desperado_memory_barrier(): %llu ticks\n",
         __FILE__, __LINE__, dbafter - dbbefore);
 
 #if defined(__GNUC__)

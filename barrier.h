@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006, 2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -146,15 +146,18 @@
 CXXCAPI int desperado_portable_barrier(void);
 
 
-#define desperado_memory_barrier() desperado_portable_barrier()
-
-#if defined(__GNUC__)
-#   if defined(__GNUC_MINOR__)
-#       if ((((__GNUC__)*1000)+(__GNUC_MINOR__))>=4001)
-#           undef  desperado_memory_barrier
-#           define desperado_memory_barrier() __sync_synchronize()
+#if !defined(desperado_native_barrier)
+#   if defined(__GNUC__)
+#       if defined(__GNUC_MINOR__)
+#           if ((((__GNUC__)*1000)+(__GNUC_MINOR__))>=4001)
+#               define desperado_native_barrier() (__sync_synchronize(), 0)
+#           endif
 #       endif
 #   endif
+#endif
+
+#if !defined(desperado_native_barrier)
+#   define desperado_native_barrier() desperado_portable_barrier()
 #endif
 
 
@@ -178,32 +181,10 @@ CXXCAPI int desperado_portable_barrier(void);
  *
  *  @author coverclock@diag.com (Chip Overclock)
  */
-CXXCINLINE int desperado_native_barrier(void) {
-    desperado_memory_barrier();
+CXXCINLINE int desperado_memory_barrier(void) {
+    desperado_native_barrier();
     return 0;
 }
-
-
-/*
- *  If the barrier macro is defined, as in linux/compiler.h, undefine
- *  it. If you want to use the Linux barrier macro, don't include this
- *  header file.
- */
-#if defined(barrier)
-#   undef barrier
-#endif
-
-
-/**
- *  @def    barrier()
- *
- *  Invokes a Desperado memory barrier mechanism. This mimics the
- *  semantics of the Linux barrier() macro, typically defined in
- *  linux/compiler.h, which has no return value. This will invoke
- *  the native barrier mechanism if it exists, or the portable
- *  barrier mechanism if there is no native mechanism.
- */
-#define barrier()   ((void)desperado_native_barrier())
 
 
 #if defined(__cplusplus)

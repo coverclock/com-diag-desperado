@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006, 2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -64,8 +64,9 @@
 
 
 /**
- *  Invokes the Desperado portable memory barrier function
- *  upon construction.
+ *  Invokes the Desperado memory barrier function
+ *  upon construction (for acquire semantics) and
+ *  destruction (for release semantics).
  *
  *  @see    B. Stroustrup, <I>The C++ Programming Language</I>,
  *          3rd edition, pp 366-367, "resource acquisition is
@@ -94,7 +95,7 @@ public:
 //  Constructor.
 //
 inline MemoryBarrier::MemoryBarrier() {
-    desperado_portable_barrier();
+    desperado_memory_barrier();
 }
 
 
@@ -102,6 +103,7 @@ inline MemoryBarrier::MemoryBarrier() {
 //  Destructor.
 //
 inline MemoryBarrier::~MemoryBarrier() {
+    desperado_memory_barrier();
 }
 
 
