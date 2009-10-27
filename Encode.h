@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements methods to collapse and expand strings containing URL-encoded
  *  substrings that are typical of those used in GET and POST query strings
@@ -195,6 +197,8 @@ public:
 //
 inline Encode::Encode() {
 }
+
+#include "End.h"
 
     
 /**

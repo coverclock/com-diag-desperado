@@ -66,6 +66,8 @@
 #include "Time.h"
 
 
+#include "Begin.h"
+
 /**
  *  Composes a Date object and a Time object into a single object.
  *
@@ -629,6 +631,8 @@ inline uint16_t DateTime::julian() const {
 inline Time::Meridiem DateTime::oclock(uint8_t& twelve) const {
     return this->time.oclock(twelve);
 }
+
+#include "End.h"
 
 
 #endif

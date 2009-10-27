@@ -66,6 +66,8 @@
 #include "Logger.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements the Platform interface to the Windows operating system
  *  using Cygwin.
@@ -414,6 +416,8 @@ private:
     Logger loggers;
 
 };
+
+#include "End.h"
 
 
 #endif

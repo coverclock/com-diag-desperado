@@ -66,6 +66,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines time zone offsets and implements conversions of
  *  these offsets into printable strings indicating a time zone.
@@ -442,6 +444,8 @@ inline int32_t TimeZone::normalize(int32_t ot) const {
     }
     return ot;
 }
+
+#include "End.h"
 
 
 #endif

@@ -60,6 +60,8 @@
  */
 
 
+#include "Begin.h"
+
 /**
  *  Generates a class containing functors to find the maximum from a
  *  list of objects.
@@ -412,6 +414,8 @@ inline _TYPE_ Maximum<_TYPE_>::operator() (
 ) {
     return (*this)((*this)(one, two, three, four, five, six, seven), eight);
 }
+
+#include "End.h"
 
 
 #ifndef _DESPERADO_MINIMUM_H_

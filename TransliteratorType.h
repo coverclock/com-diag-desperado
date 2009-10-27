@@ -67,6 +67,8 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines a template that generates a Transliterator class in which
  *  the context stack of the specified size is integral to the object.
@@ -194,6 +196,8 @@ void TransliteratorType<_CONTEXTS_>::show(
         this, sizeof(*this));
     this->Transliterator::show(level, display, indent + 1);
 }
+
+#include "End.h"
 
 
 #endif

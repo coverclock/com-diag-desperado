@@ -70,6 +70,8 @@
 #include "Logger.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an output functor that writes to the Linux system log file
  *  using syslog(3), conspiring with the Logger class to pass along
@@ -395,6 +397,8 @@ inline int SyslogOutput::getOption() const {
 inline int SyslogOutput::getFacility() const {
     return this->facility;
 }
+
+#include "End.h"
 
 
 #endif

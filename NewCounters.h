@@ -63,6 +63,8 @@
 #include "Counters.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a Counter object in which the counters are dynamically
  *  allocated.
@@ -172,6 +174,8 @@ private:
     NewCounters& operator=(const NewCounters& that);
 
 };
+
+#include "End.h"
 
 
 #endif

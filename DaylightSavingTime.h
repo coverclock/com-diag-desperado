@@ -64,6 +64,8 @@
 #include "DateTime.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines an interface to encode a rule to decide whether a given
  *  DateTime falls within daylight saving time (DST).
@@ -150,6 +152,8 @@ public:
 //
 inline DaylightSavingTime::DaylightSavingTime() {
 }
+
+#include "End.h"
 
 
 #endif

@@ -64,6 +64,8 @@
 #include "Dump.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an input functor that uses Dump to display its input stream
  *  from another input functor before returning it.
@@ -276,6 +278,8 @@ private:
     Dump* du;
 
 };
+
+#include "End.h"
 
 
 #endif

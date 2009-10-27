@@ -64,7 +64,11 @@
 #include "Number.h"
 
 
+#include "Begin.h"
+
 extern Number<int64_t> int64_Number;
+
+#include "End.h"
 
 
 #endif

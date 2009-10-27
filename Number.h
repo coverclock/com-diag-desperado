@@ -69,6 +69,8 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
 /**
  *  Generates a method to parse a character string and convert it into a
  *  binary integer of any integral type whose base is determined from its
@@ -652,6 +654,8 @@ void Number<_TYPE_>::show(int /* level */, Output* display, int indent) const {
     printf("%s issignedint=%d\n", sp, issignedint(_TYPE_));
     printf("%s widthof*=%u\n", sp, widthof(_TYPE_*));
 }
+
+#include "End.h"
     
     
 /**

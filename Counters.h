@@ -65,6 +65,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Provides an interface to an array of simple counters which may be
  *  individually accessed or modified, particularly useful when all of
@@ -475,6 +477,8 @@ inline const char* Counters::label(unsigned int id, Label buffer) const {
         ? this->generate(this->validate(id), buffer)
         : "";
 }
+
+#include "End.h"
 
 
 /**

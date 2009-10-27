@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Contains a table of country names, abbreviations, and country numbers
  *  conformant with the ISO 3166-1:1997 standard. Data provided
@@ -1176,6 +1178,8 @@ inline const Iso3166::Entry& Iso3166::operator[] (Index index)
         const {
     return this->table[index];
 }
+
+#include "End.h"
 
 
 /**

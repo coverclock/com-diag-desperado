@@ -65,6 +65,8 @@
 #include "Object.h"
 
 
+#include "Begin.h"
+
 /**
  *  This is the base class for Desperado classes which define exceptions.
  *  It is inspired by std::exception but does not extend it. This is so
@@ -213,6 +215,8 @@ public:
     const char* function;
     
 };
+
+#include "End.h"
 
 
 #if defined(__USE_GNU)

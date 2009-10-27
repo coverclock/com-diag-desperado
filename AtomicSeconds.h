@@ -66,6 +66,8 @@
 #include "CommonEra.h"
 
 
+#include "Begin.h"
+
 /**
  *  Duplicates the interface of LeapSeconds but never returns any
  *  leap seconds. It can be used as the leap second rule by applications
@@ -193,6 +195,8 @@ public:
 //
 inline AtomicSeconds::AtomicSeconds() {
 }
+
+#include "End.h"
 
 
 #endif

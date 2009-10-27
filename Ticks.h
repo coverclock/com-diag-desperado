@@ -65,6 +65,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements methods to convert Platform ticks_t to other representations
  *  of time duration.
@@ -182,6 +184,8 @@ public:
 //
 inline Ticks::Ticks() {
 }
+
+#include "End.h"
 
 
 /**

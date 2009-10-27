@@ -65,6 +65,8 @@
 #include "Linux.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements the Platform interface to the Arroyo Linux operating system.
  *
@@ -148,6 +150,8 @@ private:
     Arroyo& operator=(const Arroyo& that);
 
 };
+
+#include "End.h"
 
 
 #endif

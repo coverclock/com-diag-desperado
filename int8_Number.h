@@ -64,7 +64,11 @@
 #include "Number.h"
 
 
+#include "Begin.h"
+
 extern Number<int8_t> int8_Number;
+
+#include "End.h"
 
 
 #endif

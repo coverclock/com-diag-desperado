@@ -71,6 +71,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines a simple interface to a multi-level logging mechanism, and
  *  implements a simple logger using it. Is easily overridden to use
@@ -562,6 +564,8 @@ inline ssize_t Logger::log(Level level, const char* format, va_list ap) {
     }
     return rc;
 }
+
+#include "End.h"
 
 
 /**

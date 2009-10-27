@@ -72,6 +72,8 @@ extern "C" {
 #include "Platform.h"
 
 
+#include "Begin.h"
+
 /**
  *  Generates sixteen bit and thirty-two bit Cyclic Redundancy Check
  *  generators whose algorithms are based on the public domain Rocksoft(tm)
@@ -381,6 +383,8 @@ void Crc<_TYPE_>::show(int level, Output* display, int indent) const {
         }
     }
 }
+
+#include "End.h"
 
 
 /**

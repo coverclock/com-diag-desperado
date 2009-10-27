@@ -71,6 +71,8 @@
 #include "Object.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a printf(3)-style functor that can be used to format
  *  a variadic argument list and write it to an output functor.
@@ -190,6 +192,8 @@ private:
     Output* ou;
 
 };
+
+#include "End.h"
 
 
 /**

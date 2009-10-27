@@ -74,6 +74,8 @@ extern "C" {
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an adaptor to a Ficl system, where Ficl (pronounced "fickle")
  *  is a "FORTH-inspired command language" developed by John Sadler,
@@ -462,6 +464,8 @@ inline bool FiclSystem::lock() {
 inline bool FiclSystem::unlock() {
     return this->mutex.end();
 }
+
+#include "End.h"
 
 
 /**

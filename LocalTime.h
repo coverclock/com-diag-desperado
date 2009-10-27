@@ -69,6 +69,8 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a DataTime in local civilian time (LCT), taking into
  *  account leap seconds, time zone offset from UTC, and whether
@@ -355,6 +357,8 @@ inline DaylightSavingTime& LocalTime::getDaylightSavingTime() const {
 inline bool LocalTime::getDst() const {
     return this->dst;
 }
+
+#include "End.h"
 
 
 #endif

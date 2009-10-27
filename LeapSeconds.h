@@ -66,6 +66,8 @@
 #include "CommonEra.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an interface to determine the number of cumulative leap
  *  seconds for any given CommonEra date and time, used in the conversion
@@ -213,6 +215,8 @@ protected:
     const seconds_t* utcseconds;
 
 };
+
+#include "End.h"
 
 
 #endif

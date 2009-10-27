@@ -63,6 +63,8 @@
 #include "target.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements some useful manifest constants in a common location.
  *  Where possible, the abbreviations are based on the recommendations
@@ -146,6 +148,8 @@ struct Constant {
     static const size_t bits_per_octet = 8;
 
 };
+
+#include "End.h"
 
 
 #endif

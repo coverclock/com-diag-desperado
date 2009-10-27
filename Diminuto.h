@@ -65,6 +65,8 @@
 #include "Linux.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements the Platform interface to the Diminuto Linux operating system.
  *
@@ -148,6 +150,8 @@ private:
     Diminuto& operator=(const Diminuto& that);
 
 };
+
+#include "End.h"
 
 
 #endif

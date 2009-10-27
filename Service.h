@@ -65,6 +65,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a factory that creates sockets for service providers
  *  (server side) or service consumers (client side). If you are using
@@ -357,6 +359,8 @@ public:
      */
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 };
+
+#include "End.h"
 
 
 /**

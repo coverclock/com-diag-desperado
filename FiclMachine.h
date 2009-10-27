@@ -72,6 +72,8 @@ extern "C" {
 #include "Input.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an adaptor to a Ficl machine, where Ficl (pronounced "fickle")
  *  is a "FORTH-inspired command language" developed by John Sadler,
@@ -375,6 +377,8 @@ inline ficlSystem* FiclMachine::getNativeSystem() {
 inline ficlVm* FiclMachine::getNativeMachine() {
     return this->ficlmachine;
 }
+
+#include "End.h"
 
 
 #endif

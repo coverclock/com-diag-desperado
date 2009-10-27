@@ -64,7 +64,11 @@
 #include "Ram.h"
 
 
+#include "Begin.h"
+
 extern Ram<uint32_t> uint32_Ram;
+
+#include "End.h"
 
 
 #endif

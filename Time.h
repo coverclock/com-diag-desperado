@@ -66,6 +66,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an object that contains a time with fields
  *  of sufficient size to contain a coordinated universal time
@@ -421,6 +423,8 @@ inline const char* Time::meridiemToString() const {
     uint8_t twelve;
     return this->meridiemToString(this->oclock(twelve));
 }
+
+#include "End.h"
 
 
 #endif

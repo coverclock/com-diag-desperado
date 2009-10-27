@@ -69,6 +69,8 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
 /**
  *  This is a template that defines a type of the Counters
  *  class in which the counter array of the specified size
@@ -206,6 +208,8 @@ void CountersType<_NCOUNTERS_>::show(
         this, sizeof(*this));
     this->Counters::show(level, display, indent + 1);
 }
+
+#include "End.h"
 
 
 #endif

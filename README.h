@@ -272,6 +272,7 @@
     The design patterns implemented by this software benefitted from
     the wisdom and experience of the following cast of thousands:
 
+        Ted Apke
         Bill Bahr
         Michael Barr
         Randy Billinger
@@ -290,11 +291,13 @@
         Gene Harano
         Les Hatton
         David Hemmendinger
+        Dan Higgins
         Ken Howard
         Won Huh
         Basil Irwin
         Pete Isensee
         Ken Jensen
+        Alan Jones
         Chad Komer
         Don Leuenberger
         Sam Linzell
@@ -317,6 +320,7 @@
         Scott Thomas
         Mark Uris
         Ross Williams
+        Eric Wanowsky
         Chris Wood
         Wayne Zakowski
 

@@ -71,6 +71,8 @@ extern "C" {
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Creates, strarts and destroys a Java Virtual Machine.
  *
@@ -250,6 +252,8 @@ inline JavaVM* JavaVirtualMachine::getJavaVM() {
 inline JNIEnv* JavaVirtualMachine::getJNIEnv() {
     return this->jenv;
 }
+
+#include "End.h"
 
 
 /**

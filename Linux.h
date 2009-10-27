@@ -70,6 +70,8 @@
 #include "Logger.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements the Platform interface to the Linux operating system.
  *
@@ -415,6 +417,8 @@ private:
     Logger loggers;
 
 };
+
+#include "End.h"
 
 
 #endif

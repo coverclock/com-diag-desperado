@@ -65,6 +65,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a generic interface to a throttle, an object which
  *  maintains state to control the rate at which some event is allowed
@@ -249,6 +251,8 @@ public:
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
 };
+
+#include "End.h"
 
 
 /**

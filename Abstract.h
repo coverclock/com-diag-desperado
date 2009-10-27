@@ -64,6 +64,7 @@
 #include "Object.h"
 #include "Output.h"
 
+#include "Begin.h"
 
 /**
  *  This is a pilot framework for a header file declaring a purely abstract
@@ -193,6 +194,8 @@ inline Abstract::Abstract(const Abstract& that) :
         ;
     }
 }
+
+#include "End.h"
 
 
 #endif

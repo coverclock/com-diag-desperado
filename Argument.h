@@ -63,6 +63,7 @@
 #include "Object.h"
 #include "Output.h"
 
+#include "Begin.h"
 
 /**
  *  Implements a simple parser using strtok_r(3) to break up a character
@@ -190,6 +191,8 @@ public:
 //
 inline Argument::Argument() {
 }
+
+#include "End.h"
 
 
 /**

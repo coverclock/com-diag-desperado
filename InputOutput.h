@@ -65,6 +65,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines a class that offers both an input functor and an
  *  output functor interface. The input and output functors of
@@ -152,6 +154,8 @@ public:
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
 };
+
+#include "End.h"
 
 
 #endif

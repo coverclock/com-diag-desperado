@@ -63,6 +63,8 @@
 #include "FileInput.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an input functor that returns data from a C standard
  *  I/O library FILE object opened from a given path, the default path
@@ -145,6 +147,8 @@ public:
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
 };
+
+#include "End.h"
 
 
 #endif

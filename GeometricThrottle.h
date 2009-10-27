@@ -63,6 +63,8 @@
 #include "Throttle.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a throttle that decays geometrically by admitting
  *  the first time it is called, then the second time, then the
@@ -290,6 +292,8 @@ private:
     bool alarmed1;
 
 };
+
+#include "End.h"
 
 
 /**

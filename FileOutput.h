@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an output functor that writes data to a pre-existing
  *  C standard I/O library FILE object, the default FILE object being
@@ -223,6 +225,8 @@ private:
 inline FILE* FileOutput::getFile() const {
     return this->file;
 }
+
+#include "End.h"
 
 
 #endif

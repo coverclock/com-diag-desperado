@@ -63,6 +63,8 @@
 #include "DstGeneric.h"
 
 
+#include "Begin.h"
+
 /**
  *  Encodes a rule to decide whether a given DateTime falls within
  *  the European Union (EU) daylight saving time (DST).
@@ -124,6 +126,8 @@ public:
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
 };
+
+#include "End.h"
 
 
 #endif

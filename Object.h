@@ -60,6 +60,8 @@
  */
 
 
+#include "Begin.h"
+
 class Output;
 
 
@@ -121,6 +123,8 @@ private:
 //
 inline Object::Object() {
 }
+
+#include "End.h"
 
 
 #endif

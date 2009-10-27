@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Uses a Transliterator to implement a parser that extracts words
  *  from a buffer or an input functor. A word is a sequence of
@@ -159,6 +161,8 @@ public:
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
 };
+
+#include "End.h"
 
 
 /**

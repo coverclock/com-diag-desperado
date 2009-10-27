@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  This is a pilot framework for a header file declaring an implementation
  *  class. It is used to test new designs.
@@ -241,6 +243,8 @@ private:
     void* field;
 
 };
+
+#include "End.h"
 
 
 /**

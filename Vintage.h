@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Contains static variables with control information about
  *  this product. The base class contains information about
@@ -179,6 +181,8 @@ public:
 //
 inline Vintage::Vintage() {
 }
+
+#include "End.h"
 
 
 /**

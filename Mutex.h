@@ -66,6 +66,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a mutual exclusion lock, or mutex, for POSIX pthreads.
  *  The mutex allows recursion: if the same thread locks the mutex
@@ -210,6 +212,8 @@ inline bool Mutex::isLocked() const {
 inline identity_t Mutex::getIdentity() const {
     return this->identity;
 }
+
+#include "End.h"
 
 
 /**
