@@ -69,6 +69,8 @@
 #include "Dump.h"
 
 
+#include "Begin.h"
+
 /**
  *  Generates a very lightweight mechanism for implementing a circular
  *  buffer for objects of the specified type, most usefully in
@@ -421,6 +423,8 @@ void Fifo<_TYPE_>::show(int level, Output* display, int indent) const {
             indent + 2);
     }
 }
+
+#include "End.h"
 
 
 /**

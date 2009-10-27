@@ -67,6 +67,8 @@
 #include "Fifo.h"
 
 
+#include "Begin.h"
+
 /**
  *  This is a template that defines a type of the Fifo
  *  class in which the circular buffer array of the specified size
@@ -192,6 +194,8 @@ void FifoType<_TYPE_, _CC_>::show(
         this, sizeof(*this));
     this->Fifo<_TYPE_>::show(level, display, indent + 1);
 }
+
+#include "End.h"
 
 
 #endif

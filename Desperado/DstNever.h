@@ -63,6 +63,8 @@
 #include "DaylightSavingTime.h"
 
 
+#include "Begin.h"
+
 /**
  *  Encodes a rule to in which daylight saving time is never in effect.
  *
@@ -142,6 +144,8 @@ public:
 //
 inline DstNever::DstNever() {
 }
+
+#include "End.h"
 
 
 #endif

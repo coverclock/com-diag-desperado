@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements methods to collapse and expand strings containing ANSI C-style
  *  escape sequences.
@@ -194,6 +196,8 @@ public:
 //
 inline Escape::Escape() {
 }
+
+#include "End.h"
 
 
 /**

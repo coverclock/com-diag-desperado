@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a general mechanism for maintaining the running minimum,
  *  maximum, and mean of a ratio measurement, for example, a rate
@@ -322,6 +324,8 @@ inline size_t Meter::getMinimum() const {
 inline size_t Meter::getMaximum() const {
     return this->maximum;
 }
+
+#include "End.h"
 
 
 /**

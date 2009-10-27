@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an object which can be inserted into and removed from a
  *  circular doubly-linked list, or chain, in which insertions and
@@ -565,6 +567,8 @@ inline bool Link::initialize(void* object) {
     }
     return rc;
 }
+
+#include "End.h"
 
 
 #endif

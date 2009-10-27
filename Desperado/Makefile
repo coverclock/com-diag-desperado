@@ -107,9 +107,9 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # If you are using Ficl, specify where it is.
 # Comment out otherwise.
 
-FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
+FICLHOME	=	/home/jsloan/src/ficl4.0.31
+#FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
 #FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
-#FICLHOME	=	/home/jsloan/src/ficl4.0.31
 #FICLHOME	=	/cygdrive/c/Users/jsloan/Desktop/Home/Sources/ficl4.0.31
 
 # If you are using Java, specify where it is.

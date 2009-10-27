@@ -65,6 +65,8 @@
 #include "exceptions.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a Fifo object in which the queue is dynamically allocated.
  *
@@ -226,6 +228,8 @@ void NewFifo<_TYPE_>::show(int level, Output* display, int indent) const {
         this, sizeof(*this));
     this->Fifo<_TYPE_>::show(level, display, indent + 1);
 }
+
+#include "End.h"
 
 
 #endif

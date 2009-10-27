@@ -63,6 +63,8 @@
 #include "DaylightSavingTime.h"
 
 
+#include "Begin.h"
+
 /**
  *  Encodes a rule to decide whether a given DateTime falls within
  *  US daylight saving time (DST) based on the year the various
@@ -145,6 +147,8 @@ public:
 //
 inline DstUs::DstUs() {
 }
+
+#include "End.h"
 
 
 #endif

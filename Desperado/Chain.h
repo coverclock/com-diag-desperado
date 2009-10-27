@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a circular doubly-linked list of Link objects which
  *  can be used to implement traditional non-circular data structures
@@ -369,6 +371,8 @@ inline bool Chain::isMember(const Link* link) const {
 inline bool Chain::isEmpty() const {
     return !this->isChained();
 }
+
+#include "End.h"
 
 
 /**

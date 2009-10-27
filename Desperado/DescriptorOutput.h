@@ -63,6 +63,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an output functor that writes data to a file
  *  descriptor, the default descriptor being 1 for standard output.
@@ -228,6 +230,8 @@ private:
 inline int DescriptorOutput::getDescriptor() const {
     return this->descriptor;
 }
+
+#include "End.h"
 
 
 #endif

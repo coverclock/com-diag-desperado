@@ -64,6 +64,8 @@
 #include "Throttle.h"
 
 
+#include "Begin.h"
+
 /**
  *  This class implements a throttle that enforces a traffic contract
  *  based on the virtual scheduler implementation of the Generic
@@ -336,6 +338,8 @@ private:
     bool approximate;
 
 };
+
+#include "End.h"
 
 
 #endif

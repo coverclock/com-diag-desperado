@@ -65,6 +65,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines a simple composite of seconds and nanoseconds.
  *
@@ -158,6 +160,8 @@ inline Epoch::Epoch(seconds_t sd, uint32_t nd) :
     nanoseconds(nd)
 {
 }
+
+#include "End.h"
 
 
 #endif

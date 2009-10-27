@@ -63,6 +63,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an output functor that writes data into a buffer in
  *  memory. The buffer is not automatically NUL terminated.
@@ -259,6 +261,8 @@ inline size_t BufferOutput::getSize() const {
 inline size_t BufferOutput::getOffset() const {
     return this->offset;
 }
+
+#include "End.h"
 
 
 /**

@@ -71,6 +71,8 @@
 #include "Output.h"
 
 
+#include "End.h"
+
 /**
  *  Implement the interfaces to the C standard library malloc(3), free(3),
  *  realloc(3) and calloc(3) functions but using the C++ new and delete
@@ -428,6 +430,8 @@ inline size_t Heap::getFailures() const {
 inline size_t Heap::getFrees() const {
     return this->frees;
 }
+
+#include "End.h"
 
 
 /**

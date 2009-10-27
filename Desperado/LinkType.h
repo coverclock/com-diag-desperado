@@ -66,6 +66,8 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
 /**
  *  Offers a type-safe implemtation of Link by allowing the type
  *  of the link to be based on that of the payload object.
@@ -461,6 +463,8 @@ void LinkType<_TYPE_>::show(int level, Output* display, int indent) const {
 template <typename _TYPE_>
 LinkType<_TYPE_>::Functor::~Functor() {
 }
+
+#include "End.h"
 
 
 /**

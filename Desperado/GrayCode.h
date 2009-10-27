@@ -67,6 +67,8 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
 /**
  *  Generates methods to convert between any integral type and
  *  a binary reflected Gray code of the same width. Gray codes have the
@@ -237,6 +239,8 @@ void GrayCode<_TYPE_>::show(int /* level */, Output* display, int indent) const{
         this, sizeof(*this));
     printf("%s widthof=%u\n", sp, widthof(_TYPE_));
 }
+
+#include "End.h"
 
 
 /**

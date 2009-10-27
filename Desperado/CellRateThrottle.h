@@ -65,6 +65,8 @@
 #include "Gcra.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a throttle that enforces a traffic contract based on
  *  a virtual scheduler implementation of a Generic Cell Rate Algorithm
@@ -319,6 +321,8 @@ private:
     Gcra sustained;
 
 };
+
+#include "End.h"
 
 
 /**

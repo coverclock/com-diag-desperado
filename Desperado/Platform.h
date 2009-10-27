@@ -81,6 +81,8 @@
 #include "Epoch.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines an interface to an underlying operating system.
  *  Although it may be used by applications using this library,
@@ -675,6 +677,8 @@ inline void Platform::setDaylightSavingTime(DaylightSavingTime& rule) {
 inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
     return *this->dstrule;
 }
+
+#include "End.h"
 
 
 /**

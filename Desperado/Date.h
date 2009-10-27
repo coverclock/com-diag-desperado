@@ -67,6 +67,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an object that contains a date with fields
  *  of sufficient size to contain a Common Era year, month
@@ -560,6 +562,8 @@ inline const char* Date::weekdayToString() const {
 inline uint16_t Date::julian() const {
     return this->julian(this->year, this->month, this->day);
 }
+
+#include "End.h"
 
 
 #endif

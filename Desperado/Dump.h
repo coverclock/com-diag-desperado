@@ -72,6 +72,8 @@
 #include "Input.h"
 
 
+#include "Begin.h"
+
 /**
  *  Displays the contents of a block of memory of an arbitary location,
  *  size, and a alignment, in a hexadecimal dump format, in either word or
@@ -473,6 +475,8 @@ inline char* Dump::hexadecimals(const Byte value, char* to) const {
     *(to++) = this->table[(value >> 0) & 0x0f];
     return to;
 }
+
+#include "End.h"
 
 
 /**

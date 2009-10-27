@@ -66,6 +66,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a table driven transliterator useful in constructing
  *  pretty complex yet efficient parsers, implementing two interfaces: one
@@ -553,6 +555,8 @@ inline void Transliterator::insert(char c, char* to, size_t size) {
         this->error();
     }
 }
+
+#include "End.h"
 
 
 /**

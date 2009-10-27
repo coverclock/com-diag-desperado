@@ -69,6 +69,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Creates a Ficl-based command line shell which can manipulate
  *  C-accessible integer variables and invoke C-callable functions
@@ -315,6 +317,8 @@ inline FiclSystem* FiclShell::getFiclSystem() {
 inline FiclMachine* FiclShell::getFiclMachine() {
     return &(this->machine);
 }
+
+#include "End.h"
 
 
 /**

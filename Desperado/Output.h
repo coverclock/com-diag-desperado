@@ -72,6 +72,8 @@
 #include "Object.h"
 
 
+#include "Begin.h"
+
 /**
  *  Defines the interface to an output functor, an object, called
  *  like a function, which writes data to some data sink. This
@@ -245,6 +247,8 @@ public:
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
 };
+
+#include "End.h"
 
 
 #else

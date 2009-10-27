@@ -68,6 +68,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements methods to represent CommonEra and LocalTime dates and times
  *  as printable timestamps in a variety of formats. The buffer into which
@@ -338,6 +340,8 @@ private:
     char buffer[sizeof("WWWWWWWWW YYYYYYYYY-MM-DD hh:mm:ss.nnnnnnnnn +ooooooooo +dddd ZZZ-ZZZ")];
 
 };
+
+#include "End.h"
 
 
 #endif

@@ -64,6 +64,8 @@
 #include "Date.h"
 
 
+#include "Begin.h"
+
 /**
  *  Encodes a rule to decide whether a given DateTime falls within
  *  daylight saving time (DST) depending on parameters provided
@@ -242,6 +244,8 @@ inline DstGeneric::DstGeneric(const Event& bs, const Event& es) :
     ends(es)
 {
 }
+
+#include "End.h"
 
 
 #endif

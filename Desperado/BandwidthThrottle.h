@@ -69,6 +69,8 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
 /**
  *  This class implements a throttle based on the Generic Cell
  *  Rate Algorithm, but instead of rates measured in cells per
@@ -269,6 +271,8 @@ private:
     Gcra sustained;
 
 };
+
+#include "End.h"
 
 
 /**

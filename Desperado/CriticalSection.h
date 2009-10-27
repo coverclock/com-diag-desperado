@@ -63,6 +63,8 @@
 #include "Mutex.h"
 
 
+#include "Begin.h"
+
 /**
  *  Given a Mutex, locks it upon construction, and unlocks it
  *  upon destruction, allowing a Mutex to be automatically
@@ -115,6 +117,8 @@ inline CriticalSection::CriticalSection(Mutex& mutexr) :
 inline CriticalSection::~CriticalSection() {
     this->mutex.end();
 }
+
+#include "End.h"
 
 
 #endif

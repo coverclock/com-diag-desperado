@@ -55,6 +55,8 @@
 #include <sys/types.h>
 
 
+#include "Begin.h"
+
 /**
  *  @author coverclock@diag.com (Chip Overclock)
  */
@@ -98,6 +100,8 @@ inline uint32_t desperado_swap32(uint32_t data) {
 inline uint64_t desperado_swap16(uint16_t data) {
     return ByteOrder<uint16_t>::swapif(data);
 }
+
+#include "End.h"
 
 
 /**

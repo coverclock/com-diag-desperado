@@ -66,6 +66,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an input/output functor that manages a stream socket.
  *
@@ -200,6 +202,8 @@ private:
     DescriptorOutput out;
 
 };
+
+#include "End.h"
 
 
 /**

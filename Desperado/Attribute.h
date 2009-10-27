@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Uses a Transliterator to parse components of a keyword=value pair from
  *  a buffer or a file. The keyword string followed by an equal sign followed
@@ -178,6 +180,8 @@ inline const char* Attribute::delimiter() {
 inline const char* Attribute::special() {
     return "\"#'=\\";
 }
+
+#include "End.h"
 
 
 /**

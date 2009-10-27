@@ -63,6 +63,8 @@
 #include "Throttle.h"
 
 
+#include "Begin.h"
+
 /**
  *  Creates a throttle by combining zero to two throttles.
  *
@@ -287,6 +289,8 @@ private:
     Throttle* sustained;
 
 };
+
+#include "End.h"
 
 
 #endif

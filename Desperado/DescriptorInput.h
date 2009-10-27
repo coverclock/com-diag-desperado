@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an input functor that returns data from a file
  *  descriptor, the default descriptor being 0 for standard input.
@@ -226,6 +228,8 @@ private:
 inline int DescriptorInput::getDescriptor() const {
     return this->descriptor;
 }
+
+#include "End.h"
 
 
 #endif

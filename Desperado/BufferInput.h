@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an input functor that returns data from a buffer in
  *  memory. An EOF  return when a NUL or the is end of the buffer is reached.
@@ -290,6 +292,8 @@ inline size_t BufferInput::getSize() const {
 inline size_t BufferInput::getOffset() const {
     return this->offset;
 }
+
+#include "End.h"
 
 
 /**

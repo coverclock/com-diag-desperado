@@ -64,7 +64,11 @@
 #include "Crc.h"
 
 
+#include "Begin.h"
+
 extern Crc<uint16_t> crc16_Crc;
+
+#include "End.h"
 
 
 #endif

@@ -63,6 +63,8 @@
 #include "barrier.h"
 
 
+#include "Begin.h"
+
 /**
  *  Invokes the Desperado memory barrier function
  *  upon construction (for acquire semantics) and
@@ -105,6 +107,8 @@ inline MemoryBarrier::MemoryBarrier() {
 inline MemoryBarrier::~MemoryBarrier() {
     desperado_memory_barrier();
 }
+
+#include "End.h"
 
 
 #endif

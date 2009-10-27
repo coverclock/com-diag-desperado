@@ -63,6 +63,8 @@
 #include "DaylightSavingTime.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements a daylight saving time rule in which DST is always in effect.
  *  Useful for testing, but does not reflect any known use of daylight
@@ -144,6 +146,8 @@ public:
 //
 inline DstAlways::DstAlways() {
 }
+
+#include "End.h"
 
 
 #endif

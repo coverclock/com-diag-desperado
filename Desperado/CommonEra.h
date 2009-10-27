@@ -64,6 +64,8 @@
 #include "DateTime.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an object containing a Common Era date and UTC
  *  time, supporting conversions to and from both UTC seconds,
@@ -398,6 +400,8 @@ public:
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
 };
+
+#include "End.h"
 
 
 /**

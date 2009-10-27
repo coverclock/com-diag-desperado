@@ -70,6 +70,8 @@
 #include "generics.h"
 
 
+#include "Begin.h"
+
 /**
  *  Generates a suite of memory diagnostics for a memory architecture with
  *  a width of any integral type, based on Michael Barr's memtest functions
@@ -507,6 +509,8 @@ Ram<_TYPE_>::device(volatile _TYPE_ * baseAddress, size_t nBytes)
     return (NULL);
 
 }   /* memTestDevice() */
+
+#include "End.h"
 
 
 

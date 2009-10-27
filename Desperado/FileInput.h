@@ -65,6 +65,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Implements an input functor that returns data from a pre-existing
  *  C standard I/O library FILE object, the default FILE object being
@@ -217,6 +219,8 @@ private:
 inline FILE* FileInput::getFile() const {
     return this->file;
 }
+
+#include "End.h"
 
 
 #endif

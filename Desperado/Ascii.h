@@ -64,6 +64,8 @@
 #include "Output.h"
 
 
+#include "Begin.h"
+
 /**
  *  Indexes a table of various names for eight-bit ASCII characters indexed
  *  by each numeric character value. Each table entry contains printable
@@ -206,6 +208,8 @@ inline Ascii::Ascii() {
 inline const Ascii::Entry& Ascii::operator[] (unsigned char index) const {
     return this->table[index];
 }
+
+#include "End.h"
 
 
 /**
