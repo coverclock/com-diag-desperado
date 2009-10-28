@@ -48,11 +48,12 @@
 #include "Platform.h"
 #include "Desperado.h"
 
+extern long timezone;
+extern int daylight;
+
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());
     Print printf(Platform::instance().output());
-    extern long timezone;
-    extern int daylight;
     tzset();
     printf("timezone=%ld=0x%lx\n", timezone, timezone);
     printf("daylight=%d=0x%x\n", daylight, daylight);

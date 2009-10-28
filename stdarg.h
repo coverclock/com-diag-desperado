@@ -1,8 +1,11 @@
+#ifndef _COM_DIAG_DESPERADO_STDARG_H_
+#define _COM_DIAG_DESPERADO_STDARG_H_
+
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -37,7 +40,7 @@
 
     $Name:  $
 
-    $Id: mainException.cpp,v 1.1 2006/01/30 20:35:27 jsloan Exp $
+    $Id: stdio.h,v 1.2 2006/01/09 00:24:49 jsloan Exp $
 
 ******************************************************************************/
 
@@ -45,24 +48,18 @@
 /**
  *  @file
  *
- *  Implements the Exception unit test main program.
+ *  Defines the Desperado stdarg functions.
+ * 
+ *  This can be included from either a C or a C++ translation unit.
  *
- *  @see    Exception
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.1 $
- *
- *  @date   $Date: 2006/01/30 20:35:27 $
+ *  @author coverclock@diag.com
  */
 
+#if defined(__cplusplus)
+#   include <cstdarg>
+#else
+#   include <stdarg.h>
+#endif
 
-#include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "Exception.h"
 
-int main(int, char**) {
-    Platform::instance(Platform::factory());
-    exit(unittestException());
-}
+#endif

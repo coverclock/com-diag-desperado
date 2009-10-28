@@ -58,6 +58,7 @@
 
 
 #include <sys/time.h>
+#include "UnitTest.h"
 #include "CellRateThrottle.h"
 #include "CellRateThrottle.h"
 #include "Print.h"

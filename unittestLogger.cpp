@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "string.h"
 #include "string.h"
 #include "Logger.h"

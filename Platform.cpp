@@ -71,6 +71,9 @@
 #include "cxxcapi.h"
 
 
+CXXCAPI Platform* platform_factory(void);
+
+
 #include "Begin.h"
 
 
@@ -112,7 +115,6 @@ Platform* Platform::singleton = 0;
 //  to isolate the "decide what platform to create" logic.
 //
 Platform& Platform::factory() {
-    CXXCAPI Platform* platform_factory(void);
     return *platform_factory();
 }
 

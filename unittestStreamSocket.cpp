@@ -60,6 +60,7 @@
  */
 
 #include <unistd.h>
+#include "UnitTest.h"
 #include "target.h"
 #include "StreamSocket.h"
 #include "StreamSocket.h"

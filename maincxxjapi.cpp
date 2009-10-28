@@ -56,6 +56,7 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "cxxjapi.h"
 #include "Platform.h"
 

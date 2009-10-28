@@ -51,8 +51,6 @@
  *  @author $Author: jsloan $
  */
 
-#ifdef __cplusplus
-
-using namespace com::diag::desperado;
-
+#if defined(__cplusplus)
+using namespace ::com::diag::desperado;
 #endif

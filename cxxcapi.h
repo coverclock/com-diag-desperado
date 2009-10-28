@@ -72,6 +72,10 @@
 
 
 #if !defined(NULL)
+    /*
+     * I have recently been disabused of the notion that NULL is now
+     * a pre-defined symbol in later version of the GCC compiler.
+     */
 #   if defined(__cplusplus)
         /**
          *  @def NULL
@@ -102,7 +106,7 @@
      *
      *  This symbol is used in both declarations and definitions of
      *  functions in C++ translation units that are callable from C
-     *  translation units. Pronounced "sex-cappy".
+     *  translation units. Pronounced "sexy-API".
      */
 #   define CXXCAPI extern "C"
 #else
@@ -111,7 +115,7 @@
      *
      *  This symbol is used in declarations of functions in C translation
      *  units that are defined in C++ translation units. Pronounced
-     *  "sex-cappy".
+     *  "sexy-API".
      */
 #   define CXXCAPI extern
 #endif
@@ -146,7 +150,7 @@
      *  files that define inline functions into a C translation
      *  units being compiled for strict ISO C compliance.
      */
-#   define inline static
+#   define inline
 #endif
 
 
@@ -159,9 +163,10 @@
  *  the function. Pronounced "sexy-inline".
  *
  *  Note that the use of an additional static keyword in this context
- *  has been deprecated by the later ANSI C++ standard.
+ *  has been deprecated by the later ANSI C++ standard but not having
+ *  it produces warnings currently for compiles of C translation units.
  */
-#define CXXCINLINE inline
+#define CXXCINLINE static inline
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)

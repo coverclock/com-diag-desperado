@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "target.h"
 #include "string.h"
 #include "Dump.h"

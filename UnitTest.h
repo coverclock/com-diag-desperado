@@ -1,8 +1,11 @@
+#ifndef _COM_DIAG_DESPERADO_UNITTEST_H_
+#define _COM_DIAG_DESPERADO_UNITTEST_H_
+
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -35,34 +38,20 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: mainException.cpp,v 1.1 2006/01/30 20:35:27 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Implements the Exception unit test main program.
- *
- *  @see    Exception
+ *  Defines the magic UNIT TEST preprocessor symbol for the
+ *  Desperado unit test code.
  *
  *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.1 $
- *
- *  @date   $Date: 2006/01/30 20:35:27 $
  */
 
 
-#include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "Exception.h"
+#define DESPERADO_HAS_UNITTESTS (1)
 
-int main(int, char**) {
-    Platform::instance(Platform::factory());
-    exit(unittestException());
-}
+
+#endif

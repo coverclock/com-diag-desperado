@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "string.h"
 #include "Argument.h"
 #include "Argument.h"

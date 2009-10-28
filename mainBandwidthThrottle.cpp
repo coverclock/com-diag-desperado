@@ -58,6 +58,7 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "types.h"
 #include "Platform.h"
 #include "BandwidthThrottle.h"

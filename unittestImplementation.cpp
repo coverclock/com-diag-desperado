@@ -55,6 +55,7 @@
  *  @date   $Date: 2006/02/02 02:21:40 $
  */
 
+#include "UnitTest.h"
 #include "Implementation.h"
 #include "Implementation.h"
 #include "Derivation.h"

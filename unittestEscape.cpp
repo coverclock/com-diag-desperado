@@ -59,6 +59,7 @@
 
 
 #include <ctype.h>
+#include "UnitTest.h"
 #include "string.h"
 #include "Escape.h"
 #include "Escape.h"

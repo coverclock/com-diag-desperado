@@ -57,6 +57,7 @@
  */
 
 #include <sys/time.h>
+#include "UnitTest.h"
 #include "generics.h"
 #include "BandwidthThrottle.h"
 #include "BandwidthThrottle.h"

@@ -60,6 +60,7 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
+#include "UnitTest.h"
 #include "string.h"
 #include "string.h"
 #include "cxxcapi.h"

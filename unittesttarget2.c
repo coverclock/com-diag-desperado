@@ -45,7 +45,7 @@
 /**
  *  @file
  *
- *  Implements the target CXXCAPI unit test.
+ *  Implements the target2 unit test.
  *
  *  @see    target.h
  *
@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "target.h"
 #include "Platform.h"
 #include "Platform.h"
@@ -321,7 +322,7 @@ int unittesttarget2() {
         ++errors;
     }
 
-    printf("%s[%d]: bool\n", __FILE__, __LINE__);
+    print_f("%s[%d]: bool\n", __FILE__, __LINE__);
 
     if (!truth) {
         print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",

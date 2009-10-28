@@ -60,6 +60,7 @@
 #include <cstdlib>
 #include <signal.h>
 #include <unistd.h>
+#include "UnitTest.h"
 #include "string.h"
 #include "Platform.h"
 #include "README.h"

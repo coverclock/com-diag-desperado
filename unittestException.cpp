@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "Exception.h"
 #include "Exception.h"
 #include "PathInput.h"

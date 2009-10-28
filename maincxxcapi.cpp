@@ -58,6 +58,7 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "cxxcapi.h"
 #include "Platform.h"
 

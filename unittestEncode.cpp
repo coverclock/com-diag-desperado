@@ -58,6 +58,7 @@
 
 
 #include <ctype.h>
+#include "UnitTest.h"
 #include "target.h"
 #include "string.h"
 #include "Encode.h"

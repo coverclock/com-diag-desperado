@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "generics.h"
 #include "types.h"
 #include "GeometricThrottle.h"

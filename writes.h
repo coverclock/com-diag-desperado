@@ -65,6 +65,8 @@
 #include "generics.h"
 
 
+#include "Begin.h"
+
 /**
  *  Repeatedly performs a data write against the specified file
  *  descriptor until the specified number of bytes have been written
@@ -117,6 +119,8 @@ CXXCINLINE ssize_t writes(
 
     return total;
 }
+
+#include "End.h"
 
 
 #endif

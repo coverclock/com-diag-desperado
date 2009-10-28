@@ -49,6 +49,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "Volatile.h"
 #include "Volatile.h"
 #include "Print.h"

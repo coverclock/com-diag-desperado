@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "string.h"
 #include "generics.h"
 #include "Number.h"

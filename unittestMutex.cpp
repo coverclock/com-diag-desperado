@@ -60,6 +60,7 @@
 #if !defined(DESPERADO_HAS_DEBUGGING)
 #define DESPERADO_HAS_DEBUGGING (1)
 #endif
+#include "UnitTest.h"
 #include "debug.h"
 #include "debug.h"
 #include "Mutex.h"

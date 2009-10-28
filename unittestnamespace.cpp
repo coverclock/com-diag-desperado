@@ -47,6 +47,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "Print.h"
 #include "Dump.h"
 #include "Platform.h"
@@ -62,7 +63,7 @@ static int function2() {
 	return com::diag::desperado::function1() + 1;
 }
 
-using namespace com::diag::desperado;
+#include "Desperado.h"
 
 #include "Begin.h"
 static int function3() {

@@ -84,6 +84,8 @@
 #include "Constant.h"
 #include "generics.h"
 
+extern long timezone;
+extern int daylight;
 
 #include "Begin.h"
 
@@ -149,8 +151,6 @@ Linux::Linux() :
     //  This is just a guess, useful to facilitate testing. Applications
     //  using this package should set the time zone and DST rule explicitly.
 
-    extern long timezone;
-    extern int daylight;
     tzset();
     this->setOffset(-timezone);
     DaylightSavingTime* dst = &dstnever;

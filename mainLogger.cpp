@@ -61,6 +61,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <pthread.h>
+#include "UnitTest.h"
 #include "Platform.h"
 #include "Logger.h"
 

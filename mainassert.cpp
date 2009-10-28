@@ -58,6 +58,7 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "assert.h"
 #include "Platform.h"
 

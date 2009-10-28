@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "java.h"
 #include "java.h"
 #include "cxxjapi.h"

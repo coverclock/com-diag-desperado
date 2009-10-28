@@ -58,6 +58,7 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "Heap.h"
 #include "Heap.h"
 #include "Print.h"

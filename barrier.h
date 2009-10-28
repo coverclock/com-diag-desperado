@@ -188,7 +188,6 @@ CXXCINLINE int desperado_memory_barrier(void) {
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)
-#include "cxxcapi.h"
 /**
  *  Run the barrier unit test.
  *
@@ -201,4 +200,7 @@ CXXCAPI int unittestbarrier(void);
  *  @return the number of errors detected.
  */
 CXXCAPI int unittestbarrier2(void);
+#endif
+
+
 #endif

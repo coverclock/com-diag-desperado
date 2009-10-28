@@ -47,7 +47,6 @@
  */
 
 
-#include "Desperado.h"
 #if defined(DESPERADO_PLATFORM_IS_Linux)
 #include "Linux.h"
 typedef Linux Host;

@@ -199,6 +199,9 @@ private:
 #endif
 
 
+#include "Desperado.h"
+
+
 /**
  *  Formats a variadic argument list and writes the result
  *  to its output object.

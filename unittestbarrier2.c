@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "types.h"
 #include "types.h"
 #include "barrier.h"

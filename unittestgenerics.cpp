@@ -78,6 +78,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "target.h"
 #include "target.h"
 #include "generics.h"

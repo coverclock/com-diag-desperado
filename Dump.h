@@ -492,6 +492,9 @@ typedef struct Dump Dump;
 #endif
 
 
+#include "Desperado.h"
+
+
 /**
  *  Dumps a block of bytes in hexadecimal format.
  *
