@@ -64,6 +64,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -234,3 +237,6 @@ void GeometricThrottle::show(int level, Output* display, int indent) const {
     printf("%s countdown1=%u\n", sp, this->countdown1);
     printf("%s alarmed1=%d\n", sp, this->alarmed1);
 }
+
+
+#include "End.h"

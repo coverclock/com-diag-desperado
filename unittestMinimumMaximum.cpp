@@ -64,6 +64,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "generics.h"
+#include "Desperado.h"
 
 static Minimum<int> staticMinimum;
 static Maximum<int> staticMaximum;

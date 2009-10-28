@@ -60,4 +60,10 @@
 #include "uint8_Ram.h"
 
 
+#include "Begin.h"
+
+
 Ram<uint8_t> uint8_Ram;
+
+
+#include "End.h"

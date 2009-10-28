@@ -63,6 +63,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 //
 // Constructor
 //
@@ -176,3 +179,6 @@ void Derivation::show(int level, Output* display, int indent) const {
     this->Implementation::show(level, display, indent + 1);
     printf("%s field=%p\n", sp, this->field);
 }
+
+
+#include "End.h"

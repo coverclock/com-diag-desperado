@@ -65,6 +65,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -200,3 +203,6 @@ void DateTime::show(int level, Output* display, int indent) const {
     printf("%s time:\n", sp);
     this->time.show(level, display, indent + 2);
 }
+
+
+#include "End.h"

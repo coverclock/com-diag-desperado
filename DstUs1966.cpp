@@ -63,6 +63,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static const DstGeneric::Event begins = {
     Date::LAST,
     Date::SUNDAY,
@@ -124,3 +127,6 @@ void DstUs1966::show(int level, Output* display, int indent) const {
         this, sizeof(*this));
     this->DstGeneric::show(level, display, indent + 1);
 }
+
+
+#include "End.h"

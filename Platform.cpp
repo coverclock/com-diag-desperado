@@ -70,6 +70,9 @@
 #include "Constant.h"
 
 
+#include "Begin.h"
+
+
 //
 //  This forces at least one Vintage object to be linked into any
 //  application that uses Platform, allowing the ident(1) command
@@ -189,3 +192,6 @@ void Platform::show(int level, Output* display, int indent) const {
         printf("%s dstrule=%p\n", sp, this->dstrule);
     }
 }
+
+
+#include "End.h"

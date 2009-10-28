@@ -66,6 +66,9 @@
 #include "TimeStamp.h"
 
 
+#include "Begin.h"
+
+
 const char* Logger::labels[] = {
     "FNST",
     "FNER",
@@ -324,3 +327,6 @@ void Logger::show(int level, Output* display, int indent) const {
         this->ou->show(level, display, indent + 2);
     }
 }
+
+
+#include "End.h"

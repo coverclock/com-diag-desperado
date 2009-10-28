@@ -75,6 +75,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static bool debug = false;
 
 
@@ -628,3 +631,6 @@ void CommonEra::show(int level, Output* display, int indent) const {
         this, sizeof(*this));
     this->DateTime::show(level, display, indent + 1);
 }
+
+
+#include "End.h"

@@ -67,6 +67,8 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
 //
 //  Constructor. The string has a specified size.
 //
@@ -219,3 +221,6 @@ void BufferOutput::show(int level, Output* display, int indent) const {
     printf("%s size=%lu\n", sp, this->size);
     printf("%s offset=%lu\n", sp, this->offset);
 }
+
+
+#include "End.h"

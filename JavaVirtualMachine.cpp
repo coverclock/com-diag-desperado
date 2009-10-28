@@ -68,6 +68,9 @@
 #include "Dump.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -208,6 +211,9 @@ void JavaVirtualMachine::show(int level, Output* display, int indent) const {
         output->show(level, display, indent + 2);
     }
 }
+
+
+#include "End.h"
 
 
 #endif

@@ -46,6 +46,7 @@
 #include <ctime>
 #include <sys/time.h>
 #include "Platform.h"
+#include "Desperado.h"
 
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());

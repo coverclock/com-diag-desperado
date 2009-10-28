@@ -58,6 +58,7 @@
 
 
 #include "Output.h"
+#include "Desperado.h"
 
 
 CXXCAPI ssize_t output_c(Output* o, int c) {

@@ -64,6 +64,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "Ticks.h"
+#include "Desperado.h"
 
 static GeometricThrottle staticGeometricThrottle;
 

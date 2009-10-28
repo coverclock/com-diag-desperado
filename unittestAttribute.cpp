@@ -73,6 +73,7 @@
 #include "Platform.h"
 #include "Output.h"
 #include "Output.h"
+#include "Desperado.h"
 
 static const char sample[]= {
     "# Beginning of Sequence 1\n"

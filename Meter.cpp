@@ -64,6 +64,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static const size_t limit = ~(static_cast<size_t>(0));
 
 
@@ -213,3 +216,6 @@ void Meter::show(int /* level */, Output* display, int indent) const {
     printf("%s minimum=%u\n", sp, this->minimum);
     printf("%s maximum=%u\n", sp, this->maximum);
 }
+
+
+#include "End.h"

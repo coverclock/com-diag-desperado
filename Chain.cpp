@@ -71,6 +71,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor. Upon construction, this chain is empty.
 //
@@ -326,3 +329,6 @@ void Chain::show(int level, Output* display, int indent) const {
         }
     }
 }
+
+
+#include "End.h"

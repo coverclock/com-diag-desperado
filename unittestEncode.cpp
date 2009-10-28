@@ -65,6 +65,7 @@
 #include "Dump.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static Encode staticEncode;
 

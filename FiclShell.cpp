@@ -69,6 +69,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -204,6 +207,9 @@ void FiclShell::show(int level, Output* display, int indent) const {
     printf("%s machine:\n", sp);
     this->machine.show(level, display, indent + 2);
 }
+
+
+#include "End.h"
 
 
 #endif

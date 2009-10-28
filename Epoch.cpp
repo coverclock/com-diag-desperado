@@ -63,6 +63,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Destructor.
 //
@@ -100,3 +103,6 @@ void Epoch::show(int /* level */, Output* display, int indent) const {
     printf("%s seconds=%llu\n", sp, this->seconds);
     printf("%s nanoseconds=%u\n", sp, this->nanoseconds);
 }
+
+
+#include "End.h"

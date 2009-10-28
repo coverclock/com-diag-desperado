@@ -63,6 +63,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -155,3 +158,6 @@ void StreamSocket::show(int level, Output* display, int indent) const {
     printf("%s out:\n", sp);
     this->out.show(level, display, indent + 2);
 }
+
+
+#include "End.h"

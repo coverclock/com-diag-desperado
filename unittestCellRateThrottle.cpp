@@ -66,6 +66,7 @@
 #include "Platform.h"
 #include "Ticks.h"
 #include "Ticks.h"
+#include "Desperado.h"
 
 static CellRateThrottle staticCellRateThrottle;
 

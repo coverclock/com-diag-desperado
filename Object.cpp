@@ -60,8 +60,14 @@
 #include "Object.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Destructor
 //
 Object::~Object() {
 }
+
+
+#include "End.h"

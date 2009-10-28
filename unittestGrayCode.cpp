@@ -60,6 +60,7 @@
 #include "GrayCode.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 typedef unsigned short Code;
 

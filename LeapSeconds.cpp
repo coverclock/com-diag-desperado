@@ -64,6 +64,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Leap seconds were inserted (or even removed, although it
 //  has never happened) by the International Earth Rotation
@@ -300,3 +303,6 @@ void LeapSeconds::show(int /* level */, Output* display, int indent) const {
     printf("%s leapseconds=%p\n", sp, this->leapseconds);
     printf("%s utcseconds=%p\n", sp, this->utcseconds);
 }
+
+
+#include "End.h"

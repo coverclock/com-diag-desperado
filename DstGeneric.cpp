@@ -63,6 +63,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Destructor.
 //
@@ -193,3 +196,6 @@ void DstGeneric::show(int level, Output* display, int indent) const {
     printf("%s  hour=%u=%02u:00:00\n",
         sp, this->ends.hour, this->ends.hour);
 }
+
+
+#include "End.h"

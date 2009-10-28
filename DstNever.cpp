@@ -63,6 +63,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Destructor.
 //
@@ -110,3 +113,6 @@ void DstNever::show(int level, Output* display, int indent) const {
     printf("%s begins: NEVER\n", sp);
     printf("%s ends: NEVER\n", sp);
 }
+
+
+#include "End.h"

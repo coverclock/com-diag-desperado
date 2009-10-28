@@ -61,6 +61,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "target.h"
+#include "Desperado.h"
 
 static int mean(Meter& meter) {
     Print printf(Platform::instance().output());

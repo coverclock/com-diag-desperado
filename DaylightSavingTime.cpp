@@ -63,6 +63,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Destructor.
 //
@@ -82,3 +85,6 @@ void DaylightSavingTime::show(int /* level */, Output* display, int indent) cons
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
 }
+
+
+#include "End.h"

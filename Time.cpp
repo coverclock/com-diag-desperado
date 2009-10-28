@@ -67,6 +67,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static const char* meridiems[] = {
     "AM",
     "PM",
@@ -220,3 +223,6 @@ void Time::show(int level, Output* display, int indent) const {
         printf("%s oclock(%u)=%d\n", sp, twelve, ampm);
     }
 }
+
+
+#include "End.h"

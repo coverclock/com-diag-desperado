@@ -66,6 +66,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -256,3 +259,6 @@ void Mutex::show(int /* level */, Output* display, int indent) const {
             : (PTHREAD_CANCEL_DISABLE == this->state)
                 ? "=PTHREAD_CANCEL_DISABLE" : "");
 }
+
+
+#include "End.h"

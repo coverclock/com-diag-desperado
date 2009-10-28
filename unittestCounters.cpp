@@ -71,6 +71,7 @@
 #include "Platform.h"
 #include "Output.h"
 #include "Output.h"
+#include "Desperado.h"
 
 enum {
     COUNTER0 = 0,

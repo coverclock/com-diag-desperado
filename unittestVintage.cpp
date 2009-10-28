@@ -60,6 +60,7 @@
 #include "Vintage.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static Vintage staticVintage;
 

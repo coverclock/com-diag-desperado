@@ -65,6 +65,8 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
 //
 //  Compute the peak increment.
 //
@@ -259,3 +261,6 @@ void CellRateThrottle::show(int level, Output* display, int indent) const {
     printf("%s sustained:\n", sp);
     this->sustained.show(level, display, indent + 2);
 }
+
+
+#include "End.h"

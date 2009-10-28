@@ -67,6 +67,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static DstNever dstnever;
 
 
@@ -289,3 +292,6 @@ void LocalTime::show(int level, Output* display, int indent) const {
     }
     printf("%s dst=%d\n", sp, this->dst);
 }
+
+
+#include "End.h"

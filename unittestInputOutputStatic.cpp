@@ -89,6 +89,7 @@
 #include "SyslogOutput.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static BufferInput staticBufferInput;
 static BufferOutput staticBufferOutput;

@@ -60,4 +60,10 @@
 #include "Number.h"
 
 
+#include "Begin.h"
+
+
 template class Number<int64_t>;
+
+
+#include "End.h"

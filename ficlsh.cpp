@@ -49,6 +49,7 @@
 #include "generics.h"
 #include "FiclShell.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 
 CXXCAPI int hostname(ficlVm* pVM) {

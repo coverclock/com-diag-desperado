@@ -61,6 +61,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 #define DESPERADO_LOGGER_API(_FUNCTION_, _LEVEL_) \
 CXXCAPI ssize_t logger_##_FUNCTION_(Logger* logger, const char* format ...) { \
     va_list ap; \
@@ -87,3 +90,6 @@ DESPERADO_LOGGER_API(   alert,          ALERT           )
 DESPERADO_LOGGER_API(   fatal,          FATAL           )
 DESPERADO_LOGGER_API(   emergency,      EMERGENCY       )
 DESPERADO_LOGGER_API(   print,          PRINT           )
+
+
+#include "End.h"

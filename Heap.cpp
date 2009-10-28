@@ -67,6 +67,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 inline size_t words(size_t bytes) {
     return ((bytes + sizeof(Heap::Alignment) - 1) /
             sizeof(Heap::Alignment)) + 1;
@@ -345,3 +348,6 @@ void Heap::show(int level, Output* display, int indent) const {
     printf("%s frees=%u\n", sp, this->frees);
     printf("%s nulls=%u\n", sp, this->nulls);
 }
+
+
+#include "End.h"

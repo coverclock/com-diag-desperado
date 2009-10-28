@@ -64,6 +64,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 const char Vintage::product[] =     "$Product: Desperado $";
 
 const char Vintage::license[] =     "$License: Modified GNU Lesser Public License $";
@@ -134,3 +137,6 @@ void Vintage::show(int /* level */, Output* display, int indent) const {
     printf("%s build[%lu]=\"%s\"\n",
         sp, sizeof(this->build), this->build);
 }
+
+
+#include "End.h"

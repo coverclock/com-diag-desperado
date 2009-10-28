@@ -67,6 +67,7 @@
 #include "CriticalSection.h"
 #include "CriticalSection.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static Mutex staticMutex;
 

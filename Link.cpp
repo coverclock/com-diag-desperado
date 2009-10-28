@@ -62,6 +62,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Re-root the chain that this link is on so that all links
 //  are rooted to this link.
@@ -115,3 +118,6 @@ void Link::show(int /* level */, Output* display, int indent) const {
 //
 Link::Functor::~Functor() {
 }
+
+
+#include "End.h"

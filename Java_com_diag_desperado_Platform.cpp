@@ -67,6 +67,7 @@
 #include "Platform.h"
 #include "Output.h"
 #include "com_diag_desperado_Platform.h"
+#include "Desperado.h"
 
 
 JNIEXPORT jlong JNICALL Java_com_diag_desperado_Platform_frequency(

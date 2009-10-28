@@ -60,4 +60,10 @@
 #include "Number.h"
 
 
+#include "Begin.h"
+
+
 template class Number<uint8_t>;
+
+
+#include "End.h"

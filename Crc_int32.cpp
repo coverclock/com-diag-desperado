@@ -60,4 +60,10 @@
 #include "Crc.h"
 
 
+#include "Begin.h"
+
+
 template class Crc<int32_t>;
+
+
+#include "End.h"

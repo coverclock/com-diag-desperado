@@ -47,6 +47,7 @@
 #include "LocalTime.h"
 #include "TimeZone.h"
 #include "string.h"
+#include "Desperado.h"
 
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());

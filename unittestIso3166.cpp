@@ -62,6 +62,7 @@
 #include "Iso3166.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static Iso3166 staticIso3166;
 

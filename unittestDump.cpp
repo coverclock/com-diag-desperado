@@ -66,6 +66,7 @@
 #include "Output.h"
 #include "Ascii.h"
 #include "littleendian.h"
+#include "Desperado.h"
 
 static const char text[] =
     "SONNET NINETY-NINE:\n"

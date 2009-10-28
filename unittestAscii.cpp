@@ -62,6 +62,7 @@
 #include "Platform.h"
 #include "Escape.h"
 #include "generics.h"
+#include "Desperado.h"
 
 static Ascii ascii;
 static Escape escape;

@@ -61,6 +61,7 @@
 #include "Derivation.h"
 #include "Platform.h"
 #include "Print.h"
+#include "Desperado.h"
 
 static Implementation implementation;
 

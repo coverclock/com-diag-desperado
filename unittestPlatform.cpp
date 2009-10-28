@@ -72,6 +72,7 @@
 #include "Dump.h"
 #include "Ticks.h"
 #include "Ticks.h"
+#include "Desperado.h"
 
 extern "C" int unittestPlatform() {
     Print printf;

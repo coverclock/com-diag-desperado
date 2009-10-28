@@ -66,6 +66,10 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
+//
 //
 //  Constructor.
 //
@@ -376,3 +380,6 @@ void Counters::show(int level, Output* display, int indent) const {
 //
 Counters::Functor::~Functor() {
 }
+
+
+#include "End.h"

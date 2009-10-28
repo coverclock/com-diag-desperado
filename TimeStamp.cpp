@@ -67,6 +67,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -307,3 +310,6 @@ void TimeStamp::show(int /* level */, Output* display, int indent) const {
             sp, sizeof(this->buffer), sizeof(this->buffer),
             this->buffer, ::strnlen(this->buffer, sizeof(this->buffer)));
 }
+
+
+#include "End.h"

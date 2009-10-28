@@ -63,6 +63,7 @@
 #include "Platform.h"
 #include "Print.h"
 #include "Print.h"
+#include "Desperado.h"
 
 
 CXXCINLINE int test() {

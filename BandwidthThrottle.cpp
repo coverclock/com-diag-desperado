@@ -65,6 +65,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 static Gcra gcra;
 
 
@@ -257,3 +260,6 @@ void BandwidthThrottle::show(int level, Output* display, int indent) const {
     printf("%s sustained:\n", sp);
     this->sustained.show(level, display, indent + 2);
 }
+
+
+#include "End.h"

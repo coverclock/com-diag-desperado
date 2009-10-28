@@ -65,6 +65,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 const char Output::spaces[65] = "                                "
                                 "                                ";
 
@@ -173,3 +176,6 @@ void Output::show(int /* level */, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
 }
+
+
+#include "End.h"

@@ -64,6 +64,7 @@
 #include "Platform.h"
 #include "target.h"
 #include "generics.h"
+#include "Desperado.h"
 
 static inline bool null(void* ptr) {
     return 0 != ptr;

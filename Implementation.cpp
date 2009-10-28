@@ -64,6 +64,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 //
 // Constructor
 //
@@ -182,3 +185,6 @@ void Implementation::show(int /* level */, Output* display, int indent) const {
         this, sizeof(*this));
     printf("%s field=%p\n", sp, this->field);
 }
+
+
+#include "End.h"

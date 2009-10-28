@@ -64,6 +64,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  ASCII table.
 //
@@ -362,3 +365,6 @@ void Ascii::show(int /* level */, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
 }
+
+
+#include "End.h"

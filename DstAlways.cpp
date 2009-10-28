@@ -63,6 +63,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Destructor.
 //
@@ -110,3 +113,6 @@ void DstAlways::show(int level, Output* display, int indent) const {
     printf("%s begins: ALWAYS\n", sp);
     printf("%s ends: ALWAYS\n", sp);
 }
+
+
+#include "End.h"

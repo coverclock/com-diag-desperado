@@ -60,4 +60,10 @@
 #include "TransliteratorType.h"
 
 
+#include "Begin.h"
+
+
 template class TransliteratorType<16>;
+
+
+#include "End.h"

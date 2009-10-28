@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2007 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -35,35 +35,24 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: Crc_uint16.cpp,v 1.1 2007/01/29 15:17:08 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Instantiates the Crc<uint16_t> template.
+ *  Pulls in all of the symbols from the Desperado namespace.
  *
- *  @see    Crc
+ *  May be included more than once.
+ *
+ *  May be included from either C or C++ translation units, although
+ *  it has no effect for the former.
  *
  *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.1 $
- *
- *  @date   $Date: 2007/01/29 15:17:08 $
  */
 
+#ifdef __cplusplus
 
-#include "Crc.h"
+using namespace com::diag::desperado;
 
-
-#include "Begin.h"
-
-
-template class Crc<uint16_t>;
-
-
-#include "End.h"
+#endif

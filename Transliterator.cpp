@@ -64,6 +64,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -309,3 +312,6 @@ void Transliterator::show(int /* level */, Output* display, int indent) const {
     printf("%s contexts=%u\n", sp, this->contexts);
     printf("%s errors=%u\n", sp, this->errors);
 }
+
+
+#include "End.h"

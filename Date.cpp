@@ -67,6 +67,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static const uint8_t d_per_month[2][Constant::months_per_year] = {
     {           // non-leap years
         31,     // January
@@ -370,3 +373,6 @@ void Date::show(int level, Output* display, int indent) const {
         printf("%s julian()=%u\n", sp, this->julian());
     }
 }
+
+
+#include "End.h"

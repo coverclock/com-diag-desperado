@@ -60,4 +60,10 @@
 #include "int16_Number.h"
 
 
+#include "Begin.h"
+
+
 Number<int16_t> int16_Number;
+
+
+#include "End.h"

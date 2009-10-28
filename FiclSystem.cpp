@@ -70,6 +70,7 @@
 #include "Platform.h"
 #include "Print.h"
 #include "Dump.h"
+#include "Desperado.h"
 
 
 //
@@ -215,6 +216,9 @@ FiclSystem* FiclSystem::findFiclSystem(ficlVm* pVM) {
     }
     return ps;
 }
+
+
+#include "Begin.h"
 
 
 //
@@ -432,6 +436,9 @@ void FiclSystem::show(int level, Output* display, int indent) const {
     printf("%s mutex:\n", sp);
     this->mutex.show(level, display, indent + 2);
 }
+
+
+#include "End.h"
 
 
 #endif
