@@ -59,8 +59,8 @@ DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
 RELEASE		=	syracuse
-MAJOR		=	2
-MINOR		=	12
+MAJOR		=	3
+MINOR		=	1
 BUILD		=	0
 PRERELEASE	=	triumph
 
