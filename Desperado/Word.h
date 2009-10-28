@@ -165,6 +165,8 @@ public:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Word unit test.
  *
@@ -177,7 +179,8 @@ public:
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestWord(void *pVM, int interactive);
+CXXCAPI int unittestWord(void *pVM, int interactive);
+#endif
 
 
 #endif

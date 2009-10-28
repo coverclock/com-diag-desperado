@@ -1182,12 +1182,15 @@ inline const Iso3166::Entry& Iso3166::operator[] (Index index)
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Iso3166 unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestIso3166();
+CXXCAPI int unittestIso3166(void);
+#endif
 
 
 #endif

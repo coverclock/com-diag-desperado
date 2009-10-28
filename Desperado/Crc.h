@@ -387,12 +387,15 @@ void Crc<_TYPE_>::show(int level, Output* display, int indent) const {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Crc unit test.
  *
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestCrc();
+CXXCAPI int unittestCrc(void);
+#endif
 
 
 #endif

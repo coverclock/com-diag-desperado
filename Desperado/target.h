@@ -181,36 +181,21 @@ extern "C" {
 #endif
 
 
-/*
- *  Note: avoid a circular dependency with cxxcapi.h by not including it.
- */
-
-
-#if defined(__cplusplus)
-
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the target unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittesttarget();
+CXXCAPI int unittesttarget(void);
 
 /**
  *  Run the target CXXCAPI unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittesttarget2(void);
-
-#else
-
-/**
- *  Run the target CXXCAPI unit test.
- *
- *  @return the number of errors detected.
- */
-extern int unittesttarget2(void);
-
+CXXCAPI int unittesttarget2(void);
 #endif
 
 

@@ -559,12 +559,15 @@ inline void Transliterator::insert(char c, char* to, size_t size) {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Transliterator unit test.
  *
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestTransliterator();
+CXXCAPI int unittestTransliterator(void);
+#endif
 
 
 #endif

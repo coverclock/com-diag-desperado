@@ -188,12 +188,15 @@ inline Ticks::Ticks() {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Ticks unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestTicks();
+CXXCAPI int unittestTicks(void);
+#endif
 
 
 #endif

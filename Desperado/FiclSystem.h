@@ -468,6 +468,8 @@ inline bool FiclSystem::unlock() {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Ficl unit test.
  *
@@ -480,7 +482,8 @@ inline bool FiclSystem::unlock() {
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestFicl(void* pVM, int interactive);
+CXXCAPI int unittestFicl(void* pVM, int interactive);
+#endif
 
 
 #endif

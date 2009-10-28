@@ -371,15 +371,14 @@ inline const char* _s(const std::string * sp) { return sp->c_str(); }
 #endif
 
 
-#if defined(__cplusplus)
-
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the string unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unitteststring();
-
+CXXCAPI int unitteststring(void);
 #endif
 
 

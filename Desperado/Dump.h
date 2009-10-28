@@ -479,14 +479,6 @@ inline char* Dump::hexadecimals(const Byte value, char* to) const {
 #include "End.h"
 
 
-/**
- *  Run the Dump unit test.
- *  
- *  @return the number of errors detected by the unit test.
- */
-extern "C" int unittestDump();
-
-
 #else
 
 
@@ -535,5 +527,15 @@ CXXCAPI size_t dump_bytes(Dump* d, const void* data, size_t length);
  */
 CXXCAPI size_t dump_words(Dump* d, const void* data, size_t length);
 
+
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
+/**
+ *  Run the Dump unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
+ */
+CXXCAPI int unittestDump(void);
+#endif
 
 #endif

@@ -256,6 +256,8 @@ inline JNIEnv* JavaVirtualMachine::getJNIEnv() {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the JavaVirtualMachine unit test.
  *
@@ -263,7 +265,8 @@ inline JNIEnv* JavaVirtualMachine::getJNIEnv() {
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestJavaVirtualMachine(bool debug);
+CXXCAPI int unittestJavaVirtualMachine(bool debug);
+#endif
 
 
 #endif

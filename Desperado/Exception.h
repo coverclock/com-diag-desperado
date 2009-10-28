@@ -240,12 +240,15 @@ public:
         DESPERADO_EXCEPTION_FUNCTION)
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Exception unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestException();
+CXXCAPI int unittestException(void);
+#endif
 
 
 #endif

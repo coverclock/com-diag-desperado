@@ -418,15 +418,14 @@ inline _TYPE_ Minimum<_TYPE_>::operator() (
 #include "End.h"
 
 
-#ifndef _DESPERADO_MAXIMUM_H_
-
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
- *  Run the Minimum unit test.
+ *  Run the Minimum and Maximum unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestMinimumMaximum();
-
+CXXCAPI int unittestMinimumMaximum(void);
 #endif
 
 

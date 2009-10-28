@@ -216,12 +216,15 @@ inline identity_t Mutex::getIdentity() const {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Mutex unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestMutex();
+CXXCAPI int unittestMutex(void);
+#endif
 
 
 #endif

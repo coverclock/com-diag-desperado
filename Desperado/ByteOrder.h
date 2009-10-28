@@ -104,12 +104,15 @@ inline uint64_t desperado_swap16(uint16_t data) {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the ByteOrder unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestByteOrder();
+CXXCAPI int unittestByteOrder(void);
+#endif
 
 
 #endif

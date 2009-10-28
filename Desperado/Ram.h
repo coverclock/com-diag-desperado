@@ -513,13 +513,15 @@ Ram<_TYPE_>::device(volatile _TYPE_ * baseAddress, size_t nBytes)
 #include "End.h"
 
 
-
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Ram unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestRam();
+CXXCAPI int unittestRam(void);
+#endif
 
 
 #endif

@@ -185,12 +185,15 @@ inline Vintage::Vintage() {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Vintage unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestVintage();
+CXXCAPI int unittestVintage(void);
+#endif
 
 
 #endif

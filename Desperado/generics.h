@@ -408,36 +408,20 @@
         + staticcastto(_RESULT_, 1))
 
 
-/*
- *  Note: avoid a circular dependency with cxxcapi.h by not including it.
- */
-
-
-#if defined(__cplusplus)
-
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the generics unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestgenerics();
-
+CXXCAPI int unittestgenerics(void);
 /**
  *  Run the generics CXXCAPI unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestgenerics2(void);
-
-#else
-
-/**
- *  Run the generics CXXCAPI unit test.
- *
- *  @return the number of errors detected.
- */
-extern int unittestgenerics2(void);
-
+CXXCAPI int unittestgenerics2(void);
 #endif
 
 

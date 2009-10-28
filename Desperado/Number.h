@@ -658,12 +658,15 @@ void Number<_TYPE_>::show(int /* level */, Output* display, int indent) const {
 #include "End.h"
     
     
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Number unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestNumber();
+CXXCAPI int unittestNumber(void);
+#endif
 
 
 #endif

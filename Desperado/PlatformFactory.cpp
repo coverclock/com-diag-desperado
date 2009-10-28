@@ -47,49 +47,43 @@
  */
 
 
+#include "Desperado.h"
 #if defined(DESPERADO_PLATFORM_IS_Linux)
 #include "Linux.h"
+typedef Linux Host;
 #elif defined(DESPERADO_PLATFORM_IS_Cygwin)
 #include "Cygwin.h"
+typedef Cygwin Host;
 #elif defined(DESPERADO_PLATFORM_IS_Diminuto)
 #include "Diminuto.h"
+typedef Diminuto Host;
 #elif defined(DESPERADO_PLATFORM_IS_Arroyo)
 #include "Arroyo.h"
+typedef Arroyo Host;
 #else
-#include "Platform.h"
+#error DESPERADO_PLATFORM_IS_* not defined!
 #endif
+#include "cxxcapi.h"
 
 
-#include "Begin.h"
+CXXCAPI Platform* platform_factory(void);
 
 
+/*
+ * This must be global, otherwise the compiler will optimize it out.
+ * Optimizing it out causes a segmentation fault on the uClibc ARM
+ * Linux platform. That's the only reason it's here.
+ */
 Platform* platform_factory_cache = 0;
+
 
 /**
  *  Return a Desperado Platform object of the appropriate derived class.
  *
- *  On the uClibc-based Diminuto platform, there is either a bug in the
- *  arm-linux-g++ compiler, or a very subtle bug in this code. The store
- *  to the platform_factory_cache is only there to force the compiler to
- *  generate code to implement the reference; without it (or some other
- *  forcing function, like printing the address of the reference to
- *  standard error), this function core dumps with a Segmentation Fault.
- *  Turning off optimization does not fix this.
- * 
  *  @return a reference to the newly created Platform object.
  */
-Platform& platform_factory() {
-#if 0
-    DESPERADO_PLATFORM_CLASS* derived = new DESPERADO_PLATFORM_CLASS;
-#else
-    static DESPERADO_PLATFORM_CLASS platform;
-    DESPERADO_PLATFORM_CLASS* derived = &platform;
-#endif
-    Platform* base = derived;
-    Platform& result = *base;
-    platform_factory_cache = &result;
-    return result;
+CXXCAPI Platform* platform_factory() {
+    delete platform_factory_cache;
+    platform_factory_cache = new Host;
+    return platform_factory_cache;
 }
-
-
-#include "End.h"

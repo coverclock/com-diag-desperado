@@ -202,14 +202,14 @@ public:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Input/Output Static unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestInputOutputStatic();
-
-
+CXXCAPI int unittestInputOutputStatic(void);
 /**
  *  Run the Input/Output unit test.
  *
@@ -225,12 +225,13 @@ extern "C" int unittestInputOutputStatic();
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestInputOutput(
+CXXCAPI int unittestInputOutput(
     void* pVM,
     char mechanism,
     Input* inputp,
     Output* outputp
 );
+#endif
 
 
 #else

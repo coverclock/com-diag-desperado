@@ -114,9 +114,12 @@ public:
     /**
      *  Allocates and constructs an instance of a derived class object and
      *  returns a base class reference to it. Exactly what kind of derived
-     *  class object is implementation dependent. Passing this reference to
-     *  the instance method is sufficient to initialize the interface to
-     *  the underlying platform.
+     *  class object is implementation dependent. Passing this pointer as a
+     *  reference to the instance method is sufficient to initialize the
+     *  interface to the underlying platform. It is the responsibility of
+     *  the application to provide any necessary mutual exclusion for this
+     *  class method. Note that there is no C interface to this facility;
+     *  a C++ main program must perform this action.
      *
      *  @return a reference to a platform object.
      */
@@ -124,9 +127,13 @@ public:
 
     /**
      *  Sets the system platform object. Creating a system platform
-     *  object and setting it should be done before using any of the
-     *  other classes in this library. Passing a reference to a null
-     *  pointer results in undefined behavior.
+     *  object and setting it using this class method should be done
+     *  before using any of the other classes in this library. Passing
+     *  a reference to a null pointer (if that's even possible) results
+     *  in undefined behavior. It is the responsibility of the application
+     *  to provide any necessary mutual exclusion for this class method.
+     *  Note that there is no C interface to this facility; a C++ main
+     *  program must perform this action.
      *
      *  @param  that        refers to the system platform object
      *                      which will be used for platform requests.
@@ -680,25 +687,6 @@ inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
 
 #include "End.h"
 
-
-/**
- * Allocates, constructs, and returns a reference to a Platform object
- * of the appropriate type. If the allocation or construction fails, the
- * result is undefined.
- *
- * @return a reference to a newly allocated and constructed Platform object.
- */
-extern Platform& platform_factory();
-
-
-/**
- *  Run the Platform unit test.
- *
- *  @return the number of errors detected.
- */
-extern "C" int unittestPlatform();
-
-
 #endif
 
 
@@ -944,12 +932,20 @@ CXXCAPI const char* platform_errormessage(
 );
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+/**
+ *  Run the Platform unit test.
+ *
+ *  @return the number of errors detected.
+ */
+CXXCAPI int unittestPlatform(void);
 /**
  *  Run the Platform CXXCAPI unit test.
  *
  *  @return the number of errors detected.
  */
 CXXCAPI int unittestPlatform2(void);
+#endif
 
 
 #endif

@@ -296,6 +296,8 @@ private:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the GeometricThrottle unit test. This may
  *  take a while on a typical system.
@@ -313,7 +315,8 @@ private:
  *
  *  @return the number of errors detected by the unit test/
  */
-extern "C" int unittestGeometricThrottle(void* pVM, int limit);
+CXXCAPI int unittestGeometricThrottle(void* pVM, int limit);
+#endif
 
 
 #endif

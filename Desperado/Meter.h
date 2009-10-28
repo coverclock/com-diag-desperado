@@ -328,12 +328,15 @@ inline size_t Meter::getMaximum() const {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Meter unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestMeter();
+CXXCAPI int unittestMeter(void);
+#endif
 
 
 #endif

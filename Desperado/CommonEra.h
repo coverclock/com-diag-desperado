@@ -404,12 +404,15 @@ public:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the CommonEra unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestCommonEra();
+CXXCAPI int unittestCommonEra(void);
+#endif
 
 
 #endif

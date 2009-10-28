@@ -200,12 +200,15 @@ inline Escape::Escape() {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Escape unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestEscape();
+CXXCAPI int unittestEscape(void);
+#endif
 
 
 #endif

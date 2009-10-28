@@ -125,8 +125,11 @@
     /*
      *  ANSI C beyond 1999-01 allows inline keyword.
      */
+#elif defined(inline)
+    /*
+     *  Platform has already defined inline keyword.
+     */
 #elif (defined(__GNUC__)&&defined(__GNUC_MINOR__)&&((((__GNUC__)*1000)+(__GNUC_MINOR__))>=2007))
-#   undef inline
     /**
      *  @def inline
      *
@@ -136,7 +139,6 @@
      */
 #   define inline __inline__
 #else
-#   undef inline
     /**
      *  @def inline
      *
@@ -144,7 +146,7 @@
      *  files that define inline functions into a C translation
      *  units being compiled for strict ISO C compliance.
      */
-#   define inline
+#   define inline static
 #endif
 
 
@@ -156,26 +158,26 @@
  *  and C++ translation units to suggest that the compiler inline
  *  the function. Pronounced "sexy-inline".
  *
- *  Note that the use of the static keyword in this context has
- *  been deprecated by the later ANSI C++ standard.
+ *  Note that the use of an additional static keyword in this context
+ *  has been deprecated by the later ANSI C++ standard.
  */
-#define CXXCINLINE static inline
+#define CXXCINLINE inline
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
 /**
  *  Run the cxxcapi unit test.
  *
  *  @return the number of errors detected.
  */
 CXXCAPI int unittestcxxcapi(void);
-
-
 /**
  *  Run the cxxcapi CXXCAPI unit test.
  *
  *  @return the number of errors detected.
  */
 CXXCAPI int unittestcxxcapi2(void);
+#endif
 
 
 #endif

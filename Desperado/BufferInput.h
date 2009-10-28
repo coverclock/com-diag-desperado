@@ -296,12 +296,15 @@ inline size_t BufferInput::getOffset() const {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the BufferInput unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestBufferInput();
+CXXCAPI int unittestBufferInput(void);
+#endif
 
 
 #endif
