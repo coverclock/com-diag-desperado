@@ -66,6 +66,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 static Throttle promiscuous;
 
 
@@ -255,3 +258,6 @@ void CompoundThrottle::show(
     printf("%s sustained:\n", sp);
     this->sustained->show(level, display, indent + 2);
 }
+
+
+#include "End.h"

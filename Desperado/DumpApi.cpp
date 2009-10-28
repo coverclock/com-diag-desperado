@@ -58,6 +58,7 @@
 
 
 #include "Dump.h"
+#include "Desperado.h"
 
 
 CXXCAPI size_t dump_bytes(Dump* dump, const void* data, size_t length) {

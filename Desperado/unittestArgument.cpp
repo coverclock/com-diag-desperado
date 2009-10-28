@@ -62,6 +62,7 @@
 #include "Argument.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static Argument staticArgument;
 

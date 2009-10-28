@@ -81,6 +81,7 @@
 #include "Dump.h"
 #include "Platform.h"
 #include "Output.h"
+#include "Desperado.h"
 
 volatile int unittesttarget_volatile = 0;
 

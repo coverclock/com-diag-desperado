@@ -67,6 +67,7 @@
 #include "Platform.h"
 #include "Print.h"
 #include "Print.h"
+#include "Desperado.h"
 
 #if defined(DESPERADO_HAS_EXCEPTIONS)
 

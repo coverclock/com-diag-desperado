@@ -66,6 +66,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -151,3 +154,6 @@ void Exception::show(int /* level */, Output* display, int indent) const {
         printf("%s function=\"%s\"\n", sp, this->function);
     }
 }
+
+
+#include "End.h"

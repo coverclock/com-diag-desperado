@@ -67,6 +67,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static DstNever dstnever;
 static DstUs1966 dstus1966;
 static DstUs1986 dstus1986;
@@ -139,3 +142,6 @@ void DstUs::show(int level, Output* display, int indent) const {
     printf("%s ::dstus2007:\n", sp);
     ::dstus2007.show(level, display, indent + 2);
 }
+
+
+#include "End.h"

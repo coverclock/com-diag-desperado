@@ -66,6 +66,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "target.h"
+#include "Desperado.h"
 
 static Escape staticEscape;
 

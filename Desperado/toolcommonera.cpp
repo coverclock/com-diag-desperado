@@ -45,6 +45,7 @@
 #include "Platform.h"
 #include "Print.h"
 #include "CommonEra.h"
+#include "Desperado.h"
 
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());

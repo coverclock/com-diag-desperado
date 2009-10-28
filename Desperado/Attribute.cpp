@@ -64,6 +64,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -243,3 +246,6 @@ void Attribute::show(int level, Output* display, int indent) const {
         this, sizeof(*this));
     this->TransliteratorType<16>::show(level, display, indent + 1);
 }
+
+
+#include "End.h"

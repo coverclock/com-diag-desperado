@@ -69,6 +69,9 @@
 #include "Dump.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Return a pointer to the FiclMachine in whose context the Ficl VM
 //  is executing. To do this, we have get the FiclSystem object, then
@@ -294,6 +297,9 @@ void FiclMachine::show(int level, Output* display, int indent) const {
         dump.words(this->ficlmachine, sizeof(ficlVm), false, 0, indent + 2);
     }
 }
+
+
+#include "End.h"
 
 
 #endif

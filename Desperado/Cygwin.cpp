@@ -85,6 +85,9 @@
 #include "generics.h"
 
 
+#include "Begin.h"
+
+
 static DstNever dstnever;           // Used if no Daylight Saving Time.
 static DstUs dstus;                 // Used assuming U.S. rules.
 static LeapSeconds leapseconds;     // Used as the leap second rule.
@@ -567,6 +570,9 @@ void Cygwin::show(int level, Output* display, int indent) const {
     printf("%s loggers:\n", sp);
     this->loggers.show(level, display, indent + 2);
 }
+
+
+#include "End.h"
 
 
 #endif

@@ -66,6 +66,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 int SyslogOutput::priorities[16] = {
 #if defined(DESPERADO_HAS_SYSLOG)
     LOG_INFO,
@@ -287,3 +290,6 @@ void SyslogOutput::show(int level, Output* display, int indent) const {
     printf("%s option=0x%x\n", sp, this->option);
     printf("%s facility=0x%x\n", sp, this->facility);
 }
+
+
+#include "End.h"

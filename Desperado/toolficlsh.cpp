@@ -63,6 +63,7 @@ extern "C" {
 #include "errno.h"
 #include "Platform.h"
 #include "Print.h"
+#include "Desperado.h"
 
 
 static sigjmp_buf context;

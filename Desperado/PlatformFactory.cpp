@@ -59,6 +59,10 @@
 #include "Platform.h"
 #endif
 
+
+#include "Begin.h"
+
+
 Platform* platform_factory_cache = 0;
 
 /**
@@ -86,3 +90,6 @@ Platform& platform_factory() {
     platform_factory_cache = &result;
     return result;
 }
+
+
+#include "End.h"

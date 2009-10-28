@@ -65,6 +65,7 @@
 #include "FifoType.h"
 #include "Platform.h"
 #include "generics.h"
+#include "Desperado.h"
 
 struct Datum { uint32_t one; uint32_t two; };
 

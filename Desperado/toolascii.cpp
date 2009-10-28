@@ -189,6 +189,7 @@ man ascii (SunOS 5.1 maybe):
 #include <cstdlib>
 #include "Platform.h"
 #include "Print.h"
+#include "Desperado.h"
 
 static const char *ascii[]={
     "NUL","SOH","STX","ETX",

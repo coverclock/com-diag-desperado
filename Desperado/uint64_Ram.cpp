@@ -60,4 +60,10 @@
 #include "uint64_Ram.h"
 
 
+#include "Begin.h"
+
+
 Ram<uint64_t> uint64_Ram;
+
+
+#include "End.h"

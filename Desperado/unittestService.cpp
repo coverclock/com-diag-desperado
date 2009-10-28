@@ -75,6 +75,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "Output.h"
+#include "Desperado.h"
 
 static Service static_Service;
 

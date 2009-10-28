@@ -74,6 +74,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 
 extern "C" int unittestFiclShellProxy(void);

@@ -58,6 +58,7 @@
 
 
 #include "Print.h"
+#include "Desperado.h"
 
 
 CXXCAPI size_t print_f(Output* o, const char* format ...) {

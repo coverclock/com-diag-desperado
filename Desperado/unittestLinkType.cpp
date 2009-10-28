@@ -67,6 +67,7 @@
 #include "Platform.h"
 #include "target.h"
 #include "generics.h"
+#include "Desperado.h"
 
 class UT_LinkType {
 public:

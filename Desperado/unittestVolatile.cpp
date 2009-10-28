@@ -59,6 +59,7 @@
 #include "Output.h"
 #include "generics.h"
 #include "generics.h"
+#include "Desperado.h"
 
 template <typename _TYPE_>
 static int unittestVolatileType() {

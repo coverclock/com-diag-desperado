@@ -72,6 +72,7 @@
 #include "Platform.h"
 #include "Dump.h"
 #include "target.h"
+#include "Desperado.h"
 
 template class Ram<int>;
 

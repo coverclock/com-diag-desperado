@@ -59,6 +59,7 @@
 
 #include "Platform.h"
 #include "Print.h"
+#include "Desperado.h"
 
 
 CXXCAPI ticks_t platform_frequency() {

@@ -60,6 +60,7 @@
 #include "string.h"
 #include "Platform.h"
 #include "Print.h"
+#include "Desperado.h"
 
 extern "C" int unitteststring() {
     Print printf(Platform::instance().output());

@@ -66,6 +66,8 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
 //
 //  Constructor.
 //
@@ -259,3 +261,6 @@ void Gcra::show(int level, Output* display, int indent) const {
     printf("%s alarmed1=%d\n", sp, this->alarmed1);
     printf("%s approximate=%d\n", sp, this->approximate);
 }
+
+
+#include "End.h"

@@ -64,6 +64,9 @@
 #include "Arroyo.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -111,6 +114,9 @@ void Arroyo::show(int level, Output* display, int indent) const {
     printf("%s%s(%p)[%lu]:\n", sp, bp, this, sizeof(*this));
     this->Linux::show(level, display, indent + 1);
 }
+
+
+#include "End.h"
 
 
 #endif

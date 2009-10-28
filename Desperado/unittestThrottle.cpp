@@ -61,6 +61,7 @@
 #include "Throttle.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static Throttle staticThrottle;
 

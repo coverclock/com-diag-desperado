@@ -68,6 +68,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 static FILE* filepointer(const char* path, const char* mode) {
     FILE* fp;
 
@@ -140,3 +143,6 @@ void PathInput::show(int level, Output* display, int indent) const {
         this, sizeof(*this));
     this->FileInput::show(level, display, indent + 1);
 }
+
+
+#include "End.h"

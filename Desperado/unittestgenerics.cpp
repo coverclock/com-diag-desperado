@@ -95,6 +95,7 @@
 #include "Platform.h"
 #include "generics.h"
 #include "generics.h"
+#include "Desperado.h"
 
 #if 0
 #undef offsetof

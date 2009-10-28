@@ -60,4 +60,10 @@
 #include "uint16_Ram.h"
 
 
+#include "Begin.h"
+
+
 Ram<uint16_t> uint16_Ram;
+
+
+#include "End.h"

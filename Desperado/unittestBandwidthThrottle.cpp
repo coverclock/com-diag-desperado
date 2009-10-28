@@ -68,6 +68,7 @@
 #include "Platform.h"
 #include "Ticks.h"
 #include "Ticks.h"
+#include "Desperado.h"
 
 static BandwidthThrottle staticBandwidthThrottle;
 

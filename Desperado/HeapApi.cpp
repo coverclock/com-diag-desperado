@@ -58,6 +58,7 @@
 
 
 #include "Heap.h"
+#include "Desperado.h"
 
 
 CXXCAPI void* heap_malloc(Heap* heap, size_t size) {

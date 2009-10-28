@@ -45,6 +45,7 @@
 #include "Platform.h"
 #include "Print.h"
 #include "LocalTime.h"
+#include "Desperado.h"
 
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());

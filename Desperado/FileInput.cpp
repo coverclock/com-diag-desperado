@@ -67,6 +67,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -221,3 +224,6 @@ void FileInput::show(int level, Output* display, int indent) const {
         printf("%s  ferror=%d\n", sp, std::ferror(this->file));
     }
 }
+
+
+#include "End.h"

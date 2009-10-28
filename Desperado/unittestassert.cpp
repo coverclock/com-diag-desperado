@@ -63,6 +63,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 #define NDEBUG
 #include "assert.h"

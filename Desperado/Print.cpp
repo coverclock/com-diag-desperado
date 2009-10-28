@@ -62,6 +62,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -159,3 +162,6 @@ void Print::show(int level, Output* display, int indent) const {
         this->ou->show(level, display, indent + 2);
     }
 }
+
+
+#include "End.h"

@@ -65,6 +65,9 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -147,3 +150,6 @@ void Input::show(int /* level */, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
 }
+
+
+#include "End.h"

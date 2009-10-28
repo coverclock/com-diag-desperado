@@ -68,6 +68,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -266,3 +269,6 @@ void DescriptorInput::show(int level, Output* display, int indent) const {
         sp, this->saved,
         (EOF == this->saved) ? "=EOF" : "");
 }
+
+
+#include "End.h"

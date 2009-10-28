@@ -100,6 +100,7 @@
 #include "Platform.h"
 #include "Output.h"
 #include "Output.h"
+#include "Desperado.h"
 
 struct UT_LeapSecondDate {
     unsigned int year;

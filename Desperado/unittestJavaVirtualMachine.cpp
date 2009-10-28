@@ -68,6 +68,7 @@
 #include "errno.h"
 #include "Print.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static JavaVirtualMachine staticJvm;
 

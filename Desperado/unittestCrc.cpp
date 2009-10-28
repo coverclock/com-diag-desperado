@@ -73,6 +73,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 static Crc<uint32_t> staticCrc;
 

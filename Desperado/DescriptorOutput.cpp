@@ -69,6 +69,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Constructor.
 //
@@ -294,3 +297,6 @@ void DescriptorOutput::show(int level, Output* display, int indent) const {
             (STDERR_FILENO == this->descriptor) ? "=STDERR" : "");
     printf("%s active=%d\n", sp, this->active);
 }
+
+
+#include "End.h"

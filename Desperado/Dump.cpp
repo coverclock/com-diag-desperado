@@ -68,6 +68,9 @@
 #include "Constant.h"
 
 
+#include "Begin.h"
+
+
 const char Dump::upper_case_hex[] = {
     '0', '1', '2', '3',
     '4', '5', '6', '7',
@@ -424,3 +427,6 @@ void Dump::show(int level, Output* display, int indent) const {
     printf("%s unused=0x%02hhx\n", sp, this->unused);
     printf("%s unprintable=0x%02hhx\n", sp, this->unprintable);
 }
+
+
+#include "End.h"

@@ -65,6 +65,7 @@
 #include "Platform.h"
 #include "Print.h"
 #include "Print.h"
+#include "Desperado.h"
 
 static int leveltest(const char* ff ...) {
     Print printf(Platform::instance().output());

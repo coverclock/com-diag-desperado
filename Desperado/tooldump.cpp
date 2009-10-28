@@ -51,6 +51,7 @@
 #include "Print.h"
 #include "PathInput.h"
 #include "PathOutput.h"
+#include "Desperado.h"
 
 #define USAGE \
     "[ -b(ytes) | -w(ords) ]" \

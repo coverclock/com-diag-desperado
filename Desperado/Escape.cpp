@@ -66,6 +66,9 @@
 #include "Platform.h"
 
 
+#include "Begin.h"
+
+
 //
 //  Destructor.
 //
@@ -300,3 +303,6 @@ void Escape::show(int /* level */, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
 }
+
+
+#include "End.h"

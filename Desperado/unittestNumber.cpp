@@ -81,6 +81,7 @@
 #include "Print.h"
 #include "Platform.h"
 #include "Platform.h"
+#include "Desperado.h"
 
 // #define  DEBUG_UNIT_TEST_NUMBER  (65536 / 13)
 

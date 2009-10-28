@@ -65,6 +65,8 @@
 #include "Print.h"
 
 
+#include "Begin.h"
+
 
 //
 //  Constructor.
@@ -248,3 +250,6 @@ void DumpOutput::show(int level, Output* display, int indent) const {
         this->du->show(level, display, indent + 2);
     }
 }
+
+
+#include "End.h"
