@@ -45,6 +45,7 @@
 TOTAL=0
 NAME="`basename $0`"
 PID=$$
+COMMANDPATH=.
 if [ "$TMPDIR" = "" ]; then
     TMPDIR="/var/tmp"
 fi
@@ -147,7 +148,7 @@ fi
     while read COMMAND; do
 		TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
         echo "$NAME[$PID]: $TS begin \"$COMMAND $ARGUMENTS\""
-        $COMMAND
+        $COMMANDPATH/$COMMAND
         RC=$?
 		TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
         echo "$NAME[$PID]: $TS end \"$COMMAND $ARGUMENTS\" errors=$RC"
@@ -166,7 +167,7 @@ echo "$NAME[$PID]: $TS errors=$TOTAL"
     while read COMMAND; do
 		TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
         echo "$NAME[$PID]: $TS begin \"$COMMAND $ARGUMENTS\""
-        $COMMAND
+        $COMMANDPATH/$COMMAND
         RC=$?
 		TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
         echo "$NAME[$PID]: $TS end \"$COMMAND $ARGUMENTS\" errors=$RC"
@@ -184,7 +185,7 @@ echo "$NAME[$PID]: $TS errors=$TOTAL"
     while read COMMAND; do
 		TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
         echo "$NAME[$PID]: $TS begin \"$COMMAND $ARGUMENTS\""
-        sh $COMMAND
+        sh $COMMANDPATH/$COMMAND
         RC=$?
 		TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
         echo "$NAME[$PID]: $TS end \"$COMMAND $ARGUMENTS\" errors=$RC"
