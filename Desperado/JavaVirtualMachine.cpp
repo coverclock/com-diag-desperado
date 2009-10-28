@@ -125,7 +125,7 @@ int JavaVirtualMachine::create(const char* options[], size_t noptions) {
         noptions = 0;
     }
 
-    this->jargs.version = 0x00010002;
+    this->jargs.version = JNI_VERSION_1_2;
     JNI_GetDefaultJavaVMInitArgs(&(this->jargs)); 
 
     this->jargs.nOptions = noptions;
@@ -143,11 +143,13 @@ int JavaVirtualMachine::create(const char* options[], size_t noptions) {
         }
     }
 
+    void * env = 0;
     jint rc = ::JNI_CreateJavaVM(
         &(this->jvm),
-        reinterpret_cast<void**>(&(this->jenv)),
+        &env, // void**
         &(this->jargs)
     );
+    this->jenv = reinterpret_cast<JNIEnv*>(env);
 
     if (this->output != 0) {
         Print printf(this->output);
