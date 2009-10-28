@@ -243,12 +243,15 @@ void GrayCode<_TYPE_>::show(int /* level */, Output* display, int indent) const{
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the GrayCode unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestGrayCode();
+CXXCAPI int unittestGrayCode(void);
+#endif
 
 
 #endif

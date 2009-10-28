@@ -375,12 +375,15 @@ inline bool Chain::isEmpty() const {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Chain unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestChain();
+CXXCAPI int unittestChain(void);
+#endif
 
 
 #endif

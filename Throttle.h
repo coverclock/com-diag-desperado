@@ -255,12 +255,15 @@ public:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Throttle unit test.
  *
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestThrottle();
+CXXCAPI int unittestThrottle(void);
+#endif
 
 
 #endif

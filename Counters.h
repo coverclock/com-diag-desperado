@@ -481,12 +481,15 @@ inline const char* Counters::label(unsigned int id, Label buffer) const {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Counters unit test.
  *
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestCounters();
+CXXCAPI int unittestCounters(void);
+#endif
 
 
 #endif

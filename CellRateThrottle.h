@@ -325,6 +325,8 @@ private:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the CellRateThrottle unit test. This may take a while on a typical
  *  system.
@@ -345,7 +347,7 @@ private:
  *
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestCellRateThrottle(
+CXXCAPI int unittestCellRateThrottle(
     void* pVM,
     unsigned int pcr,
     unsigned int cdvt,
@@ -353,6 +355,7 @@ extern "C" int unittestCellRateThrottle(
     unsigned int mbs,
     unsigned int iterations
 );
+#endif
 
 
 #endif

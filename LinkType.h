@@ -467,12 +467,15 @@ LinkType<_TYPE_>::Functor::~Functor() {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the LinkType unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestLinkType();
+CXXCAPI int unittestLinkType(void);
+#endif
 
 
 #endif

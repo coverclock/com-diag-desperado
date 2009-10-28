@@ -212,12 +212,15 @@ inline const Ascii::Entry& Ascii::operator[] (unsigned char index) const {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Ascii unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestAscii();
+CXXCAPI int unittestAscii();
+#endif
 
 
 #endif

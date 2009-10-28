@@ -434,14 +434,6 @@ inline size_t Heap::getFrees() const {
 #include "End.h"
 
 
-/**
- *  Run the Heap unit test.
- *  
- *  @return the number of errors detected by the unit test.
- */
-extern "C" int unittestHeap();
-
-
 #else
 
 
@@ -536,20 +528,27 @@ CXXCAPI void* heap_realloc(Heap* h, void* ptr, size_t size);
 CXXCAPI void* heap_calloc(Heap* h, size_t nmemb, size_t size);
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
- *  Run the Heap CXXCAPI unit test.
+ *  Run the Heap unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
+ */
+CXXCAPI int unittestHeap(void);
+/**
+ *  Run the Heap2 unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
 CXXCAPI int unittestHeap2(void);
-
-
 /**
- *  Run the second Heap CXXCAPI unit test.
+ *  Run the Heap3 unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
 CXXCAPI int unittestHeap3(void);
+#endif
 
 
 #endif

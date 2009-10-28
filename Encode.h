@@ -201,12 +201,15 @@ inline Encode::Encode() {
 #include "End.h"
 
     
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Encode unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestEncode();
+CXXCAPI int unittestEncode(void);
+#endif
 
 
 #endif

@@ -247,12 +247,15 @@ private:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Implementation unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestImplementation();
+CXXCAPI int unittestImplementation(void);
+#endif
 
 
 #endif

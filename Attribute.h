@@ -184,6 +184,8 @@ inline const char* Attribute::special() {
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Attribute unit test.
  *
@@ -196,7 +198,8 @@ inline const char* Attribute::special() {
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestAttribute(void* pVM, int interactive);
+CXXCAPI int unittestAttribute(void* pVM, int interactive);
+#endif
 
 
 #endif

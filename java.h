@@ -160,31 +160,20 @@ typedef j_opaque_t *j_object_t;
 #endif
 
 
-#if defined(__cplusplus)
-
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the C++ CXXJAPI unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestcxxjapi();
-
+CXXCAPI int unittestcxxjapi();
 /**
  *  Run the C CXXJAPI unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestcxxjapi2(void);
-
-#else
-
-/**
- *  Run the C CXXCAPI unit test.
- *
- *  @return the number of errors detected.
- */
-extern int unittestcxxjapi2(void);
-
+CXXCAPI int unittestcxxjapi2(void);
 #endif
 
 

@@ -1,4 +1,5 @@
-#ifdef _COM_DIAG_DESPERADO_ASSERT_H_
+#ifndef _COM_DIAG_DESPERADO_ASSERT_H_
+#define _COM_DIAG_DESPERADO_ASSERT_H_
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
@@ -43,15 +44,6 @@
 
 ******************************************************************************/
 
-
-#   undef DESPERADO_ASSERT_VOID
-#   undef DESPERADO_ASSERT_FUNCTION
-#   undef desperado_assert
-#   undef assert
-
-#else
-
-
 /**
  *  @file
  *
@@ -70,24 +62,25 @@
  *  @date   $Date: 2006/01/30 20:35:27 $
  */
 
+#include "cxxcapi.h"
 
-#   define _DESPERADO_ASSERT_H_
+CXXCAPI void platform_fatal(const char*, int, const char*, int, const char*);
 
-#   if defined(__cplusplus)
-extern "C"
-#   else
-extern
-#   endif
-void platform_fatal(const char*, int, const char*, int, const char*);
-
-#   if defined(__cplusplus)
+#if defined(DESPERADO_HAS_UNITTESTS)
 /**
  *  Run the assert unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestassert();
-#   endif
+CXXCAPI int unittestassert(void);
+#endif
+
+#else
+
+#undef DESPERADO_ASSERT_VOID
+#undef DESPERADO_ASSERT_FUNCTION
+#undef desperado_assert
+#undef assert
 
 #endif
 

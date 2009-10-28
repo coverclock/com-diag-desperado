@@ -70,15 +70,14 @@
 #endif
 
 
-#if defined(__cplusplus)
-
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Debug unit test.
  *
  *  @return the number of errors detected.
  */
-extern "C" int unittestDebug();
-
+CXXCAPI int unittestDebug(void);
 #endif
 
 

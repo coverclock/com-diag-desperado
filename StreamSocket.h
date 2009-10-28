@@ -206,12 +206,15 @@ private:
 #include "End.h"
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the StreamSocket unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestStreamSocket();
+CXXCAPI int unittestStreamSocket(void);
+#endif
 
 
 #endif

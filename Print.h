@@ -196,14 +196,6 @@ private:
 #include "End.h"
 
 
-/**
- *  Run the Print unit test.
- *  
- *  @return the number of errors detected by the unit test.
- */
-extern "C" int unittestPrint();
-
-
 #endif
 
 
@@ -221,6 +213,16 @@ extern "C" int unittestPrint();
  *          object, or a negative number if error.
  */
 CXXCAPI size_t print_f(Output* o, const char* format, ...);
+
+
+#if defined(DESPERADO_HAS_UNITTESTS)
+/**
+ *  Run the Print unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
+ */
+CXXCAPI int unittestPrint(void);
+#endif
 
 
 #endif

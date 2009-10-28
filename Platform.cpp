@@ -68,6 +68,7 @@
 #include "DstNever.h"
 #include "LeapSeconds.h"
 #include "Constant.h"
+#include "cxxcapi.h"
 
 
 #include "Begin.h"
@@ -107,10 +108,12 @@ Platform* Platform::singleton = 0;
 
 //
 //  Allocate and construct a suitable Platform object and return a
-//  reference to it.
+//  reference to it. This is pushed off into another routine just
+//  to isolate the "decide what platform to create" logic.
 //
 Platform& Platform::factory() {
-    return platform_factory();
+    CXXCAPI Platform* platform_factory(void);
+    return *platform_factory();
 }
 
 

@@ -185,31 +185,21 @@ public:
 
 #endif
 
-#if defined(__cplusplus)
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
 /**
  *  Run the Volatile unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestVolatile();
-
+CXXCAPI int unittestVolatile(void);
 /**
  *  Run the Volatile2 unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-extern "C" int unittestVolatile2();
-
-#else
-
-/**
- *  Run the Volatile2 unit test.
- *  
- *  @return the number of errors detected by the unit test.
- */
-extern int unittestVolatile2(void);
-
+CXXCAPI int unittestVolatile2(void);
 #endif
 
 

@@ -568,14 +568,6 @@ inline ssize_t Logger::log(Level level, const char* format, va_list ap) {
 #include "End.h"
 
 
-/**
- *  Run the Logger unit test.
- *  
- *  @return the number of errors detected by the unit test.
- */
-extern "C" int unittestLogger();
-
-
 #else
 
 
@@ -845,12 +837,20 @@ CXXCAPI ssize_t logger_emergency(Logger* logger, const char* format, ...);
 CXXCAPI ssize_t logger_print(Logger* logger, const char* format, ...);
 
 
+#if defined(DESPERADO_HAS_UNITTESTS)
+/**
+ *  Run the Logger unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
+ */
+CXXCAPI int unittestLogger(void);
 /**
  *  Run the Logger CXXCAPI unit test.
  *
  *  @return the number of errors detected.
  */
 CXXCAPI int unittestLogger2(void);
+#endif
 
 
 #endif
