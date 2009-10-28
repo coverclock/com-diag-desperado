@@ -5,7 +5,7 @@
 
 /*******************************************************************************
 
-    Copyright 2005-2008 by the Digital Aggregates Corp., Arvada CO 80001-0587 USA.
+    Copyright 2005-2009 by the Digital Aggregates Corp., Arvada CO 80001-0587 USA.
 
     ----------------------------------------------------------------------
 
@@ -178,7 +178,7 @@
         alpine          1.27.0   2007-01-12
         bonanza         1.28.0   2007-01-12
         climax          1.29.0   2007-01-12
-        dexter          1.30.0   2007-01-12 (duplicate)
+        dexter          1.30.0   2007-01-12 (oops)
         eureka          1.31.0   2007-01-12
         firefly         1.32.0   2007-01-29
         grizzly         1.33.0   2007-01-29
@@ -186,8 +186,15 @@
         imperial        2.2.0    2007-02-01
         jupiter         2.3.0    2007-08-15
         keystone        2.4.0    2008-08-21
-	lucky           2.5.0    2008-09-02
+	    lucky           2.5.0    2008-09-02
         mercantile      2.6.0    2008-09-02
+        neptune         2.7.0
+        olympus         2.8.0
+        porcupine       2.9.0
+        quinto          2.10.0
+        refuge          2.11.0
+        syracuse        2.12.0  2009-10-28
+        triumph         2.13.0  TBD
 
     Information regarding Desperado can be found here:
 
@@ -372,10 +379,10 @@
             gcc 3.3.2
             GNU Make 3.79.1
 
-        One of our goals is to learn about the portability issues of
+        One of my goals is to learn about the portability issues of
         porting embedded C++ and C code from target to target. While
         every attempt has been made to make the code in this library
-        portable, our experience has been that porting across Linux,
+        portable, my experience has been that porting across Linux,
         gcc and stdlib versions is not always trivial undertaking.
         Somewhat remarkably, it seems more labor intensive than it
         was in the pre-Linux era using POSIX-compliant UNIXen and
@@ -387,32 +394,37 @@
     Why didn't you use cppunit for your unit testing?
 
         You will notice that the unit tests are functions, not main
-        programs. We want it to be possible, although perhaps not easy,
+        programs. I want it to be possible, although perhaps not easy,
         to download the unit tests themselves into an embedded system
-        and execute them on the target hardware. We were not sure that
-        there would be sufficient environment in the target hardware to
+        and execute them on the target hardware. (I was specifically
+        thinking of the VxWorks shell.) I was not sure that there
+        would be sufficient environment in the target hardware to
         support cppunit, which is after all not built around the portable
-        Platform layer.  Also, we wanted the unit tests to serve as use
+        Platform layer.  Also, I wanted the unit tests to serve as use
         cases which would be examples of how to use the library. Having
-        said that, we love junit and cannot imagine not using it when
-        we write Java applications.
+        said that, I love junit and cannot imagine not using it when
+        I write Java applications. I've had some experience recently
+        with Google Test (gtest), Google's framework for C++ unit testing.
+        I recommend it, and will probably start using it for other
+        C++ work in the near future.
 
     Is Chip Overclock a real person?
 
         He is as real as Betty Crocker, Captain Morgan, Aunt Jemima,
         Cap'n Crunch, Uncle Ben, Cracker Jack, and any number of
         folks who proudly put their names on the stuff that they make.
-        Chip Overclock is an alter ego of a real person and
+        Chip Overclock is the pen name and alter ego of John Sloan and
         represents an experiment in both product branding and process
-        improvement. This is the same Chip Overclock who blogs at
-        http://www.chipoverclock.com .
+        improvement. This is the same Chip Overclock who occasionally
+        blogs at http://www.chipoverclock.com .
 
     Why didn't you implement design pattern Foo?
 
-        Maybe we will. Maybe we're not familiar with it. Maybe we never
-        found it that useful in our own embedded work. Maybe it's already
-        been implemented in some of the common packages like ACE, whose
-        functionality we try not to overlap, or in the STL, ditto.
+        Maybe I will. Maybe I am not familiar with it. Maybe I never
+        found it that useful in my own embedded work. Maybe it's already
+        been implemented in some of the common packages like ACE, STL,
+        or Boost, whose functionality I try not to overlap. (I've used the
+        STL a lot, ACE a little, and haven't yet done much with Boost.)
 
     What does it mean to have inline virtual destructors?
 
@@ -421,29 +433,29 @@
         overridden, and for objects of the derived class to be pointed to
         by base class pointers. But if the destructors are truly empty,
         then it might be possible for a very smart compiler to eliminate
-        some of the code involved. Probably not. But we let the compiler
+        some of the code involved. Probably not. But I let the compiler
         know that anyway by putting the empty destructors inline. (In
-        later versions of this library, we moved all virtual destructors
+        later versions of this library, I moved all virtual destructors
         outline.)
 
     Shouldn't every class with a virtual destructor have all of the Big Three?
 
         Where the Big Three are virtual destructor, copy constructor, and
-        assignment operator. Maybe. For those classes where we specifically
-        want to prohibit copying, we make the copy constructor and assignment
-        operator private and leave them unimplemented. We're nervous about
+        assignment operator. Maybe. For those classes where I specifically
+        want to prohibit copying, I make the copy constructor and assignment
+        operator private and leave them unimplemented. I'm nervous about
         either prohibiting all copying, or providing a deep copy for every
         object when in embedded applications that may not be what the developer
         really wants. This is a complicated issue, and it really depends on
-        how the application wants to use the component, something we have
-        difficulty anticipating except for the use cases we execute in our
-        unit tests. For now we're punting.
+        how the application wants to use the component, something I have
+        difficulty anticipating except for the use cases I execute in my
+        unit tests. For now I'm punting.
 
     Why don't you use configure, autoconf, automake, libtool, etc.?
 
-        That's a good idea. It's on our todo list. Of course, it
+        That's a good idea. It's on my todo list. Of course, it
         will only help with UNIX-like systems, not with embedded OSes
-        like VxWorks, PSOS, C/Executive, uC/COS-II etc. We haven't quite
+        like VxWorks, PSOS, C/Executive, uC/COS-II etc. I haven't quite
         figured out how this would work with cross-compilation in
         which the platform on which you run configure is not the
         platform on which you run Desperado, which is a pretty typical
@@ -454,15 +466,15 @@
         It depends on what compiler you are using. For example, gcc
         3.3.4 does a much better job inlining than does gcc 3.3.2,
         or at least if it doesn't, it complains a lot less. You may
-        also see warnings about using the wrong printf format. Our
+        also see warnings about using the wrong printf format. My
         experience in porting this code to various platforms, both
         Linux and non-Linux, has been that it is impossible to get
         this consistently and portably correct.
 
     Aren't the reinitializeobject.h macros really a bad idea?
 
-        Yes. It's the one experiment that we consider a failure.
-        We've replaced their use with the initialize() methods,
+        Yes. It's the one experiment that I consider a failure.
+        I've replaced their use with the initialize() methods,
         but those have the drawback that they absolutely must be
         implemented in every derived class if they are to be used
         at all. Alternatives like placing the constructor code in a
@@ -472,7 +484,7 @@
 
     The EC++ specification doesn't allow templates, why do you?
 
-        We think that templates, properly used, are a safer
+        I think that templates, properly used, are a safer
         alternative to using new/delete to implement type-safe
         variable length objects. At least with the GNU C++
         compiler, templates to not inevitably lead to code bloat.
@@ -480,37 +492,37 @@
         applications, disallows, it does so because the features
         were considered too new. EC++ reflects that state of C++
         compilers in Japan when the specification was written
-        circa 1999. On the other hand, we also prefer not to use
+        circa 1999. On the other hand, I also prefer not to use
         real-time type identification (RTTI), or at least find it
-        usually unnecessary, so we agree with EC++ on that one.
+        usually unnecessary, so I agree with EC++ on that one.
         Templates are in fact necessary when using the STL, and
-        although in some embedded applications we avoid the STL
+        although in some embedded applications I avoid the STL
         for good reasons, in others a good STL implementation is
         the greatest thing since sliced bread.
 
     C++ exceptions can be enabled or disabled in Desperado, why?
 
-        C++ exception handling has proven to be problematic in our
+        C++ exception handling has proven to be problematic in my
         experience for lots of reasons. Tom Cargill cogently
         argues that it is not well understood how to write reliable
-        code using exceptions, and we agree. We think that it is
+        code using exceptions, and I agree. I think that it is
         very hard to predict how long exception handlers will take
         to execute. In C++, particularly in embedded applications,
-        we prefer not to use them, but recognize that they may have
+        I prefer not to use them, but recognize that they may have
         their place, particularly to indicate constructor failure.
-        And when we write Java, we cannot avoid using exceptions.
+        And when I write Java, I cannot avoid using exceptions.
 
     What's the deal with the licenses?
 
-        The licensing of this library is based mostly on our
+        The licensing of this library is based mostly on my
         experience dealing with corporate intellectual property
-        lawyers. It is our goal to not place undue restrictions on
+        lawyers. It is my goal to not place undue restrictions on
         how Desperado may be used while at the same time protecting
-        everyone's (including our own) intellectual property rights.
-        We find that companies frequently "pre-approve" the LGPL for
+        everyone's (including my own) intellectual property rights.
+        I find that companies frequently "pre-approve" the LGPL for
         C and C++ code, and the Apache License for Java code. Not
         conforming to one of these two models makes life painful for
-        all involved. We used a modified version of the LGPL at some
+        all involved. I used a modified version of the LGPL at some
         risk because the dynamic versus static linking licensing issues
         are real ones for embedded systems developers.
 
