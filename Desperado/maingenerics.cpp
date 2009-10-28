@@ -58,6 +58,7 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "Platform.h"
 #include "generics.h"
 

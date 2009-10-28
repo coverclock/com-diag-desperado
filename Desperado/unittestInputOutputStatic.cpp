@@ -59,6 +59,7 @@
 
 
 #include <cstdarg>
+#include "UnitTest.h"
 #include "errno.h"
 #include "string.h"
 #include "BufferInput.h"

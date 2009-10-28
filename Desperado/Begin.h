@@ -1,9 +1,5 @@
 #ifndef _COM_DIAG_DESPERADO_BEGIN_H_
 #define _COM_DIAG_DESPERADO_BEGIN_H_
-#ifdef _COM_DIAG_DESPERADO_END_H_
-#undef _COM_DIAG_DESPERADO_END_H_
-#endif
-#ifdef __cplusplus
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
@@ -55,12 +51,18 @@
  *  @author $Author: jsloan $
  */
 
+#ifdef _COM_DIAG_DESPERADO_END_H_
+#undef _COM_DIAG_DESPERADO_END_H_
+#endif
+
+#if defined(__cplusplus)
 
 namespace com {
 	namespace diag {
 		namespace desperado {
 		
 #endif
+
 #else
 #error Duplicate Desperado Begin!
 #endif

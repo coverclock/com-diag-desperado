@@ -62,13 +62,12 @@
 
 #include "target.h"
 #include "cxxcapi.h"
-#include "stdio.h"
+#include "stdarg.h"
 
 
 #if defined(__cplusplus)
 
 
-#include <cstdarg>
 #include "Object.h"
 
 
@@ -254,9 +253,6 @@ public:
 #else
 
 
-#include <stdarg.h>
-
-
 /**
  *  This is an opaque type used to refer to a C++ output object
  *  in a C program.
@@ -265,6 +261,9 @@ typedef struct Output Output;
 
 
 #endif
+
+
+#include "Desperado.h"
 
 
 /**

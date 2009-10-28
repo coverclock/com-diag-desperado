@@ -690,6 +690,9 @@ inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
 #endif
 
 
+#include "Desperado.h"
+
+
 /**
  *  Returns the frequency of the platform clock in Hertz as a
  *  whole number. Because platforms may have clock frequencies

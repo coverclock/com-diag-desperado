@@ -58,8 +58,10 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "Platform.h"
 #include "Word.h"
+#include "Desperado.h"
 
 int main(int argc, char**) {
     Platform::instance(Platform::factory());

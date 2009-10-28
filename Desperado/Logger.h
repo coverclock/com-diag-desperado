@@ -581,6 +581,9 @@ typedef struct Logger Logger;
 #endif
 
 
+#include "Desperado.h"
+
+
 /**
  *  Formats a variadic argument list and writes the result
  *  to the specified log object if FINEST is enabled.

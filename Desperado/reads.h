@@ -64,6 +64,7 @@
 #include "cxxcapi.h"
 #include "generics.h"
 
+#include "Begin.h"
 
 /**
  *  Repeatedly performs a data read against the specified file
@@ -117,6 +118,8 @@ CXXCINLINE ssize_t reads(
 
     return total;
 }
+
+#include "End.h"
 
 
 #endif

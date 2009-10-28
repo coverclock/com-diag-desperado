@@ -59,9 +59,7 @@
 
 #include "Logger.h"
 #include "Platform.h"
-
-
-#include "Begin.h"
+#include "Desperado.h"
 
 
 #define DESPERADO_LOGGER_API(_FUNCTION_, _LEVEL_) \
@@ -90,6 +88,3 @@ DESPERADO_LOGGER_API(   alert,          ALERT           )
 DESPERADO_LOGGER_API(   fatal,          FATAL           )
 DESPERADO_LOGGER_API(   emergency,      EMERGENCY       )
 DESPERADO_LOGGER_API(   print,          PRINT           )
-
-
-#include "End.h"

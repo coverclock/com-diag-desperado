@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "cxxcapi.h"
 #include "cxxcapi.h"
 #include "Platform.h"
@@ -67,6 +68,7 @@
 
 
 CXXCINLINE int test() {
+    Print printf(Platform::instance().output());
 
 #if defined(__cplusplus)
     printf("%s[%d]: __cplusplus\n",

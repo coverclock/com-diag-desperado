@@ -71,7 +71,7 @@
 #include "Output.h"
 
 
-#include "End.h"
+#include "Begin.h"
 
 /**
  *  Implement the interfaces to the C standard library malloc(3), free(3),
@@ -445,6 +445,9 @@ typedef struct Heap Heap;
 
 
 #endif
+
+
+#include "Desperado.h"
 
 
 /**

@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "stdio.h"
 #include "debug.h"
 #include "debug.h"

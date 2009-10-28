@@ -45,7 +45,7 @@
 /**
  *  @file
  *
- *  Implements the cxxjapi CXXJAPI unit test.
+ *  Implements the cxxjapi2 unit test.
  *
  *  @see    cxxjapi.h
  *
@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "java.h"
 #include "java.h"
 #include "cxxjapi.h"

@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "Fifo.h"
 #include "Fifo.h"
 #include "NewFifo.h"

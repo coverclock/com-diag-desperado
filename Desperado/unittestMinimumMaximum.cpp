@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "Minimum.h"
 #include "Maximum.h"
 #include "Maximum.h"

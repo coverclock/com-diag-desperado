@@ -45,7 +45,7 @@
 /**
  *  @file
  *
- *  Implements the Platform CXXCAPI unit test.
+ *  Implements the Platform2 unit test.
  *
  *  @see    Platform
  *
@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "target.h"
 #include "target.h"
 #include "errno.h"

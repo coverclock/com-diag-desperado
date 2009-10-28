@@ -62,6 +62,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "UnitTest.h"
 #include "stdio.h"
 #include "stdio.h"
 #include "errno.h"

@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "Vintage.h"
 #include "Print.h"
 #include "Platform.h"

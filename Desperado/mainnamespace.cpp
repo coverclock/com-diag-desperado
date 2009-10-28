@@ -56,6 +56,7 @@
 
 
 #include <cstdlib>
+#include "UnitTest.h"
 #include "Platform.h"
 
 extern "C" int unittestnamespace();

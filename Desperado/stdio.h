@@ -59,13 +59,10 @@
  *  @date   $Date: 2006/01/09 00:24:49 $
  */
 
-#include "target.h"
 #if defined(__cplusplus)
 #   include <cstdio>
-#   include <cstdarg>
 #else
 #   include <stdio.h>
-#   include <stdarg.h>
 #endif
 
 

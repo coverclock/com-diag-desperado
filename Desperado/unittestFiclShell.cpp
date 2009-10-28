@@ -58,6 +58,7 @@
 
 #if defined(DESPERADO_HAS_FICL)
 
+#include "UnitTest.h"
 #include "cxxcapi.h"
 #include "cxxcapi.h"
 #include "generics.h"

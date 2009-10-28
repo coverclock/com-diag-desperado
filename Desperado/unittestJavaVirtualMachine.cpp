@@ -58,6 +58,7 @@
 
 #if defined(DESPERADO_HAS_JAVA)
 
+#include "UnitTest.h"
 #include "target.h"
 #include "JavaVirtualMachine.h"
 #include "JavaVirtualMachine.h"

@@ -57,6 +57,7 @@
  */
 
 
+#include "UnitTest.h"
 #include "generics.h"
 #include "generics.h"
 #include "Crc.h"

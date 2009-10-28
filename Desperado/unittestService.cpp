@@ -57,6 +57,7 @@
  */
 
 #include <unistd.h>
+#include "UnitTest.h"
 #include "target.h"
 #include "errno.h"
 #include "stdio.h"

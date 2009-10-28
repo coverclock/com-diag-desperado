@@ -58,6 +58,7 @@
 
 
 #include <cstdarg>
+#include "UnitTest.h"
 #include "errno.h"
 #include "errno.h"
 #include "string.h"
