@@ -67,13 +67,13 @@
 #include "Desperado.h"
 
 
-template <typename _INPUT_, typename _OUTPUT_>
-static int testInteger(const char * file, int line, _INPUT_ input) {
+template <typename _HOST_, typename _NETWORK_>
+static int testInteger(const char * file, int line, _HOST_ input) {
     Print errorf(Platform::instance().error());
     Dump dump(Platform::instance().error());
     int errors = 0;
-    _OUTPUT_ temp = hton(input);
-    _INPUT_ output = ntoh(temp);
+    _NETWORK_ temp = hton(input);
+    _HOST_ output = ntoh(temp);
     if (input != output) {
         errorf("%s[%d]: failed!\n", file, line);
         dump.bytes(&input, sizeof(input));
@@ -84,18 +84,34 @@ static int testInteger(const char * file, int line, _INPUT_ input) {
     return errors;
 }
 
-template <typename _INPUT_, typename _OUTPUT_>
-static int testFloat(const char * file, int line, _INPUT_ input) {
+template <typename _HOST_, typename _NETWORK_>
+static int testFloat(const char * file, int line, _HOST_ input) {
     Print errorf(Platform::instance().error());
     Dump dump(Platform::instance().error());
     int errors = 0;
-    _OUTPUT_ temp = fhton(input);
-    _INPUT_ output = fntoh(temp);
+    _NETWORK_ temp = fhton(input);
+    _HOST_ output = fntoh(temp);
     if (input != output) {
         errorf("%s[%d]: failed!\n", file, line);
         dump.bytes(&input, sizeof(input));
         dump.bytes(&temp, sizeof(temp));
         dump.bytes(&output, sizeof(output));
+        ++errors;
+    }
+    return errors;
+}
+
+template <typename _TYPE_>
+static int testSwap(const char * file, int line, _TYPE_ from, _TYPE_ to) {
+    Print errorf(Platform::instance().error());
+    Dump dump(Platform::instance().error());
+    int errors = 0;
+    _TYPE_ temp = ByteOrder<_TYPE_, _TYPE_, _TYPE_>::swap(from);
+    if (temp != to) {
+        errorf("%s[%d]: failed!\n", file, line);
+        dump.bytes(&from, sizeof(from));
+        dump.bytes(&temp, sizeof(temp));
+        dump.bytes(&to, sizeof(to));
         ++errors;
     }
     return errors;
@@ -158,6 +174,24 @@ CXXCAPI int unittestByteOrder(void) {
         (__FILE__, __LINE__, -3.4);
     errors += testFloat<float, uint32_t>
         (__FILE__, __LINE__, 1.2);
+
+    errors += testSwap<uint64_t>
+        (__FILE__, __LINE__, 0x0123456789abcdefULL, 0xefcdab8967452301ULL);
+    errors += testSwap<uint32_t>
+        (__FILE__, __LINE__, 0x01234567UL, 0x67452301UL);
+    errors += testSwap<uint16_t>
+        (__FILE__, __LINE__, 0x0123U, 0x2301U);
+    errors += testSwap<uint8_t>
+        (__FILE__, __LINE__, 0x01U, 0x01U);
+
+    errors += testSwap<int64_t>
+        (__FILE__, __LINE__, 0x0123456789abcdefLL, 0xefcdab8967452301LL);
+    errors += testSwap<int32_t>
+        (__FILE__, __LINE__, 0x01234567L, 0x67452301L);
+    errors += testSwap<int16_t>
+        (__FILE__, __LINE__, 0x0123, 0x2301);
+    errors += testSwap<int8_t>
+        (__FILE__, __LINE__, 0x01, 0x01);
 
     printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
         errors);
