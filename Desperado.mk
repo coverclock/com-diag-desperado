@@ -531,6 +531,9 @@ unittestBandwidthThrottle:	mainBandwidthThrottle.o $(ARCHIVE)
 unittestbarrier:	mainbarrier.o $(ARCHIVE)
 	$(LD) -o unittestbarrier mainbarrier.o $(LDFLAGS)
 
+unittestByteOrder:	mainByteOrder.o $(ARCHIVE)
+	$(LD) -o unittestByteOrder mainByteOrder.o $(LDFLAGS)
+
 unittestcxxcapi:	maincxxcapi.o $(ARCHIVE)
 	$(LD) -o unittestcxxcapi maincxxcapi.o $(LDFLAGS)
 
