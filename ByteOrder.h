@@ -58,14 +58,31 @@
  *
  *  @author coverclock@diag.com (Chip Overclock)
  */
-template <typename _INPUT_, typename _OUTPUT_>
+template <typename _INPUT_, typename _OUTPUT_, typename _CONTROL_>
 union ByteOrder {
+
+private:
+
+    _CONTROL_ control;
 
     _INPUT_ input;
 
     _OUTPUT_ output;
 
-    uint8_t bytes[sizeof(_INPUT_)];
+    uint8_t bytes[sizeof(_CONTROL_)];
+
+public:
+
+    /**
+     * Ctor.
+     * @param cc is the control word.
+     */
+    ByteOrder(_CONTROL_ cc = 0) : control(cc) {}
+
+    /**
+     * Dtor.
+     */
+    ~ByteOrder() {}
 
     /**
      * Returns true if network byte order is not the
@@ -74,7 +91,7 @@ union ByteOrder {
      * same as host byte order.
      */
     static bool mustswap() {
-        static const ByteOrder swappable = { 1 };
+        static const ByteOrder swappable(1);
         return swappable.bytes[0] != 0;
     }
 
@@ -126,7 +143,7 @@ union ByteOrder {
  *  @return output word.
  */
 inline uint64_t ntoh(uint64_t data) {
-    return ByteOrder<uint64_t, uint64_t>::swapif(data);
+    return ByteOrder<uint64_t, uint64_t, uint64_t>::swapif(data);
 }
 
 /**
@@ -135,7 +152,7 @@ inline uint64_t ntoh(uint64_t data) {
  *  @return output word.
  */
 inline uint64_t hton(uint64_t data) {
-    return ByteOrder<uint64_t, uint64_t>::swapif(data);
+    return ByteOrder<uint64_t, uint64_t, uint64_t>::swapif(data);
 }
 
 /**
@@ -144,7 +161,7 @@ inline uint64_t hton(uint64_t data) {
  *  @return output word.
  */
 inline uint32_t ntoh(uint32_t data) {
-    return ByteOrder<uint32_t, uint32_t>::swapif(data);
+    return ByteOrder<uint32_t, uint32_t, uint32_t>::swapif(data);
 }
 
 /**
@@ -153,7 +170,7 @@ inline uint32_t ntoh(uint32_t data) {
  *  @return output word.
  */
 inline uint32_t hton(uint32_t data) {
-    return ByteOrder<uint32_t, uint32_t>::swapif(data);
+    return ByteOrder<uint32_t, uint32_t, uint32_t>::swapif(data);
 }
 
 /**
@@ -162,7 +179,7 @@ inline uint32_t hton(uint32_t data) {
  *  @return output word.
  */
 inline uint16_t ntoh(uint16_t data) {
-    return ByteOrder<uint16_t, uint16_t>::swapif(data);
+    return ByteOrder<uint16_t, uint16_t, uint16_t>::swapif(data);
 }
 
 /**
@@ -171,7 +188,7 @@ inline uint16_t ntoh(uint16_t data) {
  *  @return output word.
  */
 inline uint16_t hton(uint16_t data) {
-    return ByteOrder<uint16_t, uint16_t>::swapif(data);
+    return ByteOrder<uint16_t, uint16_t, uint16_t>::swapif(data);
 }
 
 /*
@@ -184,7 +201,7 @@ inline uint16_t hton(uint16_t data) {
  *  @return output word.
  */
 inline int64_t ntoh(int64_t data) {
-    return ByteOrder<int64_t, int64_t>::swapif(data);
+    return ByteOrder<int64_t, int64_t, int64_t>::swapif(data);
 }
 
 /**
@@ -193,7 +210,7 @@ inline int64_t ntoh(int64_t data) {
  *  @return output word.
  */
 inline int64_t hton(int64_t data) {
-    return ByteOrder<int64_t, int64_t>::swapif(data);
+    return ByteOrder<int64_t, int64_t, int64_t>::swapif(data);
 }
 
 /**
@@ -202,7 +219,7 @@ inline int64_t hton(int64_t data) {
  *  @return output word.
  */
 inline int32_t ntoh(int32_t data) {
-    return ByteOrder<int32_t, int32_t>::swapif(data);
+    return ByteOrder<int32_t, int32_t, int32_t>::swapif(data);
 }
 
 /**
@@ -211,7 +228,7 @@ inline int32_t ntoh(int32_t data) {
  *  @return output word.
  */
 inline int32_t hton(int32_t data) {
-    return ByteOrder<int32_t, int32_t>::swapif(data);
+    return ByteOrder<int32_t, int32_t, int32_t>::swapif(data);
 }
 
 /**
@@ -220,7 +237,7 @@ inline int32_t hton(int32_t data) {
  *  @return output word.
  */
 inline int16_t ntoh(int16_t data) {
-    return ByteOrder<int16_t, int16_t>::swapif(data);
+    return ByteOrder<int16_t, int16_t, int16_t>::swapif(data);
 }
 
 /**
@@ -229,7 +246,7 @@ inline int16_t ntoh(int16_t data) {
  *  @return output word.
  */
 inline int16_t hton(int16_t data) {
-    return ByteOrder<int16_t, int16_t>::swapif(data);
+    return ByteOrder<int16_t, int16_t, int16_t>::swapif(data);
 }
 
 /*
@@ -242,7 +259,7 @@ inline int16_t hton(int16_t data) {
  *  @return output word.
  */
 inline float64_t fntoh(uint64_t data) {
-    return ByteOrder<uint64_t, float64_t>::swapif(data);
+    return ByteOrder<uint64_t, float64_t, uint64_t>::swapif(data);
 }
 
 /**
@@ -251,7 +268,7 @@ inline float64_t fntoh(uint64_t data) {
  *  @return output word.
  */
 inline uint64_t fhton(float64_t data) {
-    return ByteOrder<float64_t, uint64_t>::swapif(data);
+    return ByteOrder<float64_t, uint64_t, uint64_t>::swapif(data);
 }
 
 /**
@@ -260,7 +277,7 @@ inline uint64_t fhton(float64_t data) {
  *  @return output word.
  */
 inline float32_t fntoh(uint32_t data) {
-    return ByteOrder<uint32_t, float32_t>::swapif(data);
+    return ByteOrder<uint32_t, float32_t, uint32_t>::swapif(data);
 }
 
 /**
@@ -269,7 +286,7 @@ inline float32_t fntoh(uint32_t data) {
  *  @return output word.
  */
 inline uint32_t fhton(float32_t data) {
-    return ByteOrder<float32_t, uint32_t>::swapif(data);
+    return ByteOrder<float32_t, uint32_t, uint32_t>::swapif(data);
 }
 
 #include "End.h"

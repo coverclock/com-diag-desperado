@@ -70,11 +70,15 @@
 template <typename _INPUT_, typename _OUTPUT_>
 static int testInteger(const char * file, int line, _INPUT_ input) {
     Print errorf(Platform::instance().error());
+    Dump dump(Platform::instance().error());
     int errors = 0;
     _OUTPUT_ temp = hton(input);
     _INPUT_ output = ntoh(temp);
     if (input != output) {
         errorf("%s[%d]: failed!\n", file, line);
+        dump.bytes(&input, sizeof(input));
+        dump.bytes(&temp, sizeof(temp));
+        dump.bytes(&output, sizeof(output));
         ++errors;
     }
     return errors;
@@ -83,11 +87,15 @@ static int testInteger(const char * file, int line, _INPUT_ input) {
 template <typename _INPUT_, typename _OUTPUT_>
 static int testFloat(const char * file, int line, _INPUT_ input) {
     Print errorf(Platform::instance().error());
+    Dump dump(Platform::instance().error());
     int errors = 0;
     _OUTPUT_ temp = fhton(input);
     _INPUT_ output = fntoh(temp);
     if (input != output) {
         errorf("%s[%d]: failed!\n", file, line);
+        dump.bytes(&input, sizeof(input));
+        dump.bytes(&temp, sizeof(temp));
+        dump.bytes(&output, sizeof(output));
         ++errors;
     }
     return errors;
