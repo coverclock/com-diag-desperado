@@ -91,7 +91,7 @@ static const char escapes[] = "\1\02\003\0004\x5\x06\x007\x0008\x00009";
 
 static Dump staticDump;
 
-extern "C" int unittestDump() {
+CXXCAPI int unittestDump(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

@@ -163,7 +163,7 @@ int cellrate_exercise(Throttle& throttle, size_t iterations) {
     return errors;
 }
 
-extern "C" int unittestCellRateThrottle(
+CXXCAPI int unittestCellRateThrottle(
     void*,
     unsigned int pcr,
     unsigned int cdvt,

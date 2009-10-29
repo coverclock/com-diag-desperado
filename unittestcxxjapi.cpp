@@ -71,7 +71,7 @@
 #include "Desperado.h"
 
 
-CXXCAPI int unittestcxxjapi() {
+CXXCAPI int unittestcxxjapi(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

@@ -219,7 +219,7 @@ static const char text[] = {
 
 static Attribute staticAttribute;
 
-extern "C" int unittestAttribute(void*, int interactive) {
+CXXCAPI int unittestAttribute(void*, int interactive) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

@@ -65,7 +65,7 @@
 
 static Vintage staticVintage;
 
-extern "C" int unittestVintage() {
+CXXCAPI int unittestVintage(void) {
     Print printf(Platform::instance().output());
     int errors = 0;
 

@@ -103,7 +103,7 @@
 #define offsetof(_STRUCT_, _MEMBER_) desperado_offsetof(_STRUCT_, _MEMBER_)
 #endif
 
-extern "C" int unittestgenerics() {
+CXXCAPI int unittestgenerics(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

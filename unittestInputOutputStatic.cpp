@@ -108,7 +108,7 @@ static PathOutput staticPathOutput;
 static SyslogOutput staticSyslogOutput;
 #endif
 
-extern "C" int unittestInputOutputStatic() {
+CXXCAPI int unittestInputOutputStatic(void) {
     Print printf(Platform::instance().output());
     int errors = 0;
 

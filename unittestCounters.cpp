@@ -125,7 +125,7 @@ static Counters staticCounters;
 static NewCounters staticNewCounters;
 static CountersType<COUNTERS> staticCountersType;
 
-extern "C" int unittestCounters() {
+CXXCAPI int unittestCounters(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

@@ -113,7 +113,7 @@ static int test(unsigned char cc) {
 
 static Ascii staticAscii; // Yes, this is redundant.
 
-extern "C" int unittestAscii() {
+CXXCAPI int unittestAscii(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

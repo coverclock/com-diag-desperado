@@ -411,7 +411,7 @@ static int rooting(Link* origin, Link* root) {
 
 static Chain staticChain;
 
-extern "C" int unittestChain() {
+CXXCAPI int unittestChain(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

@@ -70,7 +70,7 @@
 
 static Encode staticEncode;
 
-extern "C" int unittestEncode() {
+CXXCAPI int unittestEncode(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

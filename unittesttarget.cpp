@@ -86,7 +86,7 @@
 
 volatile int unittesttarget_volatile = 0;
 
-extern "C" int unittesttarget() {
+CXXCAPI int unittesttarget(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

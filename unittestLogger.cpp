@@ -112,7 +112,7 @@ static int leveltest(const char* ff ...) {
 
 static Logger staticLogger;
 
-extern "C" int unittestLogger() {
+CXXCAPI int unittestLogger(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

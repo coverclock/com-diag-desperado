@@ -110,6 +110,21 @@ extern "C" {
  *      uintptr_t
  */
 
+/*
+ * Knowing what floats are available would be good.
+ */
+
+#if !defined(DESPERADO_TARGET_FLOAT32)
+#   define DESPERADO_TARGET_FLOAT32  float
+#endif
+
+typedef DESPERADO_TARGET_FLOAT32 float32_t;
+
+#if !defined(DESPERADO_TARGET_FLOAT64)
+#   define DESPERADO_TARGET_FLOAT64  double
+#endif
+
+typedef DESPERADO_TARGET_FLOAT64 float64_t;
 
 /*
  *  Establish byte ordering for this target.

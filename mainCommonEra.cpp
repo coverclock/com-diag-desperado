@@ -62,7 +62,7 @@
 #include "Platform.h"
 #include "CommonEra.h"
 
-extern "C" int main(int, char**) {
+int main(int, char**) {
     Platform::instance(Platform::factory());
     exit(unittestCommonEra());
 }

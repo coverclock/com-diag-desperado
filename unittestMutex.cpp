@@ -72,7 +72,7 @@
 
 static Mutex staticMutex;
 
-extern "C" int unittestMutex() {
+CXXCAPI int unittestMutex(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

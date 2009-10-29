@@ -78,7 +78,7 @@
 
 static Crc<uint32_t> staticCrc;
 
-extern "C" int unittestCrc() {
+CXXCAPI int unittestCrc(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

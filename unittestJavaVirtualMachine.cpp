@@ -73,7 +73,7 @@
 
 static JavaVirtualMachine staticJvm;
 
-extern "C" int unittestJavaVirtualMachine(bool debug) {
+CXXCAPI int unittestJavaVirtualMachine(bool debug) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

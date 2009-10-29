@@ -73,7 +73,7 @@ static Maximum<int> staticMaximum;
 Minimum<size_t> minimum;
 Maximum<size_t> maximum;
 
-extern "C" int unittestMinimumMaximum() {
+CXXCAPI int unittestMinimumMaximum(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

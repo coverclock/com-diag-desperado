@@ -75,7 +75,7 @@
 #include "Ticks.h"
 #include "Desperado.h"
 
-extern "C" int unittestPlatform() {
+CXXCAPI int unittestPlatform(void) {
     Print printf;
     int errors = 0;
 

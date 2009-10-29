@@ -113,7 +113,7 @@ static int unittestVolatileType() {
 }
 
 
-extern "C" int unittestVolatile() {
+CXXCAPI int unittestVolatile(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;
