@@ -67,13 +67,24 @@
 #include "Desperado.h"
 
 
-template <typename _HOST_, typename _NETWORK_>
-static int testInteger(const char * file, int line, _HOST_ input) {
+template <typename _TYPE_>
+static int testMustSwap(const char * file, int line) {
+    Print printf(Platform::instance().output());
+    if (ByteOrder<_TYPE_, _TYPE_, _TYPE_>::mustswap()) {
+        printf("%s[%d]: little endian\n", file, line);
+    } else {
+        printf("%s[%d]: big endian\n", file, line);
+    }
+    return 0;
+}
+
+template <typename _TYPE_>
+static int testIntegerSanity(const char * file, int line, _TYPE_ input) {
     Print errorf(Platform::instance().error());
     Dump dump(Platform::instance().error());
     int errors = 0;
-    _NETWORK_ temp = hton(input);
-    _HOST_ output = ntoh(temp);
+    _TYPE_ temp = hton(input);
+    _TYPE_ output = ntoh(temp);
     if (input != output) {
         errorf("%s[%d]: failed!\n", file, line);
         dump.bytes(&input, sizeof(input));
@@ -85,7 +96,7 @@ static int testInteger(const char * file, int line, _HOST_ input) {
 }
 
 template <typename _HOST_, typename _NETWORK_>
-static int testFloat(const char * file, int line, _HOST_ input) {
+static int testFloatSanity(const char * file, int line, _HOST_ input) {
     Print errorf(Platform::instance().error());
     Dump dump(Platform::instance().error());
     int errors = 0;
@@ -102,7 +113,7 @@ static int testFloat(const char * file, int line, _HOST_ input) {
 }
 
 template <typename _TYPE_>
-static int testSwap(const char * file, int line, _TYPE_ from, _TYPE_ to) {
+static int testIntegerSwap(const char * file, int line, _TYPE_ from, _TYPE_ to) {
     Print errorf(Platform::instance().error());
     Dump dump(Platform::instance().error());
     int errors = 0;
@@ -117,6 +128,24 @@ static int testSwap(const char * file, int line, _TYPE_ from, _TYPE_ to) {
     return errors;
 }
 
+template <typename _INPUT_, typename _OUTPUT_, typename _CONTROL_>
+static int testFloatSwap(const char * file, int line, _INPUT_ from, _OUTPUT_ to) {
+    Print errorf(Platform::instance().error());
+    Dump dump(Platform::instance().error());
+        errorf("%s[%d]:\n", file, line);
+        dump.bytes(&from, sizeof(from));
+        dump.bytes(&to, sizeof(to));
+    int errors = 0;
+    _OUTPUT_ temp = ByteOrder<_INPUT_, _OUTPUT_, _CONTROL_>::swap(from);
+    if (temp != to) {
+        errorf("%s[%d]: failed!\n", file, line);
+        dump.bytes(&from, sizeof(from));
+        dump.bytes(&temp, sizeof(temp));
+        dump.bytes(&to, sizeof(to));
+        ++errors;
+    }
+    return errors;
+}
 
 CXXCAPI int unittestByteOrder(void) {
     Print printf(Platform::instance().output());
@@ -125,73 +154,110 @@ CXXCAPI int unittestByteOrder(void) {
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
-    errors += testInteger<int64_t, int64_t>
+    errors += testMustSwap<int64_t>
+        (__FILE__, __LINE__);
+    errors += testMustSwap<int32_t>
+        (__FILE__, __LINE__);
+    errors += testMustSwap<int16_t>
+        (__FILE__, __LINE__);
+    errors += testMustSwap<int8_t>
+        (__FILE__, __LINE__);
+
+    errors += testMustSwap<uint64_t>
+        (__FILE__, __LINE__);
+    errors += testMustSwap<uint32_t>
+        (__FILE__, __LINE__);
+    errors += testMustSwap<uint16_t>
+        (__FILE__, __LINE__);
+    errors += testMustSwap<uint8_t>
+        (__FILE__, __LINE__);
+
+    errors += testIntegerSanity<int64_t>
         (__FILE__, __LINE__, 0x0123456789abcdefLL);
-    errors += testInteger<int32_t, int32_t>
+    errors += testIntegerSanity<int32_t>
         (__FILE__, __LINE__, 0x01234567L);
-    errors += testInteger<int16_t, int16_t>
+    errors += testIntegerSanity<int16_t>
         (__FILE__, __LINE__, 0x0123);
-    errors += testInteger<int8_t, int8_t>
+    errors += testIntegerSanity<int8_t>
         (__FILE__, __LINE__, 0x01);
 
-    errors += testInteger<uint64_t, uint64_t>
+    errors += testIntegerSanity<uint64_t>
         (__FILE__, __LINE__, 0x0123456789abcdefULL);
-    errors += testInteger<uint32_t, uint32_t>
+    errors += testIntegerSanity<uint32_t>
         (__FILE__, __LINE__, 0x01234567UL);
-    errors += testInteger<uint16_t, uint16_t>
+    errors += testIntegerSanity<uint16_t>
         (__FILE__, __LINE__, 0x0123U);
-    errors += testInteger<uint8_t, uint8_t>
+    errors += testIntegerSanity<uint8_t>
         (__FILE__, __LINE__, 0x01U);
 
-    errors += testFloat<float64_t, uint64_t>
-        (__FILE__, __LINE__, -3.4);
-    errors += testFloat<float32_t, uint32_t>
-        (__FILE__, __LINE__, 1.2);
+    errors += testFloatSanity<float64_t, uint64_t>
+        (__FILE__, __LINE__, 2.7182818284590452354);
+    errors += testFloatSanity<float32_t, uint32_t>
+        (__FILE__, __LINE__, 3.14159265358979323846);
 
-    errors += testInteger<signed long long, signed long long>
+    errors += testIntegerSanity<signed long long>
 		(__FILE__, __LINE__, 0x0123456789abcdefLL);
-    errors += testInteger<signed long, signed long>
+    errors += testIntegerSanity<signed long>
 		(__FILE__, __LINE__, 0x01234567L);
-    errors += testInteger<signed int, signed int>
+    errors += testIntegerSanity<signed int>
 		(__FILE__, __LINE__, 0x01234567L);
-    errors += testInteger<signed short, signed short>
+    errors += testIntegerSanity<signed short>
 		(__FILE__, __LINE__, 0x0123);
-    errors += testInteger<signed char, signed char>
+    errors += testIntegerSanity<signed char>
 		(__FILE__, __LINE__, 0x01);
 
-    errors += testInteger<unsigned long long, unsigned long long>
+    errors += testIntegerSanity<unsigned long long>
 		(__FILE__, __LINE__, 0x0123456789abcdefULL);
-    errors += testInteger<unsigned long, unsigned long>
+    errors += testIntegerSanity<unsigned long>
 		(__FILE__, __LINE__, 0x01234567UL);
-    errors += testInteger<unsigned int, unsigned int>
+    errors += testIntegerSanity<unsigned int>
 		(__FILE__, __LINE__, 0x01234567UL);
-    errors += testInteger<unsigned short, unsigned short>
+    errors += testIntegerSanity<unsigned short>
 		(__FILE__, __LINE__, 0x0123U);
-    errors += testInteger<unsigned char, unsigned char>
+    errors += testIntegerSanity<unsigned char>
 		(__FILE__, __LINE__, 0x01U);
 
-    errors += testFloat<double, uint64_t>
-        (__FILE__, __LINE__, -3.4);
-    errors += testFloat<float, uint32_t>
-        (__FILE__, __LINE__, 1.2);
+    errors += testFloatSanity<double, uint64_t>
+        (__FILE__, __LINE__, 2.7182818284590452354);
+    errors += testFloatSanity<float, uint32_t>
+        (__FILE__, __LINE__, 3.14159265358979323846);
 
-    errors += testSwap<uint64_t>
+    errors += testIntegerSwap<uint64_t>
         (__FILE__, __LINE__, 0x0123456789abcdefULL, 0xefcdab8967452301ULL);
-    errors += testSwap<uint32_t>
+    errors += testIntegerSwap<uint32_t>
         (__FILE__, __LINE__, 0x01234567UL, 0x67452301UL);
-    errors += testSwap<uint16_t>
+    errors += testIntegerSwap<uint16_t>
         (__FILE__, __LINE__, 0x0123U, 0x2301U);
-    errors += testSwap<uint8_t>
+    errors += testIntegerSwap<uint8_t>
         (__FILE__, __LINE__, 0x01U, 0x01U);
 
-    errors += testSwap<int64_t>
+    errors += testIntegerSwap<int64_t>
         (__FILE__, __LINE__, 0x0123456789abcdefLL, 0xefcdab8967452301LL);
-    errors += testSwap<int32_t>
+    errors += testIntegerSwap<int32_t>
         (__FILE__, __LINE__, 0x01234567L, 0x67452301L);
-    errors += testSwap<int16_t>
+    errors += testIntegerSwap<int16_t>
         (__FILE__, __LINE__, 0x0123, 0x2301);
-    errors += testSwap<int8_t>
+    errors += testIntegerSwap<int8_t>
         (__FILE__, __LINE__, 0x01, 0x01);
+
+    // I thought these should work as long as the target implements
+    // IEEE 754 Floating Point. If it doesn't, there is not much
+    // point in pushing floats across the network unless it is to
+    // exactly the same architecture. And if that's the case, there
+    // is probably no point in swapping the bytes. Wikipedia:Endianess
+    // suggests that the situation is even more complicated than this,
+    // so disable this code if it doesn't fly on your target.
+
+#if 1
+    errors += testFloatSwap<float64_t, uint64_t, uint64_t>
+        (__FILE__, __LINE__, 2.7182818284590452354, 0x6957148b0abf0540ULL);
+    errors += testFloatSwap<float32_t, uint32_t, uint32_t>
+        (__FILE__, __LINE__, 3.14159265358979323846, 0xdb0f4940UL);
+    errors += testFloatSwap<uint64_t, float64_t, uint64_t>
+        (__FILE__, __LINE__, 0x6957148b0abf0540ULL, 2.7182818284590452354);
+    errors += testFloatSwap<uint32_t, float32_t, uint32_t>
+        (__FILE__, __LINE__, 0xdb0f4940UL, 3.14159265358979323846);
+#endif
 
     printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
         errors);

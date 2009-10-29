@@ -73,6 +73,7 @@ unittestArgument
 unittestAscii
 unittestAttribute
 unittestBandwidthThrottle
+unittestByteOrder
 unittestCellRateThrottle
 unittestChain
 unittestCommonEra
@@ -114,12 +115,12 @@ unitteststring
 unittesttarget
 EOF
 
-# These commands are shell scripts
+# These commands are shell scripts.
 cat << EOF > $SCRIPT3
 unittestInputOutput.sh
 EOF
 
-# Verify that we have everything
+# Verify that we have everything.
 
 cat $SCRIPT1 $SCRIPT2 $SCRIPT3 | (
 	ERRORS=0
@@ -141,7 +142,7 @@ if [ $TOTAL -gt 0 ]; then
 	exit $TOTAL
 fi
 
-# Run the tests
+# Run the tests.
 
 (
 	ERRORS=0
