@@ -93,7 +93,7 @@ CXXCAPI int unittestcxxcapi2() {
     print_f(platform_output(), "%s[%d]: begin\n",
         __FILE__, __LINE__);
 
-    print_f("%s[%d]: NULL\n", __FILE__, __LINE__);
+    print_f(platform_output(), "%s[%d]: NULL\n", __FILE__, __LINE__);
 
 #if defined(NULL)
     if (((void*)0) != NULL) {
@@ -106,7 +106,7 @@ CXXCAPI int unittestcxxcapi2() {
     ++errors;
 #endif
 
-    print_f("%s[%d]: test\n", __FILE__, __LINE__);
+    print_f(platform_output(), "%s[%d]: test\n", __FILE__, __LINE__);
 
     errors += test();
 
