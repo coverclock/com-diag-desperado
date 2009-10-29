@@ -75,7 +75,7 @@
 #include "Platform.h"
 #include "Desperado.h"
 
-extern "C" int unittestInputOutput(
+CXXCAPI int unittestInputOutput(
     void *,
     char mechanism,
     Input* inputp,

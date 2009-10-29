@@ -87,7 +87,7 @@ static Fifo<int> staticFifo;
 static NewFifo<int> staticNewFifo;
 static FifoType<int, 25> staticFifoType;
 
-extern "C" int unittestFifo() {
+CXXCAPI int unittestFifo(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

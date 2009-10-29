@@ -71,7 +71,7 @@
 
 static Escape staticEscape;
 
-extern "C" int unittestEscape() {
+CXXCAPI int unittestEscape(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

@@ -63,7 +63,7 @@
 #include "Print.h"
 #include "Desperado.h"
 
-extern "C" int unitteststring() {
+CXXCAPI int unitteststring(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

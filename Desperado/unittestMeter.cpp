@@ -95,7 +95,7 @@ static int sample(Meter& meter, size_t n, size_t d) {
 
 static Meter staticMeter;
 
-extern "C" int unittestMeter() {
+CXXCAPI int unittestMeter(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

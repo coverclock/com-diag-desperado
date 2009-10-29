@@ -48,57 +48,228 @@
  */
 
 
-#if defined(__cplusplus)
-
-
-#include <stdint.h>
-#include <sys/types.h>
+#include "target.h"
 
 
 #include "Begin.h"
 
 /**
+ *  Template defines a generalized method for swapping bytes.
+ *
  *  @author coverclock@diag.com (Chip Overclock)
  */
-template <typename _TYPE_>
+template <typename _INPUT_, typename _OUTPUT_>
 union ByteOrder {
 
-    _TYPE_ word;
+    _INPUT_ input;
 
-    uint8_t bytes[sizeof(_TYPE_)];
+    _OUTPUT_ output;
 
+    uint8_t bytes[sizeof(_INPUT_)];
+
+    /**
+     * Returns true if network byte order is not the
+     * same as host byte order.
+     * @return true if network byte order is not the
+     * same as host byte order.
+     */
     static bool mustswap() {
         static const ByteOrder swappable = { 1 };
         return swappable.bytes[0] != 0;
     }
 
-    static _TYPE_ swap(_TYPE_ data) {
+    /**
+     * Unconditionally swap bytes in a word.
+     * @param data is the the input word.
+     * @return the output word.
+     */
+    static _OUTPUT_ swap(_INPUT_ data) {
         ByteOrder in;
         ByteOrder out;
-        in.word = data;
+        in.input = data;
         for (size_t ii = 0; ii < sizeof(data); ++ii) {
             out.bytes[ii] = in.bytes[sizeof(data) - 1 - ii];
         }
-        return out.word;
+        return out.output;
     }
 
-    static _TYPE_ swapif(_TYPE_ data) {
-        return mustswap() ? swap(data) : data;
+    /**
+     * Convert the input word to the output word
+     * without swapping bytes.
+     * @param data is the the input word.
+     * @return the output word.
+     */
+    static _OUTPUT_ noswap(_INPUT_ data) {
+        ByteOrder convert;
+        convert.input = data;
+        return convert.output;
+    }
+
+    /**
+     * Conditionally swap bytes in a word.
+     * @param data is the the input word.
+     * @return the output word.
+     */
+    static _OUTPUT_ swapif(_INPUT_ data) {
+        return mustswap() ? swap(data) : noswap(data);
     }
 
 };
 
+/*
+ * Unsigned Integers
+ */
 
-inline uint64_t desperado_swap64(uint64_t data) {
-    return ByteOrder<uint64_t>::swapif(data);
+/**
+ *  Convert unsigned 64-bit integer from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint64_t ntoh(uint64_t data) {
+    return ByteOrder<uint64_t, uint64_t>::swapif(data);
 }
 
-inline uint32_t desperado_swap32(uint32_t data) {
-    return ByteOrder<uint32_t>::swapif(data);
+/**
+ *  Convert unsigned 64-bit integer from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint64_t hton(uint64_t data) {
+    return ByteOrder<uint64_t, uint64_t>::swapif(data);
 }
 
-inline uint64_t desperado_swap16(uint16_t data) {
-    return ByteOrder<uint16_t>::swapif(data);
+/**
+ *  Convert unsigned 32-bit integer from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint32_t ntoh(uint32_t data) {
+    return ByteOrder<uint32_t, uint32_t>::swapif(data);
+}
+
+/**
+ *  Convert unsigned 32-bit integer from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint32_t hton(uint32_t data) {
+    return ByteOrder<uint32_t, uint32_t>::swapif(data);
+}
+
+/**
+ *  Convert unsigned 16-bit integer from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint16_t ntoh(uint16_t data) {
+    return ByteOrder<uint16_t, uint16_t>::swapif(data);
+}
+
+/**
+ *  Convert unsigned 16-bit integer from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint16_t hton(uint16_t data) {
+    return ByteOrder<uint16_t, uint16_t>::swapif(data);
+}
+
+/*
+ * Signed Integers
+ */
+
+/**
+ *  Convert signed 64-bit integer from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline int64_t ntoh(int64_t data) {
+    return ByteOrder<int64_t, int64_t>::swapif(data);
+}
+
+/**
+ *  Convert signed 64-bit integer from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline int64_t hton(int64_t data) {
+    return ByteOrder<int64_t, int64_t>::swapif(data);
+}
+
+/**
+ *  Convert signed 32-bit integer from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline int32_t ntoh(int32_t data) {
+    return ByteOrder<int32_t, int32_t>::swapif(data);
+}
+
+/**
+ *  Convert signed 32-bit integer from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline int32_t hton(int32_t data) {
+    return ByteOrder<int32_t, int32_t>::swapif(data);
+}
+
+/**
+ *  Convert signed 16-bit integer from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline int16_t ntoh(int16_t data) {
+    return ByteOrder<int16_t, int16_t>::swapif(data);
+}
+
+/**
+ *  Convert signed 16-bit integer from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline int16_t hton(int16_t data) {
+    return ByteOrder<int16_t, int16_t>::swapif(data);
+}
+
+/*
+ * Floats
+ */
+
+/**
+ *  Convert 64-bit float from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline float64_t fntoh(uint64_t data) {
+    return ByteOrder<uint64_t, float64_t>::swapif(data);
+}
+
+/**
+ *  Convert 64-bit float from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint64_t fhton(float64_t data) {
+    return ByteOrder<float64_t, uint64_t>::swapif(data);
+}
+
+/**
+ *  Convert 32-bit float from network to host byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline float32_t fntoh(uint32_t data) {
+    return ByteOrder<uint32_t, float32_t>::swapif(data);
+}
+
+/**
+ *  Convert 32-bit float from host to network byte order.
+ *  @param data is the input word to convert.
+ *  @return output word.
+ */
+inline uint32_t fhton(float32_t data) {
+    return ByteOrder<float32_t, uint32_t>::swapif(data);
 }
 
 #include "End.h"

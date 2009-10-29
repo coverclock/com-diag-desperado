@@ -102,10 +102,10 @@ extern "C" {
     void* unittestFiclPointerSystem = &unittestFiclSystem;
     const int unittestFiclIntConst = -1;
 }
-extern "C" int unittestFiclIntC;
-extern "C" int unittestFiclFunctionC(int x, char y) { return x + y; }
-extern "C" int unittestFiclIntCXX;
-extern "C" int unittestFiclFunctionCXX(int x, char y) { return x + y; }
+CXXCAPI int unittestFiclIntC;
+CXXCAPI int unittestFiclFunctionC(int x, char y) { return x + y; }
+CXXCAPI int unittestFiclIntCXX;
+CXXCAPI int unittestFiclFunctionCXX(int x, char y) { return x + y; }
 class UnitTestFicl {
 public:
     static int unittestFiclMethodCXX(int x, char y) { return x + y; }
@@ -209,7 +209,7 @@ static int audit(FiclSystem& system, FiclMachine& machine) {
     return errors;
 }
 
-extern "C" int unittestFicl(void*, int interactive) {
+CXXCAPI int unittestFicl(void*, int interactive) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

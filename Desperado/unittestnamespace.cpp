@@ -48,10 +48,13 @@
 
 
 #include "UnitTest.h"
+#include "cxxcapi.h"
 #include "Print.h"
 #include "Dump.h"
 #include "Platform.h"
 #include "Output.h"
+
+CXXCAPI int unittestnamespace(void);
 
 #include "Begin.h"
 static int function1() {
@@ -77,7 +80,7 @@ static int function4() {
 }
 #include "End.h"
 
-extern "C" int unittestnamespace() {
+CXXCAPI int unittestnamespace(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

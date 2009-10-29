@@ -79,7 +79,7 @@ template class Ram<int>;
 
 static Ram<int> staticRam;
 
-extern "C" int unittestRam() {
+CXXCAPI int unittestRam(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     Dump dump;

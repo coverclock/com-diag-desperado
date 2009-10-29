@@ -73,7 +73,7 @@ static inline bool null(void* ptr) {
 
 static Heap staticHeap;
 
-extern "C" int unittestHeap() {
+CXXCAPI int unittestHeap(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

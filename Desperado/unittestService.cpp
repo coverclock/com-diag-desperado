@@ -80,7 +80,7 @@
 
 static Service static_Service;
 
-extern "C" int unittestService() {
+CXXCAPI int unittestService(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

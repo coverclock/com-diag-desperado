@@ -181,7 +181,7 @@ int bandwidth_exercise(Throttle& throttle, size_t iterations) {
     return errors;
 }
 
-extern "C" int unittestBandwidthThrottle(
+CXXCAPI int unittestBandwidthThrottle(
     void*,
     unsigned int pbps,
     unsigned int jt,

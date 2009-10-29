@@ -607,7 +607,7 @@ static Time staticTime;
 static TimeStamp staticTimeStamp;
 static TimeZone staticTimeZone;
 
-extern "C" int unittestCommonEra() {
+CXXCAPI int unittestCommonEra(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

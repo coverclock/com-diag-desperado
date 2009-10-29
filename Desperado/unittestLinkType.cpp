@@ -118,7 +118,7 @@ public:
 static UT_LinkType* links[10];
 static const int limit = countof(links);
 
-extern "C" int unittestLinkType() {
+CXXCAPI int unittestLinkType(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

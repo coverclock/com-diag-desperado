@@ -69,7 +69,7 @@
 
 static GeometricThrottle staticGeometricThrottle;
 
-extern "C" int unittestGeometricThrottle(void*, int limit) {
+CXXCAPI int unittestGeometricThrottle(void*, int limit) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

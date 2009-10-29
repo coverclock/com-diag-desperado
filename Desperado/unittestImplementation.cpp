@@ -70,7 +70,7 @@ static Derivation derivation;
 static Derivation derivation2 = derivation;
 static Derivation derivation3;
 
-extern "C" int unittestImplementation() {
+CXXCAPI int unittestImplementation(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

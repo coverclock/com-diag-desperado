@@ -221,7 +221,7 @@ static const char text[] = {
 
 static Word staticWord;
 
-extern "C" int unittestWord(void*, int interactive) {
+CXXCAPI int unittestWord(void*, int interactive) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

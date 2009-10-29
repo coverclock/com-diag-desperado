@@ -78,9 +78,9 @@
 #include "Desperado.h"
 
 
-extern "C" int unittestFiclShellProxy(void);
-extern "C" int unittestFiclShellValue;
-extern "C" int unittestFiclShellErrors;
+CXXCAPI int unittestFiclShellProxy(void);
+CXXCAPI int unittestFiclShellValue;
+CXXCAPI int unittestFiclShellErrors;
 
 static FiclShell staticficlshell;
 
@@ -133,7 +133,7 @@ const char script[] =
     "unittest\n"
 ;
 
-extern "C" int unittestFiclShell(void*, int interactive) {
+CXXCAPI int unittestFiclShell(void*, int interactive) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

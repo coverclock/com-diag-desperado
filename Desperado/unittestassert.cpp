@@ -111,7 +111,7 @@ static int yes() {
     return errors;
 }
 
-extern "C" int unittestassert() {
+CXXCAPI int unittestassert(void) {
     Print errorf(Platform::instance().error());
     int errors = 0;
 

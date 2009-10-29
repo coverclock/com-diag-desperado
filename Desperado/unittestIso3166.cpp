@@ -67,7 +67,7 @@
 
 static Iso3166 staticIso3166;
 
-extern "C" int unittestIso3166() {
+CXXCAPI int unittestIso3166(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

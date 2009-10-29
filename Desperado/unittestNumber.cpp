@@ -437,7 +437,7 @@ static int stest(int16_t value) {
     return errors;
 }
 
-extern "C" int unittestNumber() {
+CXXCAPI int unittestNumber(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

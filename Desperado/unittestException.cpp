@@ -129,7 +129,7 @@ static int exceptioning(int type) {
 
 #endif
 
-extern "C" int unittestException() {
+CXXCAPI int unittestException(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

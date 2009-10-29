@@ -66,7 +66,7 @@
 
 static Throttle staticThrottle;
 
-extern "C" int unittestThrottle() {
+CXXCAPI int unittestThrottle(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

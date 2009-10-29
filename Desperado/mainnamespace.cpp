@@ -56,13 +56,13 @@
 
 
 #include <cstdlib>
+#include "cxxcapi.h"
 #include "UnitTest.h"
 #include "Platform.h"
 
-extern "C" int unittestnamespace();
+CXXCAPI int unittestnamespace();
 
 int main(int, char**) {
     Platform::instance(Platform::factory());
     exit(unittestnamespace());
 }
-

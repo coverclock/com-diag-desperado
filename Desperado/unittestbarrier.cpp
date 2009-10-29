@@ -70,7 +70,7 @@
 #include "Print.h"
 #include "Desperado.h"
 
-extern "C" int unittestbarrier() {
+CXXCAPI int unittestbarrier(void) {
     Print printf;
     Print errorf(Platform::instance().error());
     int errors = 0;
