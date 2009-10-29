@@ -109,16 +109,55 @@ CXXCAPI int unittestByteOrder(void) {
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
-    errors += testInteger<int16_t, int16_t>(__FILE__, __LINE__, 0x0123);
-    errors += testInteger<int32_t, int32_t>(__FILE__, __LINE__, 0x01234567L);
-    errors += testInteger<int64_t, int64_t>(__FILE__, __LINE__, 0x0123456789abcdefLL);
+    errors += testInteger<int64_t, int64_t>
+        (__FILE__, __LINE__, 0x0123456789abcdefLL);
+    errors += testInteger<int32_t, int32_t>
+        (__FILE__, __LINE__, 0x01234567L);
+    errors += testInteger<int16_t, int16_t>
+        (__FILE__, __LINE__, 0x0123);
+    errors += testInteger<int8_t, int8_t>
+        (__FILE__, __LINE__, 0x01);
 
-    errors += testInteger<uint16_t, uint16_t>(__FILE__, __LINE__, 0x0123U);
-    errors += testInteger<uint32_t, uint32_t>(__FILE__, __LINE__, 0x01234567UL);
-    errors += testInteger<uint64_t, uint64_t>(__FILE__, __LINE__, 0x0123456789abcdefULL);
+    errors += testInteger<uint64_t, uint64_t>
+        (__FILE__, __LINE__, 0x0123456789abcdefULL);
+    errors += testInteger<uint32_t, uint32_t>
+        (__FILE__, __LINE__, 0x01234567UL);
+    errors += testInteger<uint16_t, uint16_t>
+        (__FILE__, __LINE__, 0x0123U);
+    errors += testInteger<uint8_t, uint8_t>
+        (__FILE__, __LINE__, 0x01U);
 
-    errors += testFloat<float32_t, uint32_t>(__FILE__, __LINE__, 1.2);
-    errors += testFloat<float64_t, uint64_t>(__FILE__, __LINE__, -3.4);
+    errors += testFloat<float64_t, uint64_t>
+        (__FILE__, __LINE__, -3.4);
+    errors += testFloat<float32_t, uint32_t>
+        (__FILE__, __LINE__, 1.2);
+
+    errors += testInteger<signed long long, signed long long>
+		(__FILE__, __LINE__, 0x0123456789abcdefLL);
+    errors += testInteger<signed long, signed long>
+		(__FILE__, __LINE__, 0x01234567L);
+    errors += testInteger<signed int, signed int>
+		(__FILE__, __LINE__, 0x01234567L);
+    errors += testInteger<signed short, signed short>
+		(__FILE__, __LINE__, 0x0123);
+    errors += testInteger<signed char, signed char>
+		(__FILE__, __LINE__, 0x01);
+
+    errors += testInteger<unsigned long long, unsigned long long>
+		(__FILE__, __LINE__, 0x0123456789abcdefULL);
+    errors += testInteger<unsigned long, unsigned long>
+		(__FILE__, __LINE__, 0x01234567UL);
+    errors += testInteger<unsigned int, unsigned int>
+		(__FILE__, __LINE__, 0x01234567UL);
+    errors += testInteger<unsigned short, unsigned short>
+		(__FILE__, __LINE__, 0x0123U);
+    errors += testInteger<unsigned char, unsigned char>
+		(__FILE__, __LINE__, 0x01U);
+
+    errors += testFloat<double, uint64_t>
+        (__FILE__, __LINE__, -3.4);
+    errors += testFloat<float, uint32_t>
+        (__FILE__, __LINE__, 1.2);
 
     printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
         errors);
