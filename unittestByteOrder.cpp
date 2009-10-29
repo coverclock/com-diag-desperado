@@ -132,9 +132,6 @@ template <typename _INPUT_, typename _OUTPUT_, typename _CONTROL_>
 static int testFloatSwap(const char * file, int line, _INPUT_ from, _OUTPUT_ to) {
     Print errorf(Platform::instance().error());
     Dump dump(Platform::instance().error());
-        errorf("%s[%d]:\n", file, line);
-        dump.bytes(&from, sizeof(from));
-        dump.bytes(&to, sizeof(to));
     int errors = 0;
     _OUTPUT_ temp = ByteOrder<_INPUT_, _OUTPUT_, _CONTROL_>::swap(from);
     if (temp != to) {
