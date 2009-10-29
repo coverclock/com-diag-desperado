@@ -55,6 +55,13 @@
 
 /**
  *  Template defines a generalized method for swapping bytes.
+ *  It is templatized on the input type, the output type, and
+ *  the control type. For integers, these are all the same.
+ *  For floats, the control type is always an integer type the
+ *  same sizeof as the float, and the input and output types
+ *  depends on the direction, where the network input or output
+ *  type is always an integer, and the host input or output type
+ *  is always the float, to hardware normalization.
  *
  *  @author coverclock@diag.com (Chip Overclock)
  */
