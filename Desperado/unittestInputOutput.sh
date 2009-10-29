@@ -47,7 +47,7 @@ CMD="`basename $0`"
 DIR=${TMPDIR}/${CMD}
 ROOT=${DIR}/$$
 FILE=lesser.txt
-PGM="unittestInputOutput"
+PGM="./unittestInputOutput"
 ERRORS=0
 
 test -d ${DIR} || mkdir ${DIR}

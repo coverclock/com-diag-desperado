@@ -182,10 +182,10 @@ extern "C" int unittestService() {
         ++errors;
     }
 
-    port = service.port("http", "udp");
-    if (port != 80) {
+    port = service.port("tftp", "udp");
+    if (port != 69) {
         errorf("%s[%d]: (%u==%u)!\n",
-            __FILE__, __LINE__, port, 80);
+            __FILE__, __LINE__, port, 69);
         ++errors;
     }
 

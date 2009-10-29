@@ -322,7 +322,7 @@ int unittesttarget2() {
         ++errors;
     }
 
-    print_f("%s[%d]: bool\n", __FILE__, __LINE__);
+    print_f(platform_output(), "%s[%d]: bool\n", __FILE__, __LINE__);
 
     if (!truth) {
         print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",
