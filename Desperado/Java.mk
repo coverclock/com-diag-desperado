@@ -59,6 +59,7 @@ JAVALIBRARY		=	-Wl,-Bdynamic -Wl,-ljvm
 
 JARFILE			=	$(PRODUCT).jar
 PLATFORMJNIH	=	com_diag_desperado_Platform.h
+PLATFORMJNIO	=	Java_com_diag_desperado_Platform.o
 
 JAVAH			=	javah  -classpath $(JARFILE) -jni
 JAVAP			=	javap  -classpath $(JARFILE) -s -p
@@ -84,5 +85,8 @@ $(PLATFORMJNIH):	$(JARFILE)
 
 $(JARFILE):
 	(cd $(JAVADIR); $(ANT) install)
+
+
+$(PLATFORMJNIO):	$(PLATFORMJNIH)
 
 endif
