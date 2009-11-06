@@ -71,7 +71,7 @@ Ratio & Ratio::normalize()
 	Vector::const_iterator here;
 	Vector::const_iterator end;
 
-    for (Base factor = 2; factor < root; ++factor) {
+    for (Base factor = 2; factor <= root; ++factor) {
 
 		here = primes.begin();
 		end = primes.end();
