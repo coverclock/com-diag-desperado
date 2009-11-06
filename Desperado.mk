@@ -618,6 +618,9 @@ unittestPlatform:	mainPlatform.o $(ARCHIVE)
 unittestRam:	mainRam.o $(ARCHIVE)
 	$(LD) -o unittestRam mainRam.o $(LDFLAGS)
 
+unittestRatio:	mainRatio.o $(ARCHIVE)
+	$(LD) -o unittestRatio mainRatio.o $(LDFLAGS)
+
 unittestService:	mainService.o $(ARCHIVE)
 	$(LD) -o unittestService mainService.o $(LDFLAGS)
 
