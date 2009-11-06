@@ -64,11 +64,11 @@ public:
 
     ~Ratio() {}
 
-    int numerator() {
+    int numerator() const {
         return nu;
     }
 
-    int denominator() {
+    int denominator() const {
         return de;
     }
 
@@ -80,13 +80,12 @@ public:
         de = dd;
     }
 
-    void normalize() {
-    }
-
     Ratio(const Ratio & that) {
         this->nu = that.nu;
         this->de = that.de;
     }
+
+    Ratio & normalize();
 
     Ratio & operator =(const Ratio & that) {
         if (this != &that) {
@@ -97,14 +96,22 @@ public:
     }
 
     Ratio & operator +=(const Ratio & that) {
-        this->nu = (this->nu * that.de) + (that.nu * this->de);
-        this->de = (this->de * that.de) + (that.de * this->de);
+        if (this->de == that.de) {
+            this->nu += that.nu;
+        } else {
+            this->nu = (this->nu * that.de) + (that.nu * this->de);
+            this->de = (this->de * that.de) + (that.de * this->de);
+        }
         return *this;
     }
 
     Ratio & operator -=(const Ratio & that) {
-        this->nu = (this->nu * that.de) - (that.nu * this->de);
-        this->de = (this->de * that.de) - (that.de * this->de);
+        if (this->de == that.de) {
+            this->nu -= that.nu;
+        } else {
+            this->nu = (this->nu * that.de) - (that.nu * this->de);
+            this->de = (this->de * that.de) - (that.de * this->de);
+        }
         return *this;
     }
 
@@ -120,37 +127,39 @@ public:
         return *this;
     }
 
-    Ratio operator +(const Ratio &that) {
+    Ratio operator +(const Ratio &that) const {
         Ratio temp = *this;
         temp += that;
-        return that;
+        return temp;
     }
 
-    Ratio operator -(const Ratio &that) {
+    Ratio operator -(const Ratio &that) const {
         Ratio temp = *this;
         temp -= that;
-        return that;
+        return temp;
     }
 
-    Ratio operator *(const Ratio &that) {
+    Ratio operator *(const Ratio &that) const {
         Ratio temp = *this;
         temp *= that;
-        return that;
+        return temp;
     }
 
-    Ratio operator /(const Ratio &that) {
+    Ratio operator /(const Ratio &that) const {
         Ratio temp = *this;
         temp /= that;
-        return that;
+        return temp;
     }
 
-    bool operator ==(const Ratio &that) {
-        int nu1 = (this->nu * that.de);
-        int nu2 = (that.nu * this->de);
-        return nu1 == nu2;
+    bool operator ==(const Ratio &that) const {
+        if (this->de == that.de) {
+            return this->nu == that.nu;
+        } else {
+            return (this->nu * that.de) == (that.nu * this->de);
+        }
     }
 
-    bool operator !=(const Ratio &that) {
+    bool operator !=(const Ratio &that) const {
         return !(*this == that);
     }
 
