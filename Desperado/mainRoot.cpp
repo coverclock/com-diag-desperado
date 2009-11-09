@@ -41,9 +41,9 @@
 /**
  *  @file
  *
- *  Implements the Ratio unit test main program.
+ *  Implements the Root unit test main program.
  *
- *  @see    Ratio
+ *  @see    root
  *
  *  @author $Author: jsloan $
  */
@@ -59,4 +59,3 @@ int main(int argc, char**) {
     Platform::instance(Platform::factory());
     exit(unittestRoot());
 }
-

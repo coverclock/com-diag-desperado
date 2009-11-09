@@ -1,6 +1,3 @@
-#ifndef _COM_DIAG_DESPERADO_PRIMES_H_
-#define _COM_DIAG_DESPERADO_PRIMES_H_
-
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
@@ -44,62 +41,21 @@
 /**
  *  @file
  *
- *  Declares the Primes class.
+ *  Implements the Primes unit test main program.
+ *
+ *  @see    Primes
+ *
+ *  @author $Author: jsloan $
  */
 
 
-#include <vector>
-#include "Begin.h"
+#include <cstdlib>
+#include "UnitTest.h"
+#include "Platform.h"
+#include "Primes.h"
+#include "Desperado.h"
 
-/**
- *  @author coverclock@diag.com (Chip Overclock)
- */
-class Primes {
-
-public:
-
-	typedef int Type;
-
-    typedef std::vector<Type> Vector;
-
-    typedef Vector::const_iterator Iterator;
-
-    Primes(Type limit) { generate(limit); }
-
-    ~Primes() {}
-
-    size_t size() { return primes.size(); }
-
-    Iterator begin() const { return primes.begin(); }
-
-    Iterator end() const { return primes.end(); }
-
-protected:
-
-    static void generate(Type limit);
-
-private:
-
-    static Vector primes;
-    
-    static Type maximum;
-
-};
-
-
-#include "End.h"
-
-
-#if defined(DESPERADO_HAS_UNITTESTS)
-#include "cxxcapi.h"
-/**
- *  Run the Primes unit test.
- *  
- *  @return the number of errors detected by the unit test.
- */
-CXXCAPI int unittestPrimes(void);
-#endif
-
-
-#endif
-
+int main(int argc, char**) {
+    Platform::instance(Platform::factory());
+    exit(unittestPrimes());
+}
