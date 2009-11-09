@@ -50,7 +50,7 @@
 
 Primes::Vector Primes::primes;
 
-Primes::Type Primes::maximum = 1;
+Primes::Type Primes::maximum = 2;
 
 void Primes::generate(Type limit)
 {
