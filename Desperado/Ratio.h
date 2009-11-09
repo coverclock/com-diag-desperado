@@ -57,28 +57,22 @@ class Ratio {
 
 public:
 
-    Ratio(int nn = 0, int dd = 1)
+	typedef int Type;
+
+    Ratio(Type nn = 0, Type dd = 1)
     : nu(nn)
     , de(dd)
     {}
 
     ~Ratio() {}
 
-    int numerator() const {
-        return nu;
-    }
+    Type numerator() const { return nu; }
 
-    int denominator() const {
-        return de;
-    }
+    Type denominator() const { return de; }
 
-    void numerator(int nn) {
-        nu = nn;
-    }
+    void numerator(Type nn) { nu = nn; }
 
-    void denominator(int dd) {
-        de = dd;
-    }
+    void denominator(Type dd) { de = dd; }
 
     Ratio(const Ratio & that) {
         this->nu = that.nu;
@@ -86,6 +80,18 @@ public:
     }
 
     Ratio & normalize();
+
+    operator double() {
+        double temp = this->nu;
+        temp /= this->de;
+        return temp;
+    }
+
+    operator int() {
+        int temp = this->nu;
+        temp /= this->de;
+        return temp;
+    }
 
     Ratio & operator =(const Ratio & that) {
         if (this != &that) {
@@ -165,9 +171,9 @@ public:
 
 private:
 
-	int nu;
+	Type nu;
 
-    int de;
+    Type de;
 
 };
 
@@ -187,4 +193,3 @@ CXXCAPI int unittestRatio(void);
 
 
 #endif
-

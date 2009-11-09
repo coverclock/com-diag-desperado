@@ -41,43 +41,63 @@
 /**
  *  @file
  *
- *  Implements the Ratio class.
+ *  Implements the Root unit test.
+ *
+ *  @see    Root
+ *
+ *  @author $Author: jsloan $
  */
 
-#include <vector>
+
+#include "UnitTest.h"
 #include "Root.h"
-#include "Primes.h"
-#include "Ratio.h"
+#include "Root.h"
+#include "Print.h"
+#include "Output.h"
+#include "Platform.h"
+#include "Desperado.h"
 
-#include "Begin.h"
-
-Ratio & Ratio::normalize()
-{
-    // Estimate the square root of the smaller absolute value.
-
-    Type nup = this->nu < 0 ? -this->nu : this->nu;
-    Type dep = this->de < 0 ? -this->de : this->de;
-    Type minimim = (nup < dep) ? nup : dep;
-    Type limit = root(minimim);
-
-    // Get as least those primes as large as the limit.
-
-    Primes primes(limit);
-
-    // Factor out the primes.
-
-    Primes::Iterator here = primes.begin();
-    Primes::Iterator end = primes.end();
-
-	while ((here != end) && (*here <= limit)) {
-        while (((this->nu % *here) == 0) && ((this->de % *here) == 0)) {
-            this->nu /= *here;
-            this->de /= *here;
-		}
-        ++here;
-	}
-
-    return *this;	
+static int testRoot(unsigned int value, unsigned int expected) {
+    Print errorf(Platform::instance().error());
+    int errors = 0;
+    unsigned int actual = root(value);
+    if (actual != expected) {
+        errorf("%s[%d]: 0x%08x (0x%08x!=0x%08x)!\n",
+            __FILE__, __LINE__, value, actual, expected);
+        ++errors;
+    }
+    return errors;
 }
 
-#include "End.h"
+CXXCAPI int unittestRoot(void) {
+    Print printf(Platform::instance().output());
+    Print errorf(Platform::instance().error());
+    int errors = 0;
+
+    printf("%s[%d]: begin\n", __FILE__, __LINE__);
+
+    testRoot(0x00000000, 0x00000000);
+    testRoot(0x00000001, 0x00000001);
+    testRoot(0x00000002, 0x00000001);
+    testRoot(0x00000004, 0x00000003);
+    testRoot(0x00000008, 0x00000003);
+    testRoot(0x00000010, 0x00000007);
+    testRoot(0x00000020, 0x00000007);
+    testRoot(0x00000040, 0x0000000f);
+    testRoot(0x00000080, 0x0000000f);
+    testRoot(0xffffffff, 0x0000ffff);
+    testRoot(0x7fffffff, 0x0000ffff);
+    testRoot(0x3fffffff, 0x00007fff);
+    testRoot(0x1fffffff, 0x00007fff);
+    testRoot(0x0fffffff, 0x00003fff);
+    testRoot(0x07ffffff, 0x00003fff);
+    testRoot(0x03ffffff, 0x00001fff);
+    testRoot(0x01ffffff, 0x00001fff);
+    testRoot(0x00ffffff, 0x00000fff);
+
+    printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
+        errors);
+
+    return errors;
+}
+

@@ -41,43 +41,22 @@
 /**
  *  @file
  *
- *  Implements the Ratio class.
+ *  Implements the Ratio unit test main program.
+ *
+ *  @see    Ratio
+ *
+ *  @author $Author: jsloan $
  */
 
-#include <vector>
+
+#include <cstdlib>
+#include "UnitTest.h"
+#include "Platform.h"
 #include "Root.h"
-#include "Primes.h"
-#include "Ratio.h"
+#include "Desperado.h"
 
-#include "Begin.h"
-
-Ratio & Ratio::normalize()
-{
-    // Estimate the square root of the smaller absolute value.
-
-    Type nup = this->nu < 0 ? -this->nu : this->nu;
-    Type dep = this->de < 0 ? -this->de : this->de;
-    Type minimim = (nup < dep) ? nup : dep;
-    Type limit = root(minimim);
-
-    // Get as least those primes as large as the limit.
-
-    Primes primes(limit);
-
-    // Factor out the primes.
-
-    Primes::Iterator here = primes.begin();
-    Primes::Iterator end = primes.end();
-
-	while ((here != end) && (*here <= limit)) {
-        while (((this->nu % *here) == 0) && ((this->de % *here) == 0)) {
-            this->nu /= *here;
-            this->de /= *here;
-		}
-        ++here;
-	}
-
-    return *this;	
+int main(int argc, char**) {
+    Platform::instance(Platform::factory());
+    exit(unittestRoot());
 }
 
-#include "End.h"

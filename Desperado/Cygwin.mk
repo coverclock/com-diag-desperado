@@ -75,8 +75,8 @@ CINCLUDES	=	-iquote. $(ADJUNCTINCDIR)
 CDEBUG		=	-g3 -O3
 
 COPTIONS	=	-pipe -Wall -W -Wno-long-long -Wmissing-prototypes
-
-CXXOPTIONS	=	-pipe -fcheck-new -fno-rtti -fno-implicit-templates -Wall -W -Wno-long-long -Wabi -Wold-style-cast -Winline
+ 
+CXXOPTIONS	=	-pipe -fcheck-new -fno-rtti -Wall -W -Wno-long-long -Wabi -Wold-style-cast -Winline
 
 LDLIBDIRS	=	-L. $(ADJUNCTLIBDIR) $(PLATFORMLIBDIR) $(TARGETLIBDIR)
 

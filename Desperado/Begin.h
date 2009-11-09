@@ -46,8 +46,6 @@
  *
  *  Brackets the beginning of the Desperado namespace.
  *
- *  @see    Arroyo
- *
  *  @author $Author: jsloan $
  */
 

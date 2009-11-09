@@ -64,9 +64,54 @@ CXXCAPI int unittestRatio(void) {
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
+    {
+        static const int factor = 2 * 2;
+        static const int denominator = 2 * 3 * 3 * 5 * 5 * 7;
+        static const int numerator = denominator * factor;
+        Ratio ratio(numerator, denominator);
+        if (ratio.numerator() != numerator) {
+            errorf("%s[%d]: (%d!=%d)!\n",
+                __FILE__, __LINE__, ratio.numerator(), numerator);
+            ++errors;
+        }
+        if (ratio.denominator() != denominator) {
+            errorf("%s[%d]: (%d!=%d)!\n",
+                __FILE__, __LINE__, ratio.denominator(), denominator);
+            ++errors;
+        }
+        int number1 = ratio;
+        if (number1 != 4) {
+            errorf("%s[%d]: (%ld!=%ld)!\n",
+                __FILE__, __LINE__, number1, 4);
+            ++errors;
+        }
+        double number2 = ratio;
+        if (number2 != 2.0) {
+            errorf("%s[%d]: (%f!=%f)!\n",
+                __FILE__, __LINE__, number2, 2.0);
+            ++errors;
+        }
+        ratio.normalize();
+        if (ratio.numerator() != 4) {
+            errorf("%s[%d]: (%d!=%d)!\n",
+                __FILE__, __LINE__, ratio.numerator(), factor);
+            ++errors;
+        }
+        if (ratio.denominator() != 1) {
+            errorf("%s[%d]: (%d!=%d)!\n",
+                __FILE__, __LINE__, ratio.denominator(), 1);
+            ++errors;
+        }
+        double number3 = ratio;
+        if (number3 != 4.0) {
+            errorf("%s[%d]: (%f!=%f)!\n",
+                __FILE__, __LINE__, number3, 4.0);
+            ++errors;
+        }
+    }
+
     printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
         errors);
 
     return errors;
 }
-

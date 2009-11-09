@@ -1,3 +1,6 @@
+#ifndef _COM_DIAG_DESPERADO_ROOT_H_
+#define _COM_DIAG_DESPERADO_ROOT_H_
+
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
@@ -41,43 +44,44 @@
 /**
  *  @file
  *
- *  Implements the Ratio class.
+ *  Defines the root function.
  */
 
-#include <vector>
-#include "Root.h"
-#include "Primes.h"
-#include "Ratio.h"
 
 #include "Begin.h"
 
-Ratio & Ratio::normalize()
-{
-    // Estimate the square root of the smaller absolute value.
+/**
+ *  This template generates a function which provides a very rough
+ *  estimate of the square root of an integer of the desired type.
+ *  Using negative numbers with signed types has no meaning, but
+ *  no checks are made in this regard.
+ *
+ *  @author jsloan@diag.com
+ */
+template <typename _TYPE_>
+inline _TYPE_ root(_TYPE_ value) {
+    _TYPE_ result = 0;
 
-    Type nup = this->nu < 0 ? -this->nu : this->nu;
-    Type dep = this->de < 0 ? -this->de : this->de;
-    Type minimim = (nup < dep) ? nup : dep;
-    Type limit = root(minimim);
+    while (value > 0) {
+        result = (result << 1) | 0x1;
+        value = value >> 2;
+    }
 
-    // Get as least those primes as large as the limit.
-
-    Primes primes(limit);
-
-    // Factor out the primes.
-
-    Primes::Iterator here = primes.begin();
-    Primes::Iterator end = primes.end();
-
-	while ((here != end) && (*here <= limit)) {
-        while (((this->nu % *here) == 0) && ((this->de % *here) == 0)) {
-            this->nu /= *here;
-            this->de /= *here;
-		}
-        ++here;
-	}
-
-    return *this;	
+    return result;
 }
 
 #include "End.h"
+
+
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
+/**
+ *  Run the Primes unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
+ */
+CXXCAPI int unittestRoot(void);
+#endif
+
+
+#endif
