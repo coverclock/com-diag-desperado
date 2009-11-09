@@ -615,11 +615,17 @@ unittestNumber:	mainNumber.o $(ARCHIVE)
 unittestPlatform:	mainPlatform.o $(ARCHIVE)
 	$(LD) -o unittestPlatform mainPlatform.o $(LDFLAGS)
 
+unittestPrimes:	mainPrimes.o $(ARCHIVE)
+	$(LD) -o unittestPrimes mainPrimes.o $(LDFLAGS)
+
 unittestRam:	mainRam.o $(ARCHIVE)
 	$(LD) -o unittestRam mainRam.o $(LDFLAGS)
 
 unittestRatio:	mainRatio.o $(ARCHIVE)
 	$(LD) -o unittestRatio mainRatio.o $(LDFLAGS)
+
+unittestRoot:	mainRoot.o $(ARCHIVE)
+	$(LD) -o unittestRoot mainRoot.o $(LDFLAGS)
 
 unittestService:	mainService.o $(ARCHIVE)
 	$(LD) -o unittestService mainService.o $(LDFLAGS)

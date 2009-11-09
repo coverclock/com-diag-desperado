@@ -41,43 +41,44 @@
 /**
  *  @file
  *
- *  Implements the Ratio class.
+ *  Implements the Primes class.
  */
 
-#include <vector>
-#include "Root.h"
 #include "Primes.h"
-#include "Ratio.h"
 
 #include "Begin.h"
 
-Ratio & Ratio::normalize()
+Primes::Vector Primes::primes;
+
+Primes::Type Primes::maximum = 1;
+
+void Primes::generate(Type limit)
 {
-    // Estimate the square root of the smaller absolute value.
+    Iterator here;
+    Iterator end;
 
-    Type nup = this->nu < 0 ? -this->nu : this->nu;
-    Type dep = this->de < 0 ? -this->de : this->de;
-    Type minimim = (nup < dep) ? nup : dep;
-    Type limit = root(minimim);
+    for (Type factor = maximum; factor <= limit; ++factor) {
 
-    // Get as least those primes as large as the limit.
+		here = primes.begin();
+		end = primes.end();
 
-    Primes primes(limit);
-
-    // Factor out the primes.
-
-    Primes::Iterator here = primes.begin();
-    Primes::Iterator end = primes.end();
-
-	while ((here != end) && (*here <= limit)) {
-        while (((this->nu % *here) == 0) && ((this->de % *here) == 0)) {
-            this->nu /= *here;
-            this->de /= *here;
+		while (here != end) {
+			if ((factor % (*here)) == 0) {
+				break;
+			}
+			++here;
 		}
-        ++here;
+
+		if (here == end) {
+			primes.push_back(factor);
+		}
+
 	}
 
-    return *this;	
+    if (limit > maximum) {
+        maximum = limit;
+    }
+
 }
 
 #include "End.h"

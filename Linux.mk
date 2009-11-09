@@ -102,7 +102,8 @@ CDEBUG		=	-g -O3
 GCCOPTIONS	=	-ansi -pedantic -pipe -Wall -W -Wno-long-long -fPIC
 COPTIONS	=	-Wmissing-prototypes
 # -frepo with gcc 3.3.2 seems to drive the compiler into a loop in some cases.
-CXXOPTIONS	=	-fcheck-new -fno-rtti -Wabi -Wold-style-cast -Winline -fno-implicit-templates
+# -fno-implicit-templates with gcc 4.1.3 prevents STL templates from linking.
+CXXOPTIONS	=	-fcheck-new -fno-rtti -Wabi -Wold-style-cast -Winline
 
 CPPFLAGS	=	$(CDEFINES) $(CINCLUDES)
 

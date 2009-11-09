@@ -1,3 +1,6 @@
+#ifndef _COM_DIAG_DESPERADO_PRIMES_H_
+#define _COM_DIAG_DESPERADO_PRIMES_H_
+
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
@@ -41,43 +44,60 @@
 /**
  *  @file
  *
- *  Implements the Ratio class.
+ *  Declares the Primes class.
  */
 
-#include <vector>
-#include "Root.h"
-#include "Primes.h"
-#include "Ratio.h"
 
+#include <vector>
 #include "Begin.h"
 
-Ratio & Ratio::normalize()
-{
-    // Estimate the square root of the smaller absolute value.
+/**
+ *  @author coverclock@diag.com (Chip Overclock)
+ */
+class Primes {
 
-    Type nup = this->nu < 0 ? -this->nu : this->nu;
-    Type dep = this->de < 0 ? -this->de : this->de;
-    Type minimim = (nup < dep) ? nup : dep;
-    Type limit = root(minimim);
+public:
 
-    // Get as least those primes as large as the limit.
+	typedef int Type;
 
-    Primes primes(limit);
+    typedef std::vector<Type> Vector;
 
-    // Factor out the primes.
+    typedef Vector::const_iterator Iterator;
 
-    Primes::Iterator here = primes.begin();
-    Primes::Iterator end = primes.end();
+    Primes(Type limit) { generate(limit); }
 
-	while ((here != end) && (*here <= limit)) {
-        while (((this->nu % *here) == 0) && ((this->de % *here) == 0)) {
-            this->nu /= *here;
-            this->de /= *here;
-		}
-        ++here;
-	}
+    ~Primes() {}
 
-    return *this;	
-}
+    Iterator begin() const { return primes.begin(); }
+
+    Iterator end() const { return primes.end(); }
+
+protected:
+
+    static void generate(Type limit);
+
+private:
+
+    static Vector primes;
+    
+    static Type maximum;
+
+};
+
 
 #include "End.h"
+
+
+#if defined(DESPERADO_HAS_UNITTESTS)
+#include "cxxcapi.h"
+/**
+ *  Run the Primes unit test.
+ *  
+ *  @return the number of errors detected by the unit test.
+ */
+CXXCAPI int unittestPrimes(void);
+#endif
+
+
+#endif
+
