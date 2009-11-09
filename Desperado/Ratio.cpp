@@ -51,7 +51,7 @@
 
 #include "Begin.h"
 
-Ratio & Ratio::normalize()
+Ratio * Ratio::normalize()
 {
     // Estimate the square root of the smaller absolute value.
 
@@ -77,7 +77,7 @@ Ratio & Ratio::normalize()
         ++here;
 	}
 
-    return *this;	
+    return this;	
 }
 
 #include "End.h"

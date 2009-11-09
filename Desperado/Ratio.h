@@ -66,22 +66,28 @@ public:
 
     ~Ratio() {}
 
-    Type numerator() const { return nu; }
-
-    Type denominator() const { return de; }
-
-    void numerator(Type nn) { nu = nn; }
-
-    void denominator(Type dd) { de = dd; }
-
     Ratio(const Ratio & that) {
         this->nu = that.nu;
         this->de = that.de;
     }
 
-    Ratio & normalize();
+    Type numerator() const { return nu; }
+
+    Type denominator() const { return de; }
+
+    Ratio * numerator(Type nn) { nu = nn; return this; }
+
+    Ratio * denominator(Type dd) { de = dd; return this; }
+
+    Ratio * normalize();
 
     operator double() {
+        double temp = this->nu;
+        temp /= this->de;
+        return temp;
+    }
+
+    operator float() {
         double temp = this->nu;
         temp /= this->de;
         return temp;
@@ -93,71 +99,87 @@ public:
         return temp;
     }
 
-    Ratio & operator =(const Ratio & that) {
+    operator long() {
+        int temp = this->nu;
+        temp /= this->de;
+        return temp;
+    }
+
+    operator long long() {
+        int temp = this->nu;
+        temp /= this->de;
+        return temp;
+    }
+
+    Ratio & operator = (const Ratio & that) {
         if (this != &that) {
             this->nu = that.nu;
             this->de = that.de;
         }
-        return *this;
+        return *normalize();
     }
 
-    Ratio & operator +=(const Ratio & that) {
+    Ratio & operator += (const Ratio & that) {
         if (this->de == that.de) {
             this->nu += that.nu;
         } else {
             this->nu = (this->nu * that.de) + (that.nu * this->de);
-            this->de = (this->de * that.de) + (that.de * this->de);
+            this->de = (this->de * that.de);
         }
-        return *this;
+        normalize();
+        return *normalize();
     }
 
-    Ratio & operator -=(const Ratio & that) {
+    Ratio & operator -= (const Ratio & that) {
         if (this->de == that.de) {
             this->nu -= that.nu;
         } else {
             this->nu = (this->nu * that.de) - (that.nu * this->de);
-            this->de = (this->de * that.de) - (that.de * this->de);
+            this->de = (this->de * that.de);
         }
-        return *this;
+        normalize();
+        return *normalize();
     }
 
-    Ratio & operator *=(const Ratio & that) {
+    Ratio & operator *= (const Ratio & that) {
         this->nu *= that.nu;
         this->de *= that.de;
-        return *this;
+        normalize();
+        return *normalize();
     }
 
-    Ratio & operator /=(const Ratio & that) {
+    Ratio & operator /= (const Ratio & that) {
         this->nu *= that.de;
         this->de *= that.nu;
-        return *this;
+        normalize();
+        return *normalize();
     }
 
-    Ratio operator +(const Ratio &that) const {
+    Ratio operator + (const Ratio &that) const {
         Ratio temp = *this;
         temp += that;
-        return temp;
+        return *(temp.normalize());
     }
 
-    Ratio operator -(const Ratio &that) const {
+    Ratio operator - (const Ratio &that) const {
         Ratio temp = *this;
         temp -= that;
-        return temp;
+        return *(temp.normalize());
     }
 
-    Ratio operator *(const Ratio &that) const {
+    Ratio operator * (const Ratio &that) const {
         Ratio temp = *this;
         temp *= that;
-        return temp;
+        return *(temp.normalize());
     }
 
-    Ratio operator /(const Ratio &that) const {
+    Ratio operator / (const Ratio &that) const {
         Ratio temp = *this;
         temp /= that;
-        return temp;
+        return *(temp.normalize());
     }
 
-    bool operator ==(const Ratio &that) const {
+    bool operator == (const Ratio &that) const {
         if (this->de == that.de) {
             return this->nu == that.nu;
         } else {
@@ -165,9 +187,14 @@ public:
         }
     }
 
-    bool operator !=(const Ratio &that) const {
+    bool operator != (const Ratio &that) const {
         return !(*this == that);
     }
+
+    friend bool operator> (const Ratio & a, const Ratio & b);
+    friend bool operator>= (const Ratio & a, const Ratio & b);
+    friend bool operator< (const Ratio & a, const Ratio & b);
+    friend bool operator<= (const Ratio & a, const Ratio & b);
 
 private:
 
@@ -177,6 +204,37 @@ private:
 
 };
 
+inline bool operator> (const Ratio & a, const Ratio & b) {
+    if (a.denominator() == b.denominator()) {
+        return a.numerator() > b.numerator();
+    } else {
+        return (a.numerator() * b.denominator()) > (b.numerator() * a.denominator());
+    }
+}
+
+inline bool operator>= (const Ratio & a, const Ratio & b) {
+    if (a.denominator() == b.denominator()) {
+        return a.numerator() >= b.numerator();
+    } else {
+        return (a.numerator() * b.denominator()) >= (b.numerator() * a.denominator());
+    }
+}
+
+inline bool operator< (const Ratio & a, const Ratio & b) {
+    if (a.denominator() == b.denominator()) {
+        return a.numerator() < b.numerator();
+    } else {
+        return (a.numerator() * b.denominator()) < (b.numerator() * a.denominator());
+    }
+}
+
+inline bool operator<= (const Ratio & a, const Ratio & b) {
+    if (a.denominator() == b.denominator()) {
+        return a.numerator() <= b.numerator();
+    } else {
+        return (a.numerator() * b.denominator()) <= (b.numerator() * a.denominator());
+    }
+}
 
 #include "End.h"
 
