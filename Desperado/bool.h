@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -38,10 +38,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: bool.h,v 1.12 2006/01/09 00:24:48 jsloan Exp $
-
 ******************************************************************************/
 
 
@@ -63,6 +59,9 @@
 
 #if !defined(__cplusplus)
 
+/*
+ * Remove preprocessor symbol if it exists.
+ */
 #if defined(bool)
 #undef bool
 #endif
@@ -73,6 +72,9 @@
  */
 typedef int bool;
 
+/*
+ * Remove preprocessor symbol if it exists.
+ */
 #if defined(true)
 #undef true
 #endif
@@ -81,8 +83,11 @@ typedef int bool;
  *  This defines true to be whatever the compiler considers
  *  to be true.
  */
-static const bool true = (1 == 1);
+static const bool true = !0;
 
+/*
+ * Remove preprocessor symbol if it exists.
+ */
 #if defined(false)
 #undef false
 #endif
@@ -91,7 +96,7 @@ static const bool true = (1 == 1);
  *  This defines false to be whatever the compiler considers
  *  to be false.
  */
-static const bool false = (1 == 0);
+static const bool false = !!0;
 
 #endif
 

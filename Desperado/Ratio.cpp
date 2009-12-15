@@ -44,7 +44,6 @@
  *  Implements the Ratio class.
  */
 
-#include <vector>
 #include "Root.h"
 #include "Primes.h"
 #include "Ratio.h"
