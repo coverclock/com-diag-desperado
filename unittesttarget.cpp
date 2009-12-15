@@ -326,6 +326,18 @@ CXXCAPI int unittesttarget(void) {
         ++errors;
     }
 
+    if (!truth) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, truth, true);
+        ++errors;
+    }
+
+    if (fiction) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, fiction, false);
+        ++errors;
+    }
+
     if (!notfiction) {
         errorf("%s[%d]: (%d!=%d)!\n",
             __FILE__, __LINE__, notfiction, true);
@@ -347,6 +359,42 @@ CXXCAPI int unittesttarget(void) {
     if (fiction != nottruth) {
         errorf("%s[%d]: (%d!=%d)!\n",
             __FILE__, __LINE__, fiction, nottruth);
+        ++errors;
+    }
+
+    if (truth != (1 == 1)) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, truth, (1 == 1));
+        ++errors;
+    }
+
+    if (fiction != (1 == 0)) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, fiction, (1 == 0));
+        ++errors;
+    }
+
+    if (truth != (!!2)) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, truth, (!!2));
+        ++errors;
+    }
+
+    if (fiction != (!!!2)) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, fiction, (!!!2));
+        ++errors;
+    }
+
+    if (truth != (!!(-2))) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, truth, (!!(-2)));
+        ++errors;
+    }
+
+    if (fiction != (!!!(-2))) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, fiction, (!!!(-2)));
         ++errors;
     }
 

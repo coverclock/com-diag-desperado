@@ -372,6 +372,42 @@ int unittesttarget2() {
         ++errors;
     }
 
+    if (truth != (1 == 1)) {
+        print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, truth, (1 == 1));
+        ++errors;
+    }
+
+    if (fiction != (1 == 0)) {
+        print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, fiction, (1 == 0));
+        ++errors;
+    }
+
+    if (truth != (!!2)) {
+        print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, truth, (!!2));
+        ++errors;
+    }
+
+    if (fiction != (!!!2)) {
+        print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, fiction, (!!!2));
+        ++errors;
+    }
+
+    if (truth != (!!(-2))) {
+        print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, truth, (!!(-2)));
+        ++errors;
+    }
+
+    if (fiction != (!!!(-2))) {
+        print_f(platform_error(), "%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__, fiction, (!!!(-2)));
+        ++errors;
+    }
+
     print_f(platform_output(), "%s[%d]: end errors=%d\n",
         __FILE__, __LINE__, errors);
 
