@@ -62,7 +62,9 @@ public:
     Ratio(Type nn = 0, Type dd = 1)
     : nu(nn)
     , de(dd)
-    {}
+    {
+        normalize();
+    }
 
     ~Ratio() {}
 
@@ -126,7 +128,6 @@ public:
             this->nu = (this->nu * that.de) + (that.nu * this->de);
             this->de = (this->de * that.de);
         }
-        normalize();
         return *normalize();
     }
 
@@ -137,21 +138,18 @@ public:
             this->nu = (this->nu * that.de) - (that.nu * this->de);
             this->de = (this->de * that.de);
         }
-        normalize();
         return *normalize();
     }
 
     Ratio & operator *= (const Ratio & that) {
         this->nu *= that.nu;
         this->de *= that.de;
-        normalize();
         return *normalize();
     }
 
     Ratio & operator /= (const Ratio & that) {
         this->nu *= that.de;
         this->de *= that.nu;
-        normalize();
         return *normalize();
     }
 
@@ -199,7 +197,6 @@ public:
 private:
 
 	Type nu;
-
     Type de;
 
 };

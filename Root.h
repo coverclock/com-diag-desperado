@@ -59,15 +59,34 @@
  *  @author jsloan@diag.com
  */
 template <typename _TYPE_>
-inline _TYPE_ root(_TYPE_ value) {
+inline _TYPE_ root(_TYPE_ datum)
+{
     _TYPE_ result = 0;
 
-    while (value > 0) {
+    while (datum > 0) {
         result = (result << 1) | 0x1;
-        value = value >> 2;
+        datum = datum >> 2;
     }
 
     return result;
+}
+
+template <typename _TYPE_>
+inline _TYPE_ absolute(_TYPE_ datum)
+{
+    return datum < 0 ? -datum : datum;
+}
+
+template <typename _TYPE_>
+inline _TYPE_ minimum(_TYPE_ datum1, _TYPE_ datum2)
+{
+    return datum1 < datum2 ? datum1 : datum2;
+}
+
+template <typename _TYPE_>
+inline _TYPE_ maximum(_TYPE_ datum1, _TYPE_ datum2)
+{
+    return datum1 > datum2 ? datum1 : datum2;
 }
 
 #include "End.h"
@@ -76,7 +95,7 @@ inline _TYPE_ root(_TYPE_ value) {
 #if defined(DESPERADO_HAS_UNITTESTS)
 #include "cxxcapi.h"
 /**
- *  Run the Primes unit test.
+ *  Run the Root unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */

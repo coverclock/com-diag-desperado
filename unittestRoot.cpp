@@ -57,10 +57,9 @@
 #include "Platform.h"
 #include "Desperado.h"
 
-static int testRoot(unsigned int value, unsigned int expected) {
+static int test(unsigned int value, unsigned int actual, unsigned int expected) {
     Print errorf(Platform::instance().error());
     int errors = 0;
-    unsigned int actual = root(value);
     if (actual != expected) {
         errorf("%s[%d]: 0x%08x (0x%08x!=0x%08x)!\n",
             __FILE__, __LINE__, value, actual, expected);
@@ -76,24 +75,50 @@ CXXCAPI int unittestRoot(void) {
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
-    testRoot(0x00000000, 0x00000000);
-    testRoot(0x00000001, 0x00000001);
-    testRoot(0x00000002, 0x00000001);
-    testRoot(0x00000004, 0x00000003);
-    testRoot(0x00000008, 0x00000003);
-    testRoot(0x00000010, 0x00000007);
-    testRoot(0x00000020, 0x00000007);
-    testRoot(0x00000040, 0x0000000f);
-    testRoot(0x00000080, 0x0000000f);
-    testRoot(0xffffffff, 0x0000ffff);
-    testRoot(0x7fffffff, 0x0000ffff);
-    testRoot(0x3fffffff, 0x00007fff);
-    testRoot(0x1fffffff, 0x00007fff);
-    testRoot(0x0fffffff, 0x00003fff);
-    testRoot(0x07ffffff, 0x00003fff);
-    testRoot(0x03ffffff, 0x00001fff);
-    testRoot(0x01ffffff, 0x00001fff);
-    testRoot(0x00ffffff, 0x00000fff);
+    printf("%s[%d]: root\n", __FILE__, __LINE__);
+
+    errors += test(0x00000000, root(0x00000000), 0x00000000);
+    errors += test(0x00000001, root(0x00000001), 0x00000001);
+    errors += test(0x00000002, root(0x00000002), 0x00000001);
+    errors += test(0x00000004, root(0x00000004), 0x00000003);
+    errors += test(0x00000008, root(0x00000008), 0x00000003);
+    errors += test(0x00000010, root(0x00000010), 0x00000007);
+    errors += test(0x00000020, root(0x00000020), 0x00000007);
+    errors += test(0x00000040, root(0x00000040), 0x0000000f);
+    errors += test(0x00000080, root(0x00000080), 0x0000000f);
+    errors += test(0xffffffff, root(0xffffffff), 0x0000ffff);
+    errors += test(0x7fffffff, root(0x7fffffff), 0x0000ffff);
+    errors += test(0x3fffffff, root(0x3fffffff), 0x00007fff);
+    errors += test(0x1fffffff, root(0x1fffffff), 0x00007fff);
+    errors += test(0x0fffffff, root(0x0fffffff), 0x00003fff);
+    errors += test(0x07ffffff, root(0x07ffffff), 0x00003fff);
+    errors += test(0x03ffffff, root(0x03ffffff), 0x00001fff);
+    errors += test(0x01ffffff, root(0x01ffffff), 0x00001fff);
+    errors += test(0x00ffffff, root(0x00ffffff), 0x00000fff);
+
+    printf("%s[%d]: minimum\n", __FILE__, __LINE__);
+
+    errors += test(0, minimum(1, 0), 0);
+    errors += test(1, minimum(0, 1), 0);
+    errors += test(2, minimum(1, 1), 1);
+    errors += test(3, minimum(1, -1), -1);
+    errors += test(4, minimum(-1, 1), -1);
+    errors += test(5, minimum(-1, -1), -1);
+
+    printf("%s[%d]: maximum\n", __FILE__, __LINE__);
+
+    errors += test(0, maximum(1, 0), 1);
+    errors += test(1, maximum(0, 1), 1);
+    errors += test(2, maximum(1, 1), 1);
+    errors += test(3, maximum(1, -1), 1);
+    errors += test(4, maximum(-1, 1), 1);
+    errors += test(5, maximum(-1, -1), -1);
+
+    printf("%s[%d]: absolute\n", __FILE__, __LINE__);
+
+    errors += test(0, absolute(0), 0);
+    errors += test(1, absolute(1), 1);
+    errors += test(-1, absolute(-1), 1);
 
     printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
         errors);
