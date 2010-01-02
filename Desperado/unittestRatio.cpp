@@ -57,6 +57,22 @@
 #include "Platform.h"
 #include "Desperado.h"
 
+static int test(const Ratio & ratio, int numerator, int denominator) {
+    Print errorf(Platform::instance().error());
+    int errors = 0;
+    if (ratio.numerator() != numerator) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            ratio.numerator(), numerator);
+        ++errors;
+    }
+    if (ratio.denominator() != denominator) {
+        errorf("%s[%d]: (%d!=%d)!\n",
+            ratio.denominator(), denominator);
+        ++errors;
+    }
+    return errors;
+}
+
 CXXCAPI int unittestRatio(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
@@ -65,6 +81,33 @@ CXXCAPI int unittestRatio(void) {
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
     {
+        printf("%s[%d]: test 1\n", __FILE__, __LINE__);
+        Ratio ratio;
+        test(ratio, 0, 1);
+    }
+
+    {
+        printf("%s[%d]: test 2\n", __FILE__, __LINE__);
+        Ratio ratio(0, 0);
+        test(ratio, 0, 0);
+    }
+
+    {
+        printf("%s[%d]: test 3\n", __FILE__, __LINE__);
+        Ratio ratio(24, 8);
+        test(ratio, 3, 1);
+    }
+
+    {
+        printf("%s[%d]: test 4\n", __FILE__, __LINE__);
+        Ratio ratio(24, 48);
+        test(ratio, 1, 2);
+    }
+
+    return errors;
+
+    {
+        printf("%s[%d]: test 2\n", __FILE__, __LINE__);
         static const int factor = 2 * 2;
         static const int denominator = 2 * 3 * 3 * 5 * 5 * 5 * 7;
         static const int numerator = denominator * factor;
@@ -108,6 +151,16 @@ CXXCAPI int unittestRatio(void) {
                 __FILE__, __LINE__, number3, factor);
             ++errors;
         }
+    }
+
+    {
+        printf("%s[%d]: test 2\n", __FILE__, __LINE__);
+
+        Ratio ratio0;
+        Ratio ratio1(10, 30);
+        Ratio ratio2(10, 20);
+        ratio0 = ratio1 + ratio2;
+        test(ratio0, 5, 6);
     }
 
     printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,

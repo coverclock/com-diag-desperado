@@ -50,31 +50,77 @@
 
 #include "Begin.h"
 
+/*
+ * We take care of all the special cases before the complicated stuff.
+ */
 Ratio * Ratio::normalize()
 {
-    // Estimate the square root of the smaller absolute value.
+    if (this->de == 0) {
 
-    Type nup = this->nu < 0 ? -this->nu : this->nu;
-    Type dep = this->de < 0 ? -this->de : this->de;
-    Type minimim = (nup < dep) ? nup : dep;
-    Type limit = root(minimim);
+        // Do nothing: undefined.
 
-    // Get as least those primes as large as the limit.
+    } else if (this->nu == 0) {
 
-    Primes primes(limit);
+        this->de = 1;
 
-    // Factor out the primes.
+    } else if (this->de == 1) {
 
-    Primes::Iterator here = primes.begin();
-    Primes::Iterator end = primes.end();
+        // Do nothing.
 
-	while ((here != end) && (*here <= limit)) {
-        while (((this->nu % *here) == 0) && ((this->de % *here) == 0)) {
-            this->nu /= *here;
-            this->de /= *here;
-		}
-        ++here;
-	}
+    } else if (this->nu == 1) {
+
+        // Do nothing.
+
+    } else if (this->de == -1) {
+
+        this->nu = -this->nu;
+        this->de = 1;
+
+    } else if (this->nu == this->de) {
+
+        this->nu = 1;
+        this->de = 1;
+
+    } else if (this->nu == -(this->de)) {
+
+        this->nu = -1;
+        this->de = 1;
+
+    } else if ((absolute(this->nu) % absolute(this->de)) == 0) {
+
+        this->nu /= this->de;
+        this->de = 1;
+
+    } else {
+
+        // Estimate the square root of the smaller absolute value.
+
+        Type nup = absolute(this->nu);
+        Type dep = absolute(this->de);
+        Type limit = root(minimum(nup, dep));
+
+        // Get as least those primes as large as the limit.
+
+        Primes primes(limit);
+
+        // Factor out the primes.
+
+        Primes::Iterator here = primes.begin();
+        Primes::Iterator end = primes.end();
+
+	    while ((here != end) && (*here <= limit)) {
+            nup = absolute(this->nu);
+            dep = absolute(this->de);
+            while (((nup % *here) == 0) && ((dep % *here) == 0)) {
+                this->nu /= *here;
+                this->de /= *here;
+                nup = absolute(this->nu);
+                dep = absolute(this->de);
+		    }
+            ++here;
+	    }
+
+    }
 
     return this;	
 }
