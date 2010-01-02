@@ -52,51 +52,49 @@
 
 /*
  * We take care of all the special cases before the complicated stuff.
+ * We try not to switch the signs even in the special cases since the
+ * sineage might mean something to the application.
  */
 Ratio * Ratio::normalize()
 {
-    if (this->de == 0) {
+    Type nup = absolute(this->nu);
+    Type dep = absolute(this->de);
+
+    if (dep == 0) {
 
         // Do nothing: undefined.
 
-    } else if (this->nu == 0) {
+    } else if (nup == 0) {
 
-        this->de = 1;
+        this->de = (this->de < 0) ? -1 : 1;
 
-    } else if (this->de == 1) {
-
-        // Do nothing.
-
-    } else if (this->nu == 1) {
+    } else if (dep == 1) {
 
         // Do nothing.
 
-    } else if (this->de == -1) {
+    } else if (nup == 1) {
 
-        this->nu = -this->nu;
-        this->de = 1;
+        // Do nothing.
 
-    } else if (this->nu == this->de) {
+    } else if (nup == dep) {
 
-        this->nu = 1;
-        this->de = 1;
+        if (this->nu < 0) {
+            this->nu = -1;
+            this->de = (this->de < 0) ? -1 : 1;
+        } else {
+            this->nu = 1;
+            this->de = (this->de < 0) ? -1 : 1;
+        }
 
-    } else if (this->nu == -(this->de)) {
+    } else if ((nup % dep) == 0) {
 
-        this->nu = -1;
-        this->de = 1;
-
-    } else if ((absolute(this->nu) % absolute(this->de)) == 0) {
-
-        this->nu /= this->de;
-        this->de = 1;
+        this->nu /= dep;
+        this->de = (this->de < 0) ? -1 : 1;
 
     } else {
 
         // Estimate the square root of the smaller absolute value.
 
-        Type nup = absolute(this->nu);
-        Type dep = absolute(this->de);
         Type limit = root(minimum(nup, dep));
 
         // Get as least those primes as large as the limit.
@@ -109,8 +107,6 @@ Ratio * Ratio::normalize()
         Primes::Iterator end = primes.end();
 
 	    while ((here != end) && (*here <= limit)) {
-            nup = absolute(this->nu);
-            dep = absolute(this->de);
             while (((nup % *here) == 0) && ((dep % *here) == 0)) {
                 this->nu /= *here;
                 this->de /= *here;
