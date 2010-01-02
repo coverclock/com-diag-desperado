@@ -80,87 +80,61 @@ CXXCAPI int unittestRatio(void) {
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
-    {
-        printf("%s[%d]: test 1\n", __FILE__, __LINE__);
-        Ratio ratio;
-        test(ratio, 0, 1);
-    }
+    printf("%s[%d]: sanity\n", __FILE__, __LINE__);
+    { Ratio ratio; errors += test(ratio, 0, 1); }
+    { Ratio ratio(24, 8); errors += test(ratio, 3, 1); }
+    { Ratio ratio(24, 48); errors += test(ratio, 1, 2); }
+    { Ratio ratio(1, 1); errors += test(ratio, 1, 1); }
+    { Ratio ratio(-1, 1); errors += test(ratio, -1, 1); }
+    { Ratio ratio(1, -1); errors += test(ratio, 1, -1); }
+    { Ratio ratio(-1, -1); errors += test(ratio, -1, -1); }
+    { Ratio ratio(0, 2); errors += test(ratio, 0, 1); }
+    { Ratio ratio(1, 0); errors += test(ratio, 1, 0); }
+    { Ratio ratio(2, 1); errors += test(ratio, 2, 1); }
+    { Ratio ratio(1, 2); errors += test(ratio, 1, 2); }
+    { Ratio ratio(2, 2); errors += test(ratio, 1, 1); }
+    { Ratio ratio(-2, 2); errors += test(ratio, -1, 1); }
+    { Ratio ratio(2, -2); errors += test(ratio, 1, -1); }
+    { Ratio ratio(-2, -2); errors += test(ratio, -1, -1); }
+    { Ratio ratio(8, 2); errors += test(ratio, 4, 1); }
+    { Ratio ratio(8, -2); errors += test(ratio, 4, -1); }
+    { Ratio ratio(-8, 2); errors += test(ratio, -4, 1); }
+    { Ratio ratio(-8, -2); errors += test(ratio, -4, -1); }
 
     {
-        printf("%s[%d]: test 2\n", __FILE__, __LINE__);
-        Ratio ratio(0, 0);
-        test(ratio, 0, 0);
-    }
-
-    {
-        printf("%s[%d]: test 3\n", __FILE__, __LINE__);
-        Ratio ratio(24, 8);
-        test(ratio, 3, 1);
-    }
-
-    {
-        printf("%s[%d]: test 4\n", __FILE__, __LINE__);
-        Ratio ratio(24, 48);
-        test(ratio, 1, 2);
-    }
-
-    return errors;
-
-    {
-        printf("%s[%d]: test 2\n", __FILE__, __LINE__);
-        static const int factor = 2 * 2;
-        static const int denominator = 2 * 3 * 3 * 5 * 5 * 5 * 7;
-        static const int numerator = denominator * factor;
-        Ratio ratio(numerator, denominator);
-        if (ratio.numerator() != numerator) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, ratio.numerator(), numerator);
-            ++errors;
-        }
-        if (ratio.denominator() != denominator) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, ratio.denominator(), denominator);
-            ++errors;
-        }
-        int number1 = ratio;
-        if (number1 != factor) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, number1, factor);
-            ++errors;
-        }
-        double number2 = ratio;
-        if (number2 != factor) {
-            errorf("%s[%d]: (%f!=%d)!\n",
-                __FILE__, __LINE__, number2, factor);
-            ++errors;
-        }
-        ratio.normalize();
-        if (ratio.numerator() != factor) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, ratio.numerator(), factor);
-            ++errors;
-        }
-        if (ratio.denominator() != 1) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, ratio.denominator(), 1);
-            ++errors;
-        }
-        double number3 = ratio;
-        if (number3 != factor) {
-            errorf("%s[%d]: (%f!=%d)!\n",
-                __FILE__, __LINE__, number3, factor);
-            ++errors;
-        }
-    }
-
-    {
-        printf("%s[%d]: test 2\n", __FILE__, __LINE__);
-
+        printf("%s[%d]: ratio addition\n", __FILE__, __LINE__);
         Ratio ratio0;
-        Ratio ratio1(10, 30);
-        Ratio ratio2(10, 20);
+        Ratio ratio1(10, 20);
+        Ratio ratio2(10, 30);
         ratio0 = ratio1 + ratio2;
         test(ratio0, 5, 6);
+    }
+
+    {
+        printf("%s[%d]: ratio subtraction\n", __FILE__, __LINE__);
+        Ratio ratio0;
+        Ratio ratio1(10, 20);
+        Ratio ratio2(10, 30);
+        ratio0 = ratio1 - ratio2;
+        test(ratio0, 1, 6);
+    }
+
+    {
+        printf("%s[%d]: ratio multiplication\n", __FILE__, __LINE__);
+        Ratio ratio0;
+        Ratio ratio1(10, 40);
+        Ratio ratio2(10, 30);
+        ratio0 = ratio1 * ratio2;
+        test(ratio0, 1, 12);
+    }
+
+    {
+        printf("%s[%d]: ratio division\n", __FILE__, __LINE__);
+        Ratio ratio0;
+        Ratio ratio1(10, 40);
+        Ratio ratio2(10, 30);
+        ratio0 = ratio1 / ratio2;
+        test(ratio0, 3, 4);
     }
 
     printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
