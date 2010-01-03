@@ -189,10 +189,10 @@ public:
         return !(*this == that);
     }
 
-    friend bool operator> (const Ratio & a, const Ratio & b);
-    friend bool operator>= (const Ratio & a, const Ratio & b);
-    friend bool operator< (const Ratio & a, const Ratio & b);
-    friend bool operator<= (const Ratio & a, const Ratio & b);
+    friend bool operator > (const Ratio & a, const Ratio & b);
+    friend bool operator >= (const Ratio & a, const Ratio & b);
+    friend bool operator < (const Ratio & a, const Ratio & b);
+    friend bool operator <= (const Ratio & a, const Ratio & b);
 
 private:
 
@@ -201,7 +201,7 @@ private:
 
 };
 
-inline bool operator> (const Ratio & a, const Ratio & b) {
+inline bool operator > (const Ratio & a, const Ratio & b) {
     if (a.denominator() == b.denominator()) {
         return a.numerator() > b.numerator();
     } else {
@@ -209,7 +209,7 @@ inline bool operator> (const Ratio & a, const Ratio & b) {
     }
 }
 
-inline bool operator>= (const Ratio & a, const Ratio & b) {
+inline bool operator >= (const Ratio & a, const Ratio & b) {
     if (a.denominator() == b.denominator()) {
         return a.numerator() >= b.numerator();
     } else {
@@ -217,7 +217,7 @@ inline bool operator>= (const Ratio & a, const Ratio & b) {
     }
 }
 
-inline bool operator< (const Ratio & a, const Ratio & b) {
+inline bool operator < (const Ratio & a, const Ratio & b) {
     if (a.denominator() == b.denominator()) {
         return a.numerator() < b.numerator();
     } else {

@@ -55,7 +55,7 @@
 #include "Ratio.h"
 #include "Desperado.h"
 
-int main(int argc, char**) {
+int main() {
     Platform::instance(Platform::factory());
     exit(unittestRatio());
 }
