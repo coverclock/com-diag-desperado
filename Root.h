@@ -55,8 +55,7 @@
  *  estimate of the square root of an integer of the desired type.
  *  Using negative numbers with signed types has no meaning, but
  *  no checks are made in this regard.
- *
- *  @author jsloan@diag.com
+ *  @author coverclock@diag.com
  */
 template <typename _TYPE_>
 inline _TYPE_ root(_TYPE_ datum)
@@ -71,18 +70,31 @@ inline _TYPE_ root(_TYPE_ datum)
     return result;
 }
 
+/**
+ *  This template generates a simple absolute value function.
+ *  @author coverclock@diag.com
+ */
 template <typename _TYPE_>
 inline _TYPE_ absolute(_TYPE_ datum)
 {
     return datum < 0 ? -datum : datum;
 }
 
+
+/**
+ *  This template generates a simple minimum function.
+ *  @author coverclock@diag.com
+ */
 template <typename _TYPE_>
 inline _TYPE_ minimum(_TYPE_ datum1, _TYPE_ datum2)
 {
     return datum1 < datum2 ? datum1 : datum2;
 }
 
+/**
+ *  This template generates a simple maximum function.
+ *  @author coverclock@diag.com
+ */
 template <typename _TYPE_>
 inline _TYPE_ maximum(_TYPE_ datum1, _TYPE_ datum2)
 {

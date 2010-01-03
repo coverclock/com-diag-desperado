@@ -62,12 +62,62 @@ static int test(const Ratio & ratio, int numerator, int denominator) {
     int errors = 0;
     if (ratio.numerator() != numerator) {
         errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__,
             ratio.numerator(), numerator);
         ++errors;
     }
     if (ratio.denominator() != denominator) {
         errorf("%s[%d]: (%d!=%d)!\n",
+            __FILE__, __LINE__,
             ratio.denominator(), denominator);
+        ++errors;
+    }
+    return errors;
+}
+
+static int compare(const Ratio & ratio1, const Ratio & ratio2, int expected) {
+    Print errorf(Platform::instance().error());
+    int errors = 0;
+    if ((ratio1 > ratio2) && (expected <= 0)) {
+        errorf("%s[%d]: ((%d/%d)>(%d/%d))!\n",
+            __FILE__, __LINE__,
+            ratio1.numerator(), ratio1.denominator(),
+            ratio2.numerator(), ratio2.denominator());
+        ++errors;
+    }
+    if ((ratio1 >= ratio2) && (expected < 0)) {
+        errorf("%s[%d]: ((%d/%d)>=(%d/%d))!\n",
+            __FILE__, __LINE__,
+            ratio1.numerator(), ratio1.denominator(),
+            ratio2.numerator(), ratio2.denominator());
+        ++errors;
+    }
+    if ((ratio1 == ratio2) && (expected != 0)) {
+        errorf("%s[%d]: ((%d/%d)==(%d/%d))!\n",
+            __FILE__, __LINE__,
+            ratio1.numerator(), ratio1.denominator(),
+            ratio2.numerator(), ratio2.denominator());
+        ++errors;
+    }
+    if ((ratio1 != ratio2) && (expected == 0)) {
+        errorf("%s[%d]: !((%d/%d)!=(%d/%d))!\n",
+            __FILE__, __LINE__,
+            ratio1.numerator(), ratio1.denominator(),
+            ratio2.numerator(), ratio2.denominator());
+        ++errors;
+    }
+    if ((ratio1 < ratio2) && (expected >= 0)) {
+        errorf("%s[%d]: !((%d/%d)<(%d/%d))!\n",
+            __FILE__, __LINE__,
+            ratio1.numerator(), ratio1.denominator(),
+            ratio2.numerator(), ratio2.denominator());
+        ++errors;
+    }
+    if ((ratio1 <= ratio2) && (expected > 0)) {
+        errorf("%s[%d]: !((%d/%d)<=(%d/%d))!\n",
+            __FILE__, __LINE__,
+            ratio1.numerator(), ratio1.denominator(),
+            ratio2.numerator(), ratio2.denominator());
         ++errors;
     }
     return errors;
@@ -102,7 +152,7 @@ CXXCAPI int unittestRatio(void) {
     { Ratio ratio(-8, -2); errors += test(ratio, -4, -1); }
 
     {
-        printf("%s[%d]: ratio addition\n", __FILE__, __LINE__);
+        printf("%s[%d]: addition\n", __FILE__, __LINE__);
         Ratio ratio0;
         Ratio ratio1(10, 20);
         Ratio ratio2(10, 30);
@@ -111,7 +161,7 @@ CXXCAPI int unittestRatio(void) {
     }
 
     {
-        printf("%s[%d]: ratio subtraction\n", __FILE__, __LINE__);
+        printf("%s[%d]: subtraction\n", __FILE__, __LINE__);
         Ratio ratio0;
         Ratio ratio1(10, 20);
         Ratio ratio2(10, 30);
@@ -120,7 +170,7 @@ CXXCAPI int unittestRatio(void) {
     }
 
     {
-        printf("%s[%d]: ratio multiplication\n", __FILE__, __LINE__);
+        printf("%s[%d]: multiplication\n", __FILE__, __LINE__);
         Ratio ratio0;
         Ratio ratio1(10, 40);
         Ratio ratio2(10, 30);
@@ -129,7 +179,7 @@ CXXCAPI int unittestRatio(void) {
     }
 
     {
-        printf("%s[%d]: ratio division\n", __FILE__, __LINE__);
+        printf("%s[%d]: division\n", __FILE__, __LINE__);
         Ratio ratio0;
         Ratio ratio1(10, 40);
         Ratio ratio2(10, 30);
@@ -137,8 +187,34 @@ CXXCAPI int unittestRatio(void) {
         test(ratio0, 3, 4);
     }
 
-    printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__,
-        errors);
+    printf("%s[%d]: comparison\n", __FILE__, __LINE__);
+    {
+        Ratio ratio1(1, 4);
+        Ratio ratio2(2, 8);
+        errors += compare(ratio1, ratio2, 0);
+    }
+    {
+        Ratio ratio1(1, 4);
+        Ratio ratio2(2, 4);
+        errors += compare(ratio1, ratio2, -1);
+    }
+    {
+        Ratio ratio1(3, 4);
+        Ratio ratio2(2, 4);
+        errors += compare(ratio1, ratio2, 1);
+    }
+    {
+        Ratio ratio1(2, 4);
+        Ratio ratio2(2, 3);
+        errors += compare(ratio1, ratio2, -1);
+    }
+    {
+        Ratio ratio1(5, 6);
+        Ratio ratio2(2, 5);
+        errors += compare(ratio1, ratio2, 1);
+    }
+
+    printf("%s[%d]: end errors=%d\n", __FILE__, __LINE__, errors);
 
     return errors;
 }
