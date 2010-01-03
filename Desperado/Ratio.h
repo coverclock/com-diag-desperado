@@ -83,32 +83,32 @@ public:
 
     Ratio * normalize();
 
-    operator double() {
+    operator double() const {
         double temp = this->nu;
         temp /= this->de;
         return temp;
     }
 
-    operator float() {
-        double temp = this->nu;
+    operator float() const {
+        float temp = this->nu;
         temp /= this->de;
         return temp;
     }
 
-    operator int() {
+    operator int() const {
         int temp = this->nu;
         temp /= this->de;
         return temp;
     }
 
-    operator long() {
-        int temp = this->nu;
+    operator long() const {
+        long temp = this->nu;
         temp /= this->de;
         return temp;
     }
 
-    operator long long() {
-        int temp = this->nu;
+    operator long long() const {
+        long long temp = this->nu;
         temp /= this->de;
         return temp;
     }

@@ -57,6 +57,26 @@
 #include "Platform.h"
 #include "Desperado.h"
 
+template <typename _TYPE_>
+static int convert(const Ratio & ratio)
+{
+    Print errorf(Platform::instance().error());
+    int errors = 0;
+    if (ratio.denominator() != 0) {
+        _TYPE_ actual;
+        actual = ratio.numerator();
+        actual /= ratio.denominator();
+        _TYPE_ expected;
+        expected = ratio;
+        if (actual != expected) {
+            errorf("%s[%d]: conversion!\n",
+                __FILE__, __LINE__);
+            ++errors;
+        }
+    }
+    return errors;
+}
+
 static int test(const Ratio & ratio, int numerator, int denominator) {
     Print errorf(Platform::instance().error());
     int errors = 0;
@@ -72,6 +92,11 @@ static int test(const Ratio & ratio, int numerator, int denominator) {
             ratio.denominator(), denominator);
         ++errors;
     }
+    errors += convert<int>(ratio);
+    errors += convert<long>(ratio);
+    errors += convert<long long>(ratio);
+    errors += convert<float>(ratio);
+    errors += convert<double>(ratio);
     return errors;
 }
 
