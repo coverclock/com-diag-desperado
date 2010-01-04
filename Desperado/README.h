@@ -186,7 +186,7 @@ Here is a list of Desperado releases.
     imperial        2.2.0    2007-02-01
     jupiter         2.3.0    2007-08-15
     keystone        2.4.0    2008-08-21
-	lucky           2.5.0    2008-09-02
+    lucky           2.5.0    2008-09-02
     mercantile      2.6.0    2008-09-02
     neptune         2.7.0
     olympus         2.8.0
@@ -194,7 +194,8 @@ Here is a list of Desperado releases.
     quinto          2.10.0
     refuge          2.11.0
     syracuse        3.1.0   2009-10-28
-    triumph         3.2.0   TBD
+    triumph         3.2.0   2010-01-04
+    uranium         3.3.0   TBD
 
 Information regarding Desperado can be found here:
 
