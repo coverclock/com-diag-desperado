@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006-2009 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2010 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -48,57 +48,37 @@
  *  built-in C++ bool type. It is in a seperate header file because
  *  it is such a common thing to do, it is likely to conflict with many
  *  other source code bases.
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.12 $
- *
- *  @date   $Date: 2006/01/09 00:24:48 $
  */
-
 
 #if !defined(__cplusplus)
 
-/*
- * Remove preprocessor symbol if it exists.
- */
+#if defined(DESPERADO_HAS_STDBOOL_H)
+
+#include <stdbool.h>
+
+#else
+
+#if defined(DESPERADO_NEEDS_BOOL)
+typedef unsigned char _Bool;
+#endif
+
 #if defined(bool)
 #undef bool
 #endif
+#define bool _Bool
 
-/**
- *  This defines a bool to be an int to conform to the ANSI
- *  C++ definition. 
- */
-typedef int bool;
-
-/*
- * Remove preprocessor symbol if it exists.
- */
 #if defined(true)
 #undef true
 #endif
+#define true (!0)
 
-/**
- *  This defines true to be whatever the compiler considers
- *  to be true.
- */
-static const bool true = !0;
-
-/*
- * Remove preprocessor symbol if it exists.
- */
 #if defined(false)
 #undef false
 #endif
-
-/**
- *  This defines false to be whatever the compiler considers
- *  to be false.
- */
-static const bool false = !!0;
+#define false (!!0)
 
 #endif
 
+#endif
 
 #endif
