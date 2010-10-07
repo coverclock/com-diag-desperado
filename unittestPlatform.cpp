@@ -58,6 +58,8 @@
 
 
 #include "UnitTest.h"
+#include "stdio.h"
+#include "stdio.h"
 #include "errno.h"
 #include "errno.h"
 #include "types.h"

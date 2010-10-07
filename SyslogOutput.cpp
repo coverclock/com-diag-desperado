@@ -59,6 +59,7 @@
 
 #include <new>
 #include <cstdarg>
+#include "stdio.h"
 #include "string.h"
 #include "generics.h"
 #include "SyslogOutput.h"

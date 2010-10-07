@@ -60,6 +60,7 @@
 #include <new>
 #include <cstdarg>
 #include "string.h"
+#include "stdio.h"
 #include "generics.h"
 #include "Logger.h"
 #include "Platform.h"

@@ -63,6 +63,7 @@
 
 
 #include <new>
+#include "stdio.h"
 #include "debug.h"
 #include "types.h"
 #include "string.h"
@@ -248,7 +249,7 @@ bool CommonEra::initialize(
 size_t CommonEra::toString(String string, size_t size) const {
     DateTime::String datetimebuffer;
     this->DateTime::toString(datetimebuffer);
-    int octets = ::snprintf(string, size, "%sZ", datetimebuffer);
+    int octets = snprintf(string, size, "%sZ", datetimebuffer);
     return ((0 <= octets) && (octets < static_cast<int>(size)))
         ? static_cast<size_t>(octets)
         : (0 < size) ? (size - 1) : 0;
