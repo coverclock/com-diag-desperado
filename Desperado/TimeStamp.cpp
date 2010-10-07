@@ -59,6 +59,7 @@
 
 #include <new>
 #include "string.h"
+#include "stdio.h"
 #include "assert.h"
 #include "TimeStamp.h"
 #include "TimeZone.h"

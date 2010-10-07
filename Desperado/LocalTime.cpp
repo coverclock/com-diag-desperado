@@ -58,6 +58,7 @@
 
 
 #include <new>
+#include "stdio.h"
 #include "string.h"
 #include "LocalTime.h"
 #include "TimeZone.h"

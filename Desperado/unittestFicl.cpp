@@ -231,7 +231,8 @@ CXXCAPI int unittestFicl(void*, int interactive) {
 
         printf("%s[%d]: command line\n", __FILE__, __LINE__);
 
-        rc = machine1(".ver .( " __DATE__ " ) cr quit");
+        char command[] = ".ver .( " __DATE__ " ) cr quit";
+        rc = machine1(command);
         printf("%s[%d]: Ficl returns %d\n",
             __FILE__, __LINE__, rc);
 
@@ -264,16 +265,18 @@ CXXCAPI int unittestFicl(void*, int interactive) {
 
         ficlDictionaryLock(d, ~0);
 
+        char FunctionC[] = "unittestFiclFunctionC";
         ficlDictionaryAppendPrimitive(
             d,
-            "unittestFiclFunctionC",
+            FunctionC,
             desperado_ficl_unittestFiclFunctionC,
             0
         );
 
+        char Int32Two[] = "unittestFiclInt32Two";
         ficlDictionaryAppendPrimitive(
             d,
-            "unittestFiclInt32Two",
+            Int32Two,
             desperado_ficl_unittestFiclInt32Two,
             0
         );

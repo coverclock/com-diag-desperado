@@ -59,6 +59,7 @@
 
 #include "UnitTest.h"
 #include "string.h"
+#include "stdio.h"
 #include "generics.h"
 #include "Number.h"
 #include "Number.h"
