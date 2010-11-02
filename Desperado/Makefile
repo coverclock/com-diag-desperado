@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2010 Digital Aggregates Corporation, Colorado, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -115,7 +115,8 @@ FICLHOME	=	/home/jsloan/src/ficl4.0.31
 # If you are using Java, specify where it is.
 # Comment out otherwise.
 
-JAVAHOME	=	/opt/jdk1.6.0_07
+JAVAHOME	=	/usr/lib/jvm/java-6-openjdk
+#JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
 #JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02
 
