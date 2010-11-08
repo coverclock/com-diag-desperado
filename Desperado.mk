@@ -126,6 +126,7 @@ TEMPORARIES	=	doxygen-local.cf dependencies.mk $(GENERATED)
 
 SOURCES		=	$(HEADERS) $(CSOURCES) $(CXXSOURCES) $(JAVASOURCES)
 COMPILABLES	=	$(CSOURCES) $(CXXSOURCES)
+DEPENDABLES	=	$(HEADERS) $(COMPILABLES)
 OBJECTS		=	$(addsuffix .o,$(basename $(COMPILABLES)))
 REPOS		=	$(addsuffix .rpo,$(basename $(CXXSOURCES)))
 UNITOBJECTS	=	$(addsuffix .o,$(basename $(UNITTESTS)))
@@ -214,10 +215,8 @@ include $(PLATFORM).mk
 #	Dependencies are made on demand, not whenever anything changes.
 #
 
-dependencies:
+depend dependencies:
 	$(CXX) $(CPPFLAGS) -M -MG $(COMPILABLES) > dependencies.mk
-
-depend:	dependencies
 
 -include dependencies.mk
 

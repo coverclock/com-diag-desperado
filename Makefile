@@ -58,11 +58,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	triumph
+RELEASE		=	uranium
 MAJOR		=	3
-MINOR		=	2
+MINOR		=	3
 BUILD		=	0
-PRERELEASE	=	uranium
+PRERELEASE	=	vanadium
 
 #
 # Indicate the platform and target you are using.
