@@ -65,13 +65,13 @@ endif
 
 ficl:	ficl-localize ficl-clean ficl-build
 
-ficl-localize:	Makefile.ficl.desperado ficllocal.h ficldesperado.h ficldesperadoc.txt
+ficl-localize:	Makefile.ficl.desperado include/desperado/ficllocal.h include/desperado/ficldesperado.h ficldesperadoc.txt
 	-mv -i $(FICLHOME)/Makefile.ficl.desperado $(FICLHOME)/Makefile.ficl.desperado-$(TIMESTAMP)
 	cp -i Makefile.ficl.desperado $(FICLHOME)
 	-mv -i $(FICLHOME)/ficllocal.h $(FICLHOME)/ficllocal.h-$(TIMESTAMP)
-	cp -i ficllocal.h $(FICLHOME)
+	cp -i include/desperado/ficllocal.h $(FICLHOME)
 	-mv -i $(FICLHOME)/ficldesperado.h $(FICLHOME)/ficldesperado.h-$(TIMESTAMP)
-	cp -i ficldesperado.h $(FICLHOME)
+	cp -i include/desperado/ficldesperado.h $(FICLHOME)
 	-mv -i $(FICLHOME)/ficldesperado.c $(FICLHOME)/ficldesperado.c-$(TIMESTAMP)
 	cp -i ficldesperadoc.txt $(FICLHOME)/ficldesperado.c
 

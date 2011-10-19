@@ -57,13 +57,13 @@
  */
 
 
-#include "crc16_Crc.h"
+#include "desperado/crc16_Crc.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 Crc<uint16_t> crc16_Crc(0x8005, true, 0, 0);
 
 
-#include "End.h"
+#include "desperado/End.h"

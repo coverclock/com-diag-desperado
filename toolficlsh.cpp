@@ -59,11 +59,11 @@ extern "C" {
 #   include <signal.h>
 #   include <setjmp.h>
 }
-#include "ficlsh.h"
-#include "errno.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Desperado.h"
+#include "desperado/ficlsh.h"
+#include "desperado/errno.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Desperado.h"
 
 
 static sigjmp_buf context;

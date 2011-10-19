@@ -63,8 +63,8 @@ echo " * This file was generated automatically"
 echo " * by the Desperado $0 script"
 echo " * on ${TIMESTAMP}."
 echo " */"
-echo "#include \"target.h\""
-echo "#include \"ficlApi.h\""
+echo "#include \"desperado/target.h\""
+echo "#include \"desperado/ficlApi.h\""
 echo "#if defined(DESPERADO_HAS_FICL)"
 
 for FILE in $*; do

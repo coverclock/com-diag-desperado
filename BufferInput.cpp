@@ -58,16 +58,16 @@
 
 
 #include <new>
-#include "errno.h"
-#include "target.h"
-#include "string.h"
-#include "generics.h"
-#include "BufferInput.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/errno.h"
+#include "desperado/target.h"
+#include "desperado/string.h"
+#include "desperado/generics.h"
+#include "desperado/BufferInput.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -248,4 +248,4 @@ void BufferInput::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

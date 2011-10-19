@@ -57,10 +57,10 @@
  */
 
 
-#include "Object.h"
+#include "desperado/Object.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -70,4 +70,4 @@ Object::~Object() {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

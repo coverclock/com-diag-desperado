@@ -59,15 +59,15 @@
 
 #include <new>
 #include <cstdarg>
-#include "stdio.h"
-#include "string.h"
-#include "generics.h"
-#include "SyslogOutput.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/stdio.h"
+#include "desperado/string.h"
+#include "desperado/generics.h"
+#include "desperado/SyslogOutput.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 int SyslogOutput::priorities[16] = {
@@ -293,4 +293,4 @@ void SyslogOutput::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

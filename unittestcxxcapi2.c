@@ -57,13 +57,13 @@
  */
 
 
-#include "UnitTest.h"
-#include "cxxcapi.h"
-#include "cxxcapi.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Print.h"
+#include "desperado/UnitTest.h"
+#include "desperado/cxxcapi.h"
+#include "desperado/cxxcapi.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
 
 
 CXXCINLINE int test() {

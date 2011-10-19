@@ -57,13 +57,13 @@
  */
 
 
-#include "UnitTest.h"
-#include "string.h"
-#include "Iso3166.h"
-#include "Iso3166.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/string.h"
+#include "desperado/Iso3166.h"
+#include "desperado/Iso3166.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 static Iso3166 staticIso3166;
 

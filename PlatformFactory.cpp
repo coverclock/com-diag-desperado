@@ -48,21 +48,21 @@
 
 
 #if defined(DESPERADO_PLATFORM_IS_Linux)
-#include "Linux.h"
+#include "desperado/Linux.h"
 typedef Linux Host;
 #elif defined(DESPERADO_PLATFORM_IS_Cygwin)
-#include "Cygwin.h"
+#include "desperado/Cygwin.h"
 typedef Cygwin Host;
 #elif defined(DESPERADO_PLATFORM_IS_Diminuto)
-#include "Diminuto.h"
+#include "desperado/Diminuto.h"
 typedef Diminuto Host;
 #elif defined(DESPERADO_PLATFORM_IS_Arroyo)
-#include "Arroyo.h"
+#include "desperado/Arroyo.h"
 typedef Arroyo Host;
 #else
 #error DESPERADO_PLATFORM_IS_* not defined!
 #endif
-#include "cxxcapi.h"
+#include "desperado/cxxcapi.h"
 
 
 CXXCAPI Platform* platform_factory(void);

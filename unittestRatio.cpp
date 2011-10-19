@@ -49,13 +49,13 @@
  */
 
 
-#include "UnitTest.h"
-#include "Ratio.h"
-#include "Ratio.h"
-#include "Print.h"
-#include "Output.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Ratio.h"
+#include "desperado/Ratio.h"
+#include "desperado/Print.h"
+#include "desperado/Output.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 template <typename _TYPE_>
 static int convert(const Ratio & ratio)

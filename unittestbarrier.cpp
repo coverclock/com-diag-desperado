@@ -57,18 +57,18 @@
  */
 
 
-#include "UnitTest.h"
-#include "types.h"
-#include "types.h"
-#include "barrier.h"
-#include "barrier.h"
-#include "MemoryBarrier.h"
-#include "MemoryBarrier.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Print.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/types.h"
+#include "desperado/types.h"
+#include "desperado/barrier.h"
+#include "desperado/barrier.h"
+#include "desperado/MemoryBarrier.h"
+#include "desperado/MemoryBarrier.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Desperado.h"
 
 CXXCAPI int unittestbarrier(void) {
     Print printf;

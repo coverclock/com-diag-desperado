@@ -59,15 +59,15 @@
 
 #include <new>
 #include <cstdarg>
-#include "string.h"
-#include "stdio.h"
-#include "generics.h"
-#include "Logger.h"
-#include "Platform.h"
-#include "TimeStamp.h"
+#include "desperado/string.h"
+#include "desperado/stdio.h"
+#include "desperado/generics.h"
+#include "desperado/Logger.h"
+#include "desperado/Platform.h"
+#include "desperado/TimeStamp.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 const char* Logger::labels[] = {
@@ -330,4 +330,4 @@ void Logger::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

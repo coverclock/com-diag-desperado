@@ -57,11 +57,11 @@
  */
 
 
-#include "UnitTest.h"
-#include "GrayCode.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/GrayCode.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 typedef unsigned short Code;
 

@@ -42,12 +42,12 @@
 
 
 #include <cstdlib>
-#include "Platform.h"
-#include "Print.h"
-#include "LocalTime.h"
-#include "TimeZone.h"
-#include "TimeStamp.h"
-#include "Desperado.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/LocalTime.h"
+#include "desperado/TimeZone.h"
+#include "desperado/TimeStamp.h"
+#include "desperado/Desperado.h"
 
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());

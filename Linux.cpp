@@ -71,23 +71,23 @@
 #include <unistd.h>
 #include <sched.h>
 #include <pthread.h>
-#include "errno.h"
-#include "types.h"
-#include "string.h"
-#include "Linux.h"
-#include "CommonEra.h"
-#include "Ticks.h"
-#include "TimeZone.h"
-#include "DstNever.h"
-#include "DstUs.h"
-#include "LeapSeconds.h"
-#include "Constant.h"
-#include "generics.h"
+#include "desperado/errno.h"
+#include "desperado/types.h"
+#include "desperado/string.h"
+#include "desperado/Linux.h"
+#include "desperado/CommonEra.h"
+#include "desperado/Ticks.h"
+#include "desperado/TimeZone.h"
+#include "desperado/DstNever.h"
+#include "desperado/DstUs.h"
+#include "desperado/LeapSeconds.h"
+#include "desperado/Constant.h"
+#include "desperado/generics.h"
 
 extern long timezone;
 extern int daylight;
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 static DstNever dstnever;           // Used if no Daylight Saving Time.
@@ -566,7 +566,7 @@ void Linux::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"
 
 
 #endif

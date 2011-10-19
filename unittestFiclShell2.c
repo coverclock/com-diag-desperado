@@ -58,15 +58,15 @@
 
 #if defined(DESPERADO_HAS_FICL)
 
-#include "UnitTest.h"
-#include "generics.h"
-#include "generics.h"
-#include "ficlApi.h"
-#include "ficlApi.h"
-#include "Print.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Platform.h"
+#include "desperado/UnitTest.h"
+#include "desperado/generics.h"
+#include "desperado/generics.h"
+#include "desperado/ficlApi.h"
+#include "desperado/ficlApi.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
 
 extern int unittestFiclShell00(ficlVm*);
 extern int unittestFiclShell01(ficlVm*,int);

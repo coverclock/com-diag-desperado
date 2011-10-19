@@ -62,14 +62,14 @@
 
 #include <new>
 #include <cstdlib>
-#include "target.h"
-#include "FiclMachine.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Dump.h"
+#include "desperado/target.h"
+#include "desperado/FiclMachine.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Dump.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -299,7 +299,7 @@ void FiclMachine::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"
 
 
 #endif

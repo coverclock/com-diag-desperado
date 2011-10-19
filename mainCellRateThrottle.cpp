@@ -58,10 +58,10 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "types.h"
-#include "Platform.h"
-#include "CellRateThrottle.h"
+#include "desperado/UnitTest.h"
+#include "desperado/types.h"
+#include "desperado/Platform.h"
+#include "desperado/CellRateThrottle.h"
 
 int main(int, char**) {
     Platform::instance(Platform::factory());

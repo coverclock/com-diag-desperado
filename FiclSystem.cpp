@@ -62,15 +62,15 @@
 
 #include <new>
 #include <cstdlib>
-#include "ficldesperado.h"
-#include "target.h"
-#include "cxxcapi.h"
-#include "generics.h"
-#include "FiclSystem.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Dump.h"
-#include "Desperado.h"
+#include "desperado/ficldesperado.h"
+#include "desperado/target.h"
+#include "desperado/cxxcapi.h"
+#include "desperado/generics.h"
+#include "desperado/FiclSystem.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Dump.h"
+#include "desperado/Desperado.h"
 
 
 //
@@ -218,7 +218,7 @@ FiclSystem* FiclSystem::findFiclSystem(ficlVm* pVM) {
 }
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -438,7 +438,7 @@ void FiclSystem::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"
 
 
 #endif

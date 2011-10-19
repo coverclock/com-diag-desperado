@@ -49,13 +49,13 @@
  */
 
 
-#include "UnitTest.h"
-#include "Root.h"
-#include "Root.h"
-#include "Print.h"
-#include "Output.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Root.h"
+#include "desperado/Root.h"
+#include "desperado/Print.h"
+#include "desperado/Output.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 static int test(unsigned int value, unsigned int actual, unsigned int expected) {
     Print errorf(Platform::instance().error());

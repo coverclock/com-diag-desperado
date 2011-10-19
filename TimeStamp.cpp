@@ -58,17 +58,17 @@
 
 
 #include <new>
-#include "string.h"
-#include "stdio.h"
-#include "assert.h"
-#include "TimeStamp.h"
-#include "TimeZone.h"
-#include "Constant.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/string.h"
+#include "desperado/stdio.h"
+#include "desperado/assert.h"
+#include "desperado/TimeStamp.h"
+#include "desperado/TimeZone.h"
+#include "desperado/Constant.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -313,4 +313,4 @@ void TimeStamp::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

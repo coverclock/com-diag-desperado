@@ -59,14 +59,14 @@
 
 
 #include <new>
-#include "generics.h"
-#include "CompoundThrottle.h"
-#include "Constant.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/generics.h"
+#include "desperado/CompoundThrottle.h"
+#include "desperado/Constant.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 static Throttle promiscuous;
@@ -260,4 +260,4 @@ void CompoundThrottle::show(
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

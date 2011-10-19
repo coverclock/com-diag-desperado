@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "FiclShell.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
+#include "desperado/FiclShell.h"
 
 int main(int argc, char**) {
     Platform::instance(Platform::factory());

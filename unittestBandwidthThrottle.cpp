@@ -57,19 +57,19 @@
  */
 
 #include <sys/time.h>
-#include "UnitTest.h"
-#include "generics.h"
-#include "BandwidthThrottle.h"
-#include "BandwidthThrottle.h"
-#include "Meter.h"
-#include "Meter.h"
-#include "Print.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Ticks.h"
-#include "Ticks.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/generics.h"
+#include "desperado/BandwidthThrottle.h"
+#include "desperado/BandwidthThrottle.h"
+#include "desperado/Meter.h"
+#include "desperado/Meter.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Ticks.h"
+#include "desperado/Ticks.h"
+#include "desperado/Desperado.h"
 
 static BandwidthThrottle staticBandwidthThrottle;
 

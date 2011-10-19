@@ -62,12 +62,12 @@
 #if defined(DESPERADO_HAS_JAVA)
 
 
-#include "jni.h"
-#include "target.h"
-#include "Platform.h"
-#include "Output.h"
+#include "desperado/target.h"
+#include "desperado/Platform.h"
+#include "desperado/Output.h"
+#include "desperado/Desperado.h"
 #include "com_diag_desperado_Platform.h"
-#include "Desperado.h"
+#include "jni.h"
 
 
 JNIEXPORT jlong JNICALL Java_com_diag_desperado_Platform_frequency(

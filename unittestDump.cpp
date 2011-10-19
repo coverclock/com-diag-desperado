@@ -57,18 +57,18 @@
  */
 
 
-#include "UnitTest.h"
-#include "target.h"
-#include "stdio.h"
-#include "string.h"
-#include "Dump.h"
-#include "Dump.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Output.h"
-#include "Ascii.h"
-#include "littleendian.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/target.h"
+#include "desperado/stdio.h"
+#include "desperado/string.h"
+#include "desperado/Dump.h"
+#include "desperado/Dump.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Output.h"
+#include "desperado/Ascii.h"
+#include "desperado/littleendian.h"
+#include "desperado/Desperado.h"
 
 static const char text[] =
     "SONNET NINETY-NINE:\n"

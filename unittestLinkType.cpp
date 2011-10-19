@@ -61,14 +61,14 @@
  */
 
 
-#include "UnitTest.h"
-#include "LinkType.h"
-#include "LinkType.h"
-#include "Print.h"
-#include "Platform.h"
-#include "target.h"
-#include "generics.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/LinkType.h"
+#include "desperado/LinkType.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/target.h"
+#include "desperado/generics.h"
+#include "desperado/Desperado.h"
 
 class UT_LinkType {
 public:

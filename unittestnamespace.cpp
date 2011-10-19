@@ -47,38 +47,38 @@
  */
 
 
-#include "UnitTest.h"
-#include "cxxcapi.h"
-#include "Print.h"
-#include "Dump.h"
-#include "Platform.h"
-#include "Output.h"
+#include "desperado/UnitTest.h"
+#include "desperado/cxxcapi.h"
+#include "desperado/Print.h"
+#include "desperado/Dump.h"
+#include "desperado/Platform.h"
+#include "desperado/Output.h"
 
 CXXCAPI int unittestnamespace(void);
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 static int function1() {
 	return 1;
 }
-#include "End.h"
+#include "desperado/End.h"
 
 static int function2() {
 	return com::diag::desperado::function1() + 1;
 }
 
-#include "Desperado.h"
+#include "desperado/Desperado.h"
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 static int function3() {
 	return function1() + 2;
 }
-#include "End.h"
+#include "desperado/End.h"
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 static int function4() {
 	return ::function2() + 2;
 }
-#include "End.h"
+#include "desperado/End.h"
 
 CXXCAPI int unittestnamespace(void) {
     Print printf(Platform::instance().output());

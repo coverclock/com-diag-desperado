@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "Counters.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
+#include "desperado/Counters.h"
 
 int main(int, char**) {
     Platform::instance(Platform::factory());

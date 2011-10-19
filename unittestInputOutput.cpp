@@ -58,22 +58,22 @@
 
 
 #include <cstdarg>
-#include "UnitTest.h"
-#include "errno.h"
-#include "errno.h"
-#include "string.h"
-#include "string.h"
-#include "stdio.h"
-#include "stdio.h"
-#include "Input.h"
-#include "Input.h"
-#include "Output.h"
-#include "Output.h"
-#include "Print.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/errno.h"
+#include "desperado/errno.h"
+#include "desperado/string.h"
+#include "desperado/string.h"
+#include "desperado/stdio.h"
+#include "desperado/stdio.h"
+#include "desperado/Input.h"
+#include "desperado/Input.h"
+#include "desperado/Output.h"
+#include "desperado/Output.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 CXXCAPI int unittestInputOutput(
     void *,

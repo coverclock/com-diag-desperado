@@ -57,19 +57,19 @@
  */
 
 
-#include "UnitTest.h"
-#include "java.h"
-#include "java.h"
-#include "cxxjapi.h"
-#include "cxxjapi.h"
-#include "generics.h"
-#include "generics.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Print.h"
-#include "bool.h"
-#include "bool.h"
+#include "desperado/UnitTest.h"
+#include "desperado/java.h"
+#include "desperado/java.h"
+#include "desperado/cxxjapi.h"
+#include "desperado/cxxjapi.h"
+#include "desperado/generics.h"
+#include "desperado/generics.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/bool.h"
+#include "desperado/bool.h"
 
 
 CXXCAPI int unittestcxxjapi2() {

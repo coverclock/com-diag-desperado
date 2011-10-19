@@ -56,9 +56,9 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "JavaVirtualMachine.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
+#include "desperado/JavaVirtualMachine.h"
 
 #if defined(DESPERADO_HAS_JAVA)
 int main(int argc, char**) {

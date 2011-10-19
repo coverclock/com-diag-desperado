@@ -78,25 +78,25 @@
  */
 
 
-#include "UnitTest.h"
-#include "target.h"
-#include "target.h"
-#include "generics.h"
-#include "generics.h"
+#include "desperado/UnitTest.h"
+#include "desperado/target.h"
+#include "desperado/target.h"
+#include "desperado/generics.h"
+#include "desperado/generics.h"
 #if !defined(DESPERADO_HAS_DEBUGGING)
 #define DESPERADO_HAS_DEBUGGING
 #endif
-#include "debug.h"
-#include "debug.h"
-#include "reinitializeobject.h"
-#include "reinitializeobject.h"
-#include "Print.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "generics.h"
-#include "generics.h"
-#include "Desperado.h"
+#include "desperado/debug.h"
+#include "desperado/debug.h"
+#include "desperado/reinitializeobject.h"
+#include "desperado/reinitializeobject.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/generics.h"
+#include "desperado/generics.h"
+#include "desperado/Desperado.h"
 
 #if 0
 #undef offsetof

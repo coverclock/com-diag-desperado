@@ -59,22 +59,22 @@
 
 #include <new>
 #include <cstdarg>
-#include "littleendian.h"
-#include "lowtohigh.h"
-#include "Platform.h"
-#include "Vintage.h"
-#include "Ticks.h"
-#include "TimeZone.h"
-#include "DstNever.h"
-#include "LeapSeconds.h"
-#include "Constant.h"
-#include "cxxcapi.h"
+#include "desperado/littleendian.h"
+#include "desperado/lowtohigh.h"
+#include "desperado/Platform.h"
+#include "desperado/Vintage.h"
+#include "desperado/Ticks.h"
+#include "desperado/TimeZone.h"
+#include "desperado/DstNever.h"
+#include "desperado/LeapSeconds.h"
+#include "desperado/Constant.h"
+#include "desperado/cxxcapi.h"
 
 
 CXXCAPI Platform* platform_factory(void);
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -199,4 +199,4 @@ void Platform::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

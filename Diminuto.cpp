@@ -61,10 +61,10 @@
 
 
 #include <new>
-#include "Diminuto.h"
+#include "desperado/Diminuto.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -116,7 +116,7 @@ void Diminuto::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"
 
 
 #endif

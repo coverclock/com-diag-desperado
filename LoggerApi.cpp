@@ -57,9 +57,9 @@
  */
 
 
-#include "Logger.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/Logger.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 
 #define DESPERADO_LOGGER_API(_FUNCTION_, _LEVEL_) \

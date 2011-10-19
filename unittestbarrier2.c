@@ -57,15 +57,15 @@
  */
 
 
-#include "UnitTest.h"
-#include "types.h"
-#include "types.h"
-#include "barrier.h"
-#include "barrier.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Print.h"
+#include "desperado/UnitTest.h"
+#include "desperado/types.h"
+#include "desperado/types.h"
+#include "desperado/barrier.h"
+#include "desperado/barrier.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
 
 int unittestbarrier2() {
     int errors = 0;

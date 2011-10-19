@@ -50,9 +50,9 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "Volatile.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
+#include "desperado/Volatile.h"
 
 int main(int argc, char**) {
     Platform::instance(Platform::factory());

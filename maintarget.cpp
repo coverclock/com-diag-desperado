@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "target.h"
-#include "Platform.h"
+#include "desperado/UnitTest.h"
+#include "desperado/target.h"
+#include "desperado/Platform.h"
 
 int main(int, char**) {
     Platform::instance(Platform::factory());

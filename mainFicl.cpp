@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "FiclSystem.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
+#include "desperado/FiclSystem.h"
 
 #if defined(DESPERADO_HAS_FICL)
 int main(int argc, char**) {

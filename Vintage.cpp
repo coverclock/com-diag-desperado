@@ -59,12 +59,12 @@
 
 
 #include <new>
-#include "Vintage.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/Vintage.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 const char Vintage::product[] =     "$Product: Desperado $";
@@ -139,4 +139,4 @@ void Vintage::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

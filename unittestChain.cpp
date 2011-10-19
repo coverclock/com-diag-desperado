@@ -57,16 +57,16 @@
  */
 
 
-#include "UnitTest.h"
-#include "Link.h"
-#include "Link.h"
-#include "Chain.h"
-#include "Chain.h"
-#include "Print.h"
-#include "Platform.h"
-#include "target.h"
-#include "generics.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Link.h"
+#include "desperado/Link.h"
+#include "desperado/Chain.h"
+#include "desperado/Chain.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/target.h"
+#include "desperado/generics.h"
+#include "desperado/Desperado.h"
 
 class UT_Chain_Link {
 public:

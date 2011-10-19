@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "types.h"
-#include "generics.h"
-#include "AtomicSeconds.h"
-#include "Platform.h"
+#include "desperado/types.h"
+#include "desperado/generics.h"
+#include "desperado/AtomicSeconds.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -124,4 +124,4 @@ void AtomicSeconds::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

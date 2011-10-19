@@ -42,10 +42,10 @@
 
 
 #include <cstdlib>
-#include "Platform.h"
-#include "Print.h"
-#include "CommonEra.h"
-#include "Desperado.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/CommonEra.h"
+#include "desperado/Desperado.h"
 
 int main(int, char **, char **) {
     Platform::instance(Platform::factory());

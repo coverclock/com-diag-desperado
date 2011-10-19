@@ -60,11 +60,9 @@
 #include <cstdlib>
 #include <signal.h>
 #include <unistd.h>
-#include "UnitTest.h"
-#include "string.h"
-#include "Platform.h"
-#include "README.h"
-#include "README.h"
+#include "desperado/UnitTest.h"
+#include "desperado/string.h"
+#include "desperado/Platform.h"
 
 static void handler(int signal) {
     Print& printf = Platform::instance().print();

@@ -58,12 +58,12 @@
 
 
 #include <new>
-#include "Derivation.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/Derivation.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -181,4 +181,4 @@ void Derivation::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

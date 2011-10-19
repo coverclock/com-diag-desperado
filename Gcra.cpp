@@ -59,14 +59,14 @@
 
 
 #include <new>
-#include "generics.h"
-#include "Gcra.h"
-#include "Constant.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/generics.h"
+#include "desperado/Gcra.h"
+#include "desperado/Constant.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 //
 //  Constructor.
@@ -263,4 +263,4 @@ void Gcra::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

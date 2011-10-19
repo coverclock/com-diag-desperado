@@ -45,7 +45,7 @@
  */
 
 
-#include "Volatile.h"
+#include "desperado/Volatile.h"
 
 DESPERADO_VOLATILE_VALUE_C_IMPL(int8_t)
 DESPERADO_VOLATILE_VALUE_C_IMPL(int16_t)
