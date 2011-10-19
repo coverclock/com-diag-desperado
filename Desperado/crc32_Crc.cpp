@@ -58,13 +58,13 @@
  */
 
 
-#include "crc32_Crc.h"
+#include "desperado/crc32_Crc.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 Crc<uint32_t> crc32_Crc(0x04c11db7, true, 0xffffffff, 0xffffffff);
 
 
-#include "End.h"
+#include "desperado/End.h"

@@ -50,10 +50,10 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "Ratio.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
+#include "desperado/Ratio.h"
+#include "desperado/Desperado.h"
 
 int main() {
     Platform::instance(Platform::factory());

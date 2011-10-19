@@ -57,17 +57,17 @@
  */
 
 
-#include "UnitTest.h"
-#include "errno.h"
-#include "errno.h"
-#include "Print.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/errno.h"
+#include "desperado/errno.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 #define NDEBUG
-#include "assert.h"
+#include "desperado/assert.h"
 
 static int no() {
     Print printf(Platform::instance().output());
@@ -89,7 +89,7 @@ static int no() {
 }
 
 #undef NDEBUG
-#include "assert.h"
+#include "desperado/assert.h"
 
 static int yes() {
     Print printf(Platform::instance().output());

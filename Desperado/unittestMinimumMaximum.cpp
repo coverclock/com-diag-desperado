@@ -57,15 +57,15 @@
  */
 
 
-#include "UnitTest.h"
-#include "Minimum.h"
-#include "Maximum.h"
-#include "Maximum.h"
-#include "target.h"
-#include "Print.h"
-#include "Platform.h"
-#include "generics.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Minimum.h"
+#include "desperado/Maximum.h"
+#include "desperado/Maximum.h"
+#include "desperado/target.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/generics.h"
+#include "desperado/Desperado.h"
 
 static Minimum<int> staticMinimum;
 static Maximum<int> staticMaximum;

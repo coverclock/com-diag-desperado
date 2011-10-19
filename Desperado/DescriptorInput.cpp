@@ -59,16 +59,16 @@
 
 #include <new>
 #include <unistd.h>
-#include "generics.h"
-#include "errno.h"
-#include "target.h"
-#include "string.h"
-#include "DescriptorInput.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/generics.h"
+#include "desperado/errno.h"
+#include "desperado/target.h"
+#include "desperado/string.h"
+#include "desperado/DescriptorInput.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -271,4 +271,4 @@ void DescriptorInput::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

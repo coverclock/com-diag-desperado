@@ -57,16 +57,16 @@
  */
 
 
-#include "UnitTest.h"
-#include "string.h"
-#include "string.h"
-#include "Logger.h"
-#include "Logger.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Print.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/string.h"
+#include "desperado/string.h"
+#include "desperado/Logger.h"
+#include "desperado/Logger.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Desperado.h"
 
 static int leveltest(const char* ff ...) {
     Print printf(Platform::instance().output());

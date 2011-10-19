@@ -65,14 +65,14 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "string.h"
-#include "Service.h"
-#include "Platform.h"
-#include "Print.h"
-#include "uint16_Number.h"
+#include "desperado/string.h"
+#include "desperado/Service.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/uint16_Number.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -413,4 +413,4 @@ void Service::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

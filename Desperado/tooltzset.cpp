@@ -45,8 +45,8 @@
 #include <unistd.h>
 #include <ctime>
 #include <sys/time.h>
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 extern long timezone;
 extern int daylight;

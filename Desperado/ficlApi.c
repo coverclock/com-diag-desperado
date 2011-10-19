@@ -62,11 +62,11 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
-#include "target.h"
-#include "generics.h"
-#include "ficlApi.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/target.h"
+#include "desperado/generics.h"
+#include "desperado/ficlApi.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
 /*

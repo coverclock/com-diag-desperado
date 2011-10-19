@@ -58,16 +58,16 @@
 
 
 #include <new>
-#include "stdio.h"
-#include "errno.h"
-#include "target.h"
-#include "string.h"
-#include "FileOutput.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/stdio.h"
+#include "desperado/errno.h"
+#include "desperado/target.h"
+#include "desperado/string.h"
+#include "desperado/FileOutput.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -259,4 +259,4 @@ void FileOutput::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

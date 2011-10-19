@@ -49,22 +49,22 @@
  */
 
 
-#include "UnitTest.h"
-#include "target.h"
-#include "target.h"
-#include "string.h"
-#include "string.h"
-#include "ByteOrder.h"
-#include "ByteOrder.h"
-#include "Print.h"
-#include "Print.h"
-#include "Dump.h"
-#include "Dump.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Output.h"
-#include "Output.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/target.h"
+#include "desperado/target.h"
+#include "desperado/string.h"
+#include "desperado/string.h"
+#include "desperado/ByteOrder.h"
+#include "desperado/ByteOrder.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Dump.h"
+#include "desperado/Dump.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Output.h"
+#include "desperado/Output.h"
+#include "desperado/Desperado.h"
 
 
 template <typename _TYPE_>

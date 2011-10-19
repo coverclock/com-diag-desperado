@@ -50,10 +50,10 @@
 
 
 #include <cstdlib>
-#include "UnitTest.h"
-#include "Platform.h"
-#include "ByteOrder.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
+#include "desperado/ByteOrder.h"
+#include "desperado/Desperado.h"
 
 int main(int argc, char**) {
     Platform::instance(Platform::factory());

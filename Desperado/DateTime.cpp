@@ -58,15 +58,15 @@
 
 
 #include <new>
-#include "stdio.h"
-#include "string.h"
-#include "DateTime.h"
-#include "CommonEra.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/stdio.h"
+#include "desperado/string.h"
+#include "desperado/DateTime.h"
+#include "desperado/CommonEra.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -206,4 +206,4 @@ void DateTime::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

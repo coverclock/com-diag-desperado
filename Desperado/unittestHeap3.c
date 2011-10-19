@@ -70,22 +70,22 @@
  */
 
 
-#include "UnitTest.h"
+#include "desperado/UnitTest.h"
 #include <stdlib.h>
-#include "target.h"
-#include "target.h"
-#include "generics.h"
-#include "generics.h"
-#include "malloc.h"
-#include "malloc.h"
-#include "Heap.h"
-#include "Heap.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Output.h"
-#include "Output.h"
-#include "Print.h"
-#include "Print.h"
+#include "desperado/target.h"
+#include "desperado/target.h"
+#include "desperado/generics.h"
+#include "desperado/generics.h"
+#include "desperado/malloc.h"
+#include "desperado/malloc.h"
+#include "desperado/Heap.h"
+#include "desperado/Heap.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Output.h"
+#include "desperado/Output.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
 
 #define MALLOC(b)       heap_malloc(platform_heap(), b)
 #define REALLOC(p, b)   heap_realloc(platform_heap(), p, b)

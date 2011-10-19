@@ -58,15 +58,15 @@
 
 
 #include <new>
-#include "errno.h"
-#include "string.h"
-#include "Exception.h"
-#include "Output.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/errno.h"
+#include "desperado/string.h"
+#include "desperado/Exception.h"
+#include "desperado/Output.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -156,4 +156,4 @@ void Exception::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

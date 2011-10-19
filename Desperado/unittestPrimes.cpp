@@ -49,14 +49,14 @@
  */
 
 
-#include "UnitTest.h"
-#include "Primes.h"
-#include "Primes.h"
-#include "generics.h"
-#include "Print.h"
-#include "Output.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Primes.h"
+#include "desperado/Primes.h"
+#include "desperado/generics.h"
+#include "desperado/Print.h"
+#include "desperado/Output.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 CXXCAPI int unittestPrimes(void) {
     Print printf(Platform::instance().output());

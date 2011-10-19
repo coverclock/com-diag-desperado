@@ -58,16 +58,16 @@
 
 
 #include <new>
-#include "DstUs.h"
-#include "DstNever.h"
-#include "DstUs1966.h"
-#include "DstUs1986.h"
-#include "DstUs2007.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/DstUs.h"
+#include "desperado/DstNever.h"
+#include "desperado/DstUs1966.h"
+#include "desperado/DstUs1986.h"
+#include "desperado/DstUs2007.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 static DstNever dstnever;
@@ -144,4 +144,4 @@ void DstUs::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

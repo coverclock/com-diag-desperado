@@ -58,15 +58,15 @@
 
 
 #include <new>
-#include "generics.h"
-#include "types.h"
-#include "Mutex.h"
-#include "Print.h"
-#include "Dump.h"
-#include "Platform.h"
+#include "desperado/generics.h"
+#include "desperado/types.h"
+#include "desperado/Mutex.h"
+#include "desperado/Print.h"
+#include "desperado/Dump.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -261,4 +261,4 @@ void Mutex::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

@@ -57,14 +57,14 @@
  */
 
 
-#include "UnitTest.h"
-#include "Logger.h"
-#include "Output.h"
-#include "Output.h"
-#include "Print.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Platform.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Logger.h"
+#include "desperado/Output.h"
+#include "desperado/Output.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
 
 int unittestLogger2() {
     int errors = 0;

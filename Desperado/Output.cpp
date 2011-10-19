@@ -58,14 +58,14 @@
 
 
 #include <new>
-#include "stdio.h"
-#include "Output.h"
-#include "string.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/stdio.h"
+#include "desperado/Output.h"
+#include "desperado/string.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 const char Output::spaces[65] = "                                "
@@ -178,4 +178,4 @@ void Output::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

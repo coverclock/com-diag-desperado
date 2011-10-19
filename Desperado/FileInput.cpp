@@ -59,15 +59,15 @@
 
 #include <new>
 #include <unistd.h>
-#include "errno.h"
-#include "target.h"
-#include "string.h"
-#include "FileInput.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/errno.h"
+#include "desperado/target.h"
+#include "desperado/string.h"
+#include "desperado/FileInput.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -226,4 +226,4 @@ void FileInput::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

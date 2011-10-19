@@ -56,9 +56,9 @@
 
 
 #include <cstdlib>
-#include "cxxcapi.h"
-#include "UnitTest.h"
-#include "Platform.h"
+#include "desperado/cxxcapi.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Platform.h"
 
 CXXCAPI int unittestnamespace();
 

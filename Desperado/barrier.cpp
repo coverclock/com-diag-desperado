@@ -56,8 +56,8 @@
 
 
 #include <pthread.h>
-#include "barrier.h"
-#include "Platform.h"
+#include "desperado/barrier.h"
+#include "desperado/Platform.h"
 
 
 //

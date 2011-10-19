@@ -55,14 +55,14 @@
  *  @date   $Date: 2006/02/02 02:21:40 $
  */
 
-#include "UnitTest.h"
-#include "Implementation.h"
-#include "Implementation.h"
-#include "Derivation.h"
-#include "Derivation.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Implementation.h"
+#include "desperado/Implementation.h"
+#include "desperado/Derivation.h"
+#include "desperado/Derivation.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Desperado.h"
 
 static Implementation implementation;
 

@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "target.h"
-#include "Ascii.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/target.h"
+#include "desperado/Ascii.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -367,4 +367,4 @@ void Ascii::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

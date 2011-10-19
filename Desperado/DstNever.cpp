@@ -58,12 +58,12 @@
 
 
 #include <new>
-#include "DstNever.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/DstNever.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -115,4 +115,4 @@ void DstNever::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

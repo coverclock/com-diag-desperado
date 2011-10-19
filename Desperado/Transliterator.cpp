@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "Transliterator.h"
-#include "BufferInput.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/Transliterator.h"
+#include "desperado/BufferInput.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -314,4 +314,4 @@ void Transliterator::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

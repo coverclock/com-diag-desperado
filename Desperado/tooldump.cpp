@@ -43,15 +43,15 @@
 
 #include <cstdlib>
 #include <unistd.h>
-#include "string.h"
-#include "exceptions.h"
-#include "generics.h"
-#include "Platform.h"
-#include "Dump.h"
-#include "Print.h"
-#include "PathInput.h"
-#include "PathOutput.h"
-#include "Desperado.h"
+#include "desperado/string.h"
+#include "desperado/exceptions.h"
+#include "desperado/generics.h"
+#include "desperado/Platform.h"
+#include "desperado/Dump.h"
+#include "desperado/Print.h"
+#include "desperado/PathInput.h"
+#include "desperado/PathOutput.h"
+#include "desperado/Desperado.h"
 
 #define USAGE \
     "[ -b(ytes) | -w(ords) ]" \

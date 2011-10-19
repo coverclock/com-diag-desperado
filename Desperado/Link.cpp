@@ -57,12 +57,12 @@
  */
 
 
-#include "Link.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/Link.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -120,4 +120,4 @@ Link::Functor::~Functor() {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

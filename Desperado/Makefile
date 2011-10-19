@@ -58,11 +58,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	uranium
-MAJOR		=	3
-MINOR		=	3
+RELEASE		=	vanadium
+MAJOR		=	4
+MINOR		=	0
 BUILD		=	0
-PRERELEASE	=	vanadium
+PRERELEASE	=	wildcat
 
 #
 # Indicate the platform and target you are using.
@@ -83,7 +83,7 @@ TARGET		=	IA32
 # Dynamic linking requires that Ficl, if used, also be dynamically linked.
 #
 
-DYNAMIC		=	shared
+#DYNAMIC		=	shared
 
 #
 # Specify where your public and temporary directories are for make install.
@@ -115,6 +115,8 @@ FICLHOME	=	/home/jsloan/src/ficl4.0.31
 # If you are using Java, specify where it is.
 # Comment out otherwise.
 
+# On my Ubuntu "Lucid Lynx" 10.04 system I had to explicitly set the
+# LD_LIBRARY_PATH to point to $JAVAHOME/jre/lib/i386/server . Not sure why.
 JAVAHOME	=	/usr/lib/jvm/java-6-openjdk
 #JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02

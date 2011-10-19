@@ -93,7 +93,7 @@ CDEFINES	=	-DDESPERADO_TARGET_IS_$(TARGET) \
 				$(ADJUNCTDEF) -D_REENTRANT -D_GNU_SOURCE
 endif
 
-CINCLUDES	=	-iquote. $(ADJUNCTINCDIR)
+CINCLUDES	=	-iquoteinclude $(ADJUNCTINCDIR)
 
 CDEBUG		=	-g -O3
 
@@ -120,7 +120,8 @@ LDLIBDIRS	=	-Wl,-L. $(ADJUNCTLIBDIR) $(PLATFORMLIBDIR) $(TARGETLIBDIR)
 ifdef DYNAMIC
 LDLIBRARIES	=	-Wl,-Bdynamic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bdynamic -Wl,-l$(LIBRARY) -Wl,-Bdynamic -Wl,-lpthread -Wl,-Bdynamic -Wl,-lrt -Wl,-Bdynamic -Wl,-lm
 else
-LDLIBRARIES	=	-Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bstatic -Wl,-l$(LIBRARY) -Wl,-Bstatic -Wl,-lpthread -Wl,-Bstatic -Wl,-lrt -Wl,-Bstatic -Wl,-lm
+#LDLIBRARIES	=	-Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bstatic -Wl,-l$(LIBRARY) -Wl,-Bstatic -Wl,-lpthread -Wl,-Bstatic -Wl,-lrt -Wl,-Bstatic -Wl,-lm
+LDLIBRARIES	=	-Wl,-Bstatic -Wl,-l$(LIBRARY) $(ADJUNCTLIBRARY) -Wl,-Bstatic -Wl,-l$(LIBRARY) -Wl,-Bdynamic -Wl,-lpthread -Wl,-Bdynamic -Wl,-lrt -Wl,-Bdynamic -Wl,-lm
 endif
 
 LDFLAGS		=	$(CARCH) $(CDEBUG) $(LDLIBDIRS) $(LDLIBRARIES)

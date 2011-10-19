@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "target.h"
-#include "Attribute.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/target.h"
+#include "desperado/Attribute.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -248,4 +248,4 @@ void Attribute::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

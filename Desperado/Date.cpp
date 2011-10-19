@@ -58,16 +58,16 @@
 
 
 #include <new>
-#include "target.h"
-#include "stdio.h"
-#include "generics.h"
-#include "Date.h"
-#include "Constant.h"
-#include "Print.h"
-#include "Platform.h"
+#include "desperado/target.h"
+#include "desperado/stdio.h"
+#include "desperado/generics.h"
+#include "desperado/Date.h"
+#include "desperado/Constant.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 static const uint8_t d_per_month[2][Constant::months_per_year] = {
@@ -375,4 +375,4 @@ void Date::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"

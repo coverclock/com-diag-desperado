@@ -61,15 +61,15 @@
 
 
 #include <new>
-#include "string.h"
-#include "ficlApi.h"
-#include "FiclShell.h"
-#include "BufferInput.h"
-#include "Platform.h"
-#include "Print.h"
+#include "desperado/string.h"
+#include "desperado/ficlApi.h"
+#include "desperado/FiclShell.h"
+#include "desperado/BufferInput.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 //
@@ -209,7 +209,7 @@ void FiclShell::show(int level, Output* display, int indent) const {
 }
 
 
-#include "End.h"
+#include "desperado/End.h"
 
 
 #endif

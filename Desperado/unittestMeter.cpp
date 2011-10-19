@@ -57,12 +57,12 @@
  */
 
 
-#include "UnitTest.h"
-#include "Meter.h"
-#include "Print.h"
-#include "Platform.h"
-#include "target.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Meter.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/target.h"
+#include "desperado/Desperado.h"
 
 static int mean(Meter& meter) {
     Print printf(Platform::instance().output());

@@ -57,11 +57,11 @@
  */
 
 
-#include "UnitTest.h"
-#include "Vintage.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Vintage.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 static Vintage staticVintage;
 

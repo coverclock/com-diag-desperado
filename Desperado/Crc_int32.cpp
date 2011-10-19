@@ -57,13 +57,13 @@
  */
 
 
-#include "Crc.h"
+#include "desperado/Crc.h"
 
 
-#include "Begin.h"
+#include "desperado/Begin.h"
 
 
 template class Crc<int32_t>;
 
 
-#include "End.h"
+#include "desperado/End.h"

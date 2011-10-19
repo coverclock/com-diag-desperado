@@ -59,15 +59,15 @@
 
 
 #include <ctype.h>
-#include "UnitTest.h"
-#include "string.h"
-#include "Escape.h"
-#include "Escape.h"
-#include "Dump.h"
-#include "Print.h"
-#include "Platform.h"
-#include "target.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/string.h"
+#include "desperado/Escape.h"
+#include "desperado/Escape.h"
+#include "desperado/Dump.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/target.h"
+#include "desperado/Desperado.h"
 
 static Escape staticEscape;
 

@@ -58,15 +58,15 @@
 
 
 #include <ctype.h>
-#include "UnitTest.h"
-#include "target.h"
-#include "string.h"
-#include "Encode.h"
-#include "Encode.h"
-#include "Dump.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/target.h"
+#include "desperado/string.h"
+#include "desperado/Encode.h"
+#include "desperado/Encode.h"
+#include "desperado/Dump.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 static Encode staticEncode;
 

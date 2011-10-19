@@ -57,11 +57,11 @@
  */
 
 
-#include "UnitTest.h"
-#include "string.h"
-#include "Platform.h"
-#include "Print.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/string.h"
+#include "desperado/Platform.h"
+#include "desperado/Print.h"
+#include "desperado/Desperado.h"
 
 CXXCAPI int unitteststring(void) {
     Print printf(Platform::instance().output());

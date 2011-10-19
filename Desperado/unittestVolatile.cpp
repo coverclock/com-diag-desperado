@@ -49,18 +49,18 @@
  */
 
 
-#include "UnitTest.h"
-#include "Volatile.h"
-#include "Volatile.h"
-#include "Print.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Platform.h"
-#include "Output.h"
-#include "Output.h"
-#include "generics.h"
-#include "generics.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/Volatile.h"
+#include "desperado/Volatile.h"
+#include "desperado/Print.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Platform.h"
+#include "desperado/Output.h"
+#include "desperado/Output.h"
+#include "desperado/generics.h"
+#include "desperado/generics.h"
+#include "desperado/Desperado.h"
 
 template <typename _TYPE_>
 static int unittestVolatileType() {

@@ -57,13 +57,13 @@
  */
 
 
-#include "UnitTest.h"
-#include "string.h"
-#include "Argument.h"
-#include "Argument.h"
-#include "Print.h"
-#include "Platform.h"
-#include "Desperado.h"
+#include "desperado/UnitTest.h"
+#include "desperado/string.h"
+#include "desperado/Argument.h"
+#include "desperado/Argument.h"
+#include "desperado/Print.h"
+#include "desperado/Platform.h"
+#include "desperado/Desperado.h"
 
 static Argument staticArgument;
 
