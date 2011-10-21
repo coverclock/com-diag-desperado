@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -64,12 +64,10 @@
 
 #if defined(DESPERADO_HAS_FICL)
 int main(int argc, char**) {
-    Platform::instance(Platform::factory());
     std::exit(unittestFicl(0, 1 < argc ? 1 : 0));
 }
 #else
 int main(int, char**) {
-    Platform::instance(Platform::factory());
     std::exit(0);
 }
 #endif

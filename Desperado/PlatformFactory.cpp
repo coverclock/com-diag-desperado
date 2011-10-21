@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2008-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -49,40 +49,26 @@
 
 #if defined(DESPERADO_PLATFORM_IS_Linux)
 #include "desperado/Linux.h"
-typedef Linux Host;
+typedef Linux OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Cygwin)
 #include "desperado/Cygwin.h"
-typedef Cygwin Host;
+typedef Cygwin OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Diminuto)
 #include "desperado/Diminuto.h"
-typedef Diminuto Host;
+typedef Diminuto OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Arroyo)
 #include "desperado/Arroyo.h"
-typedef Arroyo Host;
+typedef Arroyo OperatingSystem;
 #else
 #error DESPERADO_PLATFORM_IS_* not defined!
 #endif
-#include "desperado/cxxcapi.h"
-
-
-CXXCAPI Platform* platform_factory(void);
-
-
-/*
- * This must be global, otherwise the compiler will optimize it out.
- * Optimizing it out causes a segmentation fault on the uClibc ARM
- * Linux platform. That's the only reason it's here.
- */
-Platform* platform_factory_cache = 0;
 
 
 /**
- *  Return a Desperado Platform object of the appropriate derived class.
+ *  Return a reference to a Desperado Platform object of the appropriate type.
  *
  *  @return a reference to the newly created Platform object.
  */
-CXXCAPI Platform* platform_factory() {
-    delete platform_factory_cache;
-    platform_factory_cache = new Host;
-    return platform_factory_cache;
+Platform& platform_factory() {
+    return *(new OperatingSystem);
 }

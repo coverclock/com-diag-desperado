@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
 
     This program is free software; you can redistribute it and/or modify
@@ -48,7 +48,6 @@
 #include "desperado/Desperado.h"
 
 int main(int, char **, char **) {
-    Platform::instance(Platform::factory());
     Print printf(Platform::instance().output());
     LocalTime lt;
     lt.fromNow();
