@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -99,7 +99,11 @@ CDEBUG		=	-g -O3
 
 # -pedantic may cause problems depending on the compiler version.
 # -Werror may cause heartache with certain gcc versions regarding inlines.
+ifdef DYNAMIC
+GCCOPTIONS	=	-ansi -pedantic -pipe -Wall -W -Wno-long-long -fPIC -shared
+else
 GCCOPTIONS	=	-ansi -pedantic -pipe -Wall -W -Wno-long-long -fPIC
+endif
 COPTIONS	=	-Wmissing-prototypes
 # -frepo with gcc 3.3.2 seems to drive the compiler into a loop in some cases.
 # -fno-implicit-templates causes issues when using STL templates.

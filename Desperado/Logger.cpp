@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -170,61 +170,58 @@ Output& Logger::output() const {
 //  Return the logging level encoded (or not) in the buffer.
 //  This is a hack, but like many hacks, it works.
 //
-Logger::Level Logger::level(const char* buffer, size_t size) {
-    Level rc = INFORMATION;
+const char* Logger::level(const char* buffer, size_t size, size_t & level) {
+
+	level = PRINT;
 
     do {
 
-        if (0 == size) {
+        if (sizeof("[X]") > size) {
             break;
         }
 
-        if (3 > size) {
+        // We encode our four-bit logging level at the beginning of the
+        // buffer in the form of "[X]" where X is a hex digit.
+
+        if (buffer[0] != LHS_EXTENDED) {
             // Do nothing.
-        } else if (buffer[0] != LHS_KERNEL) {
+        } else if (buffer[2] != RHS_EXTENDED) {
+            // Do nothing.
+        } else if (('0' <= buffer[1]) && (buffer[1] <= '9')) {
+        	level = buffer[1] - '0' + 0;
+            buffer += sizeof("[X]") - 1;
+            break;
+        } else if (('a' <= buffer[1]) && (buffer[1] <= 'f')) {
+        	level = buffer[1] - 'a' + 0xa;
+            buffer += sizeof("[X]") - 1;
+            break;
+        } else if (('A' <= buffer[1]) && (buffer[1] <= 'F')) {
+        	level = buffer[1] - 'A' + 0xA;
+            buffer += sizeof("[X]") - 1;
+            break;
+        } else {
+        	break;
+        }
+
+        // The kernel and other related logging mechanisms encode a three-bit
+        // logging level at the beginning of the buffer in the form of "<D>"
+        // where D is a decimal digit.
+
+        if (buffer[0] != LHS_KERNEL) {
             // Do nothing.
         } else if (buffer[2] != RHS_KERNEL) {
             // Do nothing.
-        } else if (!(('0' <= buffer[1]) && (buffer[1] <= '7'))) {
-            // Do nothing.
+        } else if (('0' <= buffer[1]) && (buffer[1] <= '7')) {
+        	level = kernel[buffer[1] - '0'];
+            buffer += sizeof("<D>") - 1;
+            break;
         } else {
-            rc = kernel[buffer[1] - '0'];
-            break;
-        }
-
-        const char* lhs = ::strnchr(buffer, size, LHS_EXTENDED);
-        if (0 == lhs) {
-            break;
-        }
-
-        size -= lhs - buffer;
-        if (0 == size) {
-            break;
-        }
-
-        const char* rhs = ::strnchr(lhs, size, RHS_EXTENDED);
-        if (0 == rhs) {
-            break;
-        }
-
-        size = rhs - lhs - 1;
-
-        for (int ll = 0; 0 != this->labels[ll]; ++ll) {
-            if (0 == std::strncmp(this->labels[ll], lhs + 1, size)) {
-                rc = static_cast<Level>(ll);
-                break;
-            }
+        	break;
         }
 
     } while (false);
 
-#if DESPERADO_HAS_DEBUGGING
-    Print printf;
-    printf("%s[%d]: \"%s\" %d\n",
-        __FILE__, __LINE__, buffer, rc);
-#endif
-
-    return rc;
+    return buffer;
 }
 
 
@@ -248,13 +245,12 @@ ssize_t Logger::format(
 ) {
     TimeStamp timestamp;
     const char* stamp = timestamp.log();
-    identity_t identity = Platform::instance().identity();
     if (!((0 <= level) &&
           (static_cast<size_t>(level) < countof(this->labels)))) {
         level = Logger::PRINT;
     }
-    int octets = ::snprintf(buffer, size, "%s (0x%016llx) [%4.4s] ",
-            stamp, identity, this->labels[level]);
+    int octets = ::snprintf(buffer, size, "[%x]%s [%4.4s] ",
+            level, stamp, this->labels[level]);
     ssize_t rc = ::vsnprintf(buffer + octets, sizeof(buffer) - octets,
                                  format, ap);
     return octets + rc;

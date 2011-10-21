@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -96,13 +96,14 @@ static int leveltest(const char* ff ...) {
                 __FILE__, __LINE__, length, rc);
             ++errors;
         }
-        Logger::Level claimed = logger.level(buffer, sizeof(buffer));
-        if (claimed != level) {
-            errorf("%s[%d]: (%d!=%d)!\n",
+        size_t claimed;
+        logger.level(buffer, sizeof(buffer), claimed);
+        if (claimed != static_cast<size_t>(level)) {
+            errorf("%s[%d]: (%u!=%d)!\n",
                 __FILE__, __LINE__, claimed, level);
             ++errors;
         }
-        printf("%s[%d]: \"%s\"[%lu:%zd:%lu](%d:%d)\n",
+        printf("%s[%d]: \"%s\"[%lu:%zd:%lu](%d:%u)\n",
                 __FILE__, __LINE__, buffer, sizeof(buffer), rc, length,
                 level, claimed);
     }
@@ -300,12 +301,13 @@ CXXCAPI int unittestLogger(void) {
 
 #define DESPERADO_LOGGER_TEST_7(_LEVEL_, _KERNEL_) { \
     const char * message = _KERNEL_ #_KERNEL_; \
-    Logger::Level level = logger7.level(message, std::strlen(message)); \
-    if (Logger::_LEVEL_ != level) { \
-        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, Logger::_LEVEL_, level); \
+    size_t level; \
+    logger7.level(message, std::strlen(message), level); \
+    if (static_cast<size_t>(Logger::_LEVEL_) != level) { \
+        errorf("%s[%d]: (%d!=%u)!\n", __FILE__, __LINE__, Logger::_LEVEL_, level); \
         ++errors; \
     } else { \
-        printf("%s[%d]: \"%s\" %d %s\n", __FILE__, __LINE__, message, level, Logger::labels[level]); \
+        printf("%s[%d]: \"%s\" %u %s\n", __FILE__, __LINE__, message, level, Logger::labels[level]); \
     } \
 }
 

@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005-2010 Digital Aggregates Corporation, Colorado, USA.
+#	Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -58,11 +58,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	vanadium
+RELEASE		=	wildcat
 MAJOR		=	4
-MINOR		=	0
+MINOR		=	1
 BUILD		=	0
-PRERELEASE	=	wildcat
+PRERELEASE	=	yale
 
 #
 # Indicate the platform and target you are using.
@@ -83,7 +83,7 @@ TARGET		=	IA32
 # Dynamic linking requires that Ficl, if used, also be dynamically linked.
 #
 
-#DYNAMIC		=	shared
+DYNAMIC		=	shared
 
 #
 # Specify where your public and temporary directories are for make install.
@@ -100,24 +100,27 @@ PUBDIR		=	/opt/diminuto/buildroot/usr/local
 #
 
 SVNPROTO	=	svn
-SVNHOST		=	192.168.1.220
+SVNHOST		=	graphite
 SVNTRUNK	=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/trunk
 SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 
 # If you are using Ficl, specify where it is.
 # Comment out otherwise.
 
-FICLHOME	=	/home/jsloan/src/ficl4.0.31
+#FICLHOME	=	/home/jsloan/src/ficl4.0.31
 #FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
 #FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
 #FICLHOME	=	/cygdrive/c/Users/jsloan/Desktop/Home/Sources/ficl4.0.31
 
 # If you are using Java, specify where it is.
 # Comment out otherwise.
+# (You should unset the JAVAHOME environmental variable as well!)
 
 # On my Ubuntu "Lucid Lynx" 10.04 system I had to explicitly set the
-# LD_LIBRARY_PATH to point to $JAVAHOME/jre/lib/i386/server . Not sure why.
-JAVAHOME	=	/usr/lib/jvm/java-6-openjdk
+# LD_LIBRARY_PATH to point to $JAVAHOME/jre/lib/i386/server . I'm guessing
+# the install process for this via the normal software package management
+# tools for some reason doesn't do the "ldconfig".
+#JAVAHOME	=	/usr/lib/jvm/java-6-openjdk
 #JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
 #JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02
