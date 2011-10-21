@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -240,7 +240,6 @@ static const char *hexadecimal[]={
 };
 
 int main() {
-    Platform::instance(Platform::factory());
     Print printf(Platform::instance().output());
 
     int ch;

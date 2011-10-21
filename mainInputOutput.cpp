@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -125,7 +125,6 @@ int main(int argc, char **argv, char **) {
     char object = 0;
     char* cmdname;
 
-    Platform::instance(Platform::factory());
     Print errorf(Platform::instance().error());
 
     errorf("%s[%d]: begin\n", __FILE__, __LINE__);

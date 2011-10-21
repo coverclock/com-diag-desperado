@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -64,6 +64,5 @@
 #include "desperado/BandwidthThrottle.h"
 
 int main(int, char**) {
-    Platform::instance(Platform::factory());
     exit(unittestBandwidthThrottle(0, 10240, 250000, 1024, 10, 100000));
 }

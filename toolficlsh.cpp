@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
 
     This program is free software; you can redistribute it and/or modify
@@ -85,7 +85,6 @@ static void interrupted(int /* signalnumber */) {
 typedef void (*signalhandler)(int);
 
 int main(int, char **, char **) {
-    Platform::instance(Platform::factory());
     Platform& platform = Platform::instance();
     Print errorf(platform.error());
     int rc = 0;

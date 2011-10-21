@@ -107,7 +107,8 @@ endif
 COPTIONS	=	-Wmissing-prototypes
 # -frepo with gcc 3.3.2 seems to drive the compiler into a loop in some cases.
 # -fno-implicit-templates causes issues when using STL templates.
-CXXOPTIONS	=	-fcheck-new -fno-rtti -Wabi -Wold-style-cast -Winline
+# -fno-rtti breaks the link on applications that aren't built with RTTI enabled.
+CXXOPTIONS	=	-fcheck-new -Wabi -Wold-style-cast -Winline
 
 CPPFLAGS	=	$(CDEFINES) $(CINCLUDES)
 

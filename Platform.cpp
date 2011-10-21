@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -71,7 +71,7 @@
 #include "desperado/cxxcapi.h"
 
 
-CXXCAPI Platform* platform_factory(void);
+extern Platform& platform_factory(void);
 
 
 #include "desperado/Begin.h"
@@ -98,41 +98,36 @@ static LeapSeconds leapseconds;
 
 
 //
-//  This points to the system platform object. An application may instantiate
-//  many platform objects, but there is only one system platform object.
-//  Although it is a singleton, it is not lazily constructed. The
-//  establishment is the system platform object is a action of system
-//  initialization by the application, since it is up to the application
-//  and not this class as to what kind of derived object is the system
-//  platform.
-//
-Platform* Platform::singleton = 0;
-
-
-//
 //  Allocate and construct a suitable Platform object and return a
 //  reference to it. This is pushed off into another routine just
 //  to isolate the "decide what platform to create" logic.
 //
 Platform& Platform::factory() {
-    return *platform_factory();
+    return platform_factory();
 }
+
+
+static Platform& instant = Platform::factory();
+
+
+//
+//  This refers to the system platform object. An application may instantiate
+//  many platform objects, but there is only one system platform object.
+//  Although it is a singleton, it is not lazily constructed.
+//
+Platform* Platform::singleton = &instant;
 
 
 //
 //  Set the system platform.
 //
 void Platform::instance(Platform& that) {
-    Platform::singleton = &that;
+   Platform::singleton = &that;
 }
 
 
 //
-//  Get the system platform. Calling this method before a system
-//  platform is set deliberately dereferences a null pointer. Hopefully
-//  on most platforms this causes a segmentation violation or some other
-//  machine check. On those platforms for which zero is a valid memory
-//  location, wackiness ensues.
+//  Get the system platform.
 //
 Platform& Platform::instance() {
     return *Platform::singleton;
