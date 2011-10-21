@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -35,25 +35,17 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: SyslogOutput.cpp,v 1.5 2006/02/07 00:07:03 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Implements the SyslogOutput class.
+ *  Implements the LogOutput class.
  *
- *  @see    SyslogOutput
+ *  @see    LogOutput
  *
  *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.5 $
- *
- *  @date   $Date: 2006/02/07 00:07:03 $
  */
 
 
@@ -62,89 +54,50 @@
 #include "desperado/stdio.h"
 #include "desperado/string.h"
 #include "desperado/generics.h"
-#include "desperado/SyslogOutput.h"
+#include "desperado/LogOutput.h"
 #include "desperado/Print.h"
 
 
 #include "desperado/Begin.h"
 
 
-int SyslogOutput::priorities[] = {
-#if defined(DESPERADO_HAS_SYSLOG)
-	LOG_DEBUG,			// FINEST
-	LOG_DEBUG,			// FINER
-	LOG_DEBUG,			// FINE
-	LOG_DEBUG,			// TRACE
-    LOG_DEBUG,			// DEBUG
-    LOG_INFO,			// INFORMATION
-    LOG_NOTICE,			// CONFIGURATION
-    LOG_NOTICE,			// NOTICE
-    LOG_WARNING,		// WARNING
-    LOG_ERR,			// ERROR
-    LOG_CRIT,			// SEVERE
-    LOG_CRIT,			// CRITICAL
-    LOG_ALERT,			// ALERT
-    LOG_EMERG,			// FATAL
-    LOG_EMERG,			// EMERGENCY
-    LOG_INFO			// PRINT
-#else
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
-#endif
-};
-
-
 //
 //  Constructor.
 //
-SyslogOutput::SyslogOutput(Logger& rl, const char* id, int opt, int fac)
-: Output()
-, lo(&rl)
-, ident(id)
-, option(opt)
-, facility(fac)
-, error(stderr)
+LogOutput::LogOutput(Output& ro, Logger& rl)
+: SyslogOutput(rl, "", 0, 0)
+, ou(ro)
+
 {
-#if defined(DESPERADO_HAS_SYSLOG)
-    ::openlog(id, opt, fac);
-#endif
 }
 
 
 //
 //  Constructor.
 //
-SyslogOutput::SyslogOutput(Logger* pl, const char* id, int opt, int fac)
-: Output()
-, lo(pl)
-, ident(id)
-, option(opt)
-, facility(fac)
-, error(stderr)
+LogOutput::LogOutput(Output& ro, Logger* pl)
+: SyslogOutput(pl, "", 0, 0)
+, ou(ro)
 {
-#if defined(DESPERADO_HAS_SYSLOG)
-    ::openlog(id, opt, fac);
-#endif
 }
 
 
 //
 //  Destructor.
 //
-SyslogOutput::~SyslogOutput() {
-#if defined(DESPERADO_HAS_SYSLOG)
-    ::closelog();
-#endif
+LogOutput::~LogOutput() {
+    ou();
 }
 
 
 //
 //    Initializer.
 //
-bool SyslogOutput::initialize(Logger& rl, const char* id, int opt, int fac) {
+bool LogOutput::initialize(Output& ro, Logger& rl) {
     bool rc = false;
     try {
-        this->SyslogOutput::~SyslogOutput();
-        new(this) SyslogOutput(rl, id, opt, fac);
+        this->LogOutput::~LogOutput();
+        new(this) LogOutput(ro, rl);
         rc = true;
     } catch (...) {
         rc = false;
@@ -156,121 +109,79 @@ bool SyslogOutput::initialize(Logger& rl, const char* id, int opt, int fac) {
 //
 //    Initializer.
 //
-bool SyslogOutput::initialize(Logger* pl, const char* id, int opt, int fac) {
+bool LogOutput::initialize(Output& ro, Logger* pl) {
     bool rc = false;
     try {
-        this->SyslogOutput::~SyslogOutput();
-        new(this) SyslogOutput(pl, id, opt, fac);
+        this->LogOutput::~LogOutput();
+        new(this) LogOutput(ro, pl);
         rc = true;
     } catch (...) {
         rc = false;
     }
     return rc;
-}
-
-
-//
-// Map the embedded logging level to a priority.
-//
-const char* SyslogOutput::priority(const char* buffer, size_t size, int& pri) {
-	size_t level;
-	buffer = (this->logger()).level(buffer, size, level);
-    if (countof(this->priorities) <= level) {
-    	level = countof(this->priorities) - 1;
-    }
-    pri = this->priorities[level];
-    return buffer;
 }
 
 
 //
 //  Output a character.
 //
-int SyslogOutput::operator() (int c) {
-#if defined(DESPERADO_HAS_SYSLOG)
-    ::syslog(LOG_INFO, "%c", c);
-#else
-    error(c);
-#endif
-   return c;
+int LogOutput::operator() (int c) {
+    ou(c);
 }
 
 
 //
 //  Format and output a variable length argument list.
 //
-ssize_t SyslogOutput::operator() (const char* format, va_list ap) {
+ssize_t LogOutput::operator() (const char* format, va_list ap) {
     char buffer[minimum_buffer_size];
     ssize_t size = ::vsnprintf(buffer, minimum_buffer_size, format, ap);
     int pri;
     const char* e = this->priority(buffer, size, pri);
     size -= e - buffer;
-#if defined(DESPERADO_HAS_SYSLOG)
-    ::syslog(pri, "%s", e);
-    return size;
-#else
-    return error(e);
-#endif
+    return ou(e);
 }
 
 
 //
 //  Output a string of no more than the specified size.
 //
-ssize_t SyslogOutput::operator() (const char* s, size_t size) {
+ssize_t LogOutput::operator() (const char* s, size_t size) {
 	int pri;
     const char* e = this->priority(s, size, pri);
     size -= e - s;
-#if defined(DESPERADO_HAS_SYSLOG)
-    ::syslog(pri, "%.*s", size, e);
-    return size;
-#else
-    return error(e, size);
-#endif
+    return ou(e, size);
 }
 
 
 //
 //  Output binary data.
 //
-ssize_t SyslogOutput::operator() (
+ssize_t LogOutput::operator() (
     const void* buffer,
-#if defined(DESPERADO_HAS_SYSLOG)
-    size_t,
-#else
     size_t minimum,
-#endif
     size_t maximum 
 ) {
 	int pri;
 	const char* s = reinterpret_cast<const char*>(buffer);
     const char* e = this->priority(s, maximum, pri);
     maximum -= e - s;
-#if defined(DESPERADO_HAS_SYSLOG)
-   ::syslog(pri, "%.*s", maximum, e);
-    return maximum;
-#else
-    return error(e, minimum, maximum);
-#endif
+    return ou(e, minimum, maximum);
 }
 
 
 //
 //  Flush buffered data.
 //
-int SyslogOutput::operator() () {
-#if defined(DESPERADO_HAS_SYSLOG)
-    return 0;
-#else
-    return error();
-#endif
+int LogOutput::operator() () {
+    return ou();
 }
 
 
 //
 //  Show this object on the output object.
 //
-void SyslogOutput::show(int level, Output* display, int indent) const {
+void LogOutput::show(int level, Output* display, int indent) const {
     Platform& pl = Platform::instance();
     Print printf(display);
     const char* sp = printf.output().indentation(indent);
@@ -278,14 +189,9 @@ void SyslogOutput::show(int level, Output* display, int indent) const {
     printf("%s%s(%p)[%lu]:\n",
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
-    this->Output::show(level, display, indent + 1);
-    printf("%s lo=%p\n", sp, this->lo);
-    // We can't show our logger because he has a pointer to us that he shows.
-    printf("%s ident=\"%s\"\n", sp, this->ident);
-    printf("%s option=0x%x\n", sp, this->option);
-    printf("%s facility=0x%x\n", sp, this->facility);
-    printf("%s error:\n", sp);
-    this->error.show(level, display, indent + 2);
+    this->SyslogOutput::show(level, display, indent + 1);
+    printf("%s ou:\n", sp);
+    this->ou.show(level, display, indent + 2);
 }
 
 

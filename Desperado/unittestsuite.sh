@@ -76,7 +76,6 @@ unittestBandwidthThrottle
 unittestByteOrder
 unittestCellRateThrottle
 unittestChain
-unittestCommonEra
 unittestCounters
 unittestCrc
 unittestDump
@@ -113,6 +112,7 @@ unittestgenerics
 unittestnamespace
 unitteststring
 unittesttarget
+unittestCommonEra
 EOF
 
 # These commands are shell scripts.
