@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -248,10 +248,10 @@ const char* TimeStamp::log(const CommonEra& ce) {
 const char* TimeStamp::log(const LocalTime& lt) {
     TimeZone zone;
     ::snprintf(this->buffer, sizeof(this->buffer),
-        "%04llu-%02u-%02uT%02u:%02u:%02u.%09u%1.1s",
+        "%04llu-%02u-%02u %02u:%02u:%02u.%03u%1.1s",
         lt.getYear(), lt.getMonth(), lt.getDay(),
         lt.getHour(), lt.getMinute(), lt.getSecond(),
-        lt.getNanosecond(),
+        lt.getNanosecond() / 1000000,
         zone.milspec(lt.getOffset()));
     this->buffer[sizeof(this->buffer) - 1] = '\0';
     assert(std::strlen(this->buffer) < sizeof(this->buffer));

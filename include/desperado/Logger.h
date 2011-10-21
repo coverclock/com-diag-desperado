@@ -216,15 +216,19 @@ public:
         RHS_KERNEL = '>';
 
     /**
-     *  Given a log message in a buffer, determine its level.
+     *  Given a log message in a buffer, determine its numeric level.
      *
      *  @param  buffer      points to the buffer containing
      *                      the message.
      *
      *  @param  size        is the maximum size of the buffer
      *                      in octets.
+     *
+     *  @param level		is the variable into which the result is returned.
+     *
+     *  @return a pointer in the buffer adjusted past the level encoding.
      */
-    virtual Level level(const char* buffer, size_t size);
+    virtual const char* level(const char* buffer, size_t size, size_t & level);
 
     /**
      *  Return true if the specified level is enabled, false otherwise.

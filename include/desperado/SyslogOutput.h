@@ -61,11 +61,16 @@
 
 
 #include "desperado/stdio.h"
+#include "desperado/Platform.h"
 #if defined(DESPERADO_HAS_SYSLOG)
 #include <syslog.h>
+#define SYSLOG_OUTPUT_OPT	(LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID)
+#define SYSLOG_OUTPUT_FAC	(LOG_USER)
 #else
-#include "desperado/FileOutput.h"
+#define SYSLOG_OUTPUT_OPT	(0)
+#define SYSLOG_OUTPUT_FAC	(0)
 #endif
+#include "desperado/FileOutput.h"
 #include "desperado/Output.h"
 #include "desperado/Logger.h"
 
@@ -106,13 +111,8 @@ public:
     explicit SyslogOutput(
         Logger& rl,
         const char* id = __FILE__,
-#if defined(DESPERADO_HAS_SYSLOG)
-        int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
-        int fac = LOG_USER
-#else
-	int opt = 0,
-	int fac = 0
-#endif
+        int opt = SYSLOG_OUTPUT_OPT,
+        int fac = SYSLOG_OUTPUT_FAC
    );
 
     /**
@@ -131,13 +131,8 @@ public:
     explicit SyslogOutput(
         Logger* pl = 0,
         const char* id = __FILE__,
-#if defined(DESPERADO_HAS_SYSLOG)
-        int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
-        int fac = LOG_USER
-#else
-	int opt = 0,
-	int fac = 0
-#endif
+        int opt = SYSLOG_OUTPUT_OPT,
+        int fac = SYSLOG_OUTPUT_FAC
     );
 
     /**
@@ -173,13 +168,8 @@ public:
     virtual bool initialize(
         Logger& rl,
         const char* id = __FILE__,
-#if defined(DESPERADO_HAS_SYSLOG)
-        int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
-        int fac = LOG_USER
-#else
-	int opt = 0,
-	int fac = 0
-#endif
+        int opt = SYSLOG_OUTPUT_OPT,
+        int fac = SYSLOG_OUTPUT_FAC
    );
 
     /**
@@ -210,21 +200,16 @@ public:
     virtual bool initialize(
         Logger* pl = 0,
         const char* id = __FILE__,
-#if defined(DESPERADO_HAS_SYSLOG)
-        int opt = LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID,
-        int fac = LOG_USER
-#else
-	int opt = 0,
-	int fac = 0
-#endif
+        int opt = SYSLOG_OUTPUT_OPT,
+        int fac = SYSLOG_OUTPUT_FAC
     );
 
     /**
      *  Returns a reference to the logger.
      *
-     *  @return the syslog option.
+     *  @return the syslog logger.
      */
-    virtual Logger& logger() const;
+    Logger& logger() const;
 
     /**
      *  Returns the syslog ident.
@@ -255,9 +240,11 @@ public:
      *
      *  @param  size        is the size of the message in octets.
      *
-     *  @return the syslog priority of the given message.
+     *  @param pri			is the variable into which the priority is returned.
+     *
+     *  @return a pointer to an adjusted position in the buffer.
      */
-    virtual int priority(const char* buffer, size_t size);
+    const char* priority(const char* buffer, size_t size, int& pri);
 
     /**
      *  Outputs a character in integer form to the syslog.
@@ -365,12 +352,10 @@ private:
      */
     int facility;
 
-#if !defined(DESPERADO_HAS_SYSLOG)
     /**
      *	This is the output functor used to print log messages to stderr.
      */
     FileOutput error;
-#endif
 
 };
 
@@ -396,6 +381,14 @@ inline int SyslogOutput::getOption() const {
 //
 inline int SyslogOutput::getFacility() const {
     return this->facility;
+}
+
+
+//
+//	Return the logger.
+//
+inline Logger& SyslogOutput::logger() const {
+    return this->lo ? *this->lo : Platform::instance().logger();
 }
 
 #include "desperado/End.h"
