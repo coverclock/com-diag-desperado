@@ -66,6 +66,8 @@
 #include "desperado/Platform.h"
 #include "desperado/Print.h"
 #include "desperado/Print.h"
+#include "desperado/LogOutput.h"
+#include "desperado/LogOutput.h"
 #include "desperado/Desperado.h"
 
 static int leveltest(const char* ff ...) {
@@ -319,6 +321,39 @@ CXXCAPI int unittestLogger(void) {
     DESPERADO_LOGGER_TEST_7(NOTICE,	    	KERN_NOTICE);
     DESPERADO_LOGGER_TEST_7(INFORMATION,	KERN_INFO);
     DESPERADO_LOGGER_TEST_7(DEBUG,		    KERN_DEBUG);
+
+    FileOutput file(stderr);
+    Logger logger8;
+    LogOutput output(file, logger8);
+    logger8.initialize(output);
+
+    logger8.show();
+
+#define DESPERADO_LOGGER_TEST_8(_FUNCTION_) \
+    rc = logger8._FUNCTION_("%s[%d]: %s %s\n", \
+        __FILE__, __LINE__, "logger8", #_FUNCTION_); \
+    if (0 >= rc) { \
+        errorf("%s[%d]: (%d>%d)!\n", \
+            __FILE__, __LINE__, 0, rc); \
+        ++errors; \
+    }
+
+    DESPERADO_LOGGER_TEST_8(finest)
+    DESPERADO_LOGGER_TEST_8(finer)
+    DESPERADO_LOGGER_TEST_8(fine)
+    DESPERADO_LOGGER_TEST_8(trace)
+    DESPERADO_LOGGER_TEST_8(debug)
+    DESPERADO_LOGGER_TEST_8(information)
+    DESPERADO_LOGGER_TEST_8(configuration)
+    DESPERADO_LOGGER_TEST_8(notice)
+    DESPERADO_LOGGER_TEST_8(warning)
+    DESPERADO_LOGGER_TEST_8(error)
+    DESPERADO_LOGGER_TEST_8(severe)
+    DESPERADO_LOGGER_TEST_8(critical)
+    DESPERADO_LOGGER_TEST_8(alert)
+    DESPERADO_LOGGER_TEST_8(fatal)
+    DESPERADO_LOGGER_TEST_8(emergency)
+    DESPERADO_LOGGER_TEST_8(print)
 
     printf("%s[%d]: end errors=%d\n",
         __FILE__, __LINE__, errors);
