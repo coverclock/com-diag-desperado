@@ -60,7 +60,7 @@ PRODUCT		=	desperado
 PROJECT		=	Desperado
 RELEASE		=	wildcat
 MAJOR		=	4
-MINOR		=	1
+MINOR		=	2
 BUILD		=	0
 PRERELEASE	=	yale
 
