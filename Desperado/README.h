@@ -482,7 +482,8 @@ Aren't the reinitializeobject.h macros really a bad idea?
     at all. Alternatives like placing the constructor code in a
     separate virtual function, or having an initializer whose code
     is completely distinct from that of the constructor, have their
-    own drawbacks.
+    own drawbacks. There's a lot of badness here. I don't recommend
+    any of these approaches.
 
 The EC++ specification doesn't allow templates, why do you?
 
