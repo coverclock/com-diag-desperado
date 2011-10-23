@@ -78,25 +78,25 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/target.h"
-#include "desperado/target.h"
-#include "desperado/generics.h"
-#include "desperado/generics.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/generics.h"
 #if !defined(DESPERADO_HAS_DEBUGGING)
 #define DESPERADO_HAS_DEBUGGING
 #endif
-#include "desperado/debug.h"
-#include "desperado/debug.h"
-#include "desperado/reinitializeobject.h"
-#include "desperado/reinitializeobject.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/generics.h"
-#include "desperado/generics.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/debug.h"
+#include "com/diag/desperado/debug.h"
+#include "com/diag/desperado/reinitializeobject.h"
+#include "com/diag/desperado/reinitializeobject.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Desperado.h"
 
 #if 0
 #undef offsetof

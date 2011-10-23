@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "desperado/stdio.h"
-#include "desperado/Implementation.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
+#include "com/diag/desperado/stdio.h"
+#include "com/diag/desperado/Implementation.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -187,4 +187,4 @@ void Implementation::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

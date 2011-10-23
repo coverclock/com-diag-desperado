@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "desperado/target.h"
-#include "desperado/GeometricThrottle.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/GeometricThrottle.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -239,4 +239,4 @@ void GeometricThrottle::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

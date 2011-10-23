@@ -56,9 +56,9 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/cxxjapi.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/cxxjapi.h"
+#include "com/diag/desperado/Platform.h"
 
 int main(int, char**) {
     exit(unittestcxxjapi() + unittestcxxjapi2());

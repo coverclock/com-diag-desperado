@@ -58,10 +58,10 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/types.h"
-#include "desperado/Platform.h"
-#include "desperado/BandwidthThrottle.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/types.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/BandwidthThrottle.h"
 
 int main(int, char**) {
     exit(unittestBandwidthThrottle(0, 10240, 250000, 1024, 10, 100000));

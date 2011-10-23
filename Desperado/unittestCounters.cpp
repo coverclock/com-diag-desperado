@@ -57,22 +57,22 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/generics.h"
-#include "desperado/generics.h"
-#include "desperado/Counters.h"
-#include "desperado/Counters.h"
-#include "desperado/NewCounters.h"
-#include "desperado/NewCounters.h"
-#include "desperado/CountersType.h"
-#include "desperado/CountersType.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Output.h"
-#include "desperado/Output.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Counters.h"
+#include "com/diag/desperado/Counters.h"
+#include "com/diag/desperado/NewCounters.h"
+#include "com/diag/desperado/NewCounters.h"
+#include "com/diag/desperado/CountersType.h"
+#include "com/diag/desperado/CountersType.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Desperado.h"
 
 enum {
     COUNTER0 = 0,

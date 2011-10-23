@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/Platform.h"
-#include "desperado/GeometricThrottle.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/GeometricThrottle.h"
 
 int main(int, char**) {
     exit(unittestGeometricThrottle(0, 250000000));

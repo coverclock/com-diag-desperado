@@ -45,11 +45,11 @@
 
 
 #include <cstdlib>
-#include "desperado/cxxcapi.h"
-#include "desperado/generics.h"
-#include "desperado/FiclShell.h"
-#include "desperado/Platform.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/cxxcapi.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/FiclShell.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Desperado.h"
 
 
 CXXCAPI int hostname(ficlVm* pVM) {

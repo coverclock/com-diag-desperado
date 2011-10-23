@@ -57,13 +57,13 @@
  */
 
 
-#include "desperado/int32_Number.h"
+#include "com/diag/desperado/int32_Number.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 Number<int32_t> int32_Number;
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

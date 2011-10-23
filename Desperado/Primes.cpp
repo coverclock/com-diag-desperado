@@ -44,9 +44,9 @@
  *  Implements the Primes class.
  */
 
-#include "desperado/Primes.h"
+#include "com/diag/desperado/Primes.h"
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 Primes::Vector Primes::primes;
 
@@ -81,4 +81,4 @@ void Primes::generate(Type limit)
 
 }
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

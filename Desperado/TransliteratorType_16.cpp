@@ -57,13 +57,13 @@
  */
 
 
-#include "desperado/TransliteratorType.h"
+#include "com/diag/desperado/TransliteratorType.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 template class TransliteratorType<16>;
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

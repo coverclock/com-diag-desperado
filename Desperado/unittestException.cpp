@@ -57,18 +57,18 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/Exception.h"
-#include "desperado/Exception.h"
-#include "desperado/PathInput.h"
-#include "desperado/PathInput.h"
-#include "desperado/PathOutput.h"
-#include "desperado/PathOutput.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Exception.h"
+#include "com/diag/desperado/Exception.h"
+#include "com/diag/desperado/PathInput.h"
+#include "com/diag/desperado/PathInput.h"
+#include "com/diag/desperado/PathOutput.h"
+#include "com/diag/desperado/PathOutput.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Desperado.h"
 
 #if defined(DESPERADO_HAS_EXCEPTIONS)
 

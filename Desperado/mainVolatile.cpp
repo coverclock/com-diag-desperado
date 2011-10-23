@@ -50,9 +50,9 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/Platform.h"
-#include "desperado/Volatile.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Volatile.h"
 
 int main(int argc, char**) {
     exit(unittestVolatile() + unittestVolatile2());

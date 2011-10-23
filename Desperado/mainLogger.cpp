@@ -61,9 +61,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <pthread.h>
-#include "desperado/UnitTest.h"
-#include "desperado/Platform.h"
-#include "desperado/Logger.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Logger.h"
 
 int main(int, char**) {
     Print& printf = Platform::instance().print();

@@ -57,12 +57,12 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/Throttle.h"
-#include "desperado/Throttle.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Throttle.h"
+#include "com/diag/desperado/Throttle.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Desperado.h"
 
 static Throttle staticThrottle;
 

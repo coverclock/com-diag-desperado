@@ -58,14 +58,14 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/Heap.h"
-#include "desperado/Heap.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/target.h"
-#include "desperado/generics.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Heap.h"
+#include "com/diag/desperado/Heap.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Desperado.h"
 
 static inline bool null(void* ptr) {
     return 0 != ptr;

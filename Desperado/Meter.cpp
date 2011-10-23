@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "desperado/target.h"
-#include "desperado/Meter.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/Meter.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 static const size_t limit = ~(static_cast<size_t>(0));
@@ -218,4 +218,4 @@ void Meter::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

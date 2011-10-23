@@ -59,16 +59,16 @@
 
 #include <new>
 #include <limits.h>
-#include "desperado/string.h"
-#include "desperado/generics.h"
-#include "desperado/exceptions.h"
-#include "desperado/Exception.h"
-#include "desperado/PathInput.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/exceptions.h"
+#include "com/diag/desperado/Exception.h"
+#include "com/diag/desperado/PathInput.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 static FILE* filepointer(const char* path, const char* mode) {
@@ -145,4 +145,4 @@ void PathInput::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

@@ -49,22 +49,22 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/target.h"
-#include "desperado/target.h"
-#include "desperado/string.h"
-#include "desperado/string.h"
-#include "desperado/ByteOrder.h"
-#include "desperado/ByteOrder.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Dump.h"
-#include "desperado/Dump.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Output.h"
-#include "desperado/Output.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/ByteOrder.h"
+#include "com/diag/desperado/ByteOrder.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Dump.h"
+#include "com/diag/desperado/Dump.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Desperado.h"
 
 
 template <typename _TYPE_>

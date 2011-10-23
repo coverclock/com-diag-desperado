@@ -55,14 +55,14 @@
  *  @date   $Date: 2006/02/02 02:21:40 $
  */
 
-#include "desperado/UnitTest.h"
-#include "desperado/Implementation.h"
-#include "desperado/Implementation.h"
-#include "desperado/Derivation.h"
-#include "desperado/Derivation.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Implementation.h"
+#include "com/diag/desperado/Implementation.h"
+#include "com/diag/desperado/Derivation.h"
+#include "com/diag/desperado/Derivation.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Desperado.h"
 
 static Implementation implementation;
 

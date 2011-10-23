@@ -58,16 +58,16 @@
 
 
 #include <new>
-#include "desperado/errno.h"
-#include "desperado/target.h"
-#include "desperado/string.h"
-#include "desperado/exceptions.h"
-#include "desperado/Heap.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/errno.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/exceptions.h"
+#include "com/diag/desperado/Heap.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 inline size_t words(size_t bytes) {
@@ -350,4 +350,4 @@ void Heap::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

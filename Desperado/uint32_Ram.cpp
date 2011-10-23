@@ -57,13 +57,13 @@
  */
 
 
-#include "desperado/uint32_Ram.h"
+#include "com/diag/desperado/uint32_Ram.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 Ram<uint32_t> uint32_Ram;
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

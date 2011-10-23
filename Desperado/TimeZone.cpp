@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "desperado/generics.h"
-#include "desperado/TimeZone.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/TimeZone.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 struct Zone {
@@ -216,4 +216,4 @@ void TimeZone::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

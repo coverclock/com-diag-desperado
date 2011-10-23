@@ -57,8 +57,8 @@
  */
 
 
-#include "desperado/Dump.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/Dump.h"
+#include "com/diag/desperado/Desperado.h"
 
 
 CXXCAPI size_t dump_bytes(Dump* dump, const void* data, size_t length) {

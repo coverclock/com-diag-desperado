@@ -58,17 +58,17 @@
 
 
 #include <new>
-#include "desperado/stdio.h"
-#include "desperado/string.h"
-#include "desperado/LocalTime.h"
-#include "desperado/TimeZone.h"
-#include "desperado/DstNever.h"
-#include "desperado/Constant.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/stdio.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/LocalTime.h"
+#include "com/diag/desperado/TimeZone.h"
+#include "com/diag/desperado/DstNever.h"
+#include "com/diag/desperado/Constant.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 static DstNever dstnever;
@@ -295,4 +295,4 @@ void LocalTime::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

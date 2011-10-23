@@ -58,14 +58,14 @@
 
 
 #include <new>
-#include "desperado/generics.h"
-#include "desperado/CellRateThrottle.h"
-#include "desperado/Constant.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/CellRateThrottle.h"
+#include "com/diag/desperado/Constant.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 //
 //  Compute the peak increment.
@@ -263,4 +263,4 @@ void CellRateThrottle::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

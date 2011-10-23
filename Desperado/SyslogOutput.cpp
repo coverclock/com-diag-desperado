@@ -59,14 +59,14 @@
 
 #include <new>
 #include <cstdarg>
-#include "desperado/stdio.h"
-#include "desperado/string.h"
-#include "desperado/generics.h"
-#include "desperado/SyslogOutput.h"
-#include "desperado/Print.h"
+#include "com/diag/desperado/stdio.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/SyslogOutput.h"
+#include "com/diag/desperado/Print.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 int SyslogOutput::priorities[] = {
@@ -289,4 +289,4 @@ void SyslogOutput::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

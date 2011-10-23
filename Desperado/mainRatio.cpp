@@ -50,10 +50,10 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/Platform.h"
-#include "desperado/Ratio.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Ratio.h"
+#include "com/diag/desperado/Desperado.h"
 
 int main() {
     exit(unittestRatio());
