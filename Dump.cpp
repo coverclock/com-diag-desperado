@@ -58,17 +58,17 @@
 
 
 #include <new>
-#include "desperado/target.h"
-#include "desperado/littleendian.h"
-#include "desperado/string.h"
-#include "desperado/generics.h"
-#include "desperado/Dump.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Constant.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/littleendian.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Dump.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Constant.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 const char Dump::upper_case_hex[] = {
@@ -429,4 +429,4 @@ void Dump::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

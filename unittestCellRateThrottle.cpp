@@ -58,16 +58,16 @@
 
 
 #include <sys/time.h>
-#include "desperado/UnitTest.h"
-#include "desperado/CellRateThrottle.h"
-#include "desperado/CellRateThrottle.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Ticks.h"
-#include "desperado/Ticks.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/CellRateThrottle.h"
+#include "com/diag/desperado/CellRateThrottle.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Ticks.h"
+#include "com/diag/desperado/Ticks.h"
+#include "com/diag/desperado/Desperado.h"
 
 static CellRateThrottle staticCellRateThrottle;
 

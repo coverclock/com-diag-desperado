@@ -57,13 +57,13 @@
  */
 
 
-#include "desperado/uint16_Number.h"
+#include "com/diag/desperado/uint16_Number.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 Number<uint16_t> uint16_Number;
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

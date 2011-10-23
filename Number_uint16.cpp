@@ -57,13 +57,13 @@
  */
 
 
-#include "desperado/Number.h"
+#include "com/diag/desperado/Number.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 template class Number<uint16_t>;
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

@@ -60,15 +60,15 @@
 #if !defined(DESPERADO_HAS_DEBUGGING)
 #define DESPERADO_HAS_DEBUGGING (1)
 #endif
-#include "desperado/UnitTest.h"
-#include "desperado/debug.h"
-#include "desperado/debug.h"
-#include "desperado/Mutex.h"
-#include "desperado/Mutex.h"
-#include "desperado/CriticalSection.h"
-#include "desperado/CriticalSection.h"
-#include "desperado/Platform.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/debug.h"
+#include "com/diag/desperado/debug.h"
+#include "com/diag/desperado/Mutex.h"
+#include "com/diag/desperado/Mutex.h"
+#include "com/diag/desperado/CriticalSection.h"
+#include "com/diag/desperado/CriticalSection.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Desperado.h"
 
 static Mutex staticMutex;
 

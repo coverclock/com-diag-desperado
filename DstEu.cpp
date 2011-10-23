@@ -58,12 +58,12 @@
 
 
 #include <new>
-#include "desperado/DstEu.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/DstEu.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 static const DstGeneric::Event begins = {
@@ -129,4 +129,4 @@ void DstEu::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

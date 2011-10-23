@@ -56,15 +56,14 @@ fi
 TIMESTAMP="`date`"
 
 echo "/*"
-echo " * Copyright 2006-2008 Digital Aggregates Corp.,"
-echo " * Arvada CO 80001-0587, USA. Licensed under"
-echo " * the same terms as the Desperado library."
+echo " * Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA."
+echo " * Licensed under the same terms as the Desperado library."
 echo " * This file was generated automatically"
 echo " * by the Desperado $0 script"
 echo " * on ${TIMESTAMP}."
 echo " */"
-echo "#include \"desperado/target.h\""
-echo "#include \"desperado/ficlApi.h\""
+echo "#include \"com/diag/desperado/target.h\""
+echo "#include \"com/diag/desperado/ficlApi.h\""
 echo "#if defined(DESPERADO_HAS_FICL)"
 
 for FILE in $*; do

@@ -57,10 +57,10 @@
  */
 
 
-#include "desperado/Object.h"
+#include "com/diag/desperado/Object.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -70,4 +70,4 @@ Object::~Object() {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

@@ -61,14 +61,14 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/LinkType.h"
-#include "desperado/LinkType.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/target.h"
-#include "desperado/generics.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/LinkType.h"
+#include "com/diag/desperado/LinkType.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Desperado.h"
 
 class UT_LinkType {
 public:

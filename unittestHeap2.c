@@ -57,20 +57,20 @@
  */
 
 
-#include "desperado/UnitTest.h"
+#include "com/diag/desperado/UnitTest.h"
 #include <stdlib.h>
-#include "desperado/target.h"
-#include "desperado/target.h"
-#include "desperado/generics.h"
-#include "desperado/generics.h"
-#include "desperado/Heap.h"
-#include "desperado/Heap.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Output.h"
-#include "desperado/Output.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Heap.h"
+#include "com/diag/desperado/Heap.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
 
 /*
  *  If we weren't also using the stdlib malloc() etc. we

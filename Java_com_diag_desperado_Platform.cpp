@@ -62,10 +62,10 @@
 #if defined(DESPERADO_HAS_JAVA)
 
 
-#include "desperado/target.h"
-#include "desperado/Platform.h"
-#include "desperado/Output.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Desperado.h"
 #include "com_diag_desperado_Platform.h"
 #include "jni.h"
 

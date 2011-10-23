@@ -57,13 +57,13 @@
  */
 
 
-#include "desperado/Ram.h"
+#include "com/diag/desperado/Ram.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 template class Ram<uint16_t>;
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

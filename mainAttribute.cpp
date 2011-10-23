@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/Platform.h"
-#include "desperado/Attribute.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Attribute.h"
 
 int main(int argc, char**) {
     exit(unittestAttribute(0, 1 < argc ? 1 : 0));

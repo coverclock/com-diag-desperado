@@ -58,14 +58,14 @@
 
 
 #include <new>
-#include "desperado/target.h"
-#include "desperado/string.h"
-#include "desperado/Argument.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/Argument.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -136,4 +136,4 @@ void Argument::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

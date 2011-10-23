@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/Platform.h"
-#include "desperado/generics.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/generics.h"
 
 int main(int, char**) {
     exit(unittestgenerics() + unittestgenerics2());

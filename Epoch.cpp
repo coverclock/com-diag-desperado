@@ -58,12 +58,12 @@
 
 
 #include <new>
-#include "desperado/Epoch.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/Epoch.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -105,4 +105,4 @@ void Epoch::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

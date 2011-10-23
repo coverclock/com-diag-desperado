@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/Platform.h"
-#include "desperado/Encode.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Encode.h"
 
 int main(int, char**) {
     exit(unittestEncode());

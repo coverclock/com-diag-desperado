@@ -57,18 +57,18 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/string.h"
-#include "desperado/string.h"
-#include "desperado/Logger.h"
-#include "desperado/Logger.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/LogOutput.h"
-#include "desperado/LogOutput.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/Logger.h"
+#include "com/diag/desperado/Logger.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/LogOutput.h"
+#include "com/diag/desperado/LogOutput.h"
+#include "com/diag/desperado/Desperado.h"
 
 static int leveltest(const char* ff ...) {
     Print printf(Platform::instance().output());

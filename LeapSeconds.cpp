@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "desperado/types.h"
-#include "desperado/generics.h"
-#include "desperado/LeapSeconds.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/types.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/LeapSeconds.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -305,4 +305,4 @@ void LeapSeconds::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

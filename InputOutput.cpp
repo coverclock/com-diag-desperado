@@ -58,12 +58,12 @@
 
 
 #include <new>
-#include "desperado/InputOutput.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
+#include "com/diag/desperado/InputOutput.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 static Input input;
@@ -130,4 +130,4 @@ void InputOutput::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

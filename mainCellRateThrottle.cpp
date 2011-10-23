@@ -58,10 +58,10 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/types.h"
-#include "desperado/Platform.h"
-#include "desperado/CellRateThrottle.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/types.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/CellRateThrottle.h"
 
 int main(int, char**) {
     exit(unittestCellRateThrottle(0, 200, 250, 100, 5, 10000000));

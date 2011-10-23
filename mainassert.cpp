@@ -58,9 +58,9 @@
 
 
 #include <cstdlib>
-#include "desperado/UnitTest.h"
-#include "desperado/assert.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/assert.h"
+#include "com/diag/desperado/Platform.h"
 
 int main(int, char**) {
     exit(unittestassert());

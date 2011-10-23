@@ -57,16 +57,16 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/Fifo.h"
-#include "desperado/Fifo.h"
-#include "desperado/NewFifo.h"
-#include "desperado/NewFifo.h"
-#include "desperado/FifoType.h"
-#include "desperado/FifoType.h"
-#include "desperado/Platform.h"
-#include "desperado/generics.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Fifo.h"
+#include "com/diag/desperado/Fifo.h"
+#include "com/diag/desperado/NewFifo.h"
+#include "com/diag/desperado/NewFifo.h"
+#include "com/diag/desperado/FifoType.h"
+#include "com/diag/desperado/FifoType.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Desperado.h"
 
 struct Datum { uint32_t one; uint32_t two; };
 

@@ -58,13 +58,13 @@
 
 
 #include <new>
-#include "desperado/target.h"
-#include "desperado/Iso3166.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/Iso3166.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -350,4 +350,4 @@ void Iso3166::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

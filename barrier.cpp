@@ -56,8 +56,8 @@
 
 
 #include <pthread.h>
-#include "desperado/barrier.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/barrier.h"
+#include "com/diag/desperado/Platform.h"
 
 
 //

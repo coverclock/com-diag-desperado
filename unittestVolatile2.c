@@ -49,17 +49,17 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/Volatile.h"
-#include "desperado/Volatile.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Output.h"
-#include "desperado/Output.h"
-#include "desperado/generics.h"
-#include "desperado/generics.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Volatile.h"
+#include "com/diag/desperado/Volatile.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/generics.h"
 
 #define unittestVolatileType(_TYPE_) \
 do { \

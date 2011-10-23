@@ -58,14 +58,14 @@
 
 
 #include <new>
-#include "desperado/types.h"
-#include "desperado/Ticks.h"
-#include "desperado/Constant.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/types.h"
+#include "com/diag/desperado/Ticks.h"
+#include "com/diag/desperado/Constant.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -151,4 +151,4 @@ void Ticks::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

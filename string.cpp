@@ -55,9 +55,9 @@
  */
 
 
-#include "desperado/string.h"
-#include "desperado/cxxcapi.h"
-#include "desperado/target.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/cxxcapi.h"
+#include "com/diag/desperado/target.h"
 
 
 //

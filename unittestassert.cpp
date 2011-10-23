@@ -57,17 +57,17 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/errno.h"
-#include "desperado/errno.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/errno.h"
+#include "com/diag/desperado/errno.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Desperado.h"
 
 #define NDEBUG
-#include "desperado/assert.h"
+#include "com/diag/desperado/assert.h"
 
 static int no() {
     Print printf(Platform::instance().output());
@@ -89,7 +89,7 @@ static int no() {
 }
 
 #undef NDEBUG
-#include "desperado/assert.h"
+#include "com/diag/desperado/assert.h"
 
 static int yes() {
     Print printf(Platform::instance().output());

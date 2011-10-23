@@ -58,14 +58,14 @@
 
 
 #include <new>
-#include "desperado/errno.h"
-#include "desperado/Input.h"
-#include "desperado/Output.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
+#include "com/diag/desperado/errno.h"
+#include "com/diag/desperado/Input.h"
+#include "com/diag/desperado/Output.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -152,4 +152,4 @@ void Input::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

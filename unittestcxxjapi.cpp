@@ -57,18 +57,18 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/java.h"
-#include "desperado/java.h"
-#include "desperado/cxxjapi.h"
-#include "desperado/cxxjapi.h"
-#include "desperado/generics.h"
-#include "desperado/generics.h"
-#include "desperado/Platform.h"
-#include "desperado/Platform.h"
-#include "desperado/Print.h"
-#include "desperado/Print.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/java.h"
+#include "com/diag/desperado/java.h"
+#include "com/diag/desperado/cxxjapi.h"
+#include "com/diag/desperado/cxxjapi.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Desperado.h"
 
 
 CXXCAPI int unittestcxxjapi(void) {

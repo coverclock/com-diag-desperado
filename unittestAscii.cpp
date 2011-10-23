@@ -57,13 +57,13 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/Ascii.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Escape.h"
-#include "desperado/generics.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/Ascii.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Escape.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/Desperado.h"
 
 static Ascii ascii;
 static Escape escape;

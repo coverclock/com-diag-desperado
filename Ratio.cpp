@@ -44,11 +44,11 @@
  *  Implements the Ratio class.
  */
 
-#include "desperado/Root.h"
-#include "desperado/Primes.h"
-#include "desperado/Ratio.h"
+#include "com/diag/desperado/Root.h"
+#include "com/diag/desperado/Primes.h"
+#include "com/diag/desperado/Ratio.h"
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 /*
  * We take care of all the special cases before the complicated stuff.
@@ -121,4 +121,4 @@ Ratio * Ratio::normalize()
     return this;	
 }
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

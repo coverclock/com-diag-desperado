@@ -57,15 +57,15 @@
  */
 
 
-#include "desperado/UnitTest.h"
-#include "desperado/generics.h"
-#include "desperado/types.h"
-#include "desperado/GeometricThrottle.h"
-#include "desperado/GeometricThrottle.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Ticks.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/generics.h"
+#include "com/diag/desperado/types.h"
+#include "com/diag/desperado/GeometricThrottle.h"
+#include "com/diag/desperado/GeometricThrottle.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Ticks.h"
+#include "com/diag/desperado/Desperado.h"
 
 static GeometricThrottle staticGeometricThrottle;
 

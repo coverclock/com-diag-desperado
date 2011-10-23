@@ -58,12 +58,12 @@
 
 
 #include <new>
-#include "desperado/DaylightSavingTime.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/DaylightSavingTime.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -87,4 +87,4 @@ void DaylightSavingTime::show(int /* level */, Output* display, int indent) cons
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

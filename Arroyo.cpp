@@ -61,10 +61,10 @@
 
 
 #include <new>
-#include "desperado/Arroyo.h"
+#include "com/diag/desperado/Arroyo.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -116,7 +116,7 @@ void Arroyo::show(int level, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"
 
 
 #endif

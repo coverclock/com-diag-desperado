@@ -58,18 +58,18 @@
 
 #if defined(DESPERADO_HAS_JAVA)
 
-#include "desperado/UnitTest.h"
-#include "desperado/target.h"
-#include "desperado/JavaVirtualMachine.h"
-#include "desperado/JavaVirtualMachine.h"
-#include "desperado/java.h"
-#include "desperado/java.h"
-#include "desperado/cxxjapi.h"
-#include "desperado/cxxjapi.h"
-#include "desperado/errno.h"
-#include "desperado/Print.h"
-#include "desperado/Platform.h"
-#include "desperado/Desperado.h"
+#include "com/diag/desperado/UnitTest.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/JavaVirtualMachine.h"
+#include "com/diag/desperado/JavaVirtualMachine.h"
+#include "com/diag/desperado/java.h"
+#include "com/diag/desperado/java.h"
+#include "com/diag/desperado/cxxjapi.h"
+#include "com/diag/desperado/cxxjapi.h"
+#include "com/diag/desperado/errno.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Desperado.h"
 
 static JavaVirtualMachine staticJvm;
 

@@ -58,15 +58,15 @@
 
 
 #include <new>
-#include "desperado/target.h"
-#include "desperado/string.h"
-#include "desperado/Encode.h"
-#include "desperado/Print.h"
-#include "desperado/Dump.h"
-#include "desperado/Platform.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/string.h"
+#include "com/diag/desperado/Encode.h"
+#include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Dump.h"
+#include "com/diag/desperado/Platform.h"
 
 
-#include "desperado/Begin.h"
+#include "com/diag/desperado/Begin.h"
 
 
 //
@@ -204,4 +204,4 @@ void Encode::show(int /* level */, Output* display, int indent) const {
 }
 
 
-#include "desperado/End.h"
+#include "com/diag/desperado/End.h"

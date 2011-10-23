@@ -48,16 +48,16 @@
 
 
 #if defined(DESPERADO_PLATFORM_IS_Linux)
-#include "desperado/Linux.h"
+#include "com/diag/desperado/Linux.h"
 typedef Linux OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Cygwin)
-#include "desperado/Cygwin.h"
+#include "com/diag/desperado/Cygwin.h"
 typedef Cygwin OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Diminuto)
-#include "desperado/Diminuto.h"
+#include "com/diag/desperado/Diminuto.h"
 typedef Diminuto OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Arroyo)
-#include "desperado/Arroyo.h"
+#include "com/diag/desperado/Arroyo.h"
 typedef Arroyo OperatingSystem;
 #else
 #error DESPERADO_PLATFORM_IS_* not defined!
