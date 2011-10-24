@@ -93,7 +93,7 @@ extern int daylight;
 static DstNever dstnever;           // Used if no Daylight Saving Time.
 static DstUs dstus;                 // Used assuming U.S. rules.
 static LeapSeconds leapseconds;     // Used as the leap second rule.
-static char hostnamebuffer[64];     // Used for gethostbyname().
+static char hostnamebuffer[64];     // Used for gethostname().
 
 
 static char* hostname() {

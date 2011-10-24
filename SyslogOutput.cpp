@@ -93,6 +93,12 @@ int SyslogOutput::priorities[] = {
 #endif
 };
 
+#if !defined(DESPERADO_HAS_SYSLOG)
+/**
+ *	This is the output functor used to print log messages to stderr.
+ */
+static FileOutput error(stderr);
+#endif
 
 //
 //  Constructor.
@@ -102,7 +108,6 @@ SyslogOutput::SyslogOutput(const char* id, int opt, int fac)
 , ident(id)
 , option(opt)
 , facility(fac)
-, error(stderr)
 {
 #if defined(DESPERADO_HAS_SYSLOG)
     ::openlog(id, opt, fac);
@@ -116,6 +121,8 @@ SyslogOutput::SyslogOutput(const char* id, int opt, int fac)
 SyslogOutput::~SyslogOutput() {
 #if defined(DESPERADO_HAS_SYSLOG)
     ::closelog();
+#else
+    error();
 #endif
 }
 
@@ -249,8 +256,6 @@ void SyslogOutput::show(int level, Output* display, int indent) const {
     printf("%s ident=\"%s\"\n", sp, this->ident);
     printf("%s option=0x%x\n", sp, this->option);
     printf("%s facility=0x%x\n", sp, this->facility);
-    printf("%s error:\n", sp);
-    this->error.show(level, display, indent + 2);
 }
 
 

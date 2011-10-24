@@ -105,7 +105,7 @@ public:
      *  @param  fac         is the syslog facility.
      */
     explicit SyslogOutput(
-        const char* id = __FILE__,
+        const char* id = "SyslogOutput",
         int opt = SYSLOG_OUTPUT_OPT,
         int fac = SYSLOG_OUTPUT_FAC
    );
@@ -138,7 +138,7 @@ public:
      *  @return true if successful, false otherwise.
      */
     virtual bool initialize(
-        const char* id = __FILE__,
+        const char* id = "SyslogOutput",
         int opt = SYSLOG_OUTPUT_OPT,
         int fac = SYSLOG_OUTPUT_FAC
    );
@@ -278,11 +278,6 @@ private:
      *  This is the facility used to open the syslog.
      */
     int facility;
-
-    /**
-     *	This is the output functor used to print log messages to stderr.
-     */
-    FileOutput error;
 
 };
 
