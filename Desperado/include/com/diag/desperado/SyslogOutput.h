@@ -72,7 +72,6 @@
 #endif
 #include "com/diag/desperado/FileOutput.h"
 #include "com/diag/desperado/Output.h"
-#include "com/diag/desperado/Logger.h"
 
 
 #include "com/diag/desperado/Begin.h"
@@ -99,9 +98,6 @@ public:
     /**
      *  Constructor.
      *
-     *  @param  rl          refers to the Logger that generates
-     *                      buffers for this object.
-     *
      *  @param  id          is the syslog ident.
      *
      *  @param  opt         is the syslog option.
@@ -109,31 +105,10 @@ public:
      *  @param  fac         is the syslog facility.
      */
     explicit SyslogOutput(
-        Logger& rl,
         const char* id = __FILE__,
         int opt = SYSLOG_OUTPUT_OPT,
         int fac = SYSLOG_OUTPUT_FAC
    );
-
-    /**
-     *  Constructor.
-     *
-     *  @param  pl          points to the Logger that generates
-     *                      buffers for this object. If null,
-     *                      the default platform logger is used.
-     *
-     *  @param  id          is the syslog ident.
-     *
-     *  @param  opt         is the syslog option.
-     *
-     *  @param  fac         is the syslog facility.
-     */
-    explicit SyslogOutput(
-        Logger* pl = 0,
-        const char* id = __FILE__,
-        int opt = SYSLOG_OUTPUT_OPT,
-        int fac = SYSLOG_OUTPUT_FAC
-    );
 
     /**
      *  Destructor. The syslog is closed for this application when the
@@ -154,9 +129,6 @@ public:
      *  from a class that implements this method must also implement this
      *  method, otherwise it can never be used against a derived class object.
      *
-     *  @param  rl          refers to the Logger that generates
-     *                      buffers for this object.
-     *
      *  @param  id          is the syslog ident.
      *
      *  @param  opt         is the syslog option.
@@ -166,50 +138,10 @@ public:
      *  @return true if successful, false otherwise.
      */
     virtual bool initialize(
-        Logger& rl,
         const char* id = __FILE__,
         int opt = SYSLOG_OUTPUT_OPT,
         int fac = SYSLOG_OUTPUT_FAC
    );
-
-    /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  pl          points to the Logger that generates
-     *                      buffers for this object. If null,
-     *                      the default platform logger is used.
-     *
-     *  @param  id          is the syslog ident.
-     *
-     *  @param  opt         is the syslog option.
-     *
-     *  @param  fac         is the syslog facility.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(
-        Logger* pl = 0,
-        const char* id = __FILE__,
-        int opt = SYSLOG_OUTPUT_OPT,
-        int fac = SYSLOG_OUTPUT_FAC
-    );
-
-    /**
-     *  Returns a reference to the logger.
-     *
-     *  @return the syslog logger.
-     */
-    Logger& logger() const;
 
     /**
      *  Returns the syslog ident.
@@ -333,11 +265,6 @@ public:
 private:
 
     /**
-     *  This points to the logger used to generate buffers for this functor.
-     */
-    Logger* lo;
-
-    /**
      *  This is the ident used to open the syslog.
      */
     const char* ident;
@@ -383,13 +310,6 @@ inline int SyslogOutput::getFacility() const {
     return this->facility;
 }
 
-
-//
-//	Return the logger.
-//
-inline Logger& SyslogOutput::logger() const {
-    return this->lo ? *this->lo : Platform::instance().logger();
-}
 
 #include "com/diag/desperado/End.h"
 

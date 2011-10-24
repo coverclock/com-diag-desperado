@@ -54,7 +54,6 @@
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/SyslogOutput.h"
 #include "com/diag/desperado/Output.h"
-#include "com/diag/desperado/Logger.h"
 
 
 #include "com/diag/desperado/Begin.h"
@@ -74,29 +73,10 @@ public:
      *
      *	@param ro			refers to the output functor to which buffers are
      *						forwarded.
-     *
-     *  @param  rl          refers to the Logger that generates
-     *                      buffers for this object.
      */
     explicit LogOutput(
-    	Output& ro,
-        Logger& rl
+    	Output& ro
    );
-
-    /**
-     *  Constructor.
-     *
-     *	@param ro			refers to the output functor to which buffers are
-     *						forwarded.
-     *
-     *  @param  pl          points to the Logger that generates
-     *                      buffers for this object. If null,
-     *                      the default platform logger is used.
-     */
-    explicit LogOutput(
-    	Output& po,
-        Logger* pl = 0
-    );
 
     /**
      *  Destructor.
@@ -119,44 +99,11 @@ public:
      *	@param ro			refers to the output functor to which buffers are
      *						forwarded.
      *
-     *  @param  rl          refers to the Logger that generates
-     *                      buffers for this object.
-     *
      *  @return true if successful, false otherwise.
      */
     virtual bool initialize(
-        Output& ro,
-        Logger& rl
+        Output& ro
    );
-
-    /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *	@param ro			refers to the output functor to which buffers are
-     *						forwarded.
-     *
-     *  @param  pl          points to the Logger that generates
-     *                      buffers for this object. If null,
-     *                      the default platform logger is used.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(
-        Output& po,
-        Logger* pl = 0
-    );
-
-    using SyslogOutput::logger;
 
     using SyslogOutput::priority;
 

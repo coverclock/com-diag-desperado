@@ -56,6 +56,7 @@
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/LogOutput.h"
 #include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Logger.h"
 
 
 #include "com/diag/desperado/Begin.h"
@@ -64,19 +65,8 @@
 //
 //  Constructor.
 //
-LogOutput::LogOutput(Output& ro, Logger& rl)
-: SyslogOutput(rl, "", 0, 0)
-, ou(ro)
-
-{
-}
-
-
-//
-//  Constructor.
-//
-LogOutput::LogOutput(Output& ro, Logger* pl)
-: SyslogOutput(pl, "", 0, 0)
+LogOutput::LogOutput(Output& ro)
+: SyslogOutput("", 0, 0)
 , ou(ro)
 {
 }
@@ -93,27 +83,11 @@ LogOutput::~LogOutput() {
 //
 //    Initializer.
 //
-bool LogOutput::initialize(Output& ro, Logger& rl) {
+bool LogOutput::initialize(Output& ro) {
     bool rc = false;
     try {
         this->LogOutput::~LogOutput();
-        new(this) LogOutput(ro, rl);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool LogOutput::initialize(Output& ro, Logger* pl) {
-    bool rc = false;
-    try {
-        this->LogOutput::~LogOutput();
-        new(this) LogOutput(ro, pl);
+        new(this) LogOutput(ro);
         rc = true;
     } catch (...) {
         rc = false;
@@ -126,7 +100,7 @@ bool LogOutput::initialize(Output& ro, Logger* pl) {
 //  Output a character.
 //
 int LogOutput::operator() (int c) {
-    ou(c);
+    return ou(c);
 }
 
 

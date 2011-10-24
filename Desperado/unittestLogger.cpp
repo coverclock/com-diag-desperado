@@ -324,7 +324,7 @@ CXXCAPI int unittestLogger(void) {
 
     FileOutput file(stderr);
     Logger logger8;
-    LogOutput output(file, logger8);
+    LogOutput output(file);
     logger8.initialize(output);
 
     logger8.show();
