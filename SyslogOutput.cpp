@@ -64,6 +64,7 @@
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/SyslogOutput.h"
 #include "com/diag/desperado/Print.h"
+#include "com/diag/desperado/Logger.h"
 
 
 #include "com/diag/desperado/Begin.h"
@@ -96,26 +97,8 @@ int SyslogOutput::priorities[] = {
 //
 //  Constructor.
 //
-SyslogOutput::SyslogOutput(Logger& rl, const char* id, int opt, int fac)
+SyslogOutput::SyslogOutput(const char* id, int opt, int fac)
 : Output()
-, lo(&rl)
-, ident(id)
-, option(opt)
-, facility(fac)
-, error(stderr)
-{
-#if defined(DESPERADO_HAS_SYSLOG)
-    ::openlog(id, opt, fac);
-#endif
-}
-
-
-//
-//  Constructor.
-//
-SyslogOutput::SyslogOutput(Logger* pl, const char* id, int opt, int fac)
-: Output()
-, lo(pl)
 , ident(id)
 , option(opt)
 , facility(fac)
@@ -140,27 +123,11 @@ SyslogOutput::~SyslogOutput() {
 //
 //    Initializer.
 //
-bool SyslogOutput::initialize(Logger& rl, const char* id, int opt, int fac) {
+bool SyslogOutput::initialize(const char* id, int opt, int fac) {
     bool rc = false;
     try {
         this->SyslogOutput::~SyslogOutput();
-        new(this) SyslogOutput(rl, id, opt, fac);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool SyslogOutput::initialize(Logger* pl, const char* id, int opt, int fac) {
-    bool rc = false;
-    try {
-        this->SyslogOutput::~SyslogOutput();
-        new(this) SyslogOutput(pl, id, opt, fac);
+        new(this) SyslogOutput(id, opt, fac);
         rc = true;
     } catch (...) {
         rc = false;
@@ -174,7 +141,7 @@ bool SyslogOutput::initialize(Logger* pl, const char* id, int opt, int fac) {
 //
 const char* SyslogOutput::priority(const char* buffer, size_t size, int& pri) {
 	size_t level;
-	buffer = (this->logger()).level(buffer, size, level);
+	buffer = Logger::level(buffer, size, level);
     if (countof(this->priorities) <= level) {
     	level = countof(this->priorities) - 1;
     }
@@ -279,8 +246,6 @@ void SyslogOutput::show(int level, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
     this->Output::show(level, display, indent + 1);
-    printf("%s lo=%p\n", sp, this->lo);
-    // We can't show our logger because he has a pointer to us that he shows.
     printf("%s ident=\"%s\"\n", sp, this->ident);
     printf("%s option=0x%x\n", sp, this->option);
     printf("%s facility=0x%x\n", sp, this->facility);

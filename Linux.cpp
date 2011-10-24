@@ -118,7 +118,7 @@ Linux::Linux() :
     inputs(stdin),
     outputs(stdout),
     errors(stderr),
-    logs(this->loggers, hostname()),
+    logs(hostname()),
     dumps(this->errors),
     heaps(this->errors),
     prints(this->errors),

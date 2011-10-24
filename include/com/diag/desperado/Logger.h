@@ -98,6 +98,67 @@ class Logger : public Object {
 public:
 
     /**
+     *  These are the levels available for log messages.
+     *  They are the transitive closure of the levels
+     *  available in syslog(3), log4j, log4cpp, JDK Logger,
+     *  Apache SimpleLog, etc.
+     */
+    enum Level {
+        FINEST          =   0,
+        FINER           =   1,
+        FINE            =   2,
+        TRACE           =   3,
+        DEBUG           =   4,
+        INFORMATION     =   5,
+        CONFIGURATION   =   6,
+        NOTICE          =   7,
+        WARNING         =   8,
+        ERROR           =   9,
+        SEVERE          =   10,
+        CRITICAL        =   11,
+        ALERT           =   12,
+        FATAL           =   13,
+        EMERGENCY       =   14,
+        PRINT           =   15
+    };
+
+    /**
+     * These characters delimit the symbolic extended log levels.
+     */
+    static const char
+        LHS_EXTENDED = '[',
+        RHS_EXTENDED = ']';
+
+    /**
+     * These characters delimit the numeric kernel log levels,
+     * mimicing how the Linux kernel works.
+     */
+    static const char
+        LHS_KERNEL = '<',
+        RHS_KERNEL = '>';
+
+    /**
+     * This table maps from the kernel <0>..<7> log levels to the
+     * extended log levels.
+     */
+    static const Level kernel[8];
+
+    /**
+     *  Given a log message in a buffer, determine its numeric level.
+     *
+     *  @param  buffer      points to the buffer containing
+     *                      the message.
+     *
+     *  @param  size        is the maximum size of the buffer
+     *                      in octets.
+     *
+     *  @param level		is the variable into which the result is returned.
+     *
+     *  @return a pointer in the buffer adjusted past the level encoding.
+     */
+    static const char* level(const char* buffer, size_t size, size_t & level);
+
+    /**
      *  Constructor.
      *
      *  @param  po          points to an output object. If 0,
@@ -164,71 +225,10 @@ public:
     virtual Output& output() const;
 
     /**
-     *  These are the levels available for log messages.
-     *  They are the transitive closure of the levels
-     *  available in syslog(3), log4j, log4cpp, JDK Logger,
-     *  Apache SimpleLog, etc.
-     */
-    enum Level {
-        FINEST          =   0,
-        FINER           =   1,
-        FINE            =   2,
-        TRACE           =   3,
-        DEBUG           =   4,
-        INFORMATION     =   5,
-        CONFIGURATION   =   6,
-        NOTICE          =   7,
-        WARNING         =   8,
-        ERROR           =   9,
-        SEVERE          =   10,
-        CRITICAL        =   11,
-        ALERT           =   12,
-        FATAL           =   13,
-        EMERGENCY       =   14,
-        PRINT           =   15
-    };
-
-    /**
      *  This nul-terminated array contains labels corresponding to
      *  the levels.
      */
     static const char* labels[PRINT + 2];
-
-    /**
-     * These characters delimit the symbolic extended log levels.
-     */
-    static const char
-        LHS_EXTENDED = '[',
-        RHS_EXTENDED = ']';
-
-    /**
-     * This table maps from the kernel <0>..<7> log levels to the
-     * extended log levels.
-     */
-    static const Level kernel[8];
-
-    /**
-     * These characters delimit the numeric kernel log levels,
-     * mimicing how the Linux kernel works.
-     */
-    static const char
-        LHS_KERNEL = '<',
-        RHS_KERNEL = '>';
-
-    /**
-     *  Given a log message in a buffer, determine its numeric level.
-     *
-     *  @param  buffer      points to the buffer containing
-     *                      the message.
-     *
-     *  @param  size        is the maximum size of the buffer
-     *                      in octets.
-     *
-     *  @param level		is the variable into which the result is returned.
-     *
-     *  @return a pointer in the buffer adjusted past the level encoding.
-     */
-    virtual const char* level(const char* buffer, size_t size, size_t & level);
 
     /**
      *  Return true if the specified level is enabled, false otherwise.

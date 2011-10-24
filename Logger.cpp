@@ -101,6 +101,65 @@ const Logger::Level Logger::kernel[] = {
     Logger::DEBUG           // KERN_DEBUG
 };
 
+
+//
+//  Return the logging level encoded (or not) in the buffer.
+//  This is a hack, but like many hacks, it works.
+//
+const char* Logger::level(const char* buffer, size_t size, size_t & level) {
+
+	level = PRINT;
+
+    do {
+
+        if (sizeof("[X]") > size) {
+            break;
+        }
+
+        // We encode our four-bit logging level at the beginning of the
+        // buffer in the form of "[X]" where X is a hex digit.
+
+        if (buffer[0] != LHS_EXTENDED) {
+            // Do nothing.
+        } else if (buffer[2] != RHS_EXTENDED) {
+            // Do nothing.
+        } else if (('0' <= buffer[1]) && (buffer[1] <= '9')) {
+        	level = buffer[1] - '0' + 0;
+            buffer += sizeof("[X]") - 1;
+            break;
+        } else if (('a' <= buffer[1]) && (buffer[1] <= 'f')) {
+        	level = buffer[1] - 'a' + 0xa;
+            buffer += sizeof("[X]") - 1;
+            break;
+        } else if (('A' <= buffer[1]) && (buffer[1] <= 'F')) {
+        	level = buffer[1] - 'A' + 0xA;
+            buffer += sizeof("[X]") - 1;
+            break;
+        } else {
+        	break;
+        }
+
+        // The kernel and other related logging mechanisms encode a three-bit
+        // logging level at the beginning of the buffer in the form of "<D>"
+        // where D is a decimal digit.
+
+        if (buffer[0] != LHS_KERNEL) {
+            // Do nothing.
+        } else if (buffer[2] != RHS_KERNEL) {
+            // Do nothing.
+        } else if (('0' <= buffer[1]) && (buffer[1] <= '7')) {
+        	level = kernel[buffer[1] - '0'];
+            buffer += sizeof("<D>") - 1;
+            break;
+        } else {
+        	break;
+        }
+
+    } while (false);
+
+    return buffer;
+}
+
 //
 //  Constructor.
 //
@@ -163,65 +222,6 @@ bool Logger::initialize(Output& ro) {
 //
 Output& Logger::output() const {
     return this->ou ? *this->ou : Platform::instance().log();
-}
-
-
-//
-//  Return the logging level encoded (or not) in the buffer.
-//  This is a hack, but like many hacks, it works.
-//
-const char* Logger::level(const char* buffer, size_t size, size_t & level) {
-
-	level = PRINT;
-
-    do {
-
-        if (sizeof("[X]") > size) {
-            break;
-        }
-
-        // We encode our four-bit logging level at the beginning of the
-        // buffer in the form of "[X]" where X is a hex digit.
-
-        if (buffer[0] != LHS_EXTENDED) {
-            // Do nothing.
-        } else if (buffer[2] != RHS_EXTENDED) {
-            // Do nothing.
-        } else if (('0' <= buffer[1]) && (buffer[1] <= '9')) {
-        	level = buffer[1] - '0' + 0;
-            buffer += sizeof("[X]") - 1;
-            break;
-        } else if (('a' <= buffer[1]) && (buffer[1] <= 'f')) {
-        	level = buffer[1] - 'a' + 0xa;
-            buffer += sizeof("[X]") - 1;
-            break;
-        } else if (('A' <= buffer[1]) && (buffer[1] <= 'F')) {
-        	level = buffer[1] - 'A' + 0xA;
-            buffer += sizeof("[X]") - 1;
-            break;
-        } else {
-        	break;
-        }
-
-        // The kernel and other related logging mechanisms encode a three-bit
-        // logging level at the beginning of the buffer in the form of "<D>"
-        // where D is a decimal digit.
-
-        if (buffer[0] != LHS_KERNEL) {
-            // Do nothing.
-        } else if (buffer[2] != RHS_KERNEL) {
-            // Do nothing.
-        } else if (('0' <= buffer[1]) && (buffer[1] <= '7')) {
-        	level = kernel[buffer[1] - '0'];
-            buffer += sizeof("<D>") - 1;
-            break;
-        } else {
-        	break;
-        }
-
-    } while (false);
-
-    return buffer;
 }
 
 
