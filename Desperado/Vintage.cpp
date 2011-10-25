@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -71,7 +71,7 @@ const char Vintage::product[] =     "$Product: Desperado $";
 
 const char Vintage::license[] =     "$License: Modified GNU Lesser Public License $";
 
-const char Vintage::copyright[] =   "$Copyright: Copyright 2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA $";
+const char Vintage::copyright[] =   "$Copyright: Copyright 2008-2011 Digital Aggregates Corporation, Colorado, USA $";
 
 const char Vintage::contact[] =     "$Contact: coverclock@diag.com (Chip Overclock) $";
 
