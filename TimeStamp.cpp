@@ -244,14 +244,19 @@ const char* TimeStamp::log(const CommonEra& ce) {
     return this->log(lt);
 }
 
-
+// Log line space is at a premium. It pays to have as high a precision timestamp
+// as the underlying platform supports, but no more. Generally about a
+// microsecond is the best we can hope for on Linux platforms. But I've used
+// vxWorks platforms that had time bases accurate to tens of nanoseconds. So
+// consider altering the print format from ".%06u" to ".%09u" and removing the
+// "/ 1000" nanosecond divisor.
 const char* TimeStamp::log(const LocalTime& lt) {
     TimeZone zone;
     ::snprintf(this->buffer, sizeof(this->buffer),
-        "%04llu-%02u-%02u %02u:%02u:%02u.%03u%1.1s",
+        "%04llu-%02u-%02u %02u:%02u:%02u.%06u%1.1s",
         lt.getYear(), lt.getMonth(), lt.getDay(),
         lt.getHour(), lt.getMinute(), lt.getSecond(),
-        lt.getNanosecond() / 1000000,
+        lt.getNanosecond() / 1000,
         zone.milspec(lt.getOffset()));
     this->buffer[sizeof(this->buffer) - 1] = '\0';
     assert(std::strlen(this->buffer) < sizeof(this->buffer));

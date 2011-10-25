@@ -5,7 +5,7 @@
 
 /*******************************************************************************
 
-Copyright 2005-2009 by the Digital Aggregates Corp., Arvada CO 80001-0587 USA.
+Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
 
 ----------------------------------------------------------------------
 
