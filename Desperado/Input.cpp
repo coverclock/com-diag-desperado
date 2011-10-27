@@ -83,22 +83,6 @@ Input::~Input() {
 
 
 //
-//    Initializer.
-//
-bool Input::initialize() {
-    bool rc = false;
-    try {
-        this->Input::~Input();
-        new(this) Input;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return EOF.
 //
 int Input::operator() () {

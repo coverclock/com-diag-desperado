@@ -90,22 +90,6 @@ Service::~Service() {
 
 
 //
-//    Initializer.
-//
-bool Service::initialize() {
-    bool rc = false;
-    try {
-        this->Service::~Service();
-        new(this) Service;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Open a provider stream socket to which consumers may connect.
 //
 int Service::provider(uint16_t port) {

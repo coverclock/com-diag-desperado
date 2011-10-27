@@ -92,25 +92,6 @@ NewCounters::~NewCounters() {
 
 
 //
-//    Initializer.
-//
-bool NewCounters::initialize(
-    size_t ncounters,
-    const char** vlabels
-) {
-    bool rc = false;
-    try {
-        this->NewCounters::~NewCounters();
-        new(this) NewCounters(ncounters, vlabels);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void NewCounters::show(int level, Output* display, int indent) const {

@@ -116,50 +116,6 @@ public:
     virtual ~Exception() THROWS(());
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  eventMessage    is a message associated with the
-     *                          exception or null (0).
-     *
-     *  @param  errorNumber     is an error number that may be associated
-     *                          with the exception. If zero, no errno
-     *                          information is used. If negative, the
-     *                          system errno value is used.
-     *
-     *  @param  fileName        may be the file name of the issuing
-     *                          translation unit or null (0). Typically
-     *                          it is set to __FILE__.
-     *
-     *  @param  lineNumber      may be the line number in the issuing
-     *                          translation unit. Typically, it is set
-     *                          to __LINE__.
-     *
-     *  @param functionName     may be the function name in the
-     *                          issuing translation unit or null (0).
-     *                          Typically this is set to __PRETTY_FUNCTION__
-     *                          (GNU C or C++) or __func__ (ANSI C++).
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(
-        const char* eventMessage = 0,
-        int errorNumber = 0,
-        const char* fileName = 0,
-        int lineNumber = 0,
-        const char* functionName = 0
-    ) THROWS(());
-
-    /**
      *  Returns a character string describing the cause of the exception.
      *
      *  @return a character string describing the cause of the exception.

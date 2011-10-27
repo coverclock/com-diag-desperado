@@ -74,17 +74,6 @@ class UT_LinkType {
 public:
     UT_LinkType(int n = 0) : sn(n), node(this) {}
     virtual ~UT_LinkType() {}
-    virtual bool initialize(int n = 0) {
-        bool rc = false;
-        try {
-            this->UT_LinkType::~UT_LinkType();
-            new(this) UT_LinkType(n);
-            rc = true;
-        } catch (...) {
-            rc = false;
-        }
-        return rc;
-    }
     int sn;
     LinkType<UT_LinkType> node;
 };
@@ -147,7 +136,7 @@ CXXCAPI int unittestLinkType(void) {
     printf("%s[%d]: insert\n", __FILE__, __LINE__);
 
     for (size_t ii = 0; countof(thing) > ii; ++ii) {
-        thing[ii].initialize(ii);
+        thing[ii].sn = ii;
         if (0 != that) {
             thing[ii].node.insert(&that->node);
         }

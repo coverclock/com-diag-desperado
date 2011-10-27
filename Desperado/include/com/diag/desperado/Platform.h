@@ -153,23 +153,6 @@ public:
     virtual ~Platform();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize() = 0;
-
-    /**
      *  Returns the frequency of the platform clock in Hertz as a
      *  ratio of two whole numbers. This ratio can represent frequencies
      *  that cannot represented as whole numbers.

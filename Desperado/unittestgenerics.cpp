@@ -1640,32 +1640,6 @@ CXXCAPI int unittestgenerics(void) {
             printf("(%p)->~UT_BaseClass() ii=%d\n", this, this->ii);
             this->ii = 999;
         }
-        virtual bool initialize() {
-            Print printf(Platform::instance().output());
-            printf("(%p)->~UT_BaseClass()\n", this);
-            bool rc = false;
-            try {
-                this->UT_BaseClass::~UT_BaseClass();
-                new(this) UT_BaseClass;
-                rc = true;
-            } catch (...) {
-                rc = false;
-            }
-            return rc;
-        }
-        virtual bool initialize(int i) {
-            Print printf(Platform::instance().output());
-            printf("(%p)->~UT_BaseClass(%d)\n", this, i);
-            bool rc = false;
-            try {
-                this->UT_BaseClass::~UT_BaseClass();
-                new(this) UT_BaseClass(i);
-                rc = true;
-            } catch (...) {
-                rc = false;
-            }
-            return rc;
-        }
         int ii;
     };
 
@@ -1684,32 +1658,6 @@ CXXCAPI int unittestgenerics(void) {
             printf("(%p)->~UT_DerivedClass() jj=%d\n", this, this->jj);
             this->jj = 999;
         }
-        virtual bool initialize() {
-            Print printf(Platform::instance().output());
-            printf("(%p)->~UT_DerivedClass()\n", this);
-            bool rc = false;
-            try {
-                this->UT_DerivedClass::~UT_DerivedClass();
-                new(this) UT_DerivedClass;
-                rc = true;
-            } catch (...) {
-                rc = false;
-            }
-            return rc;
-        }
-        virtual bool initialize(int j) {
-            Print printf(Platform::instance().output());
-            printf("(%p)->~UT_DerivedClass(%d)\n", this, j);
-            bool rc = false;
-            try {
-                this->UT_DerivedClass::~UT_DerivedClass();
-                new(this) UT_DerivedClass(j);
-                rc = true;
-            } catch (...) {
-                rc = false;
-            }
-            return rc;
-        }
         int jj;
     };
 
@@ -1725,20 +1673,6 @@ CXXCAPI int unittestgenerics(void) {
         if (1 != thing1.ii) {
             errorf("%s[%d]: (%d!=%d)!\n",
                 __FILE__, __LINE__, 1, thing1.ii);
-            ++errors;
-        }
-
-        DEBUG_TRACE(thing0.initialize(3));
-        if (3 != thing0.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 2, thing0.ii);
-            ++errors;
-        }
-
-        DEBUG_TRACE(thing1.initialize());
-        if (0 != thing1.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 0, thing1.ii);
             ++errors;
         }
 
@@ -1781,30 +1715,6 @@ CXXCAPI int unittestgenerics(void) {
         if (1 != thing4.ii) {
             errorf("%s[%d]: (%d!=%d)!\n",
                 __FILE__, __LINE__, 1, thing4.ii);
-            ++errors;
-        }
-
-        DEBUG_TRACE(thing3.initialize(13));
-        if (13 != thing3.jj) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 13, thing3.jj);
-            ++errors;
-        }
-        if (3 != thing3.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 3, thing3.ii);
-            ++errors;
-        }
-
-        DEBUG_TRACE(thing4.initialize());
-        if (10 != thing4.jj) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 10, thing4.jj);
-            ++errors;
-        }
-        if (0 != thing4.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 0, thing4.ii);
             ++errors;
         }
 
@@ -1922,54 +1832,6 @@ CXXCAPI int unittestgenerics(void) {
             ++errors;
         }
 
-        DEBUG_TRACE(thinga->initialize(18));
-        if (18 != thing5.jj) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 18, thing5.jj);
-            ++errors;
-        }
-        if (8 != thing5.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 8, thing5.ii);
-            ++errors;
-        }
-
-        DEBUG_TRACE(thingb->initialize());
-        if (10 != thing6.jj) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 10, thing6.jj);
-            ++errors;
-        }
-        if (0 != thing6.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 0, thing6.ii);
-            ++errors;
-        }
-
-        DEBUG_TRACE(thingc->initialize(19));
-        if (19 != thing7.jj) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 19, thing7.jj);
-            ++errors;
-        }
-        if (9 != thing7.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 9, thing7.ii);
-            ++errors;
-        }
-
-        DEBUG_TRACE(thingd->initialize());
-        if (10 != thing8.jj) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 10, thing8.jj);
-            ++errors;
-        }
-        if (0 != thing8.ii) {
-            errorf("%s[%d]: (%d!=%d)!\n",
-                __FILE__, __LINE__, 10, thing8.ii);
-            ++errors;
-        }
-
         DEBUG_TRACE(reinitializeobjectwith(UT_DerivedClass, *thinga, (16)));
         if (16 != thing5.jj) {
             errorf("%s[%d]: (%d!=%d)!\n",
@@ -1995,7 +1857,7 @@ CXXCAPI int unittestgenerics(void) {
         }
 
         DEBUG_TRACE(reinitializeobjectwith(UT_BaseClass, *thingc, (17)));
-        if (19 != thing7.jj) {
+        if (14 != thing7.jj) {
             errorf("%s[%d]: (%d!=%d)!\n",
                 __FILE__, __LINE__, 19, thing7.jj);
             ++errors;
@@ -2007,7 +1869,7 @@ CXXCAPI int unittestgenerics(void) {
         }
 
         DEBUG_TRACE(reinitializeobject(UT_BaseClass, *thingd));
-        if (10 != thing8.jj) {
+        if (15 != thing8.jj) {
             errorf("%s[%d]: (%d!=%d)!\n",
                 __FILE__, __LINE__, 10, thing8.jj);
             ++errors;

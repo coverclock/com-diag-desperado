@@ -90,22 +90,6 @@ GeometricThrottle::~GeometricThrottle() {
 
 
 //
-//    Initializer.
-//
-bool GeometricThrottle::initialize() {
-    bool rc = false;
-    try {
-        this->GeometricThrottle::~GeometricThrottle();
-        new(this) GeometricThrottle;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Reset this throttle to its just constructed state.
 //
 void GeometricThrottle::reset() {

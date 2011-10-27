@@ -197,26 +197,6 @@ public:
     ~Link();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  object      points to a value to be stored in the payload
-     *                      of this link.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    bool initialize(void* object = 0);
-
-    /**
      *  Gets the pointer to the link on the chain after this link.
      *  If this link is on a chain, then following the next pointers
      *  will eventually expose the address of the chain root. This can
@@ -550,22 +530,6 @@ inline Link* Link::insert(Link* that) {
 //
 inline Link::~Link() {
     this->remove();
-}
-
-
-//
-//    Initializer.
-//
-inline bool Link::initialize(void* object) {
-    bool rc = false;
-    try {
-        this->Link::~Link();
-        new(this) Link(object);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 #include "com/diag/desperado/End.h"

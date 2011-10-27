@@ -98,22 +98,6 @@ DstUs2007::~DstUs2007() {
 
 
 //
-//    Initializer.
-//
-bool DstUs2007::initialize() {
-    bool rc = false;
-    try {
-        this->DstUs2007::~DstUs2007();
-        new(this) DstUs2007;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void DstUs2007::show(int level, Output* display, int indent) const {

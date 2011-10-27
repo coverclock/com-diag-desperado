@@ -204,46 +204,6 @@ CommonEra::~CommonEra() {
 
 
 //
-//    Initializer.
-//
-bool CommonEra::initialize() {
-    bool rc = false;
-    try {
-        this->CommonEra::~CommonEra();
-        new(this) CommonEra;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool CommonEra::initialize(
-    uint64_t yr,
-    uint8_t mh,
-    uint8_t dy,
-    uint8_t hr,
-    uint8_t me,
-    uint8_t sd,
-    uint32_t nd
-) {
-    bool rc = false;
-    try {
-        this->CommonEra::~CommonEra();
-        new(this) CommonEra(yr, mh, dy, hr, me, sd, nd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Convert this object to a string.
 //
 size_t CommonEra::toString(String string, size_t size) const {

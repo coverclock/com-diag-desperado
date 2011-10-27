@@ -77,22 +77,6 @@ Encode::~Encode() {
 
 
 //
-//    Initializer.
-//
-bool Encode::initialize() {
-    bool rc = false;
-    try {
-        this->Encode::~Encode();
-        new(this) Encode;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Collapse a string containing escape sequences.
 //
 size_t Encode::collapse(

@@ -86,22 +86,6 @@ TimeStamp::~TimeStamp() {
 }
 
 
-//
-//    Initializer.
-//
-bool TimeStamp::initialize() {
-    bool rc = false;
-    try {
-        this->TimeStamp::~TimeStamp();
-        new(this) TimeStamp;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
 const char* TimeStamp::iso8601() {
     CommonEra ce;
     ce.fromNow();

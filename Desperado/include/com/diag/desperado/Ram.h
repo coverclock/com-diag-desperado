@@ -101,23 +101,6 @@ public:
     virtual ~Ram();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize();
-
-    /**
      *  Test the data bus wiring in a memory region by performing a walking
      *  1's test at a fixed address within that region. The address (and hence
      *  the memory region) is selected by the caller.
@@ -241,23 +224,6 @@ Ram<_TYPE_>::Ram() {
 //
 template <typename _TYPE_>
 Ram<_TYPE_>::~Ram() {
-}
-
-
-//
-//    Initializer.
-//
-template <typename _TYPE_>
-bool Ram<_TYPE_>::initialize() {
-    bool rc = false;
-    try {
-        this->Ram<_TYPE_>::~Ram();
-        new(this) Ram<_TYPE_>;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

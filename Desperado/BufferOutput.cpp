@@ -89,22 +89,6 @@ BufferOutput::~BufferOutput() {
 
 
 //
-//    Initializer.
-//
-bool BufferOutput::initialize(char* sp, size_t sz) {
-    bool rc = false;
-    try {
-        this->BufferOutput::~BufferOutput();
-        new(this) BufferOutput(sp, sz);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Output a character.
 //
 int BufferOutput::operator() (int c) {

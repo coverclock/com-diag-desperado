@@ -88,22 +88,6 @@ FileInput::~FileInput() {
 
 
 //
-//    Initializer.
-//
-bool FileInput::initialize(FILE* fp) {
-    bool rc = false;
-    try {
-        this->FileInput::~FileInput();
-        new(this) FileInput(fp);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return the next character in the file.
 //
 int FileInput::operator() () {

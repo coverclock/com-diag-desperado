@@ -142,38 +142,6 @@ FiclMachine::~FiclMachine() {
 
 
 //
-//    Initializer.
-//
-bool FiclMachine::initialize(FiclSystem* s) {
-    bool rc = false;
-    try {
-        this->FiclMachine::~FiclMachine();
-        new(this) FiclMachine(s);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool FiclMachine::initialize(FiclSystem& s) {
-    bool rc = false;
-    try {
-        this->FiclMachine::~FiclMachine();
-        new(this) FiclMachine(s);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Push a cell onto the stack.
 //
 void FiclMachine::push(ficlCell cell) {

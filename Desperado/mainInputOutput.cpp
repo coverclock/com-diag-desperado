@@ -373,8 +373,10 @@ int main(int argc, char **argv, char **) {
         }
 
         if (debug) {
-            dumpinput.initialize(*inputp, dump);
-            dumpoutput.initialize(*outputp, dump);
+            DumpOutput newdumpoutput(*outputp, dump);
+            DumpInput newdumpinput(*inputp, dump);
+        	dumpoutput = newdumpoutput;
+        	dumpinput = newdumpinput;
             inputp = &dumpinput;
             outputp = &dumpoutput;
         }

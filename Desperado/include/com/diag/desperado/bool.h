@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006-2010-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or

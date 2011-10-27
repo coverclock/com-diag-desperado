@@ -78,8 +78,8 @@ ABSTRACT
 This file is part of the Digital Aggregates Corporation Desperado
 library. Desperado is an open source library of object-oriented
 software components written in C++. It implements design patterns
-that the authors have found to be both useful and common in embedded
-applications. It was developed as mechanism for the authors to both
+that the author(s) has found to be both useful and common in embedded
+applications. It was developed as mechanism for the author(s) to both
 learn and teach.
 
 It is licensed under a modified GNU Lesser General Public License
@@ -145,67 +145,9 @@ to the Desperado Platform.
 
 ----------------------------------------------------------------------
 
-HISTORY
-
-Here is a list of Desperado releases.
-
-    acme            1.1.0    2005-02-14
-    bachelor        1.2.0    2005-06-27
-    cascade         1.3.0    2005-07-05
-    dexter          1.4.0    2005-09-03
-    empire          1.5.0    2005-09-19
-    fortune         1.6.0    2005-09-19
-    glacier         1.7.0    2005-09-19
-    horseshoe       1.8.0    2005-10-03
-    ironside        1.9.0    2005-10-10
-    jackpot         1.10.0   2005-10-16
-    klondike        1.11.0   2005-10-23
-    liberty         1.12.0   2005-10-28
-    maverick        1.13.0   2005-10-31
-    nugget          1.14.0   2005-11-07
-    opportunity     1.15.0   2005-11-22
-    paradox         1.16.0   2005-12-28
-    quadrilateral   1.17.0   2006-01-09
-    rattlesnake     1.18.0   2006-01-09
-    shadow          1.19.0   2006-01-09
-    tempest         1.20.0   2006-01-14
-    union           1.21.0   2006-02-08
-    vermillion      1.22.0   2006-05-01
-    wildcat         1.23.0   2006-09-14
-    xray            1.24.0   2007-01-01
-    yukon           1.25.0   2007-01-05
-    zephyr          1.26.0   2007-01-10
-    alpine          1.27.0   2007-01-12
-    bonanza         1.28.0   2007-01-12
-    climax          1.29.0   2007-01-12
-    dexter          1.30.0   2007-01-12 (oops)
-    eureka          1.31.0   2007-01-12
-    firefly         1.32.0   2007-01-29
-    grizzly         1.33.0   2007-01-29
-    hurricane       2.1.0    2007-01-31
-    imperial        2.2.0    2007-02-01
-    jupiter         2.3.0    2007-08-15
-    keystone        2.4.0    2008-08-21
-    lucky           2.5.0    2008-09-02
-    mercantile      2.6.0    2008-09-02
-    neptune         2.7.0
-    olympus         2.8.0
-    porcupine       2.9.0
-    quinto          2.10.0
-    refuge          2.11.0
-    syracuse        3.1.0   2009-10-28
-    triumph         3.2.0   2010-01-04
-    uranium         3.3.0   TBD
-
-Information regarding Desperado can be found here:
-
-    http://www.diag.com/navigation/downloads/Desperado.html
-
-----------------------------------------------------------------------
-
 ACKNOWLEDGEMENTS
 
-This software is an original work of its authors.
+This software is an original work of its author(s).
 
 Portions of this library were inspired by, but do not incorporate,
 in any way make use of, are not based upon, and are probably
@@ -216,13 +158,15 @@ property of the following people and organizations:
     1300 West 120th Avenue
     Westminster CO 80234 USA
 
+    Cognitive Solutions
+	4403 Table Mountain Drive
+	Suite A
+	Golden CO 80403 USA
+
     Nachum Dershowitz
     Department of Computer Science
     Tel Aviv University
     Tel Aviv ISR
-
-    Digital Aggregates Corporation
-    Arvada CO 80001-0587 USA
 
     Keil Software, Inc.
     1501 10th Street, Suite 110
@@ -231,6 +175,11 @@ property of the following people and organizations:
     Lance Latham
     Resource Management Systems
     Fredericksburg TX USA
+
+    LGS Innovations, LLC
+	Westmoor Technology Center Building 9
+	11300 Westmoor Circle
+	Westminster CO 80021 USA
 
     Lucent Technologies Inc.
     11900 North Pecos Street
@@ -253,7 +202,7 @@ property of the following people and organizations:
     3640 Colonel Glenn Highway
     Dayton OH 45435-0001 USA
 
-The authors would like to acknowledge these people and organizations
+The author(s) would like to acknowledge these people and organizations
 for their work in the problem domains addressed by this library.
 
 Portions of this software make use of freely available and unrestricted
@@ -274,7 +223,7 @@ organizations:
     Rocksoft Pty. Ltd.
     Adelaide SA AUS
 
-The authors would like to thank these people and organizations for
+The author(s) would like to thank these people and organizations for
 making their software available.
 
 The design patterns implemented by this software benefitted from
@@ -333,8 +282,7 @@ the wisdom and experience of the following cast of thousands:
     Wayne Zakowski
 
 The authors are grateful for their sometimes unwitting suggestions,
-criticisms, insights, reviews, mentoring, and strictly intellectual
-contributions.
+criticisms, insights, reviews, mentoring, and intellectual contributions.
 
 ----------------------------------------------------------------------
 
@@ -351,6 +299,14 @@ What is your build target?
 
     Various releases of Desperado have been built for and tested on
     the following targets (most recent to least recent):
+
+		Linux 2.6.32 for the OMAP3530 (ARM11)
+		gcc 4.4.3
+		GNU Make 3.81
+
+        Linux 2.6.32-34 for the i686
+        gcc 4.4.3
+        GNU Make 3.81
 
         Linux 2.6.25.10 for the Atmel AT91RM9200-EK (ARM9)
         gcc 4.2.4
@@ -392,7 +348,7 @@ What is your build target?
     There is no guarantee that this code is backward compatible
     to prior versions of Linux, gcc, or anything else.
 
-Why didn't you use cppunit for your unit testing?
+Why didn't you use cppunit (or whatever) for your unit testing?
 
     You will notice that the unit tests are functions, not main
     programs. I want it to be possible, although perhaps not easy,
@@ -435,10 +391,7 @@ What does it mean to have inline virtual destructors?
     overridden, and for objects of the derived class to be pointed to
     by base class pointers. But if the destructors are truly empty,
     then it might be possible for a very smart compiler to eliminate
-    some of the code involved. Probably not. But I let the compiler
-    know that anyway by putting the empty destructors inline. (In
-    later versions of this library, I moved all virtual destructors
-    outline.)
+    some of the code involved.
 
 Shouldn't every class with a virtual destructor have all of the Big Three?
 
@@ -475,24 +428,22 @@ Why do I get a lot of warnings about failures to inline when I build?
 
 Aren't the reinitializeobject.h macros really a bad idea?
 
-    Yes. It's the one experiment that I consider a failure.
-    I've replaced their use with the initialize() methods,
-    but those have the drawback that they absolutely must be
-    implemented in every derived class if they are to be used
-    at all. Alternatives like placing the constructor code in a
-    separate virtual function, or having an initializer whose code
-    is completely distinct from that of the constructor, have their
-    own drawbacks. Both the macros in reinitializeobject.h and the
-    virtual initialize methods are criminally stupid. I don't have
-    a recommendation of how to solve the problem I was trying to
-    address.
+    Yes. It's one of the few experiments that I consider a failure.
+    I've worked on C++-based embedded systems which could not
+    tolerate the nonderministic timing of dynamic memory allocation;
+    all objects were drawn from pools allocated at start up. I was
+    toying with this technique for leveraging the constructors and
+    destructors as part of the pool management. I still think that's a
+    useful idea. But formalizing it in a macro makes it too easy to misuse.
+    An even worse idea were the virtual initialize() functions in earlier
+    versions of this library.
 
 The EC++ specification doesn't allow templates, why do you?
 
     I think that templates, properly used, are a safer
     alternative to using new/delete to implement type-safe
     variable length objects. At least with the GNU C++
-    compiler, templates to not inevitably lead to code bloat.
+    compiler, templates do not inevitably lead to code bloat.
     Besides, much of what EC++, a C++ subset for embedded
     applications, disallows, it does so because the features
     were considered too new. EC++ reflects that state of C++
@@ -515,7 +466,8 @@ C++ exceptions can be enabled or disabled in Desperado, why?
     to execute. In C++, particularly in embedded applications,
     I prefer not to use them, but recognize that they may have
     their place, particularly to indicate constructor failure.
-    And when I write Java, I cannot avoid using exceptions.
+    And when I write Java, this isn't an issue, and I necessarily
+    use exceptions routinely.
 
 What's the deal with the licenses?
 

@@ -128,22 +128,6 @@ SyslogOutput::~SyslogOutput() {
 
 
 //
-//    Initializer.
-//
-bool SyslogOutput::initialize(const char* id, int opt, int fac) {
-    bool rc = false;
-    try {
-        this->SyslogOutput::~SyslogOutput();
-        new(this) SyslogOutput(id, opt, fac);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 // Map the embedded logging level to a priority.
 //
 const char* SyslogOutput::priority(const char* buffer, size_t size, int& pri) {

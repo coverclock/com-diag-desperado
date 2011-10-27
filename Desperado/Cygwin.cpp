@@ -191,22 +191,6 @@ Cygwin::~Cygwin() {
 
 
 //
-//    Initializer.
-//
-bool Cygwin::initialize() {
-    bool rc = false;
-    try {
-        this->Cygwin::~Cygwin();
-        new(this) Cygwin;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return the name of this platform.
 //
 const char* Cygwin::platform() {

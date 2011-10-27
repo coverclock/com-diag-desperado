@@ -184,22 +184,6 @@ Linux::~Linux() {
 
 
 //
-//    Initializer.
-//
-bool Linux::initialize() {
-    bool rc = false;
-    try {
-        this->Linux::~Linux();
-        new(this) Linux;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return the name of this platform.
 //
 const char* Linux::platform() {

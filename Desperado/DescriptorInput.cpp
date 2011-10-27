@@ -91,22 +91,6 @@ DescriptorInput::~DescriptorInput() {
 
 
 //
-//    Initializer.
-//
-bool DescriptorInput::initialize(int fd) {
-    bool rc = false;
-    try {
-        this->DescriptorInput::~DescriptorInput();
-        new(this) DescriptorInput(fd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return the next character from the file descriptor.
 //
 int DescriptorInput::operator() () {

@@ -81,22 +81,6 @@ LogOutput::~LogOutput() {
 
 
 //
-//    Initializer.
-//
-bool LogOutput::initialize(Output& ro) {
-    bool rc = false;
-    try {
-        this->LogOutput::~LogOutput();
-        new(this) LogOutput(ro);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Output a character.
 //
 int LogOutput::operator() (int c) {

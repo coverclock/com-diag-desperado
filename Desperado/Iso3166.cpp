@@ -321,22 +321,6 @@ Iso3166::~Iso3166() {
 
 
 //
-//    Initializer.
-//
-bool Iso3166::initialize() {
-    bool rc = false;
-    try {
-        this->Iso3166::~Iso3166();
-        new(this) Iso3166;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Iso3166::show(int /* level */, Output* display, int indent) const {

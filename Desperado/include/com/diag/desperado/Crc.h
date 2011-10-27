@@ -123,41 +123,6 @@ public:
     virtual ~Crc();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  poly    is the polynomial describing the cyclic
-     *                  redundancy check. The polynomial is typically
-     *                  one bit wider than widthof(_TYPE_), the most
-     *                  significant bit assumed to be one.
-     *
-     *  @param  refl    is true if the CRC is reflected, false otherwise.
-     *
-     *  @param  init    is the initial value of the partial result
-     *                  before any data is processed.
-     *
-     *  @param  xoro    is the value with which the partial result
-     *                  is exclusive-or-ed to get the CRC.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(
-        _TYPE_ poly = 0,
-        bool refl = false,
-        _TYPE_ init = 0,
-        _TYPE_ xoro = 0
-    );
-
-    /**
      *  Initializes the provided CRC state variable.
      *
      *  @param  state   refers to the CRC state variable in which
@@ -272,23 +237,6 @@ Crc<_TYPE_>::Crc(_TYPE_ poly, bool refl, _TYPE_ init, _TYPE_ xoro) :
 //
 template <typename _TYPE_>
 Crc<_TYPE_>::~Crc() {
-}
-
-
-//
-//    Initializer.
-//
-template <typename _TYPE_>
-bool Crc<_TYPE_>::initialize(_TYPE_ poly, bool refl, _TYPE_ init, _TYPE_ xoro) {
-    bool rc = false;
-    try {
-        this->Crc<_TYPE_>::~Crc();
-        new(this) Crc<_TYPE_>(poly, refl, init, xoro);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

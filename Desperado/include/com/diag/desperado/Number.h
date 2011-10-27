@@ -179,23 +179,6 @@ public:
     virtual ~Number();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize();
-
-    /**
      *  Parses a character string and converts it into a integer.
      *
      *  @param  string          points to the character string containing
@@ -266,23 +249,6 @@ inline Number<_TYPE_>::Number() {
 //
 template <typename _TYPE_>
 Number<_TYPE_>::~Number() {
-}
-
-
-//
-//    Initializer.
-//
-template <typename _TYPE_>
-bool Number<_TYPE_>::initialize() {
-    bool rc = false;
-    try {
-        this->Number<_TYPE_>::~Number();
-        new(this) Number<_TYPE_>;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

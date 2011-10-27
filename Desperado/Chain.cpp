@@ -98,22 +98,6 @@ Chain::~Chain() {
 
 
 //
-//    Initializer.
-//
-bool Chain::initialize() {
-    bool rc = false;
-    try {
-        this->Chain::~Chain();
-        new(this) Chain;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return a pointer to the first link on this chain, or null (0)
 //  if this chain is empty.
 //

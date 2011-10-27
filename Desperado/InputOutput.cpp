@@ -85,22 +85,6 @@ InputOutput::~InputOutput() {
 
 
 //
-//    Initializer.
-//
-bool InputOutput::initialize() {
-    bool rc = false;
-    try {
-        this->InputOutput::~InputOutput();
-        new(this) InputOutput;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return a reference to the input interface.
 //
 Input& InputOutput::input() {

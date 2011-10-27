@@ -294,38 +294,6 @@ FiclSystem::~FiclSystem() {
 
 
 //
-//    Initializer.
-//
-bool FiclSystem::initialize(Output* po, Output* pe) {
-    bool rc = false;
-    try {
-        this->FiclSystem::~FiclSystem();
-        new(this) FiclSystem(po, pe);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool FiclSystem::initialize(Output& ro, Output& re) {
-    bool rc = false;
-    try {
-        this->FiclSystem::~FiclSystem();
-        new(this) FiclSystem(ro, re);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return a reference to an output functor.
 //
 Output& FiclSystem::output() const {

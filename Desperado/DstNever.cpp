@@ -74,22 +74,6 @@ DstNever::~DstNever() {
 
 
 //
-//    Initializer.
-//
-bool DstNever::initialize() {
-    bool rc = false;
-    try {
-        this->DstNever::~DstNever();
-        new(this) DstNever;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return true if the date and time fall within the DST
 //  rule, false otherwise.
 //

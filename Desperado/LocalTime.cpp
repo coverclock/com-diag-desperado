@@ -120,54 +120,6 @@ LocalTime::~LocalTime() {
 
 
 //
-//    Initializer.
-//
-bool LocalTime::initialize() {
-    bool rc = false;
-    try {
-        this->LocalTime::~LocalTime();
-        new(this) LocalTime;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool LocalTime::initialize(int32_t ot) {
-    bool rc = false;
-    try {
-        this->LocalTime::~LocalTime();
-        new(this) LocalTime(ot);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool LocalTime::initialize(int32_t ot, DaylightSavingTime& re) {
-    bool rc = false;
-    try {
-        this->LocalTime::~LocalTime();
-        new(this) LocalTime(ot, re);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Convert this object to a string.
 //
 size_t LocalTime::toString(String string, size_t size) const {

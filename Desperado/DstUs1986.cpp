@@ -99,22 +99,6 @@ DstUs1986::~DstUs1986() {
 
 
 //
-//    Initializer.
-//
-bool DstUs1986::initialize() {
-    bool rc = false;
-    try {
-        this->DstUs1986::~DstUs1986();
-        new(this) DstUs1986;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void DstUs1986::show(int level, Output* display, int indent) const {

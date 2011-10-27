@@ -94,23 +94,6 @@ public:
     virtual ~TransliteratorType();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize();
-
-    /**
      *  Displays internal information about this object to the specified
      *  output object. Useful for debugging and troubleshooting.
      *
@@ -158,23 +141,6 @@ inline TransliteratorType<_CONTEXTS_>::TransliteratorType() :
 //
 template <size_t _CONTEXTS_>
 TransliteratorType<_CONTEXTS_>::~TransliteratorType() {
-}
-
-
-//
-//    Initializer.
-//
-template <size_t _CONTEXTS_>
-bool TransliteratorType<_CONTEXTS_>::initialize() {
-    bool rc = false;
-    try {
-        this->TransliteratorType<_CONTEXTS_>::~TransliteratorType();
-        new(this) TransliteratorType<_CONTEXTS_>;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

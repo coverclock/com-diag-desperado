@@ -135,44 +135,6 @@ Implementation& Implementation::operator=(const Implementation& that) {
 
 
 //
-//    Initializer.
-//
-bool Implementation::initialize() {
-#if defined(DESPERADO_HAS_DEBUGGING)
-    fprintf(stderr, "Implementation(%p)::initialize()\n", this);
-#endif
-    bool rc = false;
-    try {
-        this->Implementation::~Implementation();
-        new(this) Implementation;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool Implementation::initialize(void* f) {
-#if defined(DESPERADO_HAS_DEBUGGING)
-    fprintf(stderr, "Implementation(%p)::initialize(%p)\n", this, f);
-#endif
-    bool rc = false;
-    try {
-        this->Implementation::~Implementation();
-        new(this) Implementation(f);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Implementation::show(int /* level */, Output* display, int indent) const {

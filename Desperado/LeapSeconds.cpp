@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005-2008-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -212,22 +212,6 @@ LeapSeconds::LeapSeconds() :
 //  Destructor.
 //
 LeapSeconds::~LeapSeconds() {
-}
-
-
-//
-//    Initializer.
-//
-bool LeapSeconds::initialize() {
-    bool rc = false;
-    try {
-        this->LeapSeconds::~LeapSeconds();
-        new(this) LeapSeconds;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

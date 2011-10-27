@@ -156,46 +156,6 @@ public:
     virtual ~Counters();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  ncounters           is the number of counters in the
-     *                              array of counters provided by the
-     *                              caller. This parameter may be zero,
-     *                              in which case the operations performed
-     *                              on the object are benign.
-     *
-     *  @param  vcounters           is an array of counters provided by
-     *                              the caller. This array is not modified
-     *                              during ocnstruction, and is assumed to
-     *                              be pre-initialized. If the number of
-     *                              counters is zero, this parameter may be
-     *                              null.
-     *
-     *  @param  vlabels             is an array of labels that correspond
-     *                              one-to-one to the counters, for when
-     *                              the counters are shown. The array may
-     *                              be omitted by passing null, in which case
-     *                              labels are not used.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(
-        size_t ncounters = 0,
-        Counter* vcounters = 0,
-        const char** vlabels = 0
-    );
-
-    /**
      *  Reset all counters in this object to a value.
      *
      *  @param  value               is the value to which the counters
@@ -385,20 +345,6 @@ protected:
     Counter* countersv;
 
 private:
-
-    /**
-     *  Copy constructor.
-     *
-     *  @param  that    refers to an R-value object of this type.
-     */
-    Counters(const Counters& that);
-
-    /**
-     *  Assignment operator.
-     *
-     *  @param  that    refers to an R-value object of this type.
-     */
-    Counters& operator=(const Counters& that);
 
     /**
      *  Pointer to an array of counter labels.

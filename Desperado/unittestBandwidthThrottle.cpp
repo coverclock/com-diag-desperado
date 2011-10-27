@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006-2007-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -233,7 +233,8 @@ CXXCAPI int unittestBandwidthThrottle(
     errors += bandwidth_exercise(constant, iterations);
 
     printf("%s[%d]: constant initialize\n", __FILE__, __LINE__);
-    constant.initialize(pbps, jt);
+    BandwidthThrottle newconstant(pbps, jt);
+    constant = newconstant;
     errors += bandwidth_exercise(constant, iterations);
 
     printf("%s[%d]: variable\n", __FILE__, __LINE__);
@@ -243,7 +244,8 @@ CXXCAPI int unittestBandwidthThrottle(
     errors += bandwidth_exercise(variable, iterations);
 
     printf("%s[%d]: variable initialize\n", __FILE__, __LINE__);
-    variable.initialize(pbps, jt, sbps, mbs);
+    BandwidthThrottle newvariable(pbps, jt, sbps, mbs);
+    variable = newvariable;
     errors += bandwidth_exercise(variable, iterations);
 
     printf("%s[%d]: end errors=%d\n",

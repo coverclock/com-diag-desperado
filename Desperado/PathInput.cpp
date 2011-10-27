@@ -114,23 +114,6 @@ PathInput::~PathInput() {
 
 
 //
-//    Initializer.
-//
-bool PathInput::initialize(const char* path, const char* mode) {
-    bool rc = false;
-    TRY {
-        this->PathInput::~PathInput();
-        new(this) PathInput(path, mode);
-        rc = true;
-    } CATCH (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-
-//
 //  Show this object on the output object.
 //
 void PathInput::show(int level, Output* display, int indent) const {

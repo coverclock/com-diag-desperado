@@ -74,22 +74,6 @@ DstAlways::~DstAlways() {
 
 
 //
-//    Initializer.
-//
-bool DstAlways::initialize() {
-    bool rc = false;
-    try {
-        this->DstAlways::~DstAlways();
-        new(this) DstAlways;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return true if the date and time fall within the DST
 //  rule, false otherwise.
 //

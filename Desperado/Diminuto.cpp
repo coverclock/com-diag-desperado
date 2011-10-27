@@ -87,21 +87,6 @@ Diminuto::~Diminuto() {
 }
 
 
-//
-//    Initializer.
-//
-bool Diminuto::initialize() {
-    bool rc = false;
-    try {
-        this->Diminuto::~Diminuto();
-        new(this) Diminuto;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
 
 //
 //  Show this object on the output object.

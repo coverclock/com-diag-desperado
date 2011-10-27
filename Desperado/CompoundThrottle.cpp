@@ -113,54 +113,6 @@ CompoundThrottle::~CompoundThrottle() {
 
 
 //
-//    Initializer.
-//
-bool CompoundThrottle::initialize() {
-    bool rc = false;
-    try {
-        this->CompoundThrottle::~CompoundThrottle();
-        new(this) CompoundThrottle;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool CompoundThrottle::initialize(Throttle& pp) {
-    bool rc = false;
-    try {
-        this->CompoundThrottle::~CompoundThrottle();
-        new(this) CompoundThrottle(pp);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool CompoundThrottle::initialize(Throttle& pp, Throttle& ss) {
-    bool rc = false;
-    try {
-        this->CompoundThrottle::~CompoundThrottle();
-        new(this) CompoundThrottle(pp, ss);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Reset this throttle to its just constructed state. It is assumed that
 //  a request is immediately admissible in the newly constructed state.
 //

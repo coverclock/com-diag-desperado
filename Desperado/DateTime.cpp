@@ -108,49 +108,6 @@ DateTime::~DateTime() {
 
 
 //
-//    Initializer.
-//
-bool DateTime::initialize(
-    uint64_t yr,
-    uint8_t mh,
-    uint8_t dy,
-    uint8_t hr,
-    uint8_t me,
-    uint8_t sd,
-    uint32_t nd
-) {
-    bool rc = false;
-    try {
-        this->DateTime::~DateTime();
-        new(this) DateTime(yr, mh, dy, hr, me, sd, nd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool DateTime::initialize(
-    const Date& de,
-    const Time& te
-) {
-    bool rc = false;
-    try {
-        this->DateTime::~DateTime();
-        new(this) DateTime(de, te);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Convert this object into a string.
 //
 size_t DateTime::toString(String string, size_t size) const {

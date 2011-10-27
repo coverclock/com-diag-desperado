@@ -91,27 +91,6 @@ public:
     virtual ~BufferOutput();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  sp      points to the input string.
-     *
-     *  @param  sz      is the length of the string in bytes.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(char* sp = 0, size_t sz = 0);
-
-    /**
      *  Outputs a character in integer form.
      *
      *  @param  c           is a character in integer form.

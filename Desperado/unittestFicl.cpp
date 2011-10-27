@@ -295,7 +295,8 @@ CXXCAPI int unittestFicl(void*, int interactive) {
 
         if (!interactive) {
             strncpy(buffer, sample, sizeof(buffer));
-            bufferinput.initialize(buffer);
+            BufferInput newbufferinput(buffer);
+            bufferinput = newbufferinput;
             input = &bufferinput;
         }
 

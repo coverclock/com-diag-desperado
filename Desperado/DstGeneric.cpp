@@ -74,38 +74,6 @@ DstGeneric::~DstGeneric() {
 
 
 //
-//    Initializer.
-//
-bool DstGeneric::initialize() {
-    bool rc = false;
-    try {
-        this->DstGeneric::~DstGeneric();
-        new(this) DstGeneric;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool DstGeneric::initialize(const Event& bs, const Event& es) {
-    bool rc = false;
-    try {
-        this->DstGeneric::~DstGeneric();
-        new(this) DstGeneric(bs, es);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return true if the date and time fall within the DST
 //  rule, false otherwise. Complicated by the fact that in
 //  the Northern Hemisphere DST "springs forward and falls

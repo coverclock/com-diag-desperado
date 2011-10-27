@@ -52,12 +52,15 @@ fi
 SCRIPT1=$TMPDIR/$NAME.$PID.1.sh
 SCRIPT2=$TMPDIR/$NAME.$PID.2.sh
 SCRIPT3=$TMPDIR/$NAME.$PID.3.sh
+SCRIPT4=$TMPDIR/$NAME.$PID.4.sh
+
 STATUS0=$TMPDIR/$NAME.$PID.0.txt
 STATUS1=$TMPDIR/$NAME.$PID.1.txt
 STATUS2=$TMPDIR/$NAME.$PID.2.txt
 STATUS3=$TMPDIR/$NAME.$PID.3.txt
+STATUS4=$TMPDIR/$NAME.$PID.4.txt
 
-trap "rm -f $SCRIPT1 $SCRIPT2 $SCRIPT3 $STATUS0 $STATUS1 $STATUS2 $STATUS3" 1 2 3 15
+trap "rm -f $SCRIPT1 $SCRIPT2 $SCRIPT3 $SCRIPT4 $STATUS0 $STATUS1 $STATUS2 $STATUS3 $SCRIPT4" 1 2 3 15
 
 TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
 echo "$NAME[$PID]: $TS begin"
@@ -112,7 +115,6 @@ unittestgenerics
 unittestnamespace
 unitteststring
 unittesttarget
-unittestCommonEra
 EOF
 
 # These commands are shell scripts.
@@ -120,9 +122,14 @@ cat << EOF > $SCRIPT3
 unittestInputOutput.sh
 EOF
 
+# These commands take eons to run so we do them last.
+cat << EOF > $SCRIPT4
+unittestCommonEra
+EOF
+
 # Verify that we have everything.
 
-cat $SCRIPT1 $SCRIPT2 $SCRIPT3 | (
+cat $SCRIPT1 $SCRIPT2 $SCRIPT3 $SCRIPT4 | (
 	ERRORS=0
     while read COMMAND; do
 		echo $COMMAND
@@ -200,6 +207,25 @@ ERRORS3=`cat $STATUS3`
 TOTAL=`expr $TOTAL + $ERRORS3`
 echo "$NAME[$PID]: $TS errors=$TOTAL"
 
-rm -f $SCRIPT1 $SCRIPT2 $SCRIPT3 $STATUS0 $STATUS1 $STATUS2 $STATUS3
+(
+    ERRORS=0
+    while read COMMAND; do
+        TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
+        echo "$NAME[$PID]: $TS begin \"$COMMAND $ARGUMENTS\""
+        $COMMANDPATH/$COMMAND
+        RC=$?
+        TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
+        echo "$NAME[$PID]: $TS end \"$COMMAND $ARGUMENTS\" errors=$RC"
+        ERRORS=`expr $ERRORS + $RC`
+    done
+    echo $ERRORS > $STATUS4
+) < $SCRIPT4
+
+TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
+ERRORS2=`cat $STATUS4`
+TOTAL=`expr $TOTAL + $ERRORS4`
+echo "$NAME[$PID]: $TS errors=$TOTAL"
+
+rm -f $SCRIPT1 $SCRIPT2 $SCRIPT3 $SCRIPT4 $STATUS0 $STATUS1 $STATUS2 $STATUS3 $STATUS4
 
 exit $TOTAL

@@ -87,22 +87,6 @@ Output::~Output() {
 
 
 //
-//    Initializer.
-//
-bool Output::initialize() {
-    bool rc = false;
-    try {
-        this->Output::~Output();
-        new(this) Output;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return a NUL-terminated character string of blanks.
 //
 const char* Output::indentation(int indent) const {

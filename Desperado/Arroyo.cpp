@@ -88,22 +88,6 @@ Arroyo::~Arroyo() {
 
 
 //
-//    Initializer.
-//
-bool Arroyo::initialize() {
-    bool rc = false;
-    try {
-        this->Arroyo::~Arroyo();
-        new(this) Arroyo;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Arroyo::show(int level, Output* display, int indent) const {
