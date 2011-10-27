@@ -116,22 +116,6 @@ TimeZone::~TimeZone() {
 
 
 //
-//    Initializer.
-//
-bool TimeZone::initialize() {
-    bool rc = false;
-    try {
-        this->TimeZone::~TimeZone();
-        new(this) TimeZone;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return the milspec time zone name.
 //
 const char* TimeZone::milspec(int32_t ot) const {

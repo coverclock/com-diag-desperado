@@ -102,38 +102,6 @@ FiclShell::~FiclShell() {
 
 
 //
-//    Initializer.
-//
-bool FiclShell::initialize(Output* po, Output* pe) {
-    bool rc = false;
-    try {
-        this->FiclShell::~FiclShell();
-        new(this) FiclShell(po, pe);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool FiclShell::initialize(Output& ro, Output& re) {
-    bool rc = false;
-    try {
-        this->FiclShell::~FiclShell();
-        new(this) FiclShell(ro, re);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Start the shell using a string.
 //
 int FiclShell::operator() (char* text) {

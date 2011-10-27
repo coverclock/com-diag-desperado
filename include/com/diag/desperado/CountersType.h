@@ -100,29 +100,6 @@ public:
     virtual ~CountersType();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  vlabels             is an array of labels that correspond
-     *                              one-to-one to the counters, for when
-     *                              the counters are shown. The array may
-     *                              be omitted by passing null, in which case
-     *                              labels are not used.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(const char** vlabels = 0);
-
-    /**
      *  Displays internal information about this object to the specified
      *  output object. Useful for debugging and troubleshooting.
      *
@@ -170,23 +147,6 @@ inline CountersType<_NCOUNTERS_>::CountersType(const char** vlabels) :
 //
 template <size_t _NCOUNTERS_>
 CountersType<_NCOUNTERS_>::~CountersType() {
-}
-
-
-//
-//    Initializer.
-//
-template <size_t _NCOUNTERS_>
-bool CountersType<_NCOUNTERS_>::initialize(const char** vlabels) {
-    bool rc = false;
-    try {
-        this->CountersType<_NCOUNTERS_>::~CountersType();
-        new(this) CountersType<_NCOUNTERS_>(vlabels);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

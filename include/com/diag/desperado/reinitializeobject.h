@@ -48,7 +48,11 @@
 /**
  *  @file
  *
- *  Defines the terrifying reinitializeobject preprocessor macro.
+ *  Defines the terrifying reinitializeobject preprocessor macro. The mere
+ *  definition of this and related macros, never mind its actual use, borders
+ *  on the criminally stupid. However, if you really want to understand how
+ *  C++ works under the hood, debugging applications that uses this macro will
+ *  certainly help with that.
  *
  *  @author $Author: jsloan $
  *

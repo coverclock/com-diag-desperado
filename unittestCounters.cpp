@@ -628,17 +628,6 @@ CXXCAPI int unittestCounters(void) {
     errorf("%s[%d]: big8 error\n", __FILE__, __LINE__);
     big8.show(1, errorp);
 
-    printf("%s[%d]: big8 initialize\n", __FILE__, __LINE__);
-    
-    big8.initialize();
-    big8.show();
-    big8.show(1);
-    
-    big8.initialize(128, big7labels);
-    big8.reset(signedintminof(Counter));
-    big8.show();
-    big8.show(1);
-
     for (unsigned int ii = 0; type9.cardinal() > ii; ++ii) {
         type9.set(ii, ii);
     }

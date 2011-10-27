@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006-2007-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -123,44 +123,6 @@ public:
      *  Destructor.
      */
     virtual ~Gcra();
-
-    /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize();
-
-    /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  increment   is the GCRA increment or I in throttle ticks.
-     *
-     *  @param  limit       is the GCRA limit or L in throttle ticks.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(ticks_t increment, ticks_t limit);
 
     using Throttle::reset;
 

@@ -5,7 +5,7 @@
 
 /******************************************************************************
 
-    Copyright 2006-2008-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -115,33 +115,6 @@ public:
      *  object is destroyed.
      */
     virtual ~SyslogOutput();
-
-    /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  id          is the syslog ident.
-     *
-     *  @param  opt         is the syslog option.
-     *
-     *  @param  fac         is the syslog facility.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(
-        const char* id = "SyslogOutput",
-        int opt = SYSLOG_OUTPUT_OPT,
-        int fac = SYSLOG_OUTPUT_FAC
-   );
 
     /**
      *  Returns the syslog ident.

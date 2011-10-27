@@ -338,22 +338,6 @@ Ascii::~Ascii() {
 
 
 //
-//    Initializer.
-//
-bool Ascii::initialize() {
-    bool rc = false;
-    try {
-        this->Ascii::~Ascii();
-        new(this) Ascii;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Ascii::show(int /* level */, Output* display, int indent) const {

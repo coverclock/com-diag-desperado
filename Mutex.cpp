@@ -93,22 +93,6 @@ Mutex::~Mutex() {
 
 
 //
-//    Initializer.
-//
-bool Mutex::initialize() {
-    bool rc = false;
-    try {
-        this->Mutex::~Mutex();
-        new(this) Mutex;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Lock. This has the unfortunate side effect of making threads
 //  waiting on mutexen uncancellable. The alternative would be to
 //  allow threads to be cancelled between taking the mutex and

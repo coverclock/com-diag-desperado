@@ -76,22 +76,6 @@ Argument::~Argument() {
 
 
 //
-//    Initializer.
-//
-bool Argument::initialize() {
-    bool rc = false;
-    try {
-        this->Argument::~Argument();
-        new(this) Argument;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Break a character string into an argument vector of maximum length.
 //  Beware: the string is not const and is modified in place!
 //

@@ -96,22 +96,6 @@ Transliterator::~Transliterator() {
 
 
 //
-//    Initializer.
-//
-bool Transliterator::initialize(uint8_t* st, unsigned int co) {
-    bool rc = false;
-    try {
-        this->Transliterator::~Transliterator();
-        new(this) Transliterator(st, co);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Transliterate a string.
 //
 char* Transliterator::next(char* from, char* to, size_t size) {

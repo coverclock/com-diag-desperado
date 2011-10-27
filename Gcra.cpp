@@ -105,37 +105,6 @@ Gcra::~Gcra() {
 }
 
 
-//
-//    Initializer.
-//
-bool Gcra::initialize() {
-    bool rc = false;
-    try {
-        this->Gcra::~Gcra();
-        new(this) Gcra;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool Gcra::initialize(ticks_t increment, ticks_t limit) {
-    bool rc = false;
-    try {
-        this->Gcra::~Gcra();
-        new(this) Gcra(increment, limit);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
 
 //
 //  Reset this throttle to its just constructed state. It is assumed that

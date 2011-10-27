@@ -186,38 +186,6 @@ Logger::~Logger() {
 
 
 //
-//    Initializer.
-//
-bool Logger::initialize(Output* po) {
-    bool rc = false;
-    try {
-        this->Logger::~Logger();
-        new(this) Logger(po);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool Logger::initialize(Output& ro) {
-    bool rc = false;
-    try {
-        this->Logger::~Logger();
-        new(this) Logger(ro);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Returns current output object.
 //
 Output& Logger::output() const {

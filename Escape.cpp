@@ -77,22 +77,6 @@ Escape::~Escape() {
 
 
 //
-//    Initializer.
-//
-bool Escape::initialize() {
-    bool rc = false;
-    try {
-        this->Escape::~Escape();
-        new(this) Escape;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Collapse a string containing escape sequences.
 //
 size_t Escape::collapse(const char *from, char *to, size_t tsize) {

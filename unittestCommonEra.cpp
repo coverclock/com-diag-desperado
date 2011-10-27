@@ -572,8 +572,8 @@ static int test1(
     printf("%s[%d]: initialize\n", __FILE__, __LINE__);
 
     CommonEra ce3;
-    ce3.initialize();
-    ce3.initialize(yr, mh, dy, hr, me, sd);
+    CommonEra newce3(yr, mh, dy, hr, me, sd);
+    ce3 = newce3;
 
     if (0 != ce.compare(ce3)) {
         errorf("%s[%d]: (%d!=%d)!\n",

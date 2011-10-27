@@ -190,61 +190,6 @@ CellRateThrottle::~CellRateThrottle() {
 
 
 //
-//    Initializer.
-//
-bool CellRateThrottle::initialize() {
-    bool rc = false;
-    try {
-        this->CellRateThrottle::~CellRateThrottle();
-        new(this) CellRateThrottle;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool CellRateThrottle::initialize(
-    uint32_t pcr,
-    uint32_t cdvt
-) {
-    bool rc = false;
-    try {
-        this->CellRateThrottle::~CellRateThrottle();
-        new(this) CellRateThrottle(pcr, cdvt);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool CellRateThrottle::initialize(
-    uint32_t pcr,
-    uint32_t cdvt,
-    uint32_t scr,
-    uint32_t mbs
-) {
-    bool rc = false;
-    try {
-        this->CellRateThrottle::~CellRateThrottle();
-        new(this) CellRateThrottle(pcr, cdvt, scr, mbs);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-//
 //  Show this object on the output object.
 //
 void CellRateThrottle::show(int level, Output* display, int indent) const {

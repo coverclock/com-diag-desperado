@@ -80,35 +80,19 @@ CXXCAPI int unittestImplementation(void) {
     printf("%s[%d]: static implementation\n", __FILE__, __LINE__);
 
     ::implementation.show();
-    ::implementation.initialize(0);
-    ::implementation.show();
-    ::implementation.initialize();
-    ::implementation.show();
 
     printf("%s[%d]: stack implementation\n", __FILE__, __LINE__);
 
     Implementation implementation;
     implementation.show();
-    implementation.initialize(0);
-    implementation.show();
-    implementation.initialize();
-    implementation.show();
 
     printf("%s[%d]: static derivation\n", __FILE__, __LINE__);
 
-    ::derivation.show();
-    ::derivation.initialize(0);
-    ::derivation.show();
-    ::derivation.initialize();
     ::derivation.show();
 
     printf("%s[%d]: static derivation via base\n", __FILE__, __LINE__);
 
     Implementation* pi = &::derivation;
-    pi->show();
-    pi->initialize(0);
-    pi->show();
-    pi->initialize();
     pi->show();
 
     printf("%s[%d]: static derivation copy construction\n", __FILE__, __LINE__);
@@ -125,18 +109,10 @@ CXXCAPI int unittestImplementation(void) {
 
     Derivation derivation;
     derivation.show();
-    derivation.initialize(0);
-    derivation.show();
-    derivation.initialize();
-    derivation.show();
 
     printf("%s[%d]: stack derivation via base\n", __FILE__, __LINE__);
 
     pi = &derivation;
-    pi->show();
-    pi->initialize(0);
-    pi->show();
-    pi->initialize();
     pi->show();
 
     printf("%s[%d]: stack derivation copy construction\n", __FILE__, __LINE__);
@@ -155,18 +131,10 @@ CXXCAPI int unittestImplementation(void) {
 
     Derivation* derivation4 = new Derivation;
     derivation4->show();
-    derivation4->initialize(0);
-    derivation4->show();
-    derivation4->initialize();
-    derivation4->show();
 
     printf("%s[%d]: heap derivation via base\n", __FILE__, __LINE__);
 
     pi = derivation4;
-    pi->show();
-    pi->initialize(0);
-    pi->show();
-    pi->initialize();
     pi->show();
 
     delete derivation4;
@@ -202,19 +170,9 @@ CXXCAPI int unittestImplementation(void) {
 
     *derivation7 = *derivation9;
 
-    printf("%s[%d]: initialize 1 trace\n", __FILE__, __LINE__);
-
-    derivation7->initialize();
-
-    printf("%s[%d]: initialize 2 trace\n", __FILE__, __LINE__);
-
-    pointer = reinterpret_cast<void*>(2);
-    derivation7->initialize(pointer);
-
     printf("%s[%d]: initialize 3 trace\n", __FILE__, __LINE__);
 
     Abstract* abstraction7 = derivation7;
-    abstraction7->initialize();
 
     printf("%s[%d]: destruction 1 trace\n", __FILE__, __LINE__);
 

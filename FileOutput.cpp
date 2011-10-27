@@ -89,22 +89,6 @@ FileOutput::~FileOutput() {
 
 
 //
-//    Initializer.
-//
-bool FileOutput::initialize(FILE* fp) {
-    bool rc = false;
-    try {
-        this->FileOutput::~FileOutput();
-        new(this) FileOutput(fp);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Output a character.
 //
 int FileOutput::operator() (int c) {

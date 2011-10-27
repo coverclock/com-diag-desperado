@@ -134,38 +134,6 @@ Derivation& Derivation::operator=(const Derivation& that) {
 
 
 //
-//    Initializer.
-//
-bool Derivation::initialize() {
-    bool rc = false;
-    try {
-        this->Derivation::~Derivation();
-        new(this) Derivation;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool Derivation::initialize(void* f) {
-    bool rc = false;
-    try {
-        this->Derivation::~Derivation();
-        new(this) Derivation(f);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Derivation::show(int level, Output* display, int indent) const {

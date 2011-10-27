@@ -193,22 +193,6 @@ Date::~Date() {
 
 
 //
-//    Initializer.
-//
-bool Date::initialize(uint64_t yr, uint8_t mh, uint8_t dy) {
-    bool rc = false;
-    try {
-        this->Date::~Date();
-        new(this) Date(yr, mh, dy);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Convert to a string. We play some games with the output
 //  format so it looks good for commonly used years in the
 //  range 1..9999. The return value from snprintf() depends

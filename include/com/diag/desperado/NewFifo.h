@@ -96,29 +96,6 @@ public:
     virtual ~NewFifo();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  cof         is the countof of the queue to be allocated
-     *                      in number of objects of the specified type.
-     *                      The actual queue size will be the smallest
-     *                      power of two greater than or equal to this
-     *                      value.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(size_t cof = 0);
-
-    /**
      *  Displays internal information about this object to the specified
      *  output object. Useful for debugging and troubleshooting.
      *
@@ -194,23 +171,6 @@ NewFifo<_TYPE_>::NewFifo(size_t cof) :
 template <typename _TYPE_>
 NewFifo<_TYPE_>::~NewFifo() {
     delete [] this->queue;
-}
-
-
-//
-//    Initializer.
-//
-template <typename _TYPE_>
-bool NewFifo<_TYPE_>::initialize(size_t cof) {
-    bool rc = false;
-    try {
-        this->NewFifo<_TYPE_>::~NewFifo();
-        new(this) NewFifo<_TYPE_>(cof);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

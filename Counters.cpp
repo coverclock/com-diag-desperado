@@ -93,26 +93,6 @@ Counters::~Counters() {
 
 
 //
-//    Initializer.
-//
-bool Counters::initialize(
-    size_t ncounters,
-    Counter* vcounters,
-    const char** vlabels
-) {
-    bool rc = false;
-    try {
-        this->Counters::~Counters();
-        new(this) Counters(ncounters, vcounters, vlabels);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Reset all counters to a value.
 //
 void Counters::reset(Counter value) {

@@ -99,22 +99,6 @@ DstEu::~DstEu() {
 
 
 //
-//    Initializer.
-//
-bool DstEu::initialize() {
-    bool rc = false;
-    try {
-        this->DstEu::~DstEu();
-        new(this) DstEu;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void DstEu::show(int level, Output* display, int indent) const {

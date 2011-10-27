@@ -92,22 +92,6 @@ DescriptorOutput::~DescriptorOutput() {
 
 
 //
-//    Initializer.
-//
-bool DescriptorOutput::initialize(int fd) {
-    bool rc = false;
-    try {
-        this->DescriptorOutput::~DescriptorOutput();
-        new(this) DescriptorOutput(fd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Output a character.
 //
 int DescriptorOutput::operator() (int c) {

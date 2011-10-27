@@ -94,27 +94,6 @@ public:
     virtual ~FileInput();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  fp      points to a FILE object. If no pointer to
-     *                  a file object is specified, a pointer to
-     *                  the standard input FILE object is used.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(FILE* fp = stdin);
-
-    /**
      *  Returns a pointer to the associated FILE object.
      *
      *  @return a pointer to the associated FILE object.

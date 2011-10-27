@@ -93,22 +93,6 @@ JavaVirtualMachine::~JavaVirtualMachine() {
 
 
 //
-//    Initializer.
-//
-bool JavaVirtualMachine::initialize(bool ign, Output* out) {
-    bool rc = false;
-    try {
-        this->JavaVirtualMachine::~JavaVirtualMachine();
-        new(this) JavaVirtualMachine(ign, out);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Lazy start the machine.
 //  
 int JavaVirtualMachine::create(const char* options[], size_t noptions) {

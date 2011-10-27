@@ -156,7 +156,8 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
 
         strncpy(buffer, script, sizeof(buffer));
         BufferInput bufferinput;
-        bufferinput.initialize(buffer);
+        BufferInput bufferinput2(buffer);
+        bufferinput = bufferinput2;
 
         Input* input = 0;
         if (!interactive) {
@@ -187,7 +188,8 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
             __FILE__, __LINE__);
 
         strncpy(buffer, script, sizeof(buffer));
-        bufferinput.initialize(buffer);
+        BufferInput bufferinput3(buffer);
+        bufferinput = bufferinput3;
 
         unittestFiclShellValue = -1;
 
@@ -213,7 +215,8 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
             __FILE__, __LINE__);
 
         strncpy(buffer, script, sizeof(buffer));
-        bufferinput.initialize(buffer);
+        BufferInput bufferinput4(buffer);
+        bufferinput = bufferinput4;
 
         unittestFiclShellValue = -1;
 
@@ -239,7 +242,8 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
             __FILE__, __LINE__);
 
         strncpy(buffer, script, sizeof(buffer));
-        bufferinput.initialize(buffer);
+        BufferInput bufferinput5(buffer);
+        bufferinput = bufferinput5;
 
         unittestFiclShellValue = -1;
 

@@ -215,7 +215,8 @@ CXXCAPI int unittestCellRateThrottle(
     errors += cellrate_exercise(constant, iterations);
 
     printf("%s[%d]: constant initialize\n", __FILE__, __LINE__);
-    constant.initialize(pcr, cdvt);
+    CellRateThrottle newconstant(pcr, cdvt);
+    constant = newconstant;
     errors += cellrate_exercise(constant, iterations);
 
     printf("%s[%d]: variable\n", __FILE__, __LINE__);
@@ -225,7 +226,8 @@ CXXCAPI int unittestCellRateThrottle(
     errors += cellrate_exercise(variable, iterations);
 
     printf("%s[%d]: variable initialize\n", __FILE__, __LINE__);
-    variable.initialize(pcr, cdvt, scr, mbs);
+    CellRateThrottle newvariable(pcr, cdvt, scr, mbs);
+    variable = newvariable;
     errors += cellrate_exercise(variable, iterations);
 
     printf("%s[%d]: end errors=%d\n",

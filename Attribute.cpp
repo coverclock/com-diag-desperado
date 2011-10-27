@@ -218,22 +218,6 @@ Attribute::~Attribute() {
 
 
 //
-//    Initializer.
-//
-bool Attribute::initialize() {
-    bool rc = false;
-    try {
-        this->Attribute::~Attribute();
-        new(this) Attribute;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Attribute::show(int level, Output* display, int indent) const {

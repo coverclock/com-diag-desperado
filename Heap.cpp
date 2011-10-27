@@ -121,38 +121,6 @@ Heap::~Heap() {
 
 
 //
-//    Initializer.
-//
-bool Heap::initialize(Output* po) {
-    bool rc = false;
-    try {
-        this->Heap::~Heap();
-        new(this) Heap(po);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool Heap::initialize(Output& ro) {
-    bool rc = false;
-    try {
-        this->Heap::~Heap();
-        new(this) Heap(ro);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Returns current output object.
 //
 Output& Heap::output() const {

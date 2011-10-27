@@ -74,22 +74,6 @@ Epoch::~Epoch() {
 
 
 //
-//    Initializer.
-//
-bool Epoch::initialize(seconds_t sd, uint32_t nd) {
-    bool rc = false;
-    try {
-        this->Epoch::~Epoch();
-        new(this) Epoch(sd, nd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Epoch::show(int /* level */, Output* display, int indent) const {

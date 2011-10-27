@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2005-2007-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -78,22 +78,6 @@ Throttle::Throttle() {
 //  Destructor.
 //
 Throttle::~Throttle() {
-}
-
-
-//
-//    Initializer.
-//
-bool Throttle::initialize() {
-    bool rc = false;
-    try {
-        this->Throttle::~Throttle();
-        new(this) Throttle;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
 }
 
 

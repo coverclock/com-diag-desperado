@@ -102,38 +102,6 @@ BufferInput::~BufferInput() {
 
 
 //
-//    Initializer.
-//
-bool BufferInput::initialize(char* sp) {
-    bool rc = false;
-    try {
-        this->BufferInput::~BufferInput();
-        new(this) BufferInput(sp);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool BufferInput::initialize(char* sp, size_t sz) {
-    bool rc = false;
-    try {
-        this->BufferInput::~BufferInput();
-        new(this) BufferInput(sp, sz);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return the next character in the string.
 //
 int BufferInput::operator() () {

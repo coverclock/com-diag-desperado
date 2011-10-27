@@ -94,38 +94,6 @@ StreamSocket::~StreamSocket() {
 
 
 //
-//    Initializer.
-//
-bool StreamSocket::initialize(int socket) {
-    bool rc = false;
-    try {
-        this->StreamSocket::~StreamSocket();
-        new(this) StreamSocket(socket);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool StreamSocket::initialize(int reading, int writing) {
-    bool rc = false;
-    try {
-        this->StreamSocket::~StreamSocket();
-        new(this) StreamSocket(reading, writing);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return a reference to the input interface.
 //
 Input& StreamSocket::input() {

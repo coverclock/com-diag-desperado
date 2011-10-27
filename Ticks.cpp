@@ -76,22 +76,6 @@ Ticks::~Ticks() {
 
 
 //
-//    Initializer.
-//
-bool Ticks::initialize() {
-    bool rc = false;
-    try {
-        this->Ticks::~Ticks();
-        new(this) Ticks;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Convert platform ticks into seconds and nanoseconds.
 //
 void Ticks::seconds(

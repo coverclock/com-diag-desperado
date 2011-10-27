@@ -106,54 +106,6 @@ DumpInput::~DumpInput() {
 
 
 //
-//    Initializer.
-//
-bool DumpInput::initialize() {
-    bool rc = false;
-    try {
-        this->DumpInput::~DumpInput();
-        new(this) DumpInput;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool DumpInput::initialize(Input& ri) {
-    bool rc = false;
-    try {
-        this->DumpInput::~DumpInput();
-        new(this) DumpInput(ri);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool DumpInput::initialize(Input& ri, Dump& rd) {
-    bool rc = false;
-    try {
-        this->DumpInput::~DumpInput();
-        new(this) DumpInput(ri, rd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Returns input object.
 //
 Input& DumpInput::input() const {

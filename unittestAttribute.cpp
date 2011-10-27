@@ -282,7 +282,8 @@ CXXCAPI int unittestAttribute(void*, int interactive) {
 
     if (!interactive) {
         strncpy(testbuffer, sample, sizeof(testbuffer));
-        bufferinput.initialize(testbuffer);
+        BufferInput newbufferinput(testbuffer);
+        bufferinput = newbufferinput;
         input = &bufferinput;
     }
 

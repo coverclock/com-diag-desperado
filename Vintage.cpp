@@ -94,22 +94,6 @@ Vintage::~Vintage() {
 
 
 //
-//    Initializer.
-//
-bool Vintage::initialize() {
-    bool rc = false;
-    try {
-        this->Vintage::~Vintage();
-        new(this) Vintage;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Show this object on the output object.
 //
 void Vintage::show(int /* level */, Output* display, int indent) const {

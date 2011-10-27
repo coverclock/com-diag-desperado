@@ -119,38 +119,6 @@ Dump::~Dump() {
 
 
 //
-//    Initializer.
-//
-bool Dump::initialize(Output* po, bool uppercase, int unuchar, int unpchar) {
-    bool rc = false;
-    try {
-        this->Dump::~Dump();
-        new(this) Dump(po, uppercase, unuchar, unpchar);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool Dump::initialize(Output& ro, bool uppercase, int unuchar, int unpchar) {
-    bool rc = false;
-    try {
-        this->Dump::~Dump();
-        new(this) Dump(ro, uppercase, unuchar, unpchar);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Returns current output object.
 //
 Output& Dump::output() const {

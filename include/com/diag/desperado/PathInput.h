@@ -99,31 +99,6 @@ public:
     virtual ~PathInput();
 
     /**
-     *  Initializes this object, returning it to its just constructed state.
-     *  This is exactly equivalent to calling the object's destructor
-     *  followed by calling its constructor. The use of this method allows
-     *  object (re)construction to be virtualized. However, it has the side
-     *  effect of also reinitializing the object's virtual pointer. This means
-     *  wackiness will ensue when if, for example, a derived class object
-     *  deliberately calls its base class initializer. Doing so turns this
-     *  object from an instance of the derived class into an instance of its
-     *  base class. This implementation requires that every class derived
-     *  from a class that implements this method must also implement this
-     *  method, otherwise it can never be used against a derived class object.
-     *
-     *  @param  path    is a path string as defined by the POSIX
-     *                  fopen() function. If the path
-     *                  is "-", standard input will be used.
-     *
-     *  @param  mode    is a mode string as defined by the POSIX
-     *                  fopen() function. This has no
-     *                  meaning if "-" is specified for the path.
-     *
-     *  @return true if successful, false otherwise.
-     */
-    virtual bool initialize(const char* path = "-", const char* mode = "r");
-
-    /**
      *  Displays internal information about this object to the specified
      *  output object. Useful for debugging and troubleshooting.
      *

@@ -209,12 +209,8 @@ CXXCAPI int unittestException(void) {
     }
 
     PathInput pathinput2;
-    bool pathinitialization = pathinput2.initialize(pathinputname, "r");
-    if (pathinitialization) {
-        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__,
-            false, pathinitialization);
-        ++errors;
-    }
+    PathInput newpathinput2(pathinputname, "r");
+    pathinput2 = newpathinput2;
 
     printf("%s[%d]: PathOutput\n", __FILE__, __LINE__);
 
@@ -235,12 +231,8 @@ CXXCAPI int unittestException(void) {
     }
 
     PathOutput pathoutput2;
-    pathinitialization = pathoutput2.initialize(pathoutputname, "w");
-    if (pathinitialization) {
-        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__,
-            false, pathinitialization);
-        ++errors;
-    }
+    PathOutput newpathoutput2(pathoutputname, "w");
+    pathoutput2 = newpathoutput2;
 
 #else
 

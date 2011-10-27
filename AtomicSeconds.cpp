@@ -75,22 +75,6 @@ AtomicSeconds::~AtomicSeconds() {
 
 
 //
-//    Initializer.
-//
-bool AtomicSeconds::initialize() {
-    bool rc = false;
-    try {
-        this->AtomicSeconds::~AtomicSeconds();
-        new(this) AtomicSeconds;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Always return false.
 //
 bool AtomicSeconds::isObserved() const {

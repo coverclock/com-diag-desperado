@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006-2007-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -180,68 +180,12 @@ BandwidthThrottle::BandwidthThrottle(
 }
 
 
-
 //
 //  Destructor.
 //
 BandwidthThrottle::~BandwidthThrottle() {
 }
 
-
-//
-//    Initializer.
-//
-bool BandwidthThrottle::initialize() {
-    bool rc = false;
-    try {
-        this->BandwidthThrottle::~BandwidthThrottle();
-        new(this) BandwidthThrottle;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool BandwidthThrottle::initialize(
-    uint32_t pbps,
-    uint32_t jt
-) {
-    bool rc = false;
-    try {
-        this->BandwidthThrottle::~BandwidthThrottle();
-        new(this) BandwidthThrottle(pbps, jt);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool BandwidthThrottle::initialize(
-    uint32_t pbps,
-    uint32_t jt,
-    uint32_t sbps,
-    uint32_t mbs
-) {
-    bool rc = false;
-    try {
-        this->BandwidthThrottle::~BandwidthThrottle();
-        new(this) BandwidthThrottle(pbps, jt, sbps, mbs);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
 
 //
 //  Show this object on the output object.

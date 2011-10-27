@@ -91,38 +91,6 @@ Print::~Print() {
 
 
 //
-//    Initializer.
-//
-bool Print::initialize(Output* po) {
-    bool rc = false;
-    try {
-        this->Print::~Print();
-        new(this) Print(po);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool Print::initialize(Output& ro) {
-    bool rc = false;
-    try {
-        this->Print::~Print();
-        new(this) Print(ro);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return a reference to the current print output object.
 //
 Output& Print::output() const {

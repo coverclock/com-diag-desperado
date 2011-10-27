@@ -106,54 +106,6 @@ DumpOutput::~DumpOutput() {
 
 
 //
-//    Initializer.
-//
-bool DumpOutput::initialize() {
-    bool rc = false;
-    try {
-        this->DumpOutput::~DumpOutput();
-        new(this) DumpOutput;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool DumpOutput::initialize(Output& ro) {
-    bool rc = false;
-    try {
-        this->DumpOutput::~DumpOutput();
-        new(this) DumpOutput(ro);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
-//    Initializer.
-//
-bool DumpOutput::initialize(Output& ro, Dump& rd) {
-    bool rc = false;
-    try {
-        this->DumpOutput::~DumpOutput();
-        new(this) DumpOutput(ro, rd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Returns output object.
 //
 Output& DumpOutput::output() const {

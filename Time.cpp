@@ -102,27 +102,6 @@ Time::~Time() {
 
 
 //
-//    Initializer.
-//
-bool Time::initialize(
-    uint8_t hr,
-    uint8_t me,
-    uint8_t sd,
-    uint32_t nd
-) {
-    bool rc = false;
-    try {
-        this->Time::~Time();
-        new(this) Time(hr, me, sd, nd);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Convert to a string. The return value from snprintf() depends
 //  on the version of glibc; we accomodate either semantic.
 //

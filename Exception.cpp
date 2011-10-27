@@ -96,29 +96,6 @@ Exception::~Exception() THROWS(()) {
 
 
 //
-//    Initializer.
-//
-bool Exception::initialize(
-    const char* eventMessage,
-    int errorNumber,
-    const char* fileName,
-    int lineNumber,
-    const char* functionName
-) THROWS(()) {
-    bool rc = false;
-    try {
-        this->Exception::~Exception();
-        new(this) Exception(eventMessage, errorNumber, fileName, lineNumber,
-                                functionName);
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
-
-//
 //  Return the event string.
 //
 const char* Exception::what() const THROWS(()) {

@@ -91,21 +91,6 @@ Meter::~Meter() {
 }
 
 
-//
-//    Initializer.
-//
-bool Meter::initialize() {
-    bool rc = false;
-    try {
-        this->Meter::~Meter();
-        new(this) Meter;
-        rc = true;
-    } catch (...) {
-        rc = false;
-    }
-    return rc;
-}
-
 
 //
 //  Reset the meter back to the initial conditions.
