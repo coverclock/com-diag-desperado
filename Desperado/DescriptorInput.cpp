@@ -148,9 +148,10 @@ ssize_t DescriptorInput::operator() (char* buffer, size_t size) {
         while (1 < size) {
             fc = ::read(this->active, here, sizeof(*here));
             if (0 < fc) {
-                --size;
+                size -= fc;
                 rc += fc;
-                if ('\n' == *(here++)) {
+                here += fc;
+                if (('\n' == *(here - 1)) || ('\0' == *(here - 1))) {
                     break;
                 }
             } else if (0 == fc) {
@@ -170,8 +171,8 @@ ssize_t DescriptorInput::operator() (char* buffer, size_t size) {
                 break;
             }
         }
-        if (EOF != rc) {
-            *(here++) = '\0';
+        if ((EOF != rc) && ('\0' != *(here - 1))) {
+            *here = '\0';
             ++rc;
         }
     }
