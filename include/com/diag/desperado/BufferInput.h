@@ -68,7 +68,7 @@
 
 /**
  *  Implements an input functor that returns data from a buffer in
- *  memory. An EOF  return when a NUL or the is end of the buffer is reached.
+ *  memory. An EOF is returned when a NUL or the end of the buffer is reached.
  *  The offset is the total number of characters input, and can be used as
  *  an index into the character string.
  *

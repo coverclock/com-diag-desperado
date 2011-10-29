@@ -140,20 +140,20 @@ int BufferInput::operator() (int ch) {
 //
 //  Read a line from the string.
 //
-ssize_t BufferInput::operator() (char* buffer, size_t size) {
+ssize_t BufferInput::operator() (char* buffer, size_t length) {
     ssize_t rc = EOF;
     if (0 == this->string) {
         errno = EINVAL;
-    } else if (0 == size) {
+    } else if (0 == length) {
         rc = 0;
     } else if (this->offset >= this->size) {
         errno = 0;
     } else if ('\0' == this->string[this->offset]) {
         errno = 0;
     } else {
-        char ch;
+        char ch = ~'\0';
         rc = 0;
-        while (static_cast<ssize_t>(--size) > rc) {
+        while (static_cast<ssize_t>(--length) > 0) {
             ch = this->string[this->offset];
             if ('\0' == ch) {
                 break;

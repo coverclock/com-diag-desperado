@@ -109,7 +109,7 @@ static char* hostname() {
 //
 //  Constructor.
 //
-//  You might consider passing argv and argc to the constructor of a
+//  You might consider passing argc and argv to the constructor of a
 //  derived class from the main and have it parse command line parameters.
 //  This would work for Linux but perhaps not other embedded platforms.
 //
@@ -134,10 +134,11 @@ Linux::Linux() :
         ::setrlimit(RLIMIT_CORE, &limit);
     }
 
-    //  Unbuffer standard output and standard error. Not the most
-    //  efficient thing, but very useful for debugging.
+    //  Unbuffer standard error. This is typically the default and is useful
+    //  for debugging. If you are having problems debugging, especially with
+    //  correlating error messages with output in time, first try redirecting
+    //  standard output to standard error on the command line.
 
-    std::setbuf(stdout, 0);
     std::setbuf(stderr, 0);
 
     //  Indicate that system ticks do not incorporate leap seconds,
