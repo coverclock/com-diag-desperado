@@ -79,9 +79,9 @@ public:
     /**
      *  Constructor.
      *
-     *  @param  sp      points to the input string.
+     *  @param  sp      points to the output buffer.
      *
-     *  @param  sz      is the length of the string in bytes.
+     *  @param  sz      is the length of the buffer in bytes.
      */
     explicit BufferOutput(char* sp = 0, size_t sz = 0);
 
