@@ -87,7 +87,6 @@ DescriptorOutput::DescriptorOutput(int fd) :
 //  Destructor.
 //
 DescriptorOutput::~DescriptorOutput() {
-    (*this)();
 }
 
 

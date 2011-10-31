@@ -84,7 +84,6 @@ FileOutput::FileOutput(FILE* fp) :
 //  Destructor.
 //
 FileOutput::~FileOutput() {
-    (*this)();
 }
 
 
