@@ -121,8 +121,6 @@ SyslogOutput::SyslogOutput(const char* id, int opt, int fac)
 SyslogOutput::~SyslogOutput() {
 #if defined(DESPERADO_HAS_SYSLOG)
     ::closelog();
-#else
-    error();
 #endif
 }
 
