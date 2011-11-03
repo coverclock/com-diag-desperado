@@ -76,10 +76,11 @@
 #include "com/diag/desperado/Desperado.h"
 
 CXXCAPI int unittestInputOutput(
-    void *,
+    void * /* pVM */,
     char mechanism,
     Input* inputp,
-    Output* outputp
+    Output* outputp,
+    bool verbose
 ) {
     Input& input = *inputp;
     Output& output = *outputp;
@@ -97,7 +98,8 @@ CXXCAPI int unittestInputOutput(
     errorf(" output:\n");
     output.show(0, &(Platform::instance().error()), 2);
 
-    ssize_t octets = 0;
+    size_t inputted = 0;
+    size_t outputted = 0;
 
     switch (mechanism) {
 
@@ -112,55 +114,56 @@ CXXCAPI int unittestInputOutput(
                 ch = input();
                 if (EOF == ch) {
                     if (0 != errno) {
-                        errorf("%s[%d]: [%lu] input()!\n",
-                            __FILE__, __LINE__, octets);
+                        errorf("%s[%d]: [%zu] input()!\n",
+                            __FILE__, __LINE__, inputted);
                         std::perror("input()");
                         ++errors;
                     }
                     break;
                 }
-                ++octets;
+                ++inputted;
                 ch2 = input(ch);
                 if (EOF == ch2) {
-                    errorf("%s[%d]: [%lu] input(ch)!\n",
-                        __FILE__, __LINE__, octets);
+                    errorf("%s[%d]: [%zu] input(ch)!\n",
+                        __FILE__, __LINE__, inputted);
                     std::perror("input(ch)");
                     ++errors;
                     break;
                 }
                 if (ch != ch2) {
-                    errorf("%s[%d]: [%lu] (0x%hhx!=0x%hhx)!\n",
-                        __FILE__, __LINE__, octets, ch, ch2);
+                    errorf("%s[%d]: [%zu] (0x%hhx!=0x%hhx)!\n",
+                        __FILE__, __LINE__, inputted, ch, ch2);
                     std::perror("input(ch)");
                     ++errors;
                     break;
                 }
                 ch = input();
                 if (EOF == ch) {
-                    errorf("%s[%d]: [%lu] input()!\n",
-                        __FILE__, __LINE__, octets);
+                    errorf("%s[%d]: [%zu] input()!\n",
+                        __FILE__, __LINE__, inputted);
                     std::perror("input()");
                     ++errors;
                     break;
                 }
                 if (ch2 != ch) {
-                    errorf("%s[%d]: [%lu] (0x%hhx!=0x%hhx)!\n",
-                        __FILE__, __LINE__, octets, ch2, ch);
+                    errorf("%s[%d]: [%zu] (0x%hhx!=0x%hhx)!\n",
+                        __FILE__, __LINE__, inputted, ch2, ch);
                     std::perror("input()");
                     ++errors;
                     break;
                 }
                 ch2 = output(ch);
                 if (EOF == ch2) {
-                    errorf("%s[%d]: [%lu] output(ch)!\n",
-                        __FILE__, __LINE__, octets);
+                    errorf("%s[%d]: [%zu] output(ch)!\n",
+                        __FILE__, __LINE__, inputted);
                     std::perror("output(ch)");
                     ++errors;
                     break;
                 }
+                ++outputted;
                 if (ch2 != ch) {
-                    errorf("%s[%d]: [%lu] (0x%hhx!=0x%hhx)!\n",
-                        __FILE__, __LINE__, octets, ch2, ch);
+                    errorf("%s[%d]: [%zu] (0x%hhx!=0x%hhx)!\n",
+                        __FILE__, __LINE__, inputted, ch2, ch);
                     std::perror("output(ch)");
                     ++errors;
                     break;
@@ -182,43 +185,44 @@ CXXCAPI int unittestInputOutput(
                 if (EOF == rc) {
                     if (0 != errno) {
                         errorf(
-                            "%s[%d]: [%lu] input(buffer, size)!\n",
-                            __FILE__, __LINE__, octets);
+                            "%s[%d]: [%zu] input(buffer, size)!\n",
+                            __FILE__, __LINE__, inputted);
                         std::perror("input(buffer, size)");
                         ++errors;
                     }
                     break;
                 }
                 if (0 == rc) {
-                    errorf("%s[%d]: [%lu] (0==%zd)!\n",
-                        __FILE__, __LINE__, octets, rc);
+                    errorf("%s[%d]: [%zu] (0==%zd)!\n",
+                        __FILE__, __LINE__, inputted, rc);
                     ++errors;
                     continue;
                 }
+                inputted += rc;
                 if (static_cast<int>(sizeof(buffer)) < rc) {
-                    errorf("%s[%d]: [%lu] (%lu<%zd)!\n",
-                        __FILE__, __LINE__, octets, sizeof(buffer), rc);
+                    errorf("%s[%d]: [%zu] (%lu<%zd)!\n",
+                        __FILE__, __LINE__, inputted, sizeof(buffer), rc);
                     ++errors;
                     break;
                 }
                 if ('\0' != buffer[rc - 1]) {
-                    errorf("%s[%d]: [%lu] (NUL!=0x%hhx[%zd])!\n",
-                        __FILE__, __LINE__, octets, buffer[rc - 1], rc - 1);
+                    errorf("%s[%d]: [%zu] (NUL!=0x%hhx[%zd])!\n",
+                        __FILE__, __LINE__, inputted, buffer[rc - 1], rc - 1);
                     ++errors;
                     break;
                 }
-                octets += rc;
                 rc2 = output(buffer);
                 if (EOF == rc2) {
-                    errorf("%s[%d]: [%lu] output(buffer)!\n",
-                        __FILE__, __LINE__, octets);
+                    errorf("%s[%d]: [%zu] output(buffer)!\n",
+                        __FILE__, __LINE__, inputted);
                     std::perror("output(buffer)");
                     ++errors;
                     break;
                 }
+                outputted += rc2;
                 if ((rc - 1) != rc2) {
-                    errorf("%s[%d]: [%lu] (%zd!=%zd)\n",
-                        __FILE__, __LINE__, octets, rc - 1, rc2);
+                    errorf("%s[%d]: [%zu] (%zd!=%zd)\n",
+                        __FILE__, __LINE__, inputted, rc - 1, rc2);
                     ++errors;
                     break;
                 }
@@ -239,46 +243,47 @@ CXXCAPI int unittestInputOutput(
                 if (EOF == rc) {
                     if (0 != errno) {
                         errorf(
-                            "%s[%d]: [%lu] input(buffer, size)!\n",
-                            __FILE__, __LINE__, octets);
+                            "%s[%d]: [%zu] input(buffer, size)!\n",
+                            __FILE__, __LINE__, inputted);
                         std::perror("input(buffer, size)");
                         ++errors;
                     }
                     break;
                 }
                 if (0 == rc) {
-                    errorf("%s[%d]: [%lu] (0==%zd)!\n",
-                        __FILE__, __LINE__, octets, rc);
+                    errorf("%s[%d]: [%zu] (0==%zd)!\n",
+                        __FILE__, __LINE__, inputted, rc);
                     ++errors;
                     continue;
                 }
+                inputted += rc;
                 if (static_cast<int>(sizeof(buffer)) <= rc) {
-                    errorf("%s[%d]: [%lu] (%lu<%zd)!\n",
-                        __FILE__, __LINE__, octets, sizeof(buffer), rc);
+                    errorf("%s[%d]: [%zu] (%lu<%zd)!\n",
+                        __FILE__, __LINE__, inputted, sizeof(buffer), rc);
                     ++errors;
                     break;
                 }
                 if ('\0' != buffer[rc - 1]) {
-                    errorf("%s[%d]: [%lu] (NUL!=0x%hhx[%zd])!\n",
-                        __FILE__, __LINE__, octets, buffer[rc - 1], rc - 1);
+                    errorf("%s[%d]: [%zu] (NUL!=0x%hhx[%zd])!\n",
+                        __FILE__, __LINE__, inputted, buffer[rc - 1], rc - 1);
                     ++errors;
                     break;
                 }
-                octets += rc;
                 buffer[rc - 1] = '!';
                 buffer[rc] = '\0';
                 rc2 = output(buffer, rc - 1);
                 if (EOF == rc2) {
                     errorf(
-                        "%s[%d]: [%lu] output(buffer, size)!\n",
-                        __FILE__, __LINE__, octets);
+                        "%s[%d]: [%zu] output(buffer, size)!\n",
+                        __FILE__, __LINE__, inputted);
                     std::perror("output(buffer, size)");
                     ++errors;
                     break;
                 }
+                outputted += rc2;
                 if ((rc - 1) != rc2) {
-                    errorf("%s[%d]: [%lu] (%zd!=%zd)\n",
-                        __FILE__, __LINE__, octets, rc - 1, rc2);
+                    errorf("%s[%d]: [%zu] (%zd!=%zd)\n",
+                        __FILE__, __LINE__, inputted, rc - 1, rc2);
                     ++errors;
                     break;
                 }
@@ -300,43 +305,44 @@ CXXCAPI int unittestInputOutput(
                 if (EOF == rc) {
                     if (0 != errno) {
                         errorf(
-                            "%s[%d]: [%lu] input(buffer, size)!\n",
-                            __FILE__, __LINE__, octets);
+                            "%s[%d]: [%zu] input(buffer, size)!\n",
+                            __FILE__, __LINE__, inputted);
                         std::perror("input(buffer, size)");
                         ++errors;
                     }
                     break;
                 }
+                inputted += rc;
                 if (0 == rc) {
-                    errorf("%s[%d]: [%lu] (0==%zd)!\n",
-                        __FILE__, __LINE__, octets, rc);
+                    errorf("%s[%d]: [%zu] (0==%zd)!\n",
+                        __FILE__, __LINE__, inputted, rc);
                     ++errors;
                     continue;
                 }
                 if (static_cast<int>(sizeof(buffer)) < rc) {
-                    errorf("%s[%d]: [%lu] (%lu<%zd)!\n",
-                        __FILE__, __LINE__, octets, sizeof(buffer), rc);
+                    errorf("%s[%d]: [%zu] (%lu<%zd)!\n",
+                        __FILE__, __LINE__, inputted, sizeof(buffer), rc);
                     ++errors;
                     break;
                 }
                 if ('\0' != buffer[rc - 1]) {
-                    errorf("%s[%d]: [%lu] (NUL!=0x%hhx[%zd])!\n",
-                        __FILE__, __LINE__, octets, buffer[rc - 1], rc - 1);
+                    errorf("%s[%d]: [%zu] (NUL!=0x%hhx[%zd])!\n",
+                        __FILE__, __LINE__, inputted, buffer[rc - 1], rc - 1);
                     ++errors;
                     break;
                 }
-                octets += rc;
                 rc2 = outputf("%s", buffer);
                 if (EOF == rc2) {
-                    errorf("%s[%d]: [%lu] outputf(buffer)!\n",
-                        __FILE__, __LINE__, octets);
+                    errorf("%s[%d]: [%zu] outputf(buffer)!\n",
+                        __FILE__, __LINE__, inputted);
                     std::perror("outputf(buffer)");
                     ++errors;
                     break;
                 }
+                outputted += rc2;
                 if ((rc - 1) != rc2) {
-                    errorf("%s[%d]: [%lu] (%zd!=%zd)\n",
-                        __FILE__, __LINE__, octets, rc - 1, rc2);
+                    errorf("%s[%d]: [%zu] (%zd!=%zd)\n",
+                        __FILE__, __LINE__, inputted, rc - 1, rc2);
                     ++errors;
                     break;
                 }
@@ -357,38 +363,54 @@ CXXCAPI int unittestInputOutput(
                 if (EOF == rc) {
                     if (0 != errno) {
                         errorf(
-                            "%s[%d]: [%lu] input(buffer, minimum, maximum)!\n",
-                            __FILE__, __LINE__, octets);
+                            "%s[%d]: [%zu] input(buffer, minimum, maximum)!\n",
+                            __FILE__, __LINE__, inputted);
                         std::perror("input(buffer, minimum, maximum)");
                         ++errors;
                     }
                     break;
                 }
+                if (verbose) {
+                	errorf(
+                		"%s[%d]: input minimum=%zu maximum=%zu actual=%zd\n",
+                		__FILE__, __LINE__,
+                		static_cast<size_t>(1), sizeof(buffer), rc);
+                }
+                inputted += rc;
                 if (0 == rc) {
-                    errorf("%s[%d]: [%lu] (0==%zd)!\n",
-                        __FILE__, __LINE__, octets, rc);
+                    errorf("%s[%d]: [%zu] (0==%zd)!\n",
+                        __FILE__, __LINE__, inputted, rc);
                     ++errors;
                     continue;
                 }
                 if (static_cast<ssize_t>(sizeof(buffer)) < rc) {
-                    errorf("%s[%d]: [%lu] (%lu<%zd)!\n",
-                        __FILE__, __LINE__, octets, sizeof(buffer), rc);
+                    errorf("%s[%d]: [%zu] (%lu<%zd)!\n",
+                        __FILE__, __LINE__, inputted, sizeof(buffer), rc);
                     ++errors;
                     break;
                 }
-                octets += rc;
-                rc2 = output(buffer, rc, rc);
-                if (EOF == rc2) {
-                    errorf(
-                        "%s[%d]: [%lu] output(buffer, size, count)!\n",
-                        __FILE__, __LINE__, octets);
-                    std::perror("output(buffer, size, count)");
-                    ++errors;
-                    break;
+                ssize_t off = 0;
+                while (off < rc) {
+					rc2 = output(buffer + off, 1, rc - off);
+					if (EOF == rc2) {
+						errorf(
+							"%s[%d]: [%zu] output(buffer, size, count)!\n",
+							__FILE__, __LINE__, inputted);
+						std::perror("output(buffer, size, count)");
+						++errors;
+						break;
+					}
+					if (verbose) {
+						errorf(
+							"%s[%d]: output minimum=%zd maximum=%zd actual=%zd\n",
+							__FILE__, __LINE__, static_cast<ssize_t>(1), rc - off, rc2);
+					}
+					off += rc2;
+					outputted += rc2;
                 }
-                if (rc != rc2) {
-                    errorf("%s[%d]: [%lu] (%zd!=%zd)\n",
-                        __FILE__, __LINE__, octets, rc, rc2);
+                if (outputted != inputted) {
+                    errorf("%s[%d]: [%zu] (%zu!=%zu)\n",
+                        __FILE__, __LINE__, inputted, outputted, inputted);
                     ++errors;
                     break;
                 }
@@ -410,8 +432,8 @@ CXXCAPI int unittestInputOutput(
     errorf(" output:\n");
     output.show(0, &(Platform::instance().error()), 2);
 
-    errorf("%s[%d]: end octets=%u errors=%d\n",
-        __FILE__, __LINE__, octets, errors);
+    errorf("%s[%d]: end inputted=%zu outputted=%zu errors=%d\n",
+        __FILE__, __LINE__, inputted, outputted, errors);
 
     return errors;
 }

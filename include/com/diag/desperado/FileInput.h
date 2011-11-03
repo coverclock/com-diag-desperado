@@ -144,10 +144,11 @@ public:
      *  Up to the maximum number may be input if it can be done without
      *  further blocking. The functor does not NUL terminate the buffer.
      *
-     *  N.B. Currently this code just does a single fread(3) of the minimum
-     *  number of bytes. Some UNIXen I've used have a non-portable mechanism to
-     *  determine the number of used bytes available in the stdin buffer.
-     *  GNU (or more properly POSIX) does not AFAICT.
+     *  N.B. This implementation interprets "without blocking" to mean "without
+     *  doing a physical read(2) in to the standard I/O buffer". It uses a
+     *  non-portable and non-thread safe mechanism that directly accesses the
+     *  underlying libc FILE structure. The caller can circumvent this by using
+     *  the same value for minimum and maximum.
      *
      *  @param  buffer  points to the buffer.
      *
