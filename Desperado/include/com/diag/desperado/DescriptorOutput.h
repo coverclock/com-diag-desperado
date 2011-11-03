@@ -149,20 +149,14 @@ public:
      *  without blocking, up to the maximum number of requested octets
      *  may be output.
      *
-     *  N.B. POSIX read(2) and write(2) semantics differ substantially,
-     *  and the practical behavior of write(2) differs depending on whether
-     *  the underlying file descriptor points to a tty, a file, or a socket.
-     *  We write the minimum atomically, and then try to write the remainder
-     *  only if the descriptor is ready for write without blocking. To prevent
-     *  blocking for outputs between minimum and maximum, we step through
-     *  and write single byte at a time once we're past the minimum. This
+     *  N.B. We write the minimum atomically, and then try to write the
+     *  remainder only if the descriptor is ready for write without blocking.
+     *  To prevent blocking for octets between minimum and maximum, we write
+     *  a single byte at a time providing doing so would not block. This
      *  is really inefficient, and non-atomic, but it preserves the semantics.
      *  The caller can address this by using the same value for minimum
      *  and maximum, but the functor will block until the specified amount
-     *  is written atomically. Practically speaking, specifying a minimum of
-     *  zero is only useful for interactive or real-time devices like sockets
-     *  (and perhaps not even then), since devices like files and even ttys
-     *  will cause the write(2) to block.
+     *  is written atomically.
      *
      *  @param  buffer  points to the buffer.
      *
