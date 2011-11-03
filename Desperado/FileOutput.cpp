@@ -35,10 +35,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: FileOutput.cpp,v 1.5 2006/02/07 00:07:03 jsloan Exp $
-
 ******************************************************************************/
 
 
@@ -48,12 +44,6 @@
  *  Implements the FileOutput class.
  *
  *  @see    FileOutput
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.5 $
- *
- *  @date   $Date: 2006/02/07 00:07:03 $
  */
 
 
