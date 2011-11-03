@@ -60,18 +60,21 @@ CXXCAPI int desperado_descriptor_ready(int fd) {
 	int result = 0;
 
 	fd_set readable;
+	FD_ZERO(&readable);
 	FD_SET(fd, &readable);
 
 	fd_set writeable;
+	FD_ZERO(&writeable);
 	FD_SET(fd, &writeable);
 
 	fd_set exceptional;
+	FD_ZERO(&exceptional);
 	FD_SET(fd, &exceptional);
 
 	struct timeval timeout;
 	std::memset(&timeout, 0, sizeof(timeout));
 
-	int rc = ::select(1, &readable, &writeable, &exceptional, &timeout);
+	int rc = ::select(fd + 1, &readable, &writeable, &exceptional, &timeout);
 	if (0 < rc) {
 		if (FD_ISSET(fd, &readable)) {
 			result |= DESPERADO_DESCRIPTOR_READY_READ;
