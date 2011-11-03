@@ -3,7 +3,7 @@
 
 ###############################################################################
 #
-#   Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#   Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
 #   This file is part of the Digital Aggregates Desperado library.
 #   
 #   This library is free software; you can redistribute it and/or
@@ -35,10 +35,6 @@
 #   Public License along with this library; if not, write to the
 #   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #   Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
-#
-#   $Name:  $
-#
-#   $Id: unittestsuite.sh,v 1.22 2007/01/12 21:21:06 jsloan Exp $
 #
 ###############################################################################
 

@@ -68,13 +68,13 @@ for OBJECT in D F N P S; do
                 cp ${FILE} ${INPUT}
             else
                 OUT="1> ${OUTPUT}"
-                IN="< /dev/null"
+                IN="< ${INPUT}"
                 cp /dev/null ${INPUT}
             fi
             ERR="2> ${ERROR}"
 
-            echo "${PGM} ${DEBUG} -${OBJECT} -${METHOD} ${OUT} ${IN} ${ERR}"
-            eval ${PGM} ${DEBUG} -${OBJECT} -${METHOD} ${OUT} ${IN} ${ERR}
+            echo "${PGM} ${DEBUG} ${VERBOSE} -${OBJECT} -${METHOD} ${OUT} ${IN} ${ERR}"
+            eval ${PGM} ${DEBUG} ${VERBOSE} -${OBJECT} -${METHOD} ${OUT} ${IN} ${ERR}
             RC=$?
             if [ ${RC} -ne 0 ]; then
                 echo "${CMD}: ${PGM} ${OBJECT} ${METHOD} ${IO} ${RC}!"

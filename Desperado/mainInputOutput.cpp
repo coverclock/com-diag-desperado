@@ -101,7 +101,7 @@
 #include "com/diag/desperado/Heap.h"
 
 #define USAGE   \
-    "[ -d(ebug) ]" \
+    "[ -d(ebug) ] [ -v(erbose) ]" \
     " [ -c(haracter) | -l(ine) | -b(lock) | -s(tring) | -f(ormatted) ]" \
     " [ -D(escriptor) | -F(ile) | -I(pc) | -N(ull) | -P(ath) | -S(tring) ]" \
     " [ -o(utout) [ outname | - ] ]" \
@@ -118,6 +118,7 @@ int main(int argc, char **argv, char **) {
     int errors = 0;
 
     bool debug = false;
+    bool verbose = false;
     bool help = false;
 
     const char *outname = "-";
@@ -133,7 +134,7 @@ int main(int argc, char **argv, char **) {
                 ? argv[0] : cmdname + 1;
 
     usage = 0;
-    while (0 <= (opt = ::getopt(argc, argv, "?bcdflo:rsDFINPS"))) {
+    while (0 <= (opt = ::getopt(argc, argv, "?bcdflo:rsvDFINPS"))) {
         inerror = 0;
         switch (opt) {
         case '?':
@@ -160,6 +161,9 @@ int main(int argc, char **argv, char **) {
         case 'o':
             outname = optarg;
             break;
+        case 'v':
+        	verbose = true;
+        	break;
         default:
             ++usage;
         }
@@ -381,7 +385,7 @@ int main(int argc, char **argv, char **) {
             outputp = &dumpoutput;
         }
 
-        rc = unittestInputOutput(0, method, inputp, outputp);
+        rc = unittestInputOutput(0, method, inputp, outputp, verbose);
         errors += rc;
 
         if (debug) {

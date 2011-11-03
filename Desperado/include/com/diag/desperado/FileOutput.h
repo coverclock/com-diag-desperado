@@ -143,10 +143,11 @@ public:
      *  an error occurs. If more space is available without blocking,
      *  up to the maximum number of requested octets may be output.
      *
-     *  N.B. Currently this code just does a single fwrite(3) of the minimum
-     *  number of bytes. Some UNIXen I've used have a non-portable mechanism to
-     *  determine the number of unused bytes available in the stdout buffer.
-     *  GNU (or more properly POSIX) does not AFAICT.
+     *  N.B. This implementation interprets "without blocking" to mean "without
+     *  doing a physical write(2) out of the standard I/O buffer". It uses a
+     *  non-portable and non-thread safe mechanism that directly accesses the
+     *  underlying libc FILE structure. The caller can circumvent this by using
+     *  the same value for minimum and maximum.
      *
      *  @param  buffer  points to the buffer.
      *

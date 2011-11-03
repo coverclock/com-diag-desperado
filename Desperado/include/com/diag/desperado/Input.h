@@ -206,13 +206,16 @@ CXXCAPI int unittestInputOutputStatic(void);
  *
  *  @param  outputp         points to the output functor to use.
  *  
+ *  @param	verbose			is true to run in verbose mode.
+ *
  *  @return the number of errors detected by the unit test.
  */
 CXXCAPI int unittestInputOutput(
     void* pVM,
     char mechanism,
     Input* inputp,
-    Output* outputp
+    Output* outputp,
+    bool verbose
 );
 #endif
 

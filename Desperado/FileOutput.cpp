@@ -172,7 +172,7 @@ ssize_t FileOutput::operator() (const char* s, size_t size) {
 ssize_t FileOutput::operator() (
     const void* buffer,
     size_t minimum,
-    size_t  /* maximum */
+    size_t maximum
 ) {
     ssize_t rc = EOF;
     if (0 == this->file) {
@@ -182,8 +182,14 @@ ssize_t FileOutput::operator() (
     } else if (0 == minimum) {
         rc = 0;
     } else {
-        size_t fc =
-            static_cast<ssize_t>(std::fwrite(buffer, 1, minimum, this->file));
+    	size_t effective = (this->file->_IO_write_ptr < this->file->_IO_write_end) ? this->file->_IO_write_end - this->file->_IO_write_ptr : 0;
+    	if (effective < minimum) {
+    		effective = minimum;
+    	}
+    	if (effective > maximum) {
+    		effective = maximum;
+    	}
+        size_t fc = static_cast<ssize_t>(std::fwrite(buffer, 1, effective, this->file));
         if (0 != fc) {
             rc = fc;
         } else if (std::feof(this->file)) {

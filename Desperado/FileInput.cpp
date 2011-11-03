@@ -165,7 +165,7 @@ ssize_t FileInput::operator() (char* buffer, size_t size) {
 ssize_t FileInput::operator() (
     void* buffer,
     size_t minimum,
-    size_t /* maximum */
+    size_t maximum
 ) {
     ssize_t rc = EOF;
     if (0 == this->file) {
@@ -175,7 +175,14 @@ ssize_t FileInput::operator() (
     } else if (0 == minimum) {
         rc = 0;
     } else {
-        size_t fc = std::fread(buffer, 1, minimum, this->file);
+    	size_t effective = (this->file->_IO_read_ptr < this->file->_IO_read_end) ? this->file->_IO_read_end - this->file->_IO_read_ptr : 0;
+    	if (effective < minimum) {
+    		effective = minimum;
+    	}
+    	if (effective > maximum) {
+    		effective = maximum;
+    	}
+        size_t fc = std::fread(buffer, 1, effective, this->file);
         if (0 != fc) {
             rc = fc;
         } else if (std::feof(this->file)) {
