@@ -186,13 +186,12 @@ ssize_t BufferInput::operator() (
     } else if (0 == maximum) {
         rc = 0;
     } else {
-        size_t have = this->size - this->offset;
-        if (have < maximum) {
-            maximum = have;
+        rc = this->size - this->offset;
+        if (static_cast<size_t>(rc) > maximum) {
+            rc = maximum;
         }
-        memcpy(buffer, &(this->string[this->offset]), maximum);
-        this->offset += maximum;
-        rc = maximum;
+        memcpy(buffer, &(this->string[this->offset]), static_cast<size_t>(rc));
+        this->offset += rc;
     }
     return rc;
 }

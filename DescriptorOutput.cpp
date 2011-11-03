@@ -57,13 +57,12 @@
  */
 
 
-#include <new>
-#include <unistd.h>
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/string.h"
+#include "com/diag/desperado/ready.h"
 #include "com/diag/desperado/DescriptorOutput.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"
@@ -213,15 +212,24 @@ ssize_t DescriptorOutput::operator() (
         errno = 0;
     } else if (0 == maximum) {
         rc = 0;
+    } else if ((0 == minimum) && (0 == (desperado_descriptor_ready(this->active) & DESPERADO_DESCRIPTOR_READY_WRITE))) {
+    	rc = 0;
     } else {
-        const char* here = reinterpret_cast<const char*>(buffer);
         ssize_t fc;
         rc = 0;
-        while (0 < maximum) {
-            fc = ::write(this->active, here, maximum);
+        size_t effective;
+        while (true) {
+        	if (rc >= static_cast<ssize_t>(maximum)) {
+        		break; // We already have the maximum.
+        	} else if (rc < static_cast<ssize_t>(minimum)) {
+        		effective = minimum - rc; // Not yet minimum.
+        	} else if (0 == (desperado_descriptor_ready(this->active) & DESPERADO_DESCRIPTOR_READY_WRITE)) {
+        		break; // Would block at next write.
+        	} else {
+        		effective = 1; // Can write at least one byte without blocking.
+        	}
+            fc = ::write(this->active, static_cast<const char*>(buffer) + rc, effective);
             if (0 < fc) {
-                here += fc;
-                maximum -= fc;
                 rc += fc;
             } else if (0 == fc) {
                 this->active = -1;
@@ -237,15 +245,6 @@ ssize_t DescriptorOutput::operator() (
                         errno = EIO;
                     }
                 }
-                break;
-            }
-            //
-            //  Putting this check at the bottom guarantees
-            //  at least one write is performed even if
-            //  minimum is zero; otherwise a write would never
-            //  be performed.
-            //
-            if (static_cast<ssize_t>(minimum) <= rc) {
                 break;
             }
         }

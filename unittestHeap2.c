@@ -58,7 +58,8 @@
 
 
 #include "com/diag/desperado/UnitTest.h"
-#include <stdlib.h>
+#include "com/diag/desperado/stdlib.h"
+#include "com/diag/desperado/stdlib.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/generics.h"

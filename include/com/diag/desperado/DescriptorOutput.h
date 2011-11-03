@@ -60,6 +60,13 @@
  */
 
 
+#include <unistd.h>
+#if !defined(STDOUT_FILENO)
+# define STDOUT_FILENO (1)
+#endif
+#if !defined(STDERR_FILENO)
+# define STDERR_FILENO (2)
+#endif
 #include "com/diag/desperado/Output.h"
 
 
@@ -82,7 +89,7 @@ public:
      *                  specified, the standard output file descriptor
      *                  is used.
      */
-    explicit DescriptorOutput(int fd = 1);
+    explicit DescriptorOutput(int fd = STDOUT_FILENO);
 
     /**
      *  Destructor. The file descriptor is not automatically closed upon
@@ -141,6 +148,21 @@ public:
      *  are output or EOF or an error occurs. If more space is available
      *  without blocking, up to the maximum number of requested octets
      *  may be output.
+     *
+     *  N.B. POSIX read(2) and write(2) semantics differ substantially,
+     *  and the practical behavior of write(2) differs depending on whether
+     *  the underlying file descriptor points to a tty, a file, or a socket.
+     *  We write the minimum atomically, and then try to write the remainder
+     *  only if the descriptor is ready for write without blocking. To prevent
+     *  blocking for outputs between minimum and maximum, we step through
+     *  and write single byte at a time once we're past the minimum. This
+     *  is really inefficient, and non-atomic, but it preserves the semantics.
+     *  The caller can address this by using the same value for minimum
+     *  and maximum, but the functor will block until the specified amount
+     *  is written atomically. Practically speaking, specifying a minimum of
+     *  zero is only useful for interactive or real-time devices like sockets
+     *  (and perhaps not even then), since devices like files and even ttys
+     *  will cause the write(2) to block.
      *
      *  @param  buffer  points to the buffer.
      *

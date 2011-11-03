@@ -144,6 +144,11 @@ public:
      *  Up to the maximum number may be input if it can be done without
      *  further blocking. The functor does not NUL terminate the buffer.
      *
+     *  N.B. Currently this code just does a single fread(3) of the minimum
+     *  number of bytes. Some UNIXen I've used have a non-portable mechanism to
+     *  determine the number of used bytes available in the stdin buffer.
+     *  GNU (or more properly POSIX) does not AFAICT.
+     *
      *  @param  buffer  points to the buffer.
      *
      *  @param  minimum is the minimum number of octets to input.
