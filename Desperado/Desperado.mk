@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005-2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2011 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -34,10 +34,6 @@
 #	Public License along with this library; if not, write to the
 #	Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #	Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
-#
-#	$Name:  $
-#
-#	$Id: Desperado.mk,v 1.44 2007/01/31 18:47:46 jsloan Exp $
 #
 ###############################################################################
 
@@ -691,6 +687,9 @@ dates:	dates.sh
 cpdate:	cpdate.sh
 	cp cpdate.sh cpdate
 	chmod 755 cpdate
+
+ready:	toolready.o $(ARCHIVE)
+	$(LD) -o ready toolready.o $(LDFLAGS)
 
 #
 #	ficlsh and other Ficl related stuff

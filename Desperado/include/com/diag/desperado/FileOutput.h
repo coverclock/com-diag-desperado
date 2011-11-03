@@ -143,6 +143,11 @@ public:
      *  an error occurs. If more space is available without blocking,
      *  up to the maximum number of requested octets may be output.
      *
+     *  N.B. Currently this code just does a single fwrite(3) of the minimum
+     *  number of bytes. Some UNIXen I've used have a non-portable mechanism to
+     *  determine the number of unused bytes available in the stdout buffer.
+     *  GNU (or more properly POSIX) does not AFAICT.
+     *
      *  @param  buffer  points to the buffer.
      *
      *  @param  minimum is the minimum number of octets to output.

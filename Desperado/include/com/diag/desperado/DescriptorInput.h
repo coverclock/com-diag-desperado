@@ -60,6 +60,10 @@
  */
 
 
+#include <unistd.h>
+#if !defined(STDIN_FILENO)
+# define STDIN_FILENO (0)
+#endif
 #include "com/diag/desperado/Input.h"
 #include "com/diag/desperado/Output.h"
 
@@ -83,7 +87,7 @@ public:
      *                  specified, the standard input file descriptor
      *                  is used.
      */
-    explicit DescriptorInput(int fd = 0);
+    explicit DescriptorInput(int fd = STDIN_FILENO);
 
     /**
      *  Destructor. The file descriptor is not automatically closed upon
@@ -141,6 +145,12 @@ public:
      *  the minimum number of octets are input unless EOF or error occurs.
      *  Up to the maximum number may be input if it can be done without
      *  further blocking. The functor does not NUL terminate the buffer.
+     *
+     *  N.B. Specifying a minimum of zero will return zero octets input if
+     *  the read(2) on the underlying file descriptor would block. Practically
+     *  speaking, this is only useful for interactive or real-time devices like
+     *  sockets or ttys, since devices like files will cause the read(2) to
+     *  block.
      *
      *  @param  buffer  points to the buffer.
      *

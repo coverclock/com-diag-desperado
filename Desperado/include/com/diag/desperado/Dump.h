@@ -212,6 +212,32 @@ public:
     );
 
     /**
+     *  Functor equivalent to calling bytes().
+     *
+     *  @param  data        points to the block of bytes. NULL (zero) is
+     *                      a valid pointer value.
+     *
+     *  @param  length      is the number of bytes in the block.
+     *
+     *  @param  virtualize  if true causes the dump to use the following
+     *                      parameter for the address to display instead
+     *                      of the actual data pointer.
+     *
+     *  @param  address     is the value to use as the display address.
+     *
+     *  @param  indent      specifies the level of indentation.
+     *
+     *  @return             the number of bytes dumped.
+     */
+    size_t operator() (
+        const void* data,
+        size_t length,
+        bool virtualize = false,
+        uintptr_t address = 0,
+        int indent = 0
+    );
+
+    /**
      *  Dumps all data in byte format from an input functor until end
      *  of file is reached.
      *
@@ -379,6 +405,12 @@ private:
 
 };
 
+//
+//	Implements a functor version of bytes().
+//
+inline size_t Dump::operator() (const void* data, size_t length, bool virtualize, uintptr_t address, int indent) {
+	return this->bytes(data, length, virtualize, address, indent);
+}
 
 //
 //  Returns true of the character ch is printable, false otherwise.

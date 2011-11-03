@@ -35,10 +35,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: DescriptorInput.cpp,v 1.6 2006/02/07 00:07:03 jsloan Exp $
-
 ******************************************************************************/
 
 
@@ -47,22 +43,15 @@
  *
  *  Implements the DescriptorInput class.
  *
- *  @see    DescriptorInput
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.6 $
- *
- *  @date   $Date: 2006/02/07 00:07:03 $
+ *  @see    DescriptorOutput
  */
 
 
-#include <new>
-#include <unistd.h>
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/string.h"
+#include "com/diag/desperado/ready.h"
 #include "com/diag/desperado/DescriptorInput.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"
@@ -193,15 +182,24 @@ ssize_t DescriptorInput::operator() (
         errno = 0;
     } else if (0 == maximum) {
         rc = 0;
+    } else if ((0 == minimum) && (0 == (desperado_descriptor_ready(this->active) & DESPERADO_DESCRIPTOR_READY_READ))) {
+    	rc = 0;
     } else {
-        char* here = reinterpret_cast<char*>(buffer);
         ssize_t fc;
         rc = 0;
-        while (0 < maximum) {
-            fc = ::read(this->active, here, maximum);
+        size_t effective;
+        while (true) {
+        	if (rc >= static_cast<ssize_t>(maximum)) {
+        		break; // We already have the maximum.
+        	} else if (rc == 0) {
+        		effective = maximum - rc; // Haven't done a read yet but minimum is non-zero or will not block.
+        	} else if (rc < static_cast<ssize_t>(minimum)) {
+        		effective = maximum - rc; // Not yet minimum but try for maximum anyway.
+        	} else {
+        		break; // At least the minimum but would block at next read.
+        	}
+            fc = ::read(this->active, static_cast<char*>(buffer) + rc, effective);
             if (0 < fc) {
-                here += fc;
-                maximum -= fc;
                 rc += fc;
             } else if (0 == fc) {
                 this->active = -1;
@@ -217,15 +215,6 @@ ssize_t DescriptorInput::operator() (
                         errno = EIO;
                     }
                 }
-                break;
-            }
-            //
-            //  Putting this check at the bottom guarantees
-            //  at least one read is performed even if
-            //  minimum is zero; otherwise a read would never
-            //  be performed.
-            //
-            if (static_cast<ssize_t>(minimum) <= rc) {
                 break;
             }
         }

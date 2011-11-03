@@ -3,7 +3,7 @@
 
 ###############################################################################
 #
-#   Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#   Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
 #   This file is part of the Digital Aggregates Desperado library.
 #   
 #   This library is free software; you can redistribute it and/or
@@ -36,10 +36,6 @@
 #   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #   Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 #
-#   $Name:  $
-#
-#   $Id: unittestInputOutput.sh,v 1.14 2006/08/04 20:42:46 jsloan Exp $
-#
 ###############################################################################
 
 TMPDIR="/var/tmp"
@@ -50,23 +46,23 @@ FILE=lesser.txt
 PGM="./unittestInputOutput"
 ERRORS=0
 
-test -d ${DIR} || mkdir ${DIR}
-
 echo "${CMD}: begin"
+
+mkdir -p ${ROOT}
 
 for OBJECT in D F N P S; do
     for METHOD in c l s f b; do
         for IO in s f x; do
 
-            INPUT="${ROOT}.txt"
-            OUTPUT="${ROOT}.${OBJECT}${METHOD}${IO}.txt"
-            ERROR="${ROOT}.${OBJECT}${METHOD}${IO}.log"
+            INPUT="${ROOT}/${FILE}"
+            OUTPUT="${ROOT}/${OBJECT}${METHOD}${IO}.txt"
+            ERROR="${ROOT}/${OBJECT}${METHOD}${IO}.log"
 
-            if [ "$IO" = "s" ]; then
+            if [ "${IO}" = "s" ]; then
                 OUT="1> ${OUTPUT}"
                 IN="< ${INPUT}"
                 cat ${FILE} > ${INPUT}
-            elif [ "$IO" = "f" ]; then
+            elif [ "${IO}" = "f" ]; then
                 OUT="-o ${OUTPUT}"
                 IN="${INPUT}"
                 cp ${FILE} ${INPUT}
@@ -83,20 +79,23 @@ for OBJECT in D F N P S; do
             if [ ${RC} -ne 0 ]; then
                 echo "${CMD}: ${PGM} ${OBJECT} ${METHOD} ${IO} ${RC}!"
             fi
-            ERRORS=`expr ${RC} + ${ERRORS}`
+            ERRORS=`expr ${ERRORS} + ${RC}`
 
             if [ "${OBJECT}" != "N" ]; then
                 ls -l ${INPUT} ${OUTPUT} >> ${ERROR} 2>&1
                 diff -q ${INPUT} ${OUTPUT} >> ${ERROR} 2>&1
                 RC=$?
-                if [ $RC -ne 0 ]; then
-                    echo "$CMD: diff ${OBJECT} ${METHOD} ${IO} ${RC}!"
+                if [ ${RC} -ne 0 ]; then
+                    echo "${CMD}: diff ${OBJECT} ${METHOD} ${IO} ${RC}!"
                 fi
-                ERRORS=`expr $RC + $ERRORS`
+                ERRORS=`expr ${ERRORS} + ${RC}`
             fi
         done
     done
 done
+
+echo grep 'errors=[^0]' ${ROOT}/*.log
+grep 'errors=[^0]' ${ROOT}/*.log
 
 echo "$CMD: end errors="$ERRORS
 
