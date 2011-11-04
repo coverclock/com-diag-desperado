@@ -186,9 +186,9 @@ ssize_t FileInput::operator() (
     ssize_t rc = EOF;
     if (0 == this->file) {
     	error = errno = EINVAL;
-    } else if (0 != std::feof(this->file)) {
+    } else if (std::feof(this->file)) {
         errno = 0;
-    } else if (0 != std::ferror(this->file)) {
+    } else if (std::ferror(this->file)) {
     	if (0 == errno) {
     		error = errno = EIO;
     	} else {
@@ -206,11 +206,11 @@ ssize_t FileInput::operator() (
 			size_t fc = std::fread(buffer, 1, minimum, this->file);
 			if (0 < fc) {
 				rc += fc; // Successful.
-			} else if (0 != std::feof(this->file)) {
+			} else if (std::feof(this->file)) {
 				rc = EOF;
 				errno = 0;
 				break; // End of file.
-			} else if (0 == std::ferror(this->file)) {
+			} else if (!std::ferror(this->file)) {
 				break; // Zero bytes but not End of File or Error.
 			} else if (0 == errno) {
 				rc = EOF;
