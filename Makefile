@@ -35,10 +35,6 @@
 #	Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #	Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 #
-#	$Name:  $
-#
-#	$Id: Makefile,v 1.108 2007/01/31 23:41:10 jsloan Exp $
-#
 ###############################################################################
 
 #
@@ -58,11 +54,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	zinc
-MAJOR		=	5
-MINOR		=	3
+RELEASE		=	ajax
+MAJOR		=	6
+MINOR		=	0
 BUILD		=	0
-PRERELEASE	=	ajax
+PRERELEASE	=	badger
 
 #
 # Indicate the platform and target you are using.
