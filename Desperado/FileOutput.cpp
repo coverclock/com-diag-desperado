@@ -47,7 +47,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/target.h"
