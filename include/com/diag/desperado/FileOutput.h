@@ -137,7 +137,11 @@ public:
      *  doing a physical write(2) out of the standard I/O buffer". It uses a
      *  non-portable and non-thread safe mechanism that directly accesses the
      *  underlying libc FILE structure. The caller can circumvent this by using
-     *  the same value for minimum and maximum.
+     *  the same value for minimum and maximum. In practice, specifying zero for
+     *  minimum isn't useful, at least not always: since the standard I/O
+     *  library performs lazy I/O (that is, not until it's really necessary),
+     *  once the buffer is full it will stay full until a non-zero minimum is
+     *  specified to force a write(2).
      *
      *  @param  buffer  points to the buffer.
      *
