@@ -216,6 +216,11 @@ private:
      */
     int active;
 
+    /**
+     * This saves the last error number.
+     */
+    int error;
+
 };
 
 
