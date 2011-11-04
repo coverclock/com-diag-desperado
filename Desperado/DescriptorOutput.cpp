@@ -77,7 +77,8 @@
 DescriptorOutput::DescriptorOutput(int fd) :
     Output(),
     descriptor(fd),
-    active(fd)
+    active(fd),
+    error(0)
 {
 }
 
@@ -106,7 +107,9 @@ int DescriptorOutput::operator() (int c) {
             this->active = -1;
             errno = 0;
         } else if (0 == errno) {
-            errno = EIO;
+        	error = errno = EIO;
+        } else {
+        	error = errno;
         }
     }
     return rc;
@@ -144,7 +147,9 @@ ssize_t DescriptorOutput::operator() (const char* format, va_list ap) {
                     if (0 == rc) {
                         rc = EOF;
                         if (0 == errno) {
-                            errno = EIO;
+                        	error = errno = EIO;
+                        } else {
+                        	error = errno;
                         }
                     }
                     break;
@@ -153,7 +158,7 @@ ssize_t DescriptorOutput::operator() (const char* format, va_list ap) {
         } else if (0 == fc) {
             rc = fc;
         } else if (0 == errno) {
-            errno = EIO;
+        	error= errno = EIO;
         }
     }
     return rc;
@@ -188,7 +193,9 @@ ssize_t DescriptorOutput::operator() (const char* s, size_t size) {
                 if (0 == rc) {
                     rc = EOF;
                     if (0 == errno) {
-                        errno = EIO;
+                    	error = errno = EIO;
+                    } else {
+                    	error = errno;
                     }
                 }
                 break;
@@ -212,7 +219,7 @@ ssize_t DescriptorOutput::operator() (
         errno = 0;
     } else if (0 == maximum) {
         rc = 0;
-    } else if ((0 == minimum) && (0 == (desperado_descriptor_ready(this->active) & DESPERADO_DESCRIPTOR_READY_WRITE))) {
+    } else if ((0 == minimum) && (0 == (::desperado_descriptor_ready(this->active) & DESPERADO_DESCRIPTOR_READY_WRITE))) {
     	rc = 0;
     } else {
         ssize_t fc;
@@ -223,7 +230,7 @@ ssize_t DescriptorOutput::operator() (
         		break; // We already have the maximum.
         	} else if (rc < static_cast<ssize_t>(minimum)) {
         		effective = minimum - rc; // Not yet minimum.
-        	} else if (0 == (desperado_descriptor_ready(this->active) & DESPERADO_DESCRIPTOR_READY_WRITE)) {
+        	} else if (0 == (::desperado_descriptor_ready(this->active) & DESPERADO_DESCRIPTOR_READY_WRITE)) {
         		break; // Would block at next write.
         	} else {
         		effective = 1; // Can write at least one byte without blocking.
@@ -242,7 +249,9 @@ ssize_t DescriptorOutput::operator() (
                 if (0 == rc) {
                     rc = EOF;
                     if (0 == errno) {
-                        errno = EIO;
+                    	error = errno = EIO;
+                    } else {
+                    	error = errno;
                     }
                 }
                 break;
@@ -275,9 +284,24 @@ void DescriptorOutput::show(int level, Output* display, int indent) const {
     this->Output::show(level, display, indent + 1);
     printf("%s descriptor=%d%s\n",
         sp, this->descriptor,
-        (STDOUT_FILENO == this->descriptor) ? "=STDOUT" :
-            (STDERR_FILENO == this->descriptor) ? "=STDERR" : "");
+        (STDOUT_FILENO == this->descriptor) ? "=STDOUT_FILENO" :
+        (STDERR_FILENO == this->descriptor) ? "=STDERR_FILENO" :
+        (STDIN_FILENO == this->descriptor) ? "=STDIN_FILENO" :
+        "");
     printf("%s active=%d\n", sp, this->active);
+    if (0 <= this->active) {
+    	int ready = ::desperado_descriptor_ready(this->active);
+        printf("%s ready=0x%02x%s%s%s%s\n",
+        	sp, ready,
+        	(0 != (ready & DESPERADO_DESCRIPTOR_READY_READ)) ? " READ": "",
+        	(0 != (ready & DESPERADO_DESCRIPTOR_READY_WRITE)) ? " WRITE": "",
+        	(0 != (ready & DESPERADO_DESCRIPTOR_READY_EXCEPTION)) ? " EXCEPTION": "",
+        	(0 != (ready & DESPERADO_DESCRIPTOR_READY_ERROR)) ? " ERROR": ""
+        );
+    }
+    if (0 < this->error) {
+        printf("%s error=%d=\"%s\"\n", sp, this->error, ::strerror(this->error));
+     }
 }
 
 

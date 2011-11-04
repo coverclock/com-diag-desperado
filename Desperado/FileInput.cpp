@@ -66,7 +66,8 @@
 //
 FileInput::FileInput(FILE* fp) :
     Input(),
-    file(fp)
+    file(fp),
+    error(0)
 {
 }
 
@@ -84,9 +85,15 @@ FileInput::~FileInput() {
 int FileInput::operator() () {
     int rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+    	error = errno = EINVAL;
     } else if (std::feof(this->file)) {
         errno = 0;
+    } else if (std::ferror(this->file)) {
+    	if (0 == errno) {
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
+    	}
     } else {
         int fc = std::fgetc(this->file);
         if (EOF != fc) {
@@ -94,7 +101,9 @@ int FileInput::operator() () {
         } else if (std::feof(this->file)) {
             errno = 0;
         } else if (0 == errno) {
-            errno = EIO;
+        	error = errno = EIO;
+        } else {
+        	error = errno;
         }
     }
     return rc;
@@ -108,9 +117,15 @@ int FileInput::operator() () {
 int FileInput::operator() (int ch) {
     int rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+    	error = errno = EINVAL;
     } else if (std::feof(this->file)) {
         errno = 0;
+    } else if (std::ferror(this->file)) {
+    	if (0 == errno) {
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
+    	}
     } else {
         int fc = ungetc(ch, this->file);
         if (EOF != fc) {
@@ -118,7 +133,9 @@ int FileInput::operator() (int ch) {
         } else if (std::feof(this->file)) {
             errno = 0;
         } else if (0 == errno) {
-            errno = EIO;
+        	error = errno = EIO;
+        } else {
+        	error = errno;
         }
     }
     return rc;
@@ -131,9 +148,15 @@ int FileInput::operator() (int ch) {
 ssize_t FileInput::operator() (char* buffer, size_t size) {
     ssize_t rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+    	error= errno = EINVAL;
     } else if (std::feof(this->file)) {
         errno = 0;
+    } else if (std::ferror(this->file)) {
+    	if (0 == errno) {
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
+    	}
     } else if (0 == size) {
         rc = 0;
     } else {
@@ -143,7 +166,9 @@ ssize_t FileInput::operator() (char* buffer, size_t size) {
         } else if (std::feof(this->file)) {
             errno = 0;
         } else if (0 == errno) {
-            errno = EIO;
+        	error = errno = EIO;
+        } else {
+        	error = errno;
         }
     }
     return rc;
@@ -160,12 +185,14 @@ ssize_t FileInput::operator() (
 ) {
     ssize_t rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+    	error = errno = EINVAL;
     } else if (0 != std::feof(this->file)) {
         errno = 0;
     } else if (0 != std::ferror(this->file)) {
     	if (0 == errno) {
-    		errno = EIO;
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
     	}
     } else if (0 == minimum) {
         rc = 0;
@@ -187,17 +214,18 @@ ssize_t FileInput::operator() (
 				break; // Zero bytes but not End of File or Error.
 			} else if (0 == errno) {
 				rc = EOF;
-				errno = EIO;
+				error = errno = EIO;
 				break; // Error without an error code.
 			} else {
 				rc = EOF;
+				error = errno;
 				break; // Error.
 			}
 			if (fc >= maximum) {
 				break; // Already have maximum.
 			}
 			maximum -= fc;
-			size_t effective = desperado_file_readable(this->file);
+			size_t effective = ::desperado_file_readable(this->file);
 			if (effective < maximum) {
 				maximum = effective;
 			}
@@ -229,12 +257,19 @@ void FileInput::show(int level, Output* display, int indent) const {
         this, sizeof(*this));
     this->Input::show(level, display, indent + 1);
     printf("%s file=%p%s\n", sp, this->file,
-            (stdin == this->file) ? "=stdin" : "");
-    if (this->file) {
+        (stdin == this->file) ? "=stdin" :
+        (stdout == this->file) ? "=stdout" :
+        (stderr == this->file) ? "=stderr" :
+        "");
+    if (0 != this->file) {
         printf("%s  fileno=%d\n", sp, fileno(this->file));
         printf("%s  feof=%d\n", sp, std::feof(this->file));
         printf("%s  ferror=%d\n", sp, std::ferror(this->file));
+        printf("%s  readable=%zu\n", sp, ::desperado_file_readable(this->file));
     }
+    if (0 < this->error) {
+        printf("%s error=%d=\"%s\"\n", sp, this->error, ::strerror(this->error));
+     }
 }
 
 

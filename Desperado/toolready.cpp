@@ -189,7 +189,7 @@ int main(int argc, char **argv, char **) {
 			ready = desperado_descriptor_ready(infd);
 			readable = desperado_file_readable(infp);
 			writeable = desperado_file_writeable(infp);
-			errorf("input: ready=%d%s%s%s%s readable=%zu writeable=%u\n",
+			errorf("input: ready=0x%x%s%s%s%s readable=%zu writeable=%u\n",
 				ready,
 				((ready & DESPERADO_DESCRIPTOR_READY_READ) != 0) ? " READ": "",
 				((ready & DESPERADO_DESCRIPTOR_READY_WRITE) != 0) ? " WRITE": "",
@@ -201,7 +201,7 @@ int main(int argc, char **argv, char **) {
 
     	inputted = input(buffer, (inputbytes < sizeof(buffer)) ? inputbytes : sizeof(buffer), sizeof(buffer));
     	if (debug) {
-    		errorf("input: bytes==%zd\n", inputted);
+    		errorf("input: bytes=%zd\n", inputted);
     	}
     	if (inputted < 0) {
     		std::exit(4);
@@ -214,7 +214,7 @@ int main(int argc, char **argv, char **) {
 			ready = desperado_descriptor_ready(outfd);
 			readable = desperado_file_readable(outfp);
 			writeable = desperado_file_writeable(outfp);
-			errorf("output: ready=%d%s%s%s%s readable=%zu writeable=%zu\n",
+			errorf("output: ready=0x%x%s%s%s%s readable=%zu writeable=%zu\n",
 				ready,
 				((ready & DESPERADO_DESCRIPTOR_READY_READ) != 0) ? " READ": "",
 				((ready & DESPERADO_DESCRIPTOR_READY_WRITE) != 0) ? " WRITE": "",

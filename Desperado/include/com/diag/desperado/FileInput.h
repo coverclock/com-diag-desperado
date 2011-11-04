@@ -189,6 +189,11 @@ private:
      */
     FILE* file;
 
+    /**
+     * This saves the last error number.
+     */
+    int error;
+
 };
 
 

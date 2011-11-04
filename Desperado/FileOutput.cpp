@@ -66,7 +66,8 @@
 //
 FileOutput::FileOutput(FILE* fp) :
     Output(),
-    file(fp)
+    file(fp),
+    error(0)
 {
 }
 
@@ -84,9 +85,15 @@ FileOutput::~FileOutput() {
 int FileOutput::operator() (int c) {
     int rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+        error= errno = EINVAL;
     } else if (std::feof(this->file)) {
         errno = 0;
+    } else if (std::ferror(this->file)) {
+    	if (0 == errno) {
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
+    	}
     } else {
         int fc = std::fputc(c, this->file);
         if (EOF != fc) {
@@ -94,7 +101,9 @@ int FileOutput::operator() (int c) {
         } else if (std::feof(this->file)) {
             errno = 0;
         } else if (0 == errno) {
-            errno = EIO;
+        	error = errno = EIO;
+        } else {
+        	error = errno;
         }
     }
     return rc;
@@ -107,9 +116,15 @@ int FileOutput::operator() (int c) {
 ssize_t FileOutput::operator() (const char* format, va_list ap) {
     ssize_t rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+    	error= errno = EINVAL;
     } else if (std::feof(this->file)) {
         errno = 0;
+    } else if (std::ferror(this->file)) {
+    	if (0 == errno) {
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
+    	}
     } else {
         int fc = std::vfprintf(this->file, format, ap);
         if (EOF != fc) {
@@ -117,7 +132,9 @@ ssize_t FileOutput::operator() (const char* format, va_list ap) {
         } else if (std::feof(this->file)) {
             errno = 0;
         } else if (0 == errno) {
-            errno = EIO;
+        	error = errno = EIO;
+        } else {
+        	error = errno;
         }
     }
     return rc;
@@ -130,9 +147,15 @@ ssize_t FileOutput::operator() (const char* format, va_list ap) {
 ssize_t FileOutput::operator() (const char* s, size_t size) {
     ssize_t rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+    	error= errno = EINVAL;
     } else if (std::feof(this->file)) {
         errno = 0;
+    } else if (std::ferror(this->file)) {
+    	if (0 == errno) {
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
+    	}
     } else if (0 == size) {
         rc = 0;
     } else {
@@ -149,7 +172,9 @@ ssize_t FileOutput::operator() (const char* s, size_t size) {
             } else if (std::feof(this->file)) {
                 errno = 0;
             } else if (0 == errno) {
-                errno = EIO;
+            	error = errno = EIO;
+            } else {
+            	error = errno;
             }
         }
     }
@@ -167,12 +192,14 @@ ssize_t FileOutput::operator() (
 ) {
     ssize_t rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
-    } else if (0 != std::feof(this->file)) {
+    	error = errno = EINVAL;
+    } else if (std::feof(this->file)) {
         errno = 0;
-    } else if (0 != std::ferror(this->file)) {
+    } else if (std::ferror(this->file)) {
     	if (0 == errno) {
-    		errno = EIO;
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
     	}
     } else if (0 == minimum) {
         rc = 0;
@@ -186,25 +213,26 @@ ssize_t FileOutput::operator() (
 			size_t fc = std::fwrite(buffer, 1, minimum, this->file);
 			if (0 < fc) {
 				rc += fc; // Successful.
-			} else if (0 != std::feof(this->file)) {
+			} else if (std::feof(this->file)) {
 				rc = EOF;
 				errno = 0;
 				break; // End of file.
-			} else if (0 == std::ferror(this->file)) {
+			} else if (!std::ferror(this->file)) {
 				break; // Zero bytes but not End of File or Error.
 			} else if (0 == errno) {
 				rc = EOF;
-				errno = EIO;
+				error = errno = EIO;
 				break; // Error without an error code.
 			} else {
 				rc = EOF;
+				error = errno;
 				break; // Error.
 			}
 			if (fc >= maximum) {
 				break; // Already have maximum.
 			}
 			maximum -= fc;
-			size_t effective = desperado_file_writeable(this->file);
+			size_t effective = ::desperado_file_writeable(this->file);
 			if (effective < maximum) {
 				maximum = effective;
 			}
@@ -229,16 +257,24 @@ ssize_t FileOutput::operator() (
 int FileOutput::operator() () {
     int rc = EOF;
     if (0 == this->file) {
-        errno = EINVAL;
+    	error= errno = EINVAL;
     } else if (std::feof(this->file)) {
         errno = 0;
+    } else if (std::ferror(this->file)) {
+    	if (0 == errno) {
+    		error = errno = EIO;
+    	} else {
+    		error = errno;
+    	}
     } else {
         rc = std::fflush(this->file);
         if (EOF == rc) {
             if (std::feof(this->file)) {
                 errno = 0;
             } else if (0 == errno) {
-                errno = EIO;
+            	error = errno = EIO;
+            } else {
+            	error = errno;
             }
         }
     }
@@ -260,12 +296,18 @@ void FileOutput::show(int level, Output* display, int indent) const {
     this->Output::show(level, display, indent + 1);
     printf("%s file=%p%s\n", sp, this->file,
         (stdout == this->file) ? "=stdout" :
-            (stderr == this->file) ? "=stderr" : "");
-    if (this->file) {
+        (stderr == this->file) ? "=stderr" :
+        (stdin == this->file) ? "=stdin" :
+        "");
+    if (0 != this->file) {
         printf("%s  fileno=%d\n", sp, fileno(this->file));
         printf("%s  feof=%d\n", sp, std::feof(this->file));
         printf("%s  ferror=%d\n", sp, std::ferror(this->file));
+        printf("%s  writeable=%zu\n", sp, ::desperado_file_writeable(this->file));
     }
+    if (0 < this->error) {
+        printf("%s error=%d=\"%s\"\n", sp, this->error, ::strerror(this->error));
+     }
 }
 
 

@@ -205,6 +205,11 @@ private:
      */
     int saved;
 
+    /**
+     * This saves the last error number.
+     */
+    int error;
+
 };
 
 
