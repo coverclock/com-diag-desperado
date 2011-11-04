@@ -52,6 +52,7 @@
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/string.h"
+#include "com/diag/desperado/ready.h"
 #include "com/diag/desperado/FileInput.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"
@@ -160,26 +161,56 @@ ssize_t FileInput::operator() (
     ssize_t rc = EOF;
     if (0 == this->file) {
         errno = EINVAL;
-    } else if (std::feof(this->file)) {
+    } else if (0 != std::feof(this->file)) {
         errno = 0;
+    } else if (0 != std::ferror(this->file)) {
+    	if (0 == errno) {
+    		errno = EIO;
+    	}
     } else if (0 == minimum) {
         rc = 0;
     } else {
-    	size_t effective = (this->file->_IO_read_ptr < this->file->_IO_read_end) ? this->file->_IO_read_end - this->file->_IO_read_ptr : 0;
-    	if (effective < minimum) {
-    		effective = minimum;
-    	}
-    	if (effective > maximum) {
-    		effective = maximum;
-    	}
-        size_t fc = std::fread(buffer, 1, effective, this->file);
-        if (0 != fc) {
-            rc = fc;
-        } else if (std::feof(this->file)) {
-            errno = 0;
-        } else if (0 == errno) {
-            errno = EIO;
-        }
+    	rc = 0;
+    	// We are always going to initially request the minimum, which we know
+    	// is not zero. But requesting the minimum may cause the state of the
+    	// standard I/O buffer to change, affecting the effective amount we can
+    	// further request up to the maximum.
+    	do {
+			size_t fc = std::fread(buffer, 1, minimum, this->file);
+			if (0 < fc) {
+				rc += fc; // Successful.
+			} else if (0 != std::feof(this->file)) {
+				rc = EOF;
+				errno = 0;
+				break; // End of file.
+			} else if (0 == std::ferror(this->file)) {
+				break; // Zero bytes but not End of File or Error.
+			} else if (0 == errno) {
+				rc = EOF;
+				errno = EIO;
+				break; // Error without an error code.
+			} else {
+				rc = EOF;
+				break; // Error.
+			}
+			if (fc >= maximum) {
+				break; // Already have maximum.
+			}
+			maximum -= fc;
+			size_t effective = desperado_file_readable(this->file);
+			if (effective < maximum) {
+				maximum = effective;
+			}
+			if (0 == maximum) {
+				break; // Nothing to request without blocking.
+			}
+			fc = std::fread(static_cast<char*>(buffer) + fc, 1, maximum, this->file);
+			if (0 < fc) {
+				rc += fc; // Successful.
+			} else {
+				break; // Some other condition but have minimum.
+			}
+    	} while (false);
     }
     return rc;
 }

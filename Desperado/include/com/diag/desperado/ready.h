@@ -47,12 +47,16 @@
  */
 
 
+#include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/cxxcapi.h"
+#include "com/diag/desperado/target.h"
+#include "com/diag/desperado/generics.h"
 
 
 #define DESPERADO_DESCRIPTOR_READY_READ			(1<<0)
 #define DESPERADO_DESCRIPTOR_READY_WRITE		(1<<1)
 #define DESPERADO_DESCRIPTOR_READY_EXCEPTION	(1<<2)
+#define DESPERADO_DESCRIPTOR_READY_ERROR		(1<<(widthof(int)-1))
 
 
 /**
@@ -60,9 +64,33 @@
  * write, or exception. (Exception is not well defined.) This function is non-
  * blocking. If the underlying system call fails, 0 is returned.
  * @param fd is the file descriptor.
- * @return 0 for not ready, masked with defined bits if ready.
+ * @return 0 for not ready, masked with defined bits if ready, <0 if error.
  */
 CXXCAPI int desperado_descriptor_ready(int fd);
+
+/**
+ * Returns the number of bytes readable from the standard I/O buffer for the
+ * specified FILE pointer.
+ * THIS FUNCTION IS NOT THREAD SAFE.
+ * It's not especially portable either.
+ * @param fp points to the FILE structure.
+ * @return the number of readable bytes.
+ */
+CXXCINLINE size_t desperado_file_readable(FILE * fp) {
+	return (fp != 0) ? ((fp->_IO_read_ptr < fp->_IO_read_end) ? fp->_IO_read_end - fp->_IO_read_ptr : 0) : 0;
+}
+
+/**
+ * Returns the number of bytes writeable from the standard I/O buffer for the
+ * specified FILE pointer.
+ * THIS FUNCTION IS NOT THREAD SAFE.
+ * It's not especially portable either.
+ * @param fp points to the FILE structure.
+ * @return the number of writeable bytes.
+ */
+CXXCINLINE size_t desperado_file_writeable(FILE * fp) {
+	return (fp != 0) ? ((fp->_IO_write_ptr < fp->_IO_write_end) ? fp->_IO_write_end - fp->_IO_write_ptr : 0) : 0;
+}
 
 
 #endif

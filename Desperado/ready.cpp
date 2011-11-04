@@ -85,6 +85,10 @@ CXXCAPI int desperado_descriptor_ready(int fd) {
 		if (FD_ISSET(fd, &exceptional)) {
 			result |= DESPERADO_DESCRIPTOR_READY_EXCEPTION;
 		}
+	} else if (0 > rc) {
+		result |= DESPERADO_DESCRIPTOR_READY_ERROR;
+	} else {
+		// Do nothing.
 	}
 
 	return result;
