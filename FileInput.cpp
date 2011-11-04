@@ -47,7 +47,6 @@
  */
 
 
-#include <new>
 #include <unistd.h>
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/target.h"
