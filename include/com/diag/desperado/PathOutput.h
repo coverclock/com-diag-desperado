@@ -121,6 +121,13 @@ public:
      */
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
+private:
+
+    /**
+     * This saves the last error number.
+     */
+    int error;
+
 };
 
 #include "com/diag/desperado/End.h"
