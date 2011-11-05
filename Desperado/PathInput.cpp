@@ -71,16 +71,18 @@
 #include "com/diag/desperado/Begin.h"
 
 
-static FILE* filepointer(const char* path, const char* mode) {
+static FILE* filepointer(const char* path, const char* mode, int* errorp) {
     FILE* fp;
 
     if (0 == path) {
         fp = 0;
+        errno = EINVAL;
     } else if (0 == std::strncmp(path, "-", PATH_MAX)) {
         fp = stdin;
     } else {
         fp = std::fopen(path, mode);
     }
+    *errorp = (0 == fp) ? errno : 0;
 
     return fp;
 }
@@ -90,12 +92,12 @@ static FILE* filepointer(const char* path, const char* mode) {
 //  Constructor.
 //
 PathInput::PathInput(const char* path, const char* mode) :
-    FileInput(::filepointer(path, mode))
+    FileInput(::filepointer(path, mode, &error))
 {
 #if defined(DESPERADO_HAS_EXCEPTIONS)
     if ((0 != path) && (0 == this->getFile())) {
-        Exception* e = new Exception(path, -1, __FILE__, __LINE__,
-            "PathInput::PathInput");
+        Exception* e = new Exception(path, -(this->error), __FILE__, __LINE__,
+        	__func__);
         throw *e;
     }
 #endif
@@ -125,6 +127,9 @@ void PathInput::show(int level, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
     this->FileInput::show(level, display, indent + 1);
+    if (0 < this->error) {
+        printf("%s error=%d=\"%s\"\n", sp, this->error, ::strerror(this->error));
+     }
 }
 
 
