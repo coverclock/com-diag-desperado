@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: assert.h,v 1.17 2006/01/30 20:35:27 jsloan Exp $
 
 ******************************************************************************/
 
@@ -55,11 +53,9 @@
  *  which vastly simplifies the use of this header file outside of the
  *  Desperado library implementation.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.17 $
  *
- *  @date   $Date: 2006/01/30 20:35:27 $
  */
 
 #include "com/diag/desperado/cxxcapi.h"

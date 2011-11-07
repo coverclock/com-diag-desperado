@@ -501,9 +501,7 @@ hours in the library" -- Westheimer's Discovery
 
 ----------------------------------------------------------------------
 
-$Name:  $
 
-$Id: README.h,v 1.44 2007/01/29 15:48:22 jsloan Exp $
 
 *******************************************************************************/
 
@@ -512,11 +510,9 @@ $Id: README.h,v 1.44 2007/01/29 15:48:22 jsloan Exp $
  *
  *  This is the README for this project.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.44 $
  *
- *  @date   $Date: 2007/01/29 15:48:22 $
  */
 
 #endif

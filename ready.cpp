@@ -42,6 +42,8 @@
  *  @file
  *
  *  Implements the Desperado select-based I/O ready indication.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

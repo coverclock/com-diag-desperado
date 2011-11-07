@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: Logger.cpp,v 1.7 2006/02/07 00:07:03 jsloan Exp $
 
 ******************************************************************************/
 
@@ -49,11 +47,9 @@
  *
  *  @see    Logger
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.7 $
  *
- *  @date   $Date: 2006/02/07 00:07:03 $
  */
 
 

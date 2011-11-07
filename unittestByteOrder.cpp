@@ -45,7 +45,7 @@
  *
  *  @see    ByteOrder
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

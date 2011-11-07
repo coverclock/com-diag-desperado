@@ -44,6 +44,8 @@
  *  Implements the FileOutput class.
  *
  *  @see    FileOutput
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

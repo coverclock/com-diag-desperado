@@ -37,7 +37,6 @@
 
     $Name:  $
 
-    $Id: Vintage.cpp,v 1.6 2006/02/07 00:07:03 jsloan Exp $
 
 ******************************************************************************/
 
@@ -49,16 +48,14 @@
  *
  *  @see    Vintage
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.6 $
  *
- *  @date   $Date: 2006/02/07 00:07:03 $
  */
 
 
 
-#include <new>
+#include "desperado_vintage.h"
 #include "com/diag/desperado/Vintage.h"
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/Print.h"
@@ -71,7 +68,7 @@ const char Vintage::product[] =     "$Product: Desperado $";
 
 const char Vintage::license[] =     "$License: Modified GNU Lesser Public License $";
 
-const char Vintage::copyright[] =   "$Copyright: Copyright 2008-2011 Digital Aggregates Corporation, Colorado, USA $";
+const char Vintage::copyright[] =   "$Copyright: Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA $";
 
 const char Vintage::contact[] =     "$Contact: coverclock@diag.com (Chip Overclock) $";
 
@@ -79,9 +76,9 @@ const char Vintage::url[] =         "$Url: http://www.diag.com $";
 
 const char Vintage::uri[] =         "$Uri: sip:600@sip.diag.dnsalias.com $";
 
-const char Vintage::date[] =        "$Date: 2008-08-20T16:44:33+00 $";
+const char Vintage::date[] =        "$Date: " DESPERADO_VINTAGE_DATE " $";
 
-const char Vintage::release[] =     "$Name: keystone $";
+const char Vintage::release[] =     "$Release: " DESPERADO_VINTAGE_RELEASE " $";
 
 const char Vintage::build[] =       "$Build: " __DATE__ " " __TIME__ " $";
 

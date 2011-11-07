@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: Java_com_diag_desperado_Platform.cpp,v 1.3 2006/09/11 21:38:39 jsloan Exp $
 
 ******************************************************************************/
 
@@ -51,11 +49,9 @@
  *
  *  @see    Platform
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.3 $
  *
- *  @date   $Date: 2006/09/11 21:38:39 $
  */
 
 

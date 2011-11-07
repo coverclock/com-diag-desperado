@@ -43,7 +43,7 @@
  *
  *  Implements the namespace unit test.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

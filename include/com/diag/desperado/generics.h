@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: generics.h,v 1.19 2006/09/06 16:27:34 jsloan Exp $
 
 ******************************************************************************/
 
@@ -82,11 +80,9 @@
  *
  *  This is the header file formerly known as of.h.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.19 $
  *
- *  @date   $Date: 2006/09/06 16:27:34 $
  */
 
 

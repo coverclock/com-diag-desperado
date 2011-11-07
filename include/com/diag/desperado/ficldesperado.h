@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: ficldesperado.h,v 1.2 2006/08/19 21:20:17 jsloan Exp $
 
 ******************************************************************************/
 
@@ -53,11 +51,9 @@
  *  the appropriate addresses into the pointer variables. If no dependencies
  *  are required, the defaults are used.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.2 $
  *
- *  @date   $Date: 2006/08/19 21:20:17 $
  */
 
 #if defined(__cplusplus)

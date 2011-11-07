@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: ficllocal.h,v 1.16 2006/01/09 00:24:48 jsloan Exp $
 
 ******************************************************************************/
 
@@ -55,11 +53,9 @@
  *  the Ficl interpreter itself. You may want or need to modify this
  *  to fit your own application.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.16 $
  *
- *  @date   $Date: 2006/01/09 00:24:48 $
  */
 
 

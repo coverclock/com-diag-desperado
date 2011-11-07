@@ -46,7 +46,7 @@
  *
  *  Brackets the beginning of the Desperado namespace.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 #ifdef _COM_DIAG_DESPERADO_END_H_

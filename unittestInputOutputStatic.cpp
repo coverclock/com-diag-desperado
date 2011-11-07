@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: unittestInputOutputStatic.cpp,v 1.4 2006/08/04 20:42:46 jsloan Exp $
 
 ******************************************************************************/
 
@@ -50,11 +48,9 @@
  *  @see    Input
  *  @see    Output
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.4 $
  *
- *  @date   $Date: 2006/08/04 20:42:46 $
  */
 
 

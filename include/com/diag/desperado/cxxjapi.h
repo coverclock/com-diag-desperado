@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: cxxjapi.h,v 1.2 2006/07/24 16:26:21 jsloan Exp $
 
 ******************************************************************************/
 
@@ -64,11 +62,9 @@
  *  @see    S. Liang, <I>The Java Native Interface Programmer's Guide
  *          and Specification</I>, Addison-Wesley, 1999
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.2 $
  *
- *  @date   $Date: 2006/07/24 16:26:21 $
  */
 
 

@@ -42,6 +42,8 @@
  *  @file
  *
  *  Implements the reads utility.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

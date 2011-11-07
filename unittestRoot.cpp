@@ -45,7 +45,7 @@
  *
  *  @see    Root
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

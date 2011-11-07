@@ -19,9 +19,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    $Name:  $
 
-    $Id: toollocaltime.cpp,v 1.3 2006/01/09 00:24:49 jsloan Exp $
 
 ******************************************************************************/
 
@@ -33,11 +31,9 @@
  *
  *  @see    localtime
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.3 $
  *
- *  @date   $Date: 2006/01/09 00:24:49 $
  */
 
 

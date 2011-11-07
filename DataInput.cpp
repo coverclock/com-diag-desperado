@@ -44,6 +44,8 @@
  *  Implements the DataInput class.
  *
  *  @see    DataInput
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

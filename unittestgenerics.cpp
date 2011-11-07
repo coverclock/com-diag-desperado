@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: unittestgenerics.cpp,v 1.7 2006/09/06 16:27:34 jsloan Exp $
 
 ******************************************************************************/
 
@@ -70,11 +68,9 @@
  *
  *  @see    generics.h
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.7 $
  *
- *  @date   $Date: 2006/09/06 16:27:34 $
  */
 
 

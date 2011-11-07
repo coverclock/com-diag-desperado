@@ -51,7 +51,7 @@
  *  May be included from either C or C++ translation units, although
  *  it has no effect for the former.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 #if defined(__cplusplus)

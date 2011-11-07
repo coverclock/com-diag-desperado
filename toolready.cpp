@@ -31,6 +31,8 @@
  *  @see    desperado_descriptor_ready
  *  @see    desperado_file_readable
  *  @see    desperado_file_writeable
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 
