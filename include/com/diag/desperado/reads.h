@@ -38,33 +38,20 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: reads.h,v 1.19 2006/01/09 00:24:49 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Implements the reads inline function. This can be included
+ *  Implements the reads function. This can be included
  *  from either a C or a C++ translation unit.
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.19 $
- *
- *  @date   $Date: 2006/01/09 00:24:49 $
  */
 
 
-#include <unistd.h>
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/cxxcapi.h"
-#include "com/diag/desperado/generics.h"
 
-#include "com/diag/desperado/Begin.h"
 
 /**
  *  Repeatedly performs a data read against the specified file
@@ -82,44 +69,17 @@
  *  @param  nomore      is the maximum number of bytes to read.
  *
  *  @return the requested number of bytes if all were successfully
- *          read, the actual number of bytes read (which may be zero)
+ *          read, the actual number of bytes read, which may be zero
  *          if EOF was encountered, or the negative of one more than
  *          the number of actual number of bytes read if an error
  *          occurred.
  */
-CXXCINLINE ssize_t reads(
+CXXCAPI ssize_t desperado_reads(
     int fd,
     void* pointer,
     size_t atleast,
     size_t nomore
-) {
-    char* here;
-    size_t remaining;
-    ssize_t total;
-    ssize_t rc;
-
-    here = staticcastto(char*, pointer);
-    remaining = nomore;
-    total = 0;
-
-    while (staticcastto(size_t, total) < atleast) {
-        rc = read(fd, here, remaining);
-        if (0 == rc) {
-            break;
-        }
-        if (0 > rc) {
-            total = -(total + 1);
-            break;
-        }
-        here += rc;
-        remaining -= rc;
-        total += rc;
-    }
-
-    return total;
-}
-
-#include "com/diag/desperado/End.h"
+);
 
 
 #endif

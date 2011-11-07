@@ -70,11 +70,11 @@
 #include "com/diag/desperado/Begin.h"
 
 //
-//  Constructor. The string has a specified size.
+//  Constructor. The buffer has a specified size.
 //
-BufferOutput::BufferOutput(char* sp, size_t sz) :
+BufferOutput::BufferOutput(void* sp, size_t sz) :
     Output(),
-    string(sp),
+    buffer(static_cast<char*>(sp)),
     size((0 != sp) ? sz : 0),
     offset(0)
 {
@@ -93,12 +93,12 @@ BufferOutput::~BufferOutput() {
 //
 int BufferOutput::operator() (int c) {
     int rc = EOF;
-    if (0 == this->string) {
+    if (0 == this->buffer) {
         errno = EINVAL;
     } else if (this->offset >= this->size) {
         errno = 0;
     } else {
-        this->string[this->offset++] = rc = c;
+        this->buffer[this->offset++] = rc = c;
     }
     return rc;
 }
@@ -109,7 +109,7 @@ int BufferOutput::operator() (int c) {
 //
 ssize_t BufferOutput::operator() (const char* format, va_list ap) {
     ssize_t rc = EOF;
-    if (0 == this->string) {
+    if (0 == this->buffer) {
         errno = EINVAL;
     } else if (this->offset >= this->size) {
         errno = 0;
@@ -129,11 +129,11 @@ ssize_t BufferOutput::operator() (const char* format, va_list ap) {
 
 
 //
-//  Output a string of no more than the specified size.
+//  Output a buffer of no more than the specified size.
 //
 ssize_t BufferOutput::operator() (const char* s, size_t size) {
     ssize_t rc = EOF;
-    if (0 == this->string) {
+    if (0 == this->buffer) {
         errno = EINVAL;
     } else if (this->offset >= this->size) {
         errno = 0;
@@ -144,7 +144,7 @@ ssize_t BufferOutput::operator() (const char* s, size_t size) {
             want = have;
         }
         if (0 < want) {
-            std::strncpy(&(this->string[this->offset]), s, want);
+            std::strncpy(&(this->buffer[this->offset]), s, want);
             this->offset += want;
         }
         rc = want;
@@ -154,15 +154,15 @@ ssize_t BufferOutput::operator() (const char* s, size_t size) {
 
 
 //
-//  Write binary data to the string from a buffer.
+//  Write binary data to the buffer from a buffer.
 //
 ssize_t BufferOutput::operator() (
-    const void* buffer,
+    const void* bp,
     size_t /* minimum */,
     size_t maximum
 ) {
     ssize_t rc = EOF;
-    if (0 == this->string) {
+    if (0 == this->buffer) {
         errno = EINVAL;
     } else if (this->offset >= this->size) {
         errno = 0;
@@ -173,7 +173,7 @@ ssize_t BufferOutput::operator() (
         if (static_cast<size_t>(rc) > maximum) {
             rc = maximum;
         }
-        memcpy(&(this->string[this->offset]), buffer, static_cast<size_t>(rc));
+        memcpy(&(this->buffer[this->offset]), bp, static_cast<size_t>(rc));
         this->offset += rc;
     }
     return rc;
@@ -200,7 +200,7 @@ void BufferOutput::show(int level, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
     this->Output::show(level, display, indent + 1);
-    printf("%s string=%p\n", sp, this->string);
+    printf("%s buffer=%p\n", sp, this->buffer);
     printf("%s size=%lu\n", sp, this->size);
     printf("%s offset=%lu\n", sp, this->offset);
 }

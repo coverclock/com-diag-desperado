@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -35,34 +35,23 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: BufferInput.cpp,v 1.6 2006/02/07 00:07:02 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Implements the BufferInput class.
+ *  Implements the DataInput class.
  *
- *  @see    BufferInput
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.6 $
- *
- *  @date   $Date: 2006/02/07 00:07:02 $
+ *  @see    DataInput
  */
 
 
-#include <new>
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/generics.h"
-#include "com/diag/desperado/BufferInput.h"
+#include "com/diag/desperado/DataInput.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"
 
@@ -71,25 +60,27 @@
 
 
 //
-//  Constructor. The string is assumed to be NUL terminated.
+//  Constructor. The data is assumed to be NUL terminated.
 //
-BufferInput::BufferInput(char* sp) :
+DataInput::DataInput(const char* sp) :
     Input(),
-    buffer(sp),
+    data(sp),
     size((0 != sp) ? std::strlen(sp) + 1 : 0),
-    offset(0)
+    offset(0),
+    saved(EOF)
 {
 }
 
 
 //
-//  Constructor. The buffer has a specified size.
+//  Constructor. The data has a specified size.
 //
-BufferInput::BufferInput(void* sp, size_t sz) :
+DataInput::DataInput(const void* sp, size_t sz) :
     Input(),
-    buffer(static_cast<char*>(sp)),
+    data(static_cast<const char*>(sp)),
     size((0 != sp) ? sz : 0),
-    offset(0)
+    offset(0),
+    saved(EOF)
 {
 }
 
@@ -97,23 +88,27 @@ BufferInput::BufferInput(void* sp, size_t sz) :
 //
 //  Destructor.
 //
-BufferInput::~BufferInput() {
+DataInput::~DataInput() {
 }
 
 
 //
-//  Return the next character in the buffer.
+//  Return the next character in the data.
 //
-int BufferInput::operator() () {
+int DataInput::operator() () {
     int rc = EOF;
-    if (0 == this->buffer) {
+    if (0 == this->data) {
         errno = EINVAL;
+    } else if (EOF != this->saved) {
+        rc = this->saved;
+        rc = intmaxof(uint8_t) & rc;
+        this->saved = EOF;
     } else if (this->offset >= this->size) {
         errno = 0;
-    } else if ('\0' == this->buffer[this->offset]) {
+    } else if ('\0' == this->data[this->offset]) {
         errno = 0;
     } else {
-        rc = this->buffer[this->offset++];
+        rc = this->data[this->offset++];
         rc = rc & unsignedintmaxof(char);
     }
     return rc;
@@ -121,34 +116,34 @@ int BufferInput::operator() () {
 
 
 //
-//  Push a character back into the buffer up to the limit of the
-//  beginning of the buffer.
+//  Push a character back into the data up to the limit of the
+//  beginning of the data.
 //
-int BufferInput::operator() (int ch) {
+int DataInput::operator() (int ch) {
     int rc = EOF;
-    if (0 == this->buffer) {
+    if (0 == this->data) {
         errno = EINVAL;
     } else if (0 == this->offset) {
         errno = 0;
     } else {
-        rc = this->buffer[--this->offset] = ch;
+        rc = this->saved = ch;
     }
     return rc;
 }
 
 
 //
-//  Read a line from the buffer.
+//  Read a line from the data.
 //
-ssize_t BufferInput::operator() (char* bp, size_t length) {
+ssize_t DataInput::operator() (char* bp, size_t length) {
     ssize_t rc = EOF;
-    if (0 == this->buffer) {
+    if (0 == this->data) {
         errno = EINVAL;
     } else if (0 == length) {
         rc = 0;
     } else if (this->offset >= this->size) {
         errno = 0;
-    } else if ('\0' == this->buffer[this->offset]) {
+    } else if ('\0' == this->data[this->offset]) {
         errno = 0;
     } else if (1 == length) {
     	*bp = '\0';
@@ -156,18 +151,29 @@ ssize_t BufferInput::operator() (char* bp, size_t length) {
     } else {
         char ch;
         rc = 0;
-        while (1 < length) {
-            ch = this->buffer[this->offset];
-            if ('\0' == ch) {
-                break;
+    	if (EOF != this->saved) {
+    		ch = this->saved;
+            this->saved = EOF;
+            if ('\0' != ch) {
+            	bp[rc++] = ch;
+            	--length;
             }
-            ++this->offset;
-            bp[rc++] = ch;
-            --length;
-            if ('\n' == ch) {
-                break;
+            if (('\n' == ch) || ('\0' == ch)) {
+            	length = 1;
             }
-        }
+    	}
+		while (1 < length) {
+			ch = this->data[this->offset];
+			if ('\0' == ch) {
+				break;
+			}
+			++this->offset;
+			bp[rc++] = ch;
+			--length;
+			if ('\n' == ch) {
+				break;
+			}
+		}
         bp[rc++] = '\0';
     }
     return rc;
@@ -175,27 +181,38 @@ ssize_t BufferInput::operator() (char* bp, size_t length) {
 
 
 //
-//  Read binary data from the buffer.
+//  Read binary data from the data.
 //
-ssize_t BufferInput::operator() (
+ssize_t DataInput::operator() (
     void* bp,
     size_t /* minimum */,
     size_t maximum
 ) {
     ssize_t rc = EOF;
-    if (0 == this->buffer) {
+    if (0 == this->data) {
         errno = EINVAL;
     } else if (this->offset >= this->size) {
         errno = 0;
     } else if (0 == maximum) {
         rc = 0;
     } else {
-    	rc = this->size - this->offset;
-        if (rc > maximum) {
-        	rc = maximum;
+    	rc = 0;
+    	char* sp = static_cast<char*>(bp);
+    	if (EOF != this->saved) {
+    		*(sp++) = this->saved;
+    		this->saved = EOF;
+    		--maximum;
+    		++rc;
+    	}
+    	size_t effective = this->size - this->offset;
+        if (effective > maximum) {
+            effective = maximum;
         }
-        memcpy(bp, &(this->buffer[this->offset]), rc);
-        this->offset += rc;
+        if (effective > 0) {
+        	memcpy(sp, &(this->data[this->offset]), effective);
+        	this->offset += effective;
+        	rc += effective;
+        }
     }
     return rc;
 }
@@ -204,7 +221,7 @@ ssize_t BufferInput::operator() (
 //
 //  Show this object on the output object.
 //
-void BufferInput::show(int level, Output* display, int indent) const {
+void DataInput::show(int level, Output* display, int indent) const {
     Platform& pl = Platform::instance();
     Print printf(display);
     const char* sp = printf.output().indentation(indent);
@@ -213,9 +230,12 @@ void BufferInput::show(int level, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
     this->Input::show(level, display, indent + 1);
-    printf("%s buffer=%p\n", sp, this->buffer);
+    printf("%s data=%p\n", sp, this->data);
     printf("%s size=%lu\n", sp, this->size);
     printf("%s offset=%lu\n", sp, this->offset);
+    printf("%s saved=0x%08x%s\n",
+        sp, this->saved,
+        (EOF == this->saved) ? "=EOF" : "");
 }
 
 
