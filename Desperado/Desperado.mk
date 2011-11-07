@@ -96,10 +96,15 @@ JAVAHGEN	=	com_diag_desperado_Platform.h
 JAVACGEN	=
 JAVACXXGEN	=
 
-TXTGEN		=	$(FICLTXTGEN) $(JAVATXTGEN)
-CGEN		=	$(FICLCGEN) $(JAVACGEN)
-CXXGEN		=	$(FICLCXXGEN) $(JAVACXXGEN)
-HGEN		=	$(FICLHGEN) $(JAVAHGEN)
+DESPTXTGEN	=
+DESPHGEN	=	desperado_vintage.h
+DESPCGEN	=
+DESPCXXGEN	=
+
+TXTGEN		=	$(FICLTXTGEN) $(JAVATXTGEN) $(DESPTXTGEN)
+CGEN		=	$(FICLCGEN) $(JAVACGEN) $(DESPCGEN)
+CXXGEN		=	$(FICLCXXGEN) $(JAVACXXGEN) $(DESPCXXGEN)
+HGEN		=	$(FICLHGEN) $(JAVAHGEN) $(DESPHGEN)
 GENERATED	=	$(CGEN) $(CXXGEN) $(HGEN) $(TXTGEN)
 
 #
@@ -220,11 +225,13 @@ depend dependencies:
 #	Build
 #
 
-Vintage.cpp:	$(filter-out Vintage.cpp,$(NONSYMBOLS))
-	touch Vintage.cpp
-
 vintage:
-	touch Vintage.cpp
+	echo "#define DESPERADO_VINTAGE_RELEASE \"$(RELEASE)-$(MAJOR).$(MINOR).$(BUILD)\"" > desperado_vintage.h
+	echo "#define DESPERADO_VINTAGE_DATE \"`date +%Y%m%dT%H%M%S.%N%:z`\"" >> desperado_vintage.h
+
+desperado_vintage.h:	$(filter-out Vintage.cpp,$(NONSYMBOLS))
+	echo "#define DESPERADO_VINTAGE_RELEASE \"$(RELEASE)-$(MAJOR).$(MINOR).$(BUILD)\"" > desperado_vintage.h
+	echo "#define DESPERADO_VINTAGE_DATE \"`date +%Y%m%dT%H%M%S.%N%:z`\"" >> desperado_vintage.h
 
 ifdef DYNAMIC
 library:	static dynamic

@@ -42,6 +42,8 @@
  *  @file
  *
  *  Implements the Primes class.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 #include "com/diag/desperado/Primes.h"

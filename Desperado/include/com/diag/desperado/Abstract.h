@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: Abstract.h,v 1.28 2006/08/11 03:37:03 jsloan Exp $
 
 ******************************************************************************/
 
@@ -52,11 +50,9 @@
  *
  *  @see    Abstract
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.28 $
  *
- *  @date   $Date: 2006/08/11 03:37:03 $
  */
 
 

@@ -42,6 +42,8 @@
  *  @file
  *
  *  Implements the writes utility.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

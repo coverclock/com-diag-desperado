@@ -43,9 +43,11 @@
 /**
  *  @file
  *
- *  Defines the Desperado stdlib functions.
+ *  Defines the stdlib functions.
  * 
  *  This can be included from either a C or a C++ translation unit.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 #if defined(__cplusplus)

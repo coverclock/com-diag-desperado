@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: types.h,v 1.5 2006/01/09 00:24:49 jsloan Exp $
 
 ******************************************************************************/
 
@@ -52,11 +50,9 @@
  *
  *  This header file can included from both C++ and C translation units.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.5 $
  *
- *  @date   $Date: 2006/01/09 00:24:49 $
  */
 
 

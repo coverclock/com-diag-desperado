@@ -47,7 +47,7 @@
  *  Defines the magic UNIT TEST preprocessor symbol for the
  *  Desperado unit test code.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

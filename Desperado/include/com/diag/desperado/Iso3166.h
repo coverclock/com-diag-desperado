@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: Iso3166.h,v 1.20 2006/02/07 00:07:03 jsloan Exp $
 
 ******************************************************************************/
 
@@ -52,11 +50,9 @@
  *
  *  @see    Iso3166
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.20 $
  *
- *  @date   $Date: 2006/02/07 00:07:03 $
  */
 
 

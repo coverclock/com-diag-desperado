@@ -44,6 +44,8 @@
  *  Implements the FileInput class.
  *
  *  @see    FileInput
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

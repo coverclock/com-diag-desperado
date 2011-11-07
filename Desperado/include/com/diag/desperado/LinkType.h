@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: LinkType.h,v 1.7 2007/01/10 23:00:16 jsloan Exp $
 
 ******************************************************************************/
 
@@ -52,11 +50,9 @@
  *
  *  @see    LinkType
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.7 $
  *
- *  @date   $Date: 2007/01/10 23:00:16 $
  */
 
 

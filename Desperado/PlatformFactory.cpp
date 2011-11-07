@@ -44,6 +44,8 @@
  *  Implements the platform factory.
  *
  *  @see    Platform
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

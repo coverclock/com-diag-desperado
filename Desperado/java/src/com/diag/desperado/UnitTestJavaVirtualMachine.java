@@ -27,6 +27,8 @@ package com.diag.desperado;
 
 /**
  *  This class is part of the Desperado JavaVirtualMachine unit test.
+ *
+ * @author Chip Overclock (coverclock@diag.com)
  */
 public class UnitTestJavaVirtualMachine  {
 

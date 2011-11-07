@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: maincxxjapi.cpp,v 1.1 2006/07/24 16:28:29 jsloan Exp $
 
 ******************************************************************************/
 
@@ -47,11 +45,9 @@
  *
  *  Implements the cxxjapi unit test main program.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.1 $
  *
- *  @date   $Date: 2006/07/24 16:28:29 $
  */
 
 

@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: errno.h,v 1.15 2006/09/06 16:27:34 jsloan Exp $
 
 ******************************************************************************/
 
@@ -51,11 +49,9 @@
  *  Provides a place for applications to extend the errno range
  *  by adding new error numbers.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.15 $
  *
- *  @date   $Date: 2006/09/06 16:27:34 $
  */
 
 

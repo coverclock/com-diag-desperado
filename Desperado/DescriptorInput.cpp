@@ -44,6 +44,8 @@
  *  Implements the DescriptorInput class.
  *
  *  @see    DescriptorInput
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

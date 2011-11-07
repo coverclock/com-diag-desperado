@@ -19,9 +19,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    $Name:  $
 
-    $Id: toolcoreable.cpp,v 1.1 2006/12/09 22:57:19 jsloan Exp $
 
 ******************************************************************************/
 
@@ -33,11 +31,9 @@
  *
  *  @see    coreable
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.1 $
  *
- *  @date   $Date: 2006/12/09 22:57:19 $
  */
 
 #include "com/diag/desperado/stdio.h"

@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: java.h,v 1.6 2006/09/16 16:39:55 jsloan Exp $
 
 ******************************************************************************/
 
@@ -69,11 +67,9 @@
  *  @see    IEEE, <I>IEEE Standard for Binary Floating-Point Arithmetic</I>,
  *          Std. 754-1985, IEEE, 1985
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.6 $
  *
- *  @date   $Date: 2006/09/16 16:39:55 $
  */
 
 

@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: uint32_Number.cpp,v 1.4 2006/01/16 22:46:54 jsloan Exp $
 
 ******************************************************************************/
 
@@ -49,11 +47,9 @@
  *
  *  @see    Number
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.4 $
  *
- *  @date   $Date: 2006/01/16 22:46:54 $
  */
 
 

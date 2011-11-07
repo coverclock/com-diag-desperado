@@ -19,9 +19,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    $Name:  $
 
-    $Id: tooldump.cpp,v 1.6 2006/09/04 13:50:00 jsloan Exp $
 
 ******************************************************************************/
 
@@ -33,11 +31,9 @@
  *
  *  @see    dump
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.6 $
  *
- *  @date   $Date: 2006/09/04 13:50:00 $
  */
 
 

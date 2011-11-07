@@ -44,6 +44,8 @@
  *  Implements the InputOutput unit test.
  *
  *  @see    InputOutput
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

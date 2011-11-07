@@ -42,6 +42,8 @@
  *  @file
  *
  *  Implements the Desperado Volatile C-callable functions.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

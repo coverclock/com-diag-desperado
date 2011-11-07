@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: ficlsh.h,v 1.3 2006/01/17 00:25:31 jsloan Exp $
 
 ******************************************************************************/
 
@@ -50,11 +48,9 @@
  *
  *  Declares the ficlsh functions.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.3 $
  *
- *  @date   $Date: 2006/01/17 00:25:31 $
  */
 
 

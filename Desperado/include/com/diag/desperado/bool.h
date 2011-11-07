@@ -48,6 +48,8 @@
  *  built-in C++ bool type. It is in a seperate header file because
  *  it is such a common thing to do, it is likely to conflict with many
  *  other source code bases.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 #if !defined(__cplusplus)

@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: crc32_Crc.cpp,v 1.2 2006/01/16 03:50:48 jsloan Exp $
 
 ******************************************************************************/
 
@@ -50,11 +48,9 @@
  *
  *  @see    Crc
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.2 $
  *
- *  @date   $Date: 2006/01/16 03:50:48 $
  */
 
 

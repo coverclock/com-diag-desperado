@@ -35,9 +35,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: Throttle.cpp,v 1.8 2007/01/31 18:47:47 jsloan Exp $
 
 ******************************************************************************/
 
@@ -49,11 +47,9 @@
  *
  *  @see    Throttle
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.8 $
  *
- *  @date   $Date: 2007/01/31 18:47:47 $
  */
 
 

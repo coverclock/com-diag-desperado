@@ -17,16 +17,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
-    $Name:  $
-
-    $Id: Platform.java,v 1.1 2006/09/11 21:38:41 jsloan Exp $
-
 ******************************************************************************/
 
 package com.diag.desperado;
 
 /**
  * This class uses JNI to extend the Desperado Platform into the Java world.
+ *
+ * @author Chip Overclock (coverclock@diag.com)
  */
 public class Platform {
 

@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: cxxcapi.h,v 1.9 2006/07/24 16:01:46 jsloan Exp $
 
 ******************************************************************************/
 
@@ -63,11 +61,9 @@
  *
  *  @see    M. Cline, "C++ FAQ Lite", 2001-08-15, 29.8
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.9 $
  *
- *  @date   $Date: 2006/07/24 16:01:46 $
  */
 
 

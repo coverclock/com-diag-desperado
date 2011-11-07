@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: stdio.h,v 1.2 2006/01/09 00:24:49 jsloan Exp $
 
 ******************************************************************************/
 

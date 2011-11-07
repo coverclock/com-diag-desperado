@@ -19,9 +19,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    $Name:  $
 
-    $Id: ficlsh.cpp,v 1.2 2006/01/17 00:25:31 jsloan Exp $
 
 ******************************************************************************/
 
@@ -33,11 +31,9 @@
  *
  *  @see    FiclConsole
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.2 $
  *
- *  @date   $Date: 2006/01/17 00:25:31 $
  */
 
 

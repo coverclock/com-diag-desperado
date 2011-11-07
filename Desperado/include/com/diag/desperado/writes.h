@@ -44,8 +44,10 @@
 /**
  *  @file
  *
- *  Implements the writes function. This can be included
+ *  Declares the writes function. This can be included
  *  from either a C or a C++ translation unit.
+ *
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

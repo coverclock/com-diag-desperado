@@ -75,7 +75,7 @@
  *
  *  This can be included from either a C or a C++ translation unit.
  * 
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  */
 
 

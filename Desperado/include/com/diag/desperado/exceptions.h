@@ -38,9 +38,7 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
 
-    $Id: exceptions.h,v 1.2 2006/05/01 19:20:36 jsloan Exp $
 
 ******************************************************************************/
 
@@ -51,11 +49,9 @@
  *  Defines some macros useful for globally enabling or disabling the
  *  use of C++ exceptions.
  *
- *  @author $Author: jsloan $
+ *  @author Chip Overclock (coverclock@diag.com)
  *
- *  @version    $Revision: 1.2 $
  *
- *  @date   $Date: 2006/05/01 19:20:36 $
  */
 
 
