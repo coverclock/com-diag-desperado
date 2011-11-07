@@ -160,9 +160,6 @@ private:
 #endif
 
 
-#include "com/diag/desperado/Desperado.h"
-
-
 /**
  *  Formats a variadic argument list and writes the result
  *  to its output object.
@@ -176,7 +173,7 @@ private:
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI size_t print_f(Output* o, const char* format, ...);
+CXXCAPI size_t print_f(CXXCTYPE(Output)* o, const char* format, ...);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)

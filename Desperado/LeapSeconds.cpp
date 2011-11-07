@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/types.h"
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/LeapSeconds.h"
@@ -75,7 +74,9 @@
 //  or removed, and that there will be a strong preference to
 //  do so on the last day of either December or June.
 //
-static const CommonEra commoneras[] = {
+//	See http://maia.usno.navy.mil/ser7/tai-utc.dat .
+//
+static const CommonEra COMMONERAS[] = {
     CommonEra(1972,  6, 30, 23, 59, 60),
     CommonEra(1972, 12, 31, 23, 59, 60),
     CommonEra(1973, 12, 31, 23, 59, 60),
@@ -118,7 +119,7 @@ static const CommonEra commoneras[] = {
 //  admits the possibility that leap seconds could be removed
 //  in the future should the Earth's rotation speed up.
 //
-static const int leapseconds[] = {
+static const int LEAPSECONDS[] = {
     0,
     1,
     2,
@@ -158,31 +159,31 @@ static const int leapseconds[] = {
 //  seconds for each occurrence plus the cumulative number
 //  of leap seconds prior to that occurrence.
 //
-static const seconds_t utcseconds[] = {
-    ::commoneras[0].toAtomicSeconds() + ::leapseconds[0],
-    ::commoneras[1].toAtomicSeconds() + ::leapseconds[1],
-    ::commoneras[2].toAtomicSeconds() + ::leapseconds[2],
-    ::commoneras[3].toAtomicSeconds() + ::leapseconds[3],
-    ::commoneras[4].toAtomicSeconds() + ::leapseconds[4],
-    ::commoneras[5].toAtomicSeconds() + ::leapseconds[5],
-    ::commoneras[6].toAtomicSeconds() + ::leapseconds[6],
-    ::commoneras[7].toAtomicSeconds() + ::leapseconds[7],
-    ::commoneras[8].toAtomicSeconds() + ::leapseconds[8],
-    ::commoneras[9].toAtomicSeconds() + ::leapseconds[9],
-    ::commoneras[10].toAtomicSeconds() + ::leapseconds[10],
-    ::commoneras[11].toAtomicSeconds() + ::leapseconds[11],
-    ::commoneras[12].toAtomicSeconds() + ::leapseconds[12],
-    ::commoneras[13].toAtomicSeconds() + ::leapseconds[13],
-    ::commoneras[14].toAtomicSeconds() + ::leapseconds[14],
-    ::commoneras[15].toAtomicSeconds() + ::leapseconds[15],
-    ::commoneras[16].toAtomicSeconds() + ::leapseconds[16], 
-    ::commoneras[17].toAtomicSeconds() + ::leapseconds[17],
-    ::commoneras[18].toAtomicSeconds() + ::leapseconds[18],
-    ::commoneras[19].toAtomicSeconds() + ::leapseconds[19],
-    ::commoneras[20].toAtomicSeconds() + ::leapseconds[20],
-    ::commoneras[21].toAtomicSeconds() + ::leapseconds[21],
-    ::commoneras[22].toAtomicSeconds() + ::leapseconds[22],
-    ::commoneras[23].toAtomicSeconds() + ::leapseconds[23]
+static const seconds_t UTCSECONDS[] = {
+    COMMONERAS[0].toAtomicSeconds() + LEAPSECONDS[0],
+    COMMONERAS[1].toAtomicSeconds() + LEAPSECONDS[1],
+    COMMONERAS[2].toAtomicSeconds() + LEAPSECONDS[2],
+    COMMONERAS[3].toAtomicSeconds() + LEAPSECONDS[3],
+    COMMONERAS[4].toAtomicSeconds() + LEAPSECONDS[4],
+    COMMONERAS[5].toAtomicSeconds() + LEAPSECONDS[5],
+    COMMONERAS[6].toAtomicSeconds() + LEAPSECONDS[6],
+    COMMONERAS[7].toAtomicSeconds() + LEAPSECONDS[7],
+    COMMONERAS[8].toAtomicSeconds() + LEAPSECONDS[8],
+    COMMONERAS[9].toAtomicSeconds() + LEAPSECONDS[9],
+    COMMONERAS[10].toAtomicSeconds() + LEAPSECONDS[10],
+    COMMONERAS[11].toAtomicSeconds() + LEAPSECONDS[11],
+    COMMONERAS[12].toAtomicSeconds() + LEAPSECONDS[12],
+    COMMONERAS[13].toAtomicSeconds() + LEAPSECONDS[13],
+    COMMONERAS[14].toAtomicSeconds() + LEAPSECONDS[14],
+    COMMONERAS[15].toAtomicSeconds() + LEAPSECONDS[15],
+    COMMONERAS[16].toAtomicSeconds() + LEAPSECONDS[16],
+    COMMONERAS[17].toAtomicSeconds() + LEAPSECONDS[17],
+    COMMONERAS[18].toAtomicSeconds() + LEAPSECONDS[18],
+    COMMONERAS[19].toAtomicSeconds() + LEAPSECONDS[19],
+    COMMONERAS[20].toAtomicSeconds() + LEAPSECONDS[20],
+    COMMONERAS[21].toAtomicSeconds() + LEAPSECONDS[21],
+    COMMONERAS[22].toAtomicSeconds() + LEAPSECONDS[22],
+    COMMONERAS[23].toAtomicSeconds() + LEAPSECONDS[23]
     //
     //  When another leap second occurs, insert a new entry
     //  here using the new values from the previous two tables.
@@ -200,10 +201,10 @@ static const seconds_t utcseconds[] = {
 //  which have a file system; many do not.
 //
 LeapSeconds::LeapSeconds() :
-    count(countof(::commoneras)),
-    commoneras(::commoneras),
-    leapseconds(::leapseconds),
-    utcseconds(::utcseconds)
+    count(countof(COMMONERAS)),
+    commoneras(COMMONERAS),
+    leapseconds(LEAPSECONDS),
+    utcseconds(UTCSECONDS)
 {
 }
 

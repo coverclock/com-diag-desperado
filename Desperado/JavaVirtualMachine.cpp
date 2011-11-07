@@ -60,8 +60,7 @@
 #if defined(DESPERADO_HAS_JAVA)
 
 
-#include <new>
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include "com/diag/desperado/JavaVirtualMachine.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"

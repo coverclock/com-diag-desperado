@@ -316,9 +316,7 @@ unittest:	$(TEST)
 clean:
 	-rm -f $(TEMPORARIES) $(OBJECTS) $(STRIPPED) $(REPOS) $(DOCUMENTS) $(BINARIES) $(WINBINARIES) $(ARCHIVE) $(SHAREDOBJS)
 
-mrproper:	pristine
-
-pristine:	clean adjuncts-clean
+mrproper pristine clobber:	clean adjuncts-clean
 	-(cd doc/latex; $(MAKE) -e clean)
 	-rm -f doc/latex/*.eps doc/latex/*.pdf doc/latex/*.tex
 	-rm -f doc/html/*.gif doc/html/*.ttf

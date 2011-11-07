@@ -58,7 +58,7 @@
 #include <pthread.h>
 #include "com/diag/desperado/barrier.h"
 #include "com/diag/desperado/Platform.h"
-
+#include "com/diag/desperado/Desperado.h"
 
 //
 //  Implement a memory barrier. Yes, we really are creating a mutex

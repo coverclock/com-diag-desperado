@@ -62,7 +62,6 @@
 #endif
 
 
-#include <new>
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/debug.h"
 #include "com/diag/desperado/types.h"
@@ -77,9 +76,6 @@
 
 
 #include "com/diag/desperado/Begin.h"
-
-
-static bool debug = false;
 
 
 //
@@ -160,12 +156,15 @@ static const uint32_t s_per_month[2][Constant::months_per_year] = {
 };
 
 
+static bool d_bug = false;
+
+
 //
 //  Turn debugging on and off.
 //
 bool CommonEra::debug(bool now) {
-    bool was = ::debug;
-    ::debug = now;
+    bool was = d_bug;
+    d_bug = now;
     return was;
 }
 
@@ -221,7 +220,7 @@ size_t CommonEra::toString(String string, size_t size) const {
 //
 void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: fromAtomicSeconds(%llu,%lu)\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: fromAtomicSeconds(%llu,%lu)\n",
         __FILE__, __LINE__, ad, nd));
 
     //  Nanoseconds.
@@ -233,18 +232,18 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     this->setNanosecond(na);
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu nanoseconds=%lu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu nanoseconds=%lu\n",
         __FILE__, __LINE__, ad, this->getNanosecond()));
 
     //  Year.
 
     uint64_t ye = 1;
 
-    uint64_t quadricenturies = ad / ::s_per_quadricentury;
-    ad -= quadricenturies * ::s_per_quadricentury;
-    ye += quadricenturies * ::y_per_quadricentury;
+    uint64_t quadricenturies = ad /s_per_quadricentury;
+    ad -= quadricenturies * s_per_quadricentury;
+    ye += quadricenturies * y_per_quadricentury;
 
-    DEBUG_PRINTF_IF(::debug,
+    DEBUG_PRINTF_IF(d_bug,
         ("%s[%d]: ad=%llu quadricenturies=%llu year=%llu\n",
         __FILE__, __LINE__, ad, quadricenturies, ye));
 
@@ -252,27 +251,27 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
     //  have one too few days compared to a quadricentury, since
     //  a quadricentury includes an additional leap day.
 
-    uint32_t centuries = ad / ::s_per_century;
+    uint32_t centuries = ad /s_per_century;
     if (3 < centuries) {
         centuries = 3;
     }
-    ad -= centuries * ::s_per_century;
-    ye += centuries * ::y_per_century;
+    ad -= centuries * s_per_century;
+    ye += centuries * y_per_century;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu centuries=%lu year=%llu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu centuries=%lu year=%llu\n",
         __FILE__, __LINE__, ad, centuries, ye));
 
     //  You can have at most twenty-three quadriyears; twenty-four
     //  quadriyears will not have a consistent number of days.
 
-    uint32_t quadriyears = ad / ::s_per_quadriyear;
+    uint32_t quadriyears = ad / s_per_quadriyear;
     if (23 < quadriyears) {
         quadriyears = 23;
     }
-    ad -= quadriyears * ::s_per_quadriyear;
-    ye += quadriyears * ::y_per_quadriyear;
+    ad -= quadriyears * s_per_quadriyear;
+    ye += quadriyears * y_per_quadriyear;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu quadriyears=%lu year=%llu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu quadriyears=%lu year=%llu\n",
         __FILE__, __LINE__, ad, quadriyears, ye));
 
     uint32_t sc;
@@ -280,7 +279,7 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     do {
         ly = this->getDate().isLeapYear(ye);
-        sc = ::s_per_year[ly];
+        sc = s_per_year[ly];
         if (sc > ad) {
             break;
         }
@@ -290,7 +289,7 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     this->setYear(ye);
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu year=%llu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu year=%llu\n",
         __FILE__, __LINE__, ad, this->getYear()));
 
     //  Month.
@@ -299,7 +298,7 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     ly = this->getDate().isLeapYear(ye);
     do {
-        sc = ::s_per_month[ly][mo - 1];
+        sc = s_per_month[ly][mo - 1];
         if (sc > ad) {
             break;
         }
@@ -309,7 +308,7 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     this->setMonth(mo);
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu month=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu month=%u\n",
         __FILE__, __LINE__, ad, this->getMonth()));
 
     //  Day.
@@ -321,7 +320,7 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     this->setDay(da);
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu day=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu day=%u\n",
         __FILE__, __LINE__, ad, this->getDay()));
 
     //  Hour.
@@ -333,7 +332,7 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     this->setHour(ho);
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu hour=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu hour=%u\n",
         __FILE__, __LINE__, ad, this->getHour()));
 
     //  Minute.
@@ -345,14 +344,14 @@ void CommonEra::fromAtomicSeconds(uint64_t ad, uint32_t nd) {
 
     this->setMinute(mi);
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu minute=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu minute=%u\n",
         __FILE__, __LINE__, ad, this->getMinute()));
 
     //  Second.
 
     this->setSecond(ad);
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu second=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu second=%u\n",
         __FILE__, __LINE__, ad, this->getSecond()));
 }
 
@@ -388,7 +387,7 @@ seconds_t CommonEra::toAtomicSeconds(uint32_t& nd) const {
     const uint8_t se = this->getSecond();
     uint32_t na = this->getNanosecond();
 
-    DEBUG_PRINTF_IF(::debug,
+    DEBUG_PRINTF_IF(d_bug,
         ("%s[%d]: toAtomicSeconds(): %llu-%02u-%02uT%02u:%02u:%02u.%09u\n",
         __FILE__, __LINE__,
         ye, mo, da,
@@ -403,26 +402,26 @@ seconds_t CommonEra::toAtomicSeconds(uint32_t& nd) const {
     // Convert from one-based Common Era year to zero-based elapsed years.
     uint64_t years = ye - 1;
 
-    uint64_t quadricenturies = years / ::y_per_quadricentury;
-    ad += quadricenturies * ::s_per_quadricentury;
-    years -= quadricenturies * ::y_per_quadricentury;
+    uint64_t quadricenturies = years / y_per_quadricentury;
+    ad += quadricenturies * s_per_quadricentury;
+    years -= quadricenturies * y_per_quadricentury;
 
-    DEBUG_PRINTF_IF(::debug,
+    DEBUG_PRINTF_IF(d_bug,
            ("%s[%d]: ad=%llu quadricenturies=%llu year=%llu\n",
         __FILE__, __LINE__, ad, quadricenturies, ye - years));
 
-    uint32_t centuries = years / ::y_per_century;
-    ad += centuries * ::s_per_century;
-    years -= centuries * ::y_per_century;
+    uint32_t centuries = years / y_per_century;
+    ad += centuries * s_per_century;
+    years -= centuries * y_per_century;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu centuries=%lu year=%llu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu centuries=%lu year=%llu\n",
         __FILE__, __LINE__, ad, centuries, ye - years));
 
-    uint32_t quadriyears = years / ::y_per_quadriyear;
-    ad += quadriyears * ::s_per_quadriyear;
-    years -= quadriyears * ::y_per_quadriyear;
+    uint32_t quadriyears = years / y_per_quadriyear;
+    ad += quadriyears * s_per_quadriyear;
+    years -= quadriyears * y_per_quadriyear;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu quadriyears=%lu year=%llu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu quadriyears=%lu year=%llu\n",
         __FILE__, __LINE__, ad, quadriyears, ye - years));
 
     bool ly;
@@ -430,12 +429,12 @@ seconds_t CommonEra::toAtomicSeconds(uint32_t& nd) const {
     uint64_t yr = ye - years;
     while (yr < ye) {
         ly = this->getDate().isLeapYear(yr);
-        ad += ::s_per_year[ly];
+        ad += s_per_year[ly];
         ++yr;
         --years;
     }
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu year=%llu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu year=%llu\n",
         __FILE__, __LINE__, ad, ye - years));
 
     //  Months.
@@ -443,11 +442,11 @@ seconds_t CommonEra::toAtomicSeconds(uint32_t& nd) const {
     uint8_t mh = 1;
     ly = this->getDate().isLeapYear(ye);
     while (mh < mo) {
-        ad += ::s_per_month[ly][mh - 1];
+        ad += s_per_month[ly][mh - 1];
         ++mh;
     }
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu month=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu month=%u\n",
         __FILE__, __LINE__, ad, mh));
 
     //  Days.
@@ -456,35 +455,35 @@ seconds_t CommonEra::toAtomicSeconds(uint32_t& nd) const {
         ad += (da - 1) * Constant::s_per_d;
     }
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu day=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu day=%u\n",
         __FILE__, __LINE__, ad, da));
 
     //  Hours.
 
     ad += ho * Constant::s_per_h;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu hour=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu hour=%u\n",
         __FILE__, __LINE__, ad, ho));
 
     //  Minutes.
 
     ad += mi * Constant::s_per_min;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu minute=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu minute=%u\n",
         __FILE__, __LINE__, ad, mi));
 
     //  Seconds.
 
     ad += se;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu second=%u\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu second=%u\n",
         __FILE__, __LINE__, ad, se));
 
     //  Nanoseconds.
 
     nd = na;
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: ad=%llu nanoseconds=%lu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: ad=%llu nanoseconds=%lu\n",
         __FILE__, __LINE__, ad, na));
 
     return ad;
@@ -533,7 +532,7 @@ seconds_t CommonEra::toSeconds() const {
 //
 void CommonEra::fromTicks(ticks_t tk) {
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: fromTicks(%llu)\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: fromTicks(%llu)\n",
         __FILE__, __LINE__, tk));
 
     Platform& pl = Platform::instance();
@@ -558,7 +557,7 @@ void CommonEra::fromTicks(ticks_t tk) {
         this->fromAtomicSeconds(es, en);
     }
 
-    DEBUG_PRINTF_IF(::debug, ("%s[%d]: es=%llu en=%lu\n",
+    DEBUG_PRINTF_IF(d_bug, ("%s[%d]: es=%llu en=%lu\n",
         __FILE__, __LINE__, es, en));
 }
 

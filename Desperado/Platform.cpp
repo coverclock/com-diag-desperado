@@ -57,8 +57,7 @@
  */
 
 
-#include <new>
-#include <cstdarg>
+#include "com/diag/desperado/stdarg.h"
 #include "com/diag/desperado/littleendian.h"
 #include "com/diag/desperado/lowtohigh.h"
 #include "com/diag/desperado/Platform.h"
@@ -71,7 +70,7 @@
 #include "com/diag/desperado/cxxcapi.h"
 
 
-extern Platform& platform_factory(void);
+extern CXXCTYPE(Platform)& platform_factory(void);
 
 
 #include "com/diag/desperado/Begin.h"
@@ -88,13 +87,13 @@ static Vintage vintage;
 //
 //  This is the default Daylight Saving Time rule.
 //
-static DstNever dstnever;
+static DstNever dstneverrule;
 
 
 //
 //  This is the default Leap Seconds rule.
 //
-static LeapSeconds leapseconds;
+static LeapSeconds leapsecondsrule;
 
 
 //
@@ -139,10 +138,10 @@ Platform& Platform::instance() {
 //
 Platform::Platform() :
     leapseconds(false),
-    lsrule(&::leapseconds),
+    lsrule(&leapsecondsrule),
     epoch(),
     offset(0L),
-    dstrule(&::dstnever)
+    dstrule(&dstneverrule)
 {
 }
 

@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/DstUs2007.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"
@@ -65,7 +64,7 @@
 
 #include "com/diag/desperado/Begin.h"
 
-static const DstGeneric::Event begins = {
+static const DstGeneric::Event BEGINS = {
     Date::SECOND,
     Date::SUNDAY,
     Date::MARCH,
@@ -73,7 +72,7 @@ static const DstGeneric::Event begins = {
 };
 
 
-static const DstGeneric::Event ends = {
+static const DstGeneric::Event ENDS = {
     Date::FIRST,
     Date::SUNDAY,
     Date::NOVEMBER,
@@ -85,7 +84,7 @@ static const DstGeneric::Event ends = {
 //  Constructor.
 //
 DstUs2007::DstUs2007() :
-    DstGeneric(::begins, ::ends)
+    DstGeneric(BEGINS, ENDS)
 {
 }
 

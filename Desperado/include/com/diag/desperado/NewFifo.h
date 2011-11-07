@@ -60,7 +60,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/Fifo.h"
 #include "com/diag/desperado/exceptions.h"
 

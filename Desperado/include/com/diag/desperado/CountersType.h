@@ -62,7 +62,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/Counters.h"
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/Output.h"

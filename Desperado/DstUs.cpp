@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/DstUs.h"
 #include "com/diag/desperado/DstNever.h"
 #include "com/diag/desperado/DstUs1966.h"
@@ -117,14 +116,14 @@ void DstUs::show(int level, Output* display, int indent) const {
         sp, pl.component(__FILE__, component, sizeof(component)),
         this, sizeof(*this));
     this->DaylightSavingTime::show(level, display, indent + 1);
-    printf("%s ::dstnever:\n", sp);
-    ::dstnever.show(level, display, indent + 2);
-    printf("%s ::dstus1966:\n", sp);
-    ::dstus1966.show(level, display, indent + 2);
-    printf("%s ::dstus1986:\n", sp);
-    ::dstus1986.show(level, display, indent + 2);
-    printf("%s ::dstus2007:\n", sp);
-    ::dstus2007.show(level, display, indent + 2);
+    printf("%s dstnever:\n", sp);
+    dstnever.show(level, display, indent + 2);
+    printf("%s dstus1966:\n", sp);
+    dstus1966.show(level, display, indent + 2);
+    printf("%s dstus1986:\n", sp);
+    dstus1986.show(level, display, indent + 2);
+    printf("%s dstus2007:\n", sp);
+    dstus2007.show(level, display, indent + 2);
 }
 
 

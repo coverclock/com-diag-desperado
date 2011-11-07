@@ -49,8 +49,7 @@
  */
 
 
-#include <new>
-#include <cstdarg>
+#include "com/diag/desperado/stdarg.h"
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/generics.h"

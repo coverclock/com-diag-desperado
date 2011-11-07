@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/LocalTime.h"
@@ -91,7 +90,7 @@ LocalTime::LocalTime() :
 //
 LocalTime::LocalTime(int32_t ot) :
     DateTime(),
-    rule(&::dstnever),
+    rule(&dstnever),
     dst(false)
 {
     TimeZone zone;

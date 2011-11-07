@@ -60,7 +60,6 @@
 #if defined(DESPERADO_PLATFORM_IS_Diminuto)
 
 
-#include <new>
 #include "com/diag/desperado/Diminuto.h"
 
 

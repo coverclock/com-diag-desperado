@@ -169,9 +169,9 @@ CXXCAPI int dump(ficlVm* pVM, int data, int length);
  *  @return the exit status of the Ficl shell.
  */
 CXXCAPI int ficlsh(
-    Input& input = Platform::instance().input(),
-    Output& output = Platform::instance().output(),
-    Output& error = Platform::instance().error()
+    CXXCTYPE(Input)& input = *platform_input(),
+    CXXCTYPE(Output)& output = *platform_output(),
+    CXXCTYPE(Output)& error = *platform_error()
 );
 
 

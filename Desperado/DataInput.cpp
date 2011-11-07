@@ -204,8 +204,8 @@ ssize_t DataInput::operator() (
     		--maximum;
     		++rc;
     	}
-    	size_t effective = this->size - this->offset;
-        if (effective > maximum) {
+    	ssize_t effective = this->size - this->offset;
+        if (effective > static_cast<ssize_t>(maximum)) {
             effective = maximum;
         }
         if (effective > 0) {

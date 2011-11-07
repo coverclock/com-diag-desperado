@@ -60,8 +60,7 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
-#include <new>
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include "com/diag/desperado/ficldesperado.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/cxxcapi.h"

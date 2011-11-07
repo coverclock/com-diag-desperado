@@ -57,8 +57,7 @@
  */
 
 
-#include <new>
-#include <cstdarg>
+#include "com/diag/desperado/stdarg.h"
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/generics.h"
@@ -237,12 +236,35 @@ ssize_t Logger::emit(const char* buffer, size_t size) {
 
 
 //
+//  Note that the PRINT level is checked for explicitly, enforcing the
+//	fact that the PRINT level is logged unconditionally regardless of
+//	the value returned by the isEnabled() method.
+//
+#define DESPERADO_LOGGER_BODY(_LEVEL_) \
+	do { \
+		if ((this->PRINT == _LEVEL_) || this->isEnabled(_LEVEL_)) { \
+			char buffer[Output::minimum_buffer_size + 1]; \
+			this->format(buffer, sizeof(buffer), _LEVEL_, format, ap); \
+			rc = this->emit(buffer, sizeof(buffer)); \
+		} \
+	} while (false)
+
+
+ssize_t Logger::vlog(Level level, const char* format, va_list ap) {
+    ssize_t rc = 0;
+    DESPERADO_LOGGER_BODY(level);
+    return rc;
+}
+
+
+//
 //  Log the variadic argument list.
 //
 ssize_t Logger::log(Level level, const char* format ...) {
+	ssize_t rc = 0;
     va_list ap;
     va_start(ap, format);
-    ssize_t rc = this->log(level, format, ap);
+    DESPERADO_LOGGER_BODY(level);
     va_end(ap);
     return rc;
 }
@@ -250,9 +272,10 @@ ssize_t Logger::log(Level level, const char* format ...) {
 
 #define DESPERADO_LOGGER(_FUNCTION_, _LEVEL_) \
 ssize_t Logger::_FUNCTION_(const char* format ...) { \
+    ssize_t rc = 0; \
     va_list ap; \
     va_start(ap, format); \
-    ssize_t rc = this->log(this->_LEVEL_, format, ap); \
+    DESPERADO_LOGGER_BODY(_LEVEL_); \
     va_end(ap); \
     return rc; \
 }

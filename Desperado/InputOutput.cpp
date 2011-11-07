@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/InputOutput.h"
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/Print.h"
@@ -66,8 +65,8 @@
 #include "com/diag/desperado/Begin.h"
 
 
-static Input input;
-static Output output;
+static Input INPUT;
+static Output OUTPUT;
 
 
 //
@@ -88,7 +87,7 @@ InputOutput::~InputOutput() {
 //  Return a reference to the input interface.
 //
 Input& InputOutput::input() {
-    return ::input;
+    return INPUT;
 }
 
 
@@ -96,7 +95,7 @@ Input& InputOutput::input() {
 //  Return a reference to the output interface.
 //
 Output& InputOutput::output() {
-    return ::output;
+    return OUTPUT;
 }
 
 

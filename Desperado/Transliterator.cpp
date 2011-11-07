@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/Transliterator.h"
 #include "com/diag/desperado/BufferInput.h"
 #include "com/diag/desperado/Print.h"

@@ -47,18 +47,19 @@
  */
 
 
+#include "com/diag/desperado/cxxcapi.h"
 #if defined(DESPERADO_PLATFORM_IS_Linux)
 #include "com/diag/desperado/Linux.h"
-typedef Linux OperatingSystem;
+typedef CXXCTYPE(Linux) OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Cygwin)
 #include "com/diag/desperado/Cygwin.h"
-typedef Cygwin OperatingSystem;
+typedef CXXCTYPE(Cygwin) OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Diminuto)
 #include "com/diag/desperado/Diminuto.h"
-typedef Diminuto OperatingSystem;
+typedef CXXCTYPE(Diminuto) OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Arroyo)
 #include "com/diag/desperado/Arroyo.h"
-typedef Arroyo OperatingSystem;
+typedef CXXCTYPE(Arroyo) OperatingSystem;
 #else
 #error DESPERADO_PLATFORM_IS_* not defined!
 #endif
@@ -69,6 +70,6 @@ typedef Arroyo OperatingSystem;
  *
  *  @return a reference to the newly created Platform object.
  */
-Platform& platform_factory() {
+CXXCTYPE(Platform)& platform_factory() {
     return *(new OperatingSystem);
 }

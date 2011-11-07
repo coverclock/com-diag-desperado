@@ -58,7 +58,6 @@
 
 
 
-#include <new>
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/Gcra.h"
 #include "com/diag/desperado/Constant.h"

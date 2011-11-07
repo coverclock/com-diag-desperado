@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/TimeZone.h"
 #include "com/diag/desperado/Platform.h"
@@ -79,7 +78,7 @@ struct Zone {
         (#_SYMBOL_) \
     }
 
-static const Zone milspec[] = {
+static const Zone MILSPEC[] = {
     MILITARY(YANKEE),
     MILITARY(XRAY),
     MILITARY(WHISKY),
@@ -122,9 +121,9 @@ const char* TimeZone::milspec(int32_t ot) const {
     int32_t offset = this->normalize(ot);
     static const Zone otherwise = { 0, "JULIET" };
     const Zone* found = &otherwise;
-    for (size_t ii = 0; ii < countof(::milspec); ++ii) {
-        if (::milspec[ii].seconds == offset) {
-            found = &(::milspec[ii]);
+    for (size_t ii = 0; ii < countof(MILSPEC); ++ii) {
+        if (MILSPEC[ii].seconds == offset) {
+            found = &(MILSPEC[ii]);
             break;
         }
     }
@@ -138,7 +137,7 @@ const char* TimeZone::milspec(int32_t ot) const {
         (#_SYMBOL_), \
     }
 
-static const Zone civilian[] = {
+static const Zone CIVILIAN[] = {
     CIVILIAN(MIT),
     CIVILIAN(HST),
     CIVILIAN(AST),
@@ -176,9 +175,9 @@ const char* TimeZone::civilian(int32_t ot) const {
     int32_t offset = this->normalize(ot);
     static const Zone otherwise = { 0, "LCT" };
     const Zone* found = &otherwise;
-    for (size_t ii = 0; ii < countof(::civilian); ++ii) {
-        if (::civilian[ii].seconds == offset) {
-            found = &(::civilian[ii]);
+    for (size_t ii = 0; ii < countof(CIVILIAN); ++ii) {
+        if (CIVILIAN[ii].seconds == offset) {
+            found = &(CIVILIAN[ii]);
             break;
         }
     }

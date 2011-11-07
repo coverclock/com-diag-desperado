@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/Iso3166.h"
 #include "com/diag/desperado/Print.h"

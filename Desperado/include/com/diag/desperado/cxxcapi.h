@@ -169,6 +169,29 @@
 #define CXXCINLINE static inline
 
 
+#if defined(__cplusplus)
+/**
+ *  @def CXXCTYPE
+ *
+ *  This symbol is used with type references in header files included in
+ *  both C and C++ translation units to define the type as to whether it
+ *  has a namespace prefix. C++ symbols will, C symbols will not. Pronounced
+ *  "sexy-type".
+ */
+# define CXXCTYPE(_TYPE_) ::com::diag::desperado::_TYPE_
+#else
+/**
+ *  @def CXXCTYPE
+ *
+ *  This symbol is used with type references in header files included in
+ *  both C and C++ translation units to define the type as to whether it
+ *  has a namespace prefix. C++ symbols will, C symbols will not. Pronounced
+ *  "sexy-type".
+ */
+# define CXXCTYPE(_TYPE_) _TYPE_
+#endif
+
+
 #if defined(DESPERADO_HAS_UNITTESTS)
 /**
  *  Run the cxxcapi unit test.
