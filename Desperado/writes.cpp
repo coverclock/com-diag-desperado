@@ -1,13 +1,10 @@
-#ifndef _COM_DIAG_DESPERADO_WRITES_H_
-#define _COM_DIAG_DESPERADO_WRITES_H_
-
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
-    
+
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -44,42 +41,42 @@
 /**
  *  @file
  *
- *  Implements the writes function. This can be included
- *  from either a C or a C++ translation unit.
+ *  Implements the writes utility.
  */
 
 
-#include "com/diag/desperado/target.h"
-#include "com/diag/desperado/cxxcapi.h"
+#include <unistd.h>
+#include "com/diag/desperado/writes.h"
 
 
-/**
- *  Repeatedly performs a data write against the specified file
- *  descriptor until the specified number of bytes have been written
- *  or until EOF or an error occurs.
- *
- *  @see    reads
- *
- *  @param  fd          refers to the file descriptor.
- *
- *  @param  pointer     points to the data buffer.
- *
- *  @param  atleast     is the minimum number of bytes to write.
- *
- *  @param  nomore      is the maximum number of bytes to write.
- *
- *  @return the requested number of bytes if all were successfully
- *          written, the actual number of bytes written, which may be zero
- *          if EOF was encountered, or the negative of one more than
- *          the number of actual number of bytes written if an error
- *          occurred.
- */
 CXXCAPI ssize_t desperado_writes(
     int fd,
     const void* pointer,
     size_t atleast,
     size_t nomore
-);
+) {
+    const char* here;
+    size_t remaining;
+    ssize_t total;
+    ssize_t rc;
 
+    here = static_cast<const char*>(pointer);
+    remaining = nomore;
+    total = 0;
 
-#endif
+    while (static_cast<size_t>(total) < atleast) {
+        rc = ::write(fd, here, remaining);
+        if (0 == rc) {
+            break;
+        }
+        if (0 > rc) {
+            total = -(total + 1);
+            break;
+        }
+        here += rc;
+        remaining -= rc;
+        total += rc;
+    }
+
+    return total;
+}

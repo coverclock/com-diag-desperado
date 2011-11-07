@@ -1,11 +1,11 @@
-#ifndef _COM_DIAG_DESPERADO_BUFFERINPUT_H_
-#define _COM_DIAG_DESPERADO_BUFFERINPUT_H_
+#ifndef _COM_DIAG_DESPERADO_DATAINPUT_H_
+#define _COM_DIAG_DESPERADO_DATAINPUT_H_
 
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -38,25 +38,15 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: BufferInput.h,v 1.18 2006/02/07 00:07:02 jsloan Exp $
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Declares the BufferInput class.
+ *  Declares the DataInput class.
  *
- *  @see    BufferInput
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.18 $
- *
- *  @date   $Date: 2006/02/07 00:07:02 $
+ *  @see    DataInput
  */
 
 
@@ -70,49 +60,47 @@
  *  Implements an input functor that returns data from a buffer in
  *  memory. An EOF is returned when a NUL or the end of the buffer is reached.
  *  The offset is the total number of characters input, and can be used as
- *  an index into the character string.
+ *  an index into the character data.
  *
  *  @author coverclock@diag.com (Chip Overclock)
  */
-class BufferInput : public Input {
+class DataInput : public Input {
 
 public:
 
     /**
-     *  Constructor. Since the length of the string is not specified,
-     *  it is assumed to be NUL terminated.
+     *  Constructor. Since the length of the data is not specified,
+     *  it is assumed to be NUL terminated. Unlike BufferInput the data
+     *  can be const.
      *
-     *  @param  sp      points to the input string. The buffer must not be
-     *                  const so that the character push back capability can
-     *                  be implemented.
+     *  @param  sp      points to the input data.
      */
-    explicit BufferInput(char* sp = 0);
+    explicit DataInput(const char* sp = 0);
 
     /**
-     *  Constructor. The length of the buffer is specified explicitly.
+     *  Constructor. The length of the data is specified explicitly. Unlike
+     *  BufferInput the data can be const.
      *
-     *  @param  sp      points to the input buffer. The buffer must not be
-     *                  const so that the character push back capability can
-     *                  be implemented.
+     *  @param  sp      points to the input data.
      *
-     *  @param  sz      is the length of the buffer in bytes.
+     *  @param  sz      is the length of the data in octets.
      */
-    explicit BufferInput(void* sp, size_t sz);
+    explicit DataInput(const void* sp, size_t sz);
 
     /**
      *  Destructor.
      */
-    virtual ~BufferInput();
+    virtual ~DataInput();
 
     /**
-     *  Returns the next character in the buffer.
+     *  Returns the next character in the data.
      *
      *  @return a character in an integer if successful, EOF otherwise.
      */
     virtual int operator() ();
 
     /**
-     *  Pushes an character in an integer back to the buffer to be
+     *  Pushes an character in an integer back to the data to be
      *  returned on the next call to the input character functor.
      *  Only one pushed back character is guaranteed to succeed in
      *  between input character operations. The character pushed back
@@ -128,13 +116,13 @@ public:
     virtual int operator() (int ch);
 
     /**
-     *  Inputs a newline or NUL terminated line from the buffer into
+     *  Inputs a newline or NUL terminated line from the data into
      *  the buffer of the specified size. If a newline is read, it is
      *  transferred into the buffer. Guarantees that the buffer is NUL
      *  terminated if it is at least one octet in size. Guarantees that
      *  no more than the specified number of octets are returned.
      *
-     *  @param  bp  	points to the output buffer.
+     *  @param  bp		points to the buffer.
      *
      *  @param  size    is the size of the buffer in octets. Size
      *                  should be no larger than the largest possible
@@ -146,13 +134,13 @@ public:
     virtual ssize_t operator() (char* bp, size_t size);
 
     /**
-     *  Inputs binary data into a buffer from a buffer. At least the
+     *  Inputs binary data into a buffer from a data. At least the
      *  minimum number of octets are input unless EOF or error occurs.
      *  Up to the maximum number may be input if they are available.
      *  The functor does not NUL terminate the buffer nor does a
      *  NUL character in the buffer terminate the input.
      *
-     *  @param  bp  	points to the output buffer.
+     *  @param  bp  	points to the buffer.
      *
      *  @param  minimum is the minimum number of octets to input.
      *
@@ -168,17 +156,17 @@ public:
     );
 
     /**
-     *  Returns a pointer to the buffer.
+     *  Returns a pointer to the data.
      */
-    void* getBuffer() const;
+    const void* getData() const;
 
     /**
-     *  Returns the size of the buffer.
+     *  Returns the size of the data.
      */
     size_t getSize() const;
 
     /**
-     *  Returns the current offset into the buffer, indicating how
+     *  Returns the current offset into the data, indicating how
      *  many characters have been consumed so far.
      */
     size_t getOffset() const;
@@ -209,43 +197,48 @@ public:
 private:
 
     /**
-     *  This points to the beginning of the character buffer.
+     *  This points to the beginning of the data.
      */
-    char* buffer;
+    const char* data;
 
     /**
-     *  This is the size of the buffer.
+     *  This is the size of the data.
      */
     size_t size;
 
     /**
-     *  This is the offset into the character buffer.
+     *  This is the offset into the data.
      */
     size_t offset;
+
+    /**
+     *  This is the character pushed back into the descriptor.
+     */
+    int saved;
 
 };
 
 
 //
-//  Return a pointer to the buffer.
+//  Return a pointer to the data.
 //
-inline void* BufferInput::getBuffer() const {
-    return this->buffer;
+inline const void* DataInput::getData() const {
+    return this->data;
 }
 
 
 //
-//  Return a pointer to the buffer.
+//  Return a pointer to the data.
 //
-inline size_t BufferInput::getSize() const {
+inline size_t DataInput::getSize() const {
     return this->size;
 }
 
 
 //
-//  Return the offset into the buffer.
+//  Return the offset into the data.
 //
-inline size_t BufferInput::getOffset() const {
+inline size_t DataInput::getOffset() const {
     return this->offset;
 }
 
@@ -255,11 +248,11 @@ inline size_t BufferInput::getOffset() const {
 #if defined(DESPERADO_HAS_UNITTESTS)
 #include "com/diag/desperado/cxxcapi.h"
 /**
- *  Run the BufferInput unit test.
+ *  Run the DataInput unit test.
  *  
  *  @return the number of errors detected by the unit test.
  */
-CXXCAPI int unittestBufferInput(void);
+CXXCAPI int unittestDataInput(void);
 #endif
 
 

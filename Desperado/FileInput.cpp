@@ -148,6 +148,8 @@ ssize_t FileInput::operator() (char* buffer, size_t size) {
     ssize_t rc = EOF;
     if (0 == this->file) {
     	error= errno = EINVAL;
+    } else if (0 == size) {
+        rc = 0;
     } else if (std::feof(this->file)) {
         errno = 0;
     } else if (std::ferror(this->file)) {
@@ -156,8 +158,9 @@ ssize_t FileInput::operator() (char* buffer, size_t size) {
     	} else {
     		error = errno;
     	}
-    } else if (0 == size) {
-        rc = 0;
+    } else if (1 == size) {
+    	*buffer = '\0';
+    	rc = 1;
     } else {
         char* fc = std::fgets(buffer, size, this->file);
         if (0 != fc) {

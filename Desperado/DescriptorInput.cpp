@@ -43,7 +43,7 @@
  *
  *  Implements the DescriptorInput class.
  *
- *  @see    DescriptorOutput
+ *  @see    DescriptorInput
  */
 
 
@@ -133,12 +133,21 @@ ssize_t DescriptorInput::operator() (char* buffer, size_t size) {
         errno = 0;
     } else if (0 == size) {
         rc = 0;
+    } else if (1 == size) {
+    	*buffer = '\0';
+    	rc = 1;
     } else {
         char* here = buffer;
         ssize_t fc;
         rc = 0;
         while (1 < size) {
-            fc = ::read(this->active, here, sizeof(*here));
+        	if (EOF == this->saved) {
+        		fc = ::read(this->active, here, sizeof(*here));
+        	} else {
+                *here = this->saved;
+                this->saved = EOF;
+                fc = 1;
+        	}
             if (0 < fc) {
                 size -= fc;
                 rc += fc;
@@ -203,7 +212,13 @@ ssize_t DescriptorInput::operator() (
         	} else {
         		break; // At least the minimum but would block at next read.
         	}
-            fc = ::read(this->active, static_cast<char*>(buffer) + rc, effective);
+        	if (EOF == this->saved) {
+                fc = ::read(this->active, static_cast<char*>(buffer) + rc, effective);
+        	} else {
+                *(static_cast<char*>(buffer) + rc) = this->saved;
+                this->saved = EOF;
+                fc = 1;
+        	}
             if (0 < fc) {
                 rc += fc;
             } else if (0 == fc) {

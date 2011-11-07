@@ -50,7 +50,7 @@ echo "${CMD}: begin"
 
 mkdir -p ${ROOT}
 
-for OBJECT in D F N P S; do
+for OBJECT in D F N P S B; do
     for METHOD in c l s f b; do
         for IO in s f x; do
 

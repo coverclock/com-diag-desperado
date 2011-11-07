@@ -83,7 +83,7 @@ public:
      *
      *  @param  sz      is the length of the buffer in bytes.
      */
-    explicit BufferOutput(char* sp = 0, size_t sz = 0);
+    explicit BufferOutput(void* sp = 0, size_t sz = 0);
 
     /**
      *  Destructor.
@@ -136,7 +136,7 @@ public:
      *  only guarantees that at least the minimum number of octets are
      *  output from the buffer.
      *
-     *  @param  buffer  points to the buffer.
+     *  @param  bp		points to the buffer.
      *
      *  @param  minimum is the minimum number of octets to output.
      *
@@ -146,7 +146,7 @@ public:
      *          than maximum including zero) if successful, EOF otherwise.
      */
     virtual ssize_t operator() (
-        const void* buffer,
+        const void* bp,
         size_t minimum,
         size_t maximum
     );
@@ -160,17 +160,17 @@ public:
     virtual int operator() ();
 
     /**
-     *  Returns a pointer to the string.
+     *  Returns a pointer to the buffer.
      */
-    char* getString() const;
+    void* getBuffer() const;
 
     /**
-     *  Returns the size of the string.
+     *  Returns the size of the buffer.
      */
     size_t getSize() const;
 
     /**
-     *  Returns the current offset into the string, indicating how
+     *  Returns the current offset into the buffer, indicating how
      *  many characters have been consumed so far.
      */
     size_t getOffset() const;
@@ -201,17 +201,17 @@ public:
 private:
 
     /**
-     *  This points to the beginning of the character string.
+     *  This points to the beginning of the buffer.
      */
-    char* string;
+    char* buffer;
 
     /**
-     *  This is the size of the string.
+     *  This is the size of the buffer.
      */
     size_t size;
 
     /**
-     *  This is the offset into the character string.
+     *  This is the offset into the buffer.
      */
     size_t offset;
 
@@ -219,15 +219,15 @@ private:
 
 
 //
-//  Return a pointer to the string.
+//  Return a pointer to the buffer.
 //
-inline char* BufferOutput::getString() const {
-    return this->string;
+inline void* BufferOutput::getBuffer() const {
+    return this->buffer;
 }
 
 
 //
-//  Return a pointer to the string.
+//  Return a pointer to the buffer.
 //
 inline size_t BufferOutput::getSize() const {
     return this->size;
@@ -235,7 +235,7 @@ inline size_t BufferOutput::getSize() const {
 
 
 //
-//  Return the offset into the string.
+//  Return the offset into the buffer.
 //
 inline size_t BufferOutput::getOffset() const {
     return this->offset;

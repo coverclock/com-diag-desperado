@@ -89,11 +89,14 @@
 #include "com/diag/desperado/writes.h"
 #include "com/diag/desperado/Heap.h"
 #include "com/diag/desperado/Heap.h"
+#include "com/diag/desperado/DataInput.h"
+#include "com/diag/desperado/DataInput.h"
+#include "com/diag/desperado/Desperado.h"
 
 #define USAGE   \
     "[ -d(ebug) ] [ -v(erbose) ]" \
     " [ -c(haracter) | -l(ine) | -b(lock) | -s(tring) | -f(ormatted) ]" \
-    " [ -D(escriptor) | -F(ile) | -I(pc) | -N(ull) | -P(ath) | -S(tring) ]" \
+    " [ -D(escriptor) | -F(ile) | -I(pc) | -N(ull) | -P(ath) | -S(tring) | -B(lock) ]" \
     " [ -o(utout) [ outname | - ] ]" \
     " [ [ inname | - ] ... ]"
 
@@ -101,7 +104,6 @@ int main(int argc, char **argv, char **) {
     extern char *optarg;
     extern int optind;
     int opt;
-    int inerror;
     int usage;
     int rc;
 
@@ -124,8 +126,7 @@ int main(int argc, char **argv, char **) {
                 ? argv[0] : cmdname + 1;
 
     usage = 0;
-    while (0 <= (opt = ::getopt(argc, argv, "?bcdflo:rsvDFINPS"))) {
-        inerror = 0;
+    while (0 <= (opt = ::getopt(argc, argv, "?bcdflo:rsvBDFINPS"))) {
         switch (opt) {
         case '?':
             help = true;
@@ -140,6 +141,7 @@ int main(int argc, char **argv, char **) {
         case 's':
             method = opt;
             break;
+        case 'B':
         case 'D':
         case 'F':
         case 'I':
@@ -156,17 +158,13 @@ int main(int argc, char **argv, char **) {
         	break;
         default:
             ++usage;
-        }
-        if (0 < inerror) {
-            errorf("%s: bad value -- -%c %s\n",
-                cmdname, opt, optarg);
-            ++usage;
+            break;
         }
     }
 
     if (help || (0 < usage) || (0 == method) || (0 == object)) {
         errorf("usage: %s %s\n", cmdname, USAGE);
-        ::exit(help ? 0 : 1);
+        std::exit(help ? 0 : 1);
     }
 
     Output* outputp = 0;
@@ -177,6 +175,20 @@ int main(int argc, char **argv, char **) {
     DumpInput dumpinput;
 
     switch (object) {
+
+    case 'B':
+        if (0 == std::strcmp(outname, "-")) {
+            outfile = stdout;
+        } else {
+            outfile = std::fopen(outname, "w");
+        }
+        if (0 != outfile) {
+            outsocket = fileno(outfile);
+        } else {
+            std::perror(outname);
+            ++errors;
+        }
+        break;
 
     case 'D':
         if (0 == std::strcmp(outname, "-")) {
@@ -249,6 +261,7 @@ int main(int argc, char **argv, char **) {
     Input* inputp = 0;
     BufferInput* si = 0;
     BufferOutput* so = 0;
+    DataInput* bi = 0;
 
     do {
 
@@ -259,6 +272,63 @@ int main(int argc, char **argv, char **) {
         }
 
         switch (object) {
+
+        case 'B':
+            do {
+                if (0 == std::strcmp(inname, "-")) {
+                    infile = stdin;
+                } else {
+                    infile = std::fopen(inname, "r");
+                }
+                if (0 == infile) {
+                    std::perror(inname);
+                    ++errors;
+                    break;
+                }
+                insocket = fileno(infile);
+                if (0 != ::fstat(insocket, &status)) {
+                    std::perror("fstat");
+                    ++errors;
+                    break;
+                }
+                size = status.st_size;
+                instring = reinterpret_cast<char*>(heap.malloc(size));
+                if (0 == instring) {
+                    std::perror("instring=heap.malloc(size)");
+                    ++errors;
+                    break;
+                }
+                bi = new DataInput(instring, size);
+                inputp = bi;
+                if (0 == inputp) {
+                    std::perror("new DataInput(instring,size)");
+                    ++errors;
+                    break;
+                }
+                fc = ::desperado_reads(insocket, const_cast<char*>(static_cast<const char*>(bi->getData())),
+                		bi->getSize(), bi->getSize());
+                if (static_cast<ssize_t>(size) != fc) {
+                    heap.free(instring);
+                    instring = 0;
+                    std::perror("desperado_reads(insocket,instring,size,size)");
+                    ++errors;
+                    break;
+                }
+                outstring = reinterpret_cast<char*>(heap.malloc(size));
+                if (0 == outstring) {
+                    std::perror("outstring=heap.malloc(size)");
+                    ++errors;
+                    break;
+                }
+                so = new BufferOutput(outstring, size);
+                outputp = so;
+                if (0 == outputp) {
+                    std::perror("new BufferInput(outstring,size)");
+                    ++errors;
+                    break;
+                }
+            } while (false);
+            break;
 
         case 'D':
             if (0 == std::strcmp(inname, "-")) {
@@ -335,12 +405,12 @@ int main(int argc, char **argv, char **) {
                     ++errors;
                     break;
                 }
-                fc = ::reads(insocket, si->getString(),
+                fc = ::desperado_reads(insocket, si->getBuffer(),
                         si->getSize(), si->getSize());
                 if (static_cast<ssize_t>(size) != fc) {
                     heap.free(instring);
                     instring = 0;
-                    std::perror("reads(insocket,instring,size,size)");
+                    std::perror("desperado_reads(insocket,instring,size,size)");
                     ++errors;
                     break;
                 }
@@ -384,10 +454,10 @@ int main(int argc, char **argv, char **) {
         }
 
         if (0 != outstring) {
-            fc = ::writes(outsocket, so->getString(),
+            fc = ::desperado_writes(outsocket, so->getBuffer(),
                     so->getOffset(), so->getOffset());
             if (static_cast<ssize_t>(size) != fc) {
-                std::perror("writes(outoutsocket,outstring,size)");
+                std::perror("desperado_writes(outoutsocket,outstring,size)");
                 ++errors;
             }
             delete outputp;
