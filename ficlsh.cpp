@@ -44,7 +44,7 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include "com/diag/desperado/cxxcapi.h"
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/FiclShell.h"

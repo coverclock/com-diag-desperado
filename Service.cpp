@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include <unistd.h>
 #include <fcntl.h>
 #include <netdb.h>
@@ -373,7 +372,7 @@ uint16_t Service::port(const char* service, const char* protocol) {
     } else {
         uint16_t temp;
         size_t length;
-        bool successful = ::uint16_Number(service, temp, length, 64);
+        bool successful = uint16_Number(service, temp, length, 64);
         if (successful) {
             port = temp;
         }

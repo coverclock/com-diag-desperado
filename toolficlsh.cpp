@@ -54,7 +54,7 @@
  *  @date   $Date: 2006/09/13 16:46:50 $
  */
 
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 extern "C" {
 #   include <signal.h>
 #   include <setjmp.h>

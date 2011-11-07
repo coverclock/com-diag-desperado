@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/BandwidthThrottle.h"
 #include "com/diag/desperado/Constant.h"

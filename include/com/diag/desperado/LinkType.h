@@ -60,7 +60,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/Link.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"

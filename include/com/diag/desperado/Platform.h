@@ -673,9 +673,6 @@ inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
 #endif
 
 
-#include "com/diag/desperado/Desperado.h"
-
-
 /**
  *  Returns the frequency of the platform clock in Hertz as a
  *  whole number. Because platforms may have clock frequencies
@@ -776,7 +773,7 @@ CXXCAPI void platform_fatal(
  *
  *  @return a pointer to the platform input object.
  */
-CXXCAPI Input* platform_input(void);
+CXXCAPI CXXCTYPE(Input)* platform_input(void);
 
 
 /**
@@ -786,7 +783,7 @@ CXXCAPI Input* platform_input(void);
  *
  *  @return a pointer to the platform output object.
  */
-CXXCAPI Output* platform_output(void);
+CXXCAPI CXXCTYPE(Output)* platform_output(void);
 
 
 /**
@@ -796,7 +793,7 @@ CXXCAPI Output* platform_output(void);
  *
  *  @return a pointer to the platform error output object.
  */
-CXXCAPI Output* platform_error(void);
+CXXCAPI CXXCTYPE(Output)* platform_error(void);
 
 
 /**
@@ -806,7 +803,7 @@ CXXCAPI Output* platform_error(void);
  *
  *  @return a pointer to the platform dump object.
  */
-CXXCAPI Dump* platform_dump(void);
+CXXCAPI CXXCTYPE(Dump)* platform_dump(void);
 
 
 /**
@@ -816,7 +813,7 @@ CXXCAPI Dump* platform_dump(void);
  *
  *  @return a pointer to the platform heap object.
  */
-CXXCAPI Heap* platform_heap(void);
+CXXCAPI CXXCTYPE(Heap)* platform_heap(void);
 
 
 /**
@@ -826,7 +823,7 @@ CXXCAPI Heap* platform_heap(void);
  *
  *  @return a pointer to the platform logger object.
  */
-CXXCAPI Logger* platform_logger(void);
+CXXCAPI CXXCTYPE(Logger)* platform_logger(void);
 
 
 /**

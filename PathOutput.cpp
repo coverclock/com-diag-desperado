@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include <limits.h>
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/generics.h"
@@ -92,7 +91,7 @@ static FILE* filepointer(const char* path, const char* mode, int* errorp) {
 //  Constructor.
 //
 PathOutput::PathOutput(const char* path, const char* mode) :
-    FileOutput(::filepointer(path, mode, &error))
+    FileOutput(filepointer(path, mode, &error))
 {
 #if defined(DESPERADO_HAS_EXCEPTIONS)
     if ((0 != path) && (0 == this->getFile())) {

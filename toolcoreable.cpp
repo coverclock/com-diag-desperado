@@ -40,7 +40,7 @@
  *  @date   $Date: 2006/12/09 22:57:19 $
  */
 
-#include <cstdio>
+#include "com/diag/desperado/stdio.h"
 #include <cerrno>
 #include <unistd.h>
 #include <signal.h>

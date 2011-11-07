@@ -186,7 +186,7 @@ man ascii (SunOS 5.1 maybe):
 
 *******************************************************************************/
 
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Desperado.h"

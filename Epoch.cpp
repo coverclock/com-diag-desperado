@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/Epoch.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"

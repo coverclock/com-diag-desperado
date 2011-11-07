@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/generics.h"
 #include "com/diag/desperado/types.h"
 #include "com/diag/desperado/Mutex.h"

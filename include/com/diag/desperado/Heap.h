@@ -408,9 +408,6 @@ typedef struct Heap Heap;
 #endif
 
 
-#include "com/diag/desperado/Desperado.h"
-
-
 /**
  *  Allocates a block of contiguous memory of the specified size.
  *
@@ -424,7 +421,7 @@ typedef struct Heap Heap;
  *  @return a pointer to the suitably aligned memory block of
  *          at least the requested size, or null if an error occurred.
  */
-CXXCAPI void* heap_malloc(Heap* h, size_t size);
+CXXCAPI void* heap_malloc(CXXCTYPE(Heap)* h, size_t size);
 
 
 /**
@@ -440,7 +437,7 @@ CXXCAPI void* heap_malloc(Heap* h, size_t size);
  *                      realloc(), or calloc().
  *                      It is not an error for this pointer to be null.
  */
-CXXCAPI void heap_free(Heap* h, void* ptr);
+CXXCAPI void heap_free(CXXCTYPE(Heap)* h, void* ptr);
 
 
 /**
@@ -470,7 +467,7 @@ CXXCAPI void heap_free(Heap* h, void* ptr);
  *  @return a pointer to the suitably aligned memory block of
  *          at least the requested size, or null if an error occurred.
  */
-CXXCAPI void* heap_realloc(Heap* h, void* ptr, size_t size);
+CXXCAPI void* heap_realloc(CXXCTYPE(Heap)* h, void* ptr, size_t size);
 
 
 /**
@@ -489,11 +486,10 @@ CXXCAPI void* heap_realloc(Heap* h, void* ptr, size_t size);
  *  @return a pointer to the suitably aligned and zeroed memory block of
  *          at least the requested size, or null if an error occurred.
  */
-CXXCAPI void* heap_calloc(Heap* h, size_t nmemb, size_t size);
+CXXCAPI void* heap_calloc(CXXCTYPE(Heap)* h, size_t nmemb, size_t size);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)
-#include "com/diag/desperado/cxxcapi.h"
 /**
  *  Run the Heap unit test.
  *  

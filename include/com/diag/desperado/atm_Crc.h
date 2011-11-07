@@ -64,7 +64,11 @@
 #include "com/diag/desperado/Crc.h"
 
 
+#include "com/diag/desperado/Begin.h"
+
 extern Crc<int32_t> atm_Crc;
+
+#include "com/diag/desperado/End.h"
 
 
 #endif

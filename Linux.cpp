@@ -60,9 +60,8 @@
 #if defined(DESPERADO_PLATFORM_IS_Linux) || defined(DESPERADO_PLATFORM_IS_Diminuto) || defined(DESPERADO_PLATFORM_IS_Arroyo)
 
 
-#include <new>
-#include <cstdarg>
-#include <cstdlib>
+#include "com/diag/desperado/stdarg.h"
+#include "com/diag/desperado/stdlib.h"
 #include <ctime>
 #include <syslog.h>
 #include <sys/time.h>
@@ -90,10 +89,10 @@ extern int daylight;
 #include "com/diag/desperado/Begin.h"
 
 
-static DstNever dstnever;           // Used if no Daylight Saving Time.
-static DstUs dstus;                 // Used assuming U.S. rules.
-static LeapSeconds leapseconds;     // Used as the leap second rule.
-static char hostnamebuffer[64];     // Used for gethostname().
+static DstNever dstnever;           	// Used if no Daylight Saving Time.
+static DstUs dstus;                 	// Used assuming U.S. rules.
+static LeapSeconds leapsecondsrule;     // Used as the leap second rule.
+static char hostnamebuffer[64];     	// Used for gethostname().
 
 
 static char* hostname() {
@@ -146,7 +145,7 @@ Linux::Linux() :
     //  leap seconds rule is used.
 
     this->setLeapSecondTicks(false);
-    this->setLeapSeconds(::leapseconds);
+    this->setLeapSeconds(leapsecondsrule);
 
     //  Set the zone to match that of the underlying system configuration.
     //  This is just a guess, useful to facilitate testing. Applications

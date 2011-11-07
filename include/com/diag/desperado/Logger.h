@@ -262,15 +262,6 @@ public:
      */
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
-    //
-    //  Note that this method is not virtual, and is inline, in
-    //  an effort to eliminate some of the overhead of each logging
-    //  call. Derived classes wishing to alter the implementation
-    //  of this base class shall have to do so by overriding the
-    //  Logger::isEnabled(), Logger::format(), Logger::emit() methods,
-    //  which are virtual.
-    //
-
     /**
      *  Log a message using an argument list if the specified level
      *  is enabled.
@@ -284,19 +275,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t log(Level level, const char* format, va_list ap);
-
-    //
-    //  Note that the variadic logging methods are not
-    //  virtual. This is an attempt to eliminate some of the
-    //  overhead of a logging call, while unfortunately limiting
-    //  the ability of a derived class to override these methods.
-    //  Also note that they are not inline. In my experience, most
-    //  C++ compilers cannot inline variadic methods because the
-    //  va_list mechanism itself depends on an argument list having
-    //  been built on the stack as part of the function call
-    //  implementation.
-    //
+    ssize_t vlog(Level level, const char* format, va_list ap);
 
     /**
      *  Log a message using a variadic argument list if the specified
@@ -513,23 +492,6 @@ private:
 
 };
 
-
-//
-//  Log the argument list. Note that the PRINT level is checked for
-//  explicitly, enforcing the fact that the PRINT level is logged
-//  unconditionally regardless of the value returned by the isEnabled()
-//  method.
-//
-inline ssize_t Logger::log(Level level, const char* format, va_list ap) {
-    ssize_t rc = 0;
-    if ((this->PRINT == level) || this->isEnabled(level)) {
-        char buffer[Output::minimum_buffer_size + 1];
-        this->format(buffer, sizeof(buffer), level, format, ap);
-        rc = this->emit(buffer, sizeof(buffer));
-    }
-    return rc;
-}
-
 #include "com/diag/desperado/End.h"
 
 
@@ -546,9 +508,6 @@ typedef struct Logger Logger;
 #endif
 
 
-#include "com/diag/desperado/Desperado.h"
-
-
 /**
  *  Formats a variadic argument list and writes the result
  *  to the specified log object if FINEST is enabled.
@@ -562,7 +521,7 @@ typedef struct Logger Logger;
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_finest(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_finest(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -578,7 +537,7 @@ CXXCAPI ssize_t logger_finest(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_finer(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_finer(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -594,7 +553,7 @@ CXXCAPI ssize_t logger_finer(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_fine(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_fine(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -610,7 +569,7 @@ CXXCAPI ssize_t logger_fine(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_trace(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_trace(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -626,7 +585,7 @@ CXXCAPI ssize_t logger_trace(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_debug(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_debug(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -642,7 +601,7 @@ CXXCAPI ssize_t logger_debug(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_information(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_information(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -658,7 +617,7 @@ CXXCAPI ssize_t logger_information(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_configuration(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_configuration(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -674,7 +633,7 @@ CXXCAPI ssize_t logger_configuration(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_notice(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_notice(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -690,7 +649,7 @@ CXXCAPI ssize_t logger_notice(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_warning(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_warning(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -706,7 +665,7 @@ CXXCAPI ssize_t logger_warning(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_error(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_error(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -722,7 +681,7 @@ CXXCAPI ssize_t logger_error(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_severe(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_severe(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -738,7 +697,7 @@ CXXCAPI ssize_t logger_severe(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_critical(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_critical(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -754,7 +713,7 @@ CXXCAPI ssize_t logger_critical(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_alert(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_alert(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -770,7 +729,7 @@ CXXCAPI ssize_t logger_alert(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_fatal(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_fatal(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -786,7 +745,7 @@ CXXCAPI ssize_t logger_fatal(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_emergency(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_emergency(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 /**
@@ -802,7 +761,7 @@ CXXCAPI ssize_t logger_emergency(Logger* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_print(Logger* logger, const char* format, ...);
+CXXCAPI ssize_t logger_print(CXXCTYPE(Logger)* logger, const char* format, ...);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)

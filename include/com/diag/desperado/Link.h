@@ -60,7 +60,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/Output.h"
 
 

@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/Implementation.h"
 #include "com/diag/desperado/Platform.h"

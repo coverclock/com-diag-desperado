@@ -60,7 +60,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/Transliterator.h"
 #include "com/diag/desperado/Platform.h"

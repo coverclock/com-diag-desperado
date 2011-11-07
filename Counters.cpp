@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/string.h"

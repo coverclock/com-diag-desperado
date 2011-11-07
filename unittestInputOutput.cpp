@@ -47,7 +47,7 @@
  */
 
 
-#include <cstdarg>
+#include "com/diag/desperado/stdarg.h"
 #include "com/diag/desperado/UnitTest.h"
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/errno.h"

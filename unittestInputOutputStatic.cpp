@@ -58,7 +58,7 @@
  */
 
 
-#include <cstdarg>
+#include "com/diag/desperado/stdarg.h"
 #include "com/diag/desperado/UnitTest.h"
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/string.h"
@@ -66,6 +66,7 @@
 #include "com/diag/desperado/BufferInput.h"
 #include "com/diag/desperado/BufferOutput.h"
 #include "com/diag/desperado/BufferOutput.h"
+#include "com/diag/desperado/DataInput.h"
 #include "com/diag/desperado/DescriptorInput.h"
 #include "com/diag/desperado/DescriptorInput.h"
 #include "com/diag/desperado/DescriptorOutput.h"
@@ -94,6 +95,7 @@
 
 static BufferInput staticBufferInput;
 static BufferOutput staticBufferOutput;
+static DataInput staticDataInput;
 static DescriptorInput staticDescriptorInput;
 static DescriptorOutput staticDescriptorOutput;
 static DumpInput staticDumpInput;
@@ -116,6 +118,7 @@ CXXCAPI int unittestInputOutputStatic(void) {
 
     ::staticBufferInput.show();
     ::staticBufferOutput.show();
+    ::staticDataInput.show();
     ::staticDescriptorInput.show();
     ::staticDescriptorOutput.show();
     ::staticDumpInput.show();

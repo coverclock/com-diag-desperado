@@ -43,6 +43,9 @@
  *
  *  Pulls in all of the symbols from the Desperado namespace.
  *
+ *  Care should be taken when used in header files used outside of the library
+ *  since it pollutes the user's namespace.
+ *
  *  May be included more than once.
  *
  *  May be included from either C or C++ translation units, although

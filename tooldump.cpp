@@ -41,7 +41,7 @@
  */
 
 
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include <unistd.h>
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/exceptions.h"

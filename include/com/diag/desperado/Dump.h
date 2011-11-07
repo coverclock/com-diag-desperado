@@ -445,9 +445,6 @@ typedef struct Dump Dump;
 #endif
 
 
-#include "com/diag/desperado/Desperado.h"
-
-
 /**
  *  Dumps a block of bytes in hexadecimal format.
  *
@@ -463,7 +460,7 @@ typedef struct Dump Dump;
  *
  *  @return         the number of bytes dumped.
  */
-CXXCAPI size_t dump_bytes(Dump* d, const void* data, size_t length);
+CXXCAPI size_t dump_bytes(CXXCTYPE(Dump)* d, const void* data, size_t length);
 
 
 /**
@@ -481,11 +478,10 @@ CXXCAPI size_t dump_bytes(Dump* d, const void* data, size_t length);
  *
  *  @return         the number of words dumped.
  */
-CXXCAPI size_t dump_words(Dump* d, const void* data, size_t length);
+CXXCAPI size_t dump_words(CXXCTYPE(Dump)* d, const void* data, size_t length);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)
-#include "com/diag/desperado/cxxcapi.h"
 /**
  *  Run the Dump unit test.
  *  

@@ -60,7 +60,6 @@
 #if defined(DESPERADO_PLATFORM_IS_Arroyo)
 
 
-#include <new>
 #include "com/diag/desperado/Arroyo.h"
 
 

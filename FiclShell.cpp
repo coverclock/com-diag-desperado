@@ -60,7 +60,6 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
-#include <new>
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/ficlApi.h"
 #include "com/diag/desperado/FiclShell.h"

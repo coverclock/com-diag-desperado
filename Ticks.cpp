@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/types.h"
 #include "com/diag/desperado/Ticks.h"
 #include "com/diag/desperado/Constant.h"

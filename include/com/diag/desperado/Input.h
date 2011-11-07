@@ -203,8 +203,8 @@ CXXCAPI int unittestInputOutputStatic(void);
 CXXCAPI int unittestInputOutput(
     void* pVM,
     char mechanism,
-    Input* inputp,
-    Output* outputp,
+    CXXCTYPE(Input)* inputp,
+    CXXCTYPE(Output)* outputp,
     bool verbose
 );
 #endif

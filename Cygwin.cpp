@@ -60,9 +60,8 @@
 #if defined(DESPERADO_PLATFORM_IS_Cygwin)
 
 
-#include <new>
-#include <cstdarg>
-#include <cstdlib>
+#include "com/diag/desperado/stdarg.h"
+#include "com/diag/desperado/stdlib.h"
 #include <ctime>
 #include <syslog.h>
 #include <sys/time.h>

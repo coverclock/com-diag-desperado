@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/generics.h"
@@ -70,7 +69,7 @@
 #include "com/diag/desperado/Begin.h"
 
 
-static const char* meridiems[] = {
+static const char* MERIDIEMS[] = {
     "AM",
     "PM",
     ""
@@ -134,8 +133,8 @@ bool Time::isValid() const {
 //  Return the name of the meridiem.
 //
 const char* Time::meridiemToString(Meridiem mm) const {
-    static const int limit = countof(::meridiems);
-    return ::meridiems[((0 <= mm) && (mm < limit)) ? mm : limit - 1];
+    static const int limit = countof(MERIDIEMS);
+    return MERIDIEMS[((0 <= mm) && (mm < limit)) ? mm : limit - 1];
 }
 
 //

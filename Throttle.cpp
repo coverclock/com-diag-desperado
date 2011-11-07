@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/Throttle.h"
 #include "com/diag/desperado/Print.h"

@@ -57,12 +57,13 @@
  */
 
 
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include <signal.h>
 #include <unistd.h>
 #include "com/diag/desperado/UnitTest.h"
 #include "com/diag/desperado/string.h"
 #include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/Desperado.h"
 
 static void handler(int signal) {
     Print& printf = Platform::instance().print();

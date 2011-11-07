@@ -41,7 +41,7 @@
  */
 
 
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include <unistd.h>
 #include <ctime>
 #include <sys/time.h>

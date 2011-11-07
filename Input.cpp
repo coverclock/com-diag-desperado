@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/Input.h"
 #include "com/diag/desperado/Output.h"

@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/generics.h"
@@ -213,8 +212,8 @@ size_t Date::toString(String string, size_t size) const {
 //  Return the name of the month.
 //
 const char* Date::monthToString(Month mh) const {
-    static const int limit = countof(::months);
-    return ::months[((0 <= mh) && (mh < limit)) ? mh : 0];
+    static const int limit = countof(months);
+    return months[((0 <= mh) && (mh < limit)) ? mh : 0];
 }
 
 
@@ -222,8 +221,8 @@ const char* Date::monthToString(Month mh) const {
 //  Return the name of the weekday.
 //
 const char* Date::weekdayToString(Weekday dy) const {
-    static const int limit = countof(::weekdays);
-    return ::weekdays[((0 <= dy) && (dy < limit)) ? dy : 0];
+    static const int limit = countof(weekdays);
+    return weekdays[((0 <= dy) && (dy < limit)) ? dy : 0];
 }
 
 
@@ -231,8 +230,8 @@ const char* Date::weekdayToString(Weekday dy) const {
 //  Return the name of the weekday.
 //
 const char* Date::ordinalToString(Ordinal od) const {
-    static const int limit = countof(::ordinals);
-    return ::ordinals[((0 <= od) && (od < limit)) ? od : 0];
+    static const int limit = countof(ordinals);
+    return ordinals[((0 <= od) && (od < limit)) ? od : 0];
 }
 
 
@@ -247,7 +246,7 @@ bool Date::isValid() const {
     &&
         (this->month <= Date::DECEMBER)
     &&
-        (this->day <= ::d_per_month[this->isLeapYear()][this->month - 1])
+        (this->day <= d_per_month[this->isLeapYear()][this->month - 1])
     ;
 }
 
@@ -256,7 +255,7 @@ bool Date::isValid() const {
 //  Return the number of days in the specified month and year.
 //
 uint8_t Date::cardinal(uint64_t yr, Month mh) const {
-    return ::d_per_month[this->isLeapYear(yr)][mh - 1];
+    return d_per_month[this->isLeapYear(yr)][mh - 1];
 }
 
 
@@ -280,7 +279,7 @@ Date::Weekday Date::weekday(uint64_t yr, uint8_t mh, uint8_t dy) const {
 //  Returns the day of the month of the nth weekday.
 //
 uint8_t Date::ordinal(Ordinal nth, Weekday wy) const {
-    const uint8_t dpm = ::d_per_month[this->isLeapYear()][this->month - 1];
+    const uint8_t dpm = d_per_month[this->isLeapYear()][this->month - 1];
     uint8_t from;
     uint8_t to;
     if ((FIRST <= nth) && (nth <= FIFTH)) {
@@ -310,7 +309,7 @@ uint8_t Date::ordinal(Ordinal nth, Weekday wy) const {
 //  Compute the julian day for the given date.
 //
 uint16_t Date::julian(uint64_t yr, uint8_t mh, uint8_t dy) const {
-    return ::cum_d_per_month[this->isLeapYear(yr)][mh - 1] + dy;
+    return cum_d_per_month[this->isLeapYear(yr)][mh - 1] + dy;
 }
 
 

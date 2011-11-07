@@ -57,7 +57,6 @@
  */
 
 
-#include <new>
 #include "com/diag/desperado/stdio.h"
 #include "com/diag/desperado/errno.h"
 #include "com/diag/desperado/target.h"
@@ -170,7 +169,7 @@ ssize_t BufferOutput::operator() (
         rc = 0;
     } else {
         rc = this->size - this->offset;
-        if (static_cast<size_t>(rc) > maximum) {
+        if (rc > static_cast<ssize_t>(maximum)) {
             rc = maximum;
         }
         memcpy(&(this->buffer[this->offset]), bp, static_cast<size_t>(rc));

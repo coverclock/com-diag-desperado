@@ -61,4 +61,8 @@
 #include "com/diag/desperado/atm_Crc.h"
 
 
+#include "com/diag/desperado/Begin.h"
+
 Crc<int32_t> atm_Crc(0x04c11db7, false, 0xffffffff, 0xffffffff);
+
+#include "com/diag/desperado/End.h"

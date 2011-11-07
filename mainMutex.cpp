@@ -57,7 +57,7 @@
  */
 
 
-#include <cstdlib>
+#include "com/diag/desperado/stdlib.h"
 #include "com/diag/desperado/UnitTest.h"
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/Mutex.h"
