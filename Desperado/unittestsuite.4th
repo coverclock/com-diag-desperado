@@ -1,4 +1,4 @@
-(   Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.       )
+(   Copyright 2006 Digital Aggregates Corporation, Colorado, USA.             )
 (   This file is part of the Digital Aggregates Desperado library.            )
 (                                                                             )
 (   This library is free software; you can redistribute it and/or             )
@@ -30,9 +30,6 @@
 (   Free Software Foundation, Inc., 59 Temple Place, Suite 330,               )
 (   Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.     )
 (                                                                             )
-(   $Name:  $                                                                    )
-(                                                                             )
-(   $Id: unittestsuite.4th,v 1.2 2006/01/30 20:35:27 jsloan Exp $                                                                      )
 
 VARIABLE errors
 

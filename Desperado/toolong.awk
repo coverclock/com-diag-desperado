@@ -1,7 +1,7 @@
 #	:set ts=4
 #
 #	toolong.awk: display source lines that are too long.
-#	Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005 Digital Aggregates Corporation, Colorado, USA.
 #
 #	This program is free software; you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by

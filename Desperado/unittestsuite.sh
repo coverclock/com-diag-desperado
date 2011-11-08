@@ -218,8 +218,8 @@ echo "$NAME[$PID]: $TS errors=$TOTAL"
 ) < $SCRIPT4
 
 TS="`date -u +'%Y-%m-%dT%H:%M:%S.%N%Z'`"
-ERRORS2=`cat $STATUS4`
-TOTAL=`expr $TOTAL + $ERRORS2`
+ERRORS4=`cat $STATUS4`
+TOTAL=`expr $TOTAL + $ERRORS4`
 echo "$NAME[$PID]: $TS errors=$TOTAL"
 
 rm -f $SCRIPT1 $SCRIPT2 $SCRIPT3 $SCRIPT4 $STATUS0 $STATUS1 $STATUS2 $STATUS3 $STATUS4

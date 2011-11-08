@@ -3,7 +3,7 @@
 
 ###############################################################################
 #
-#   Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2006 Digital Aggregates Corporation, Colorado, USA.
 #   This file is part of the Digital Aggregates Desperado library.
 #   
 #   This library is free software; you can redistribute it and/or

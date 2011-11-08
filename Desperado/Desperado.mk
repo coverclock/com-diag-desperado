@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005-2011 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -97,7 +97,7 @@ JAVACGEN	=
 JAVACXXGEN	=
 
 DESPTXTGEN	=
-DESPHGEN	=	desperado_vintage.h
+DESPHGEN	=
 DESPCGEN	=
 DESPCXXGEN	=
 
@@ -222,16 +222,42 @@ depend dependencies:
 -include dependencies.mk
 
 #
-#	Build
+#	Vintage
 #
 
-vintage:
-	echo "#define DESPERADO_VINTAGE_RELEASE \"$(RELEASE)-$(MAJOR).$(MINOR).$(BUILD)\"" > desperado_vintage.h
-	echo "#define DESPERADO_VINTAGE_DATE \"`date +%Y%m%dT%H%M%S.%N%:z`\"" >> desperado_vintage.h
+V_PRODUCT	=	$(PROJECT)
+V_RELEASE	=	$(PRERELEASE)
+V_VERSION	=	$(MAJOR).$(MINOR).$(BUILD)
+V_COPYRIGHT	=	Copyright 2005-$(shell date +%Y) Digital Aggregates Corporation, Colorado, USA.
+V_CONTACT	=	coverclock@diag.com (Chip Overclock)
+V_URL		=	http://www.diag.com/navigation/downloads/Desperado.html
+V_DATE		=	$(shell date +%Y%m%dT%H%M%S.%N%:z)
+V_PLATFORM	=	$(PLATFORM)
+V_TARGET	=	$(TARGET)
+V_LICENSE	=	Modified GNU Lesser Public License
 
-desperado_vintage.h:	$(filter-out Vintage.cpp,$(NONSYMBOLS))
-	echo "#define DESPERADO_VINTAGE_RELEASE \"$(RELEASE)-$(MAJOR).$(MINOR).$(BUILD)\"" > desperado_vintage.h
-	echo "#define DESPERADO_VINTAGE_DATE \"`date +%Y%m%dT%H%M%S.%N%:z`\"" >> desperado_vintage.h
+V_H			=	include/com/diag/desperado/release.h
+
+vintage:
+	chmod u+w $(V_H)
+	cp /dev/null $(V_H)
+	echo "#define DESPERADO_VINTAGE_PRODUCT \"$(V_PRODUCT)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_RELEASE \"$(V_RELEASE)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_VERSION \"$(V_VERSION)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_COPYRIGHT \"$(V_COPYRIGHT)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_CONTACT \"$(V_CONTACT)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_URL \"$(V_URL)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_DATE \"$(V_DATE)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_PLATFORM \"$(V_PLATFORM)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_TARGET \"$(V_TARGET)\"" >> $(V_H)
+	echo "#define DESPERADO_VINTAGE_LICENSE \"$(V_LICENSE)\"" >> $(V_H)
+
+$(V_H):	$(NONSYMBOLS)
+	make vintage
+
+#
+#	Build
+#
 
 ifdef DYNAMIC
 library:	static dynamic

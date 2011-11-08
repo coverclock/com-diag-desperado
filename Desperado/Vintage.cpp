@@ -55,7 +55,7 @@
 
 
 
-#include "desperado_vintage.h"
+#include "com/diag/desperado/release.h"
 #include "com/diag/desperado/Vintage.h"
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/Print.h"
@@ -64,21 +64,25 @@
 #include "com/diag/desperado/Begin.h"
 
 
-const char Vintage::product[] =     "$Product: Desperado $";
+const char Vintage::product[] =     "$Product: " DESPERADO_VINTAGE_PRODUCT " $";
 
-const char Vintage::license[] =     "$License: Modified GNU Lesser Public License $";
+const char Vintage::license[] =     "$License: " DESPERADO_VINTAGE_LICENSE " $";
 
-const char Vintage::copyright[] =   "$Copyright: Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA $";
+const char Vintage::copyright[] =   "$Copyright: " DESPERADO_VINTAGE_COPYRIGHT " $";
 
-const char Vintage::contact[] =     "$Contact: coverclock@diag.com (Chip Overclock) $";
+const char Vintage::contact[] =     "$Contact: " DESPERADO_VINTAGE_CONTACT " $";
 
-const char Vintage::url[] =         "$Url: http://www.diag.com $";
-
-const char Vintage::uri[] =         "$Uri: sip:600@sip.diag.dnsalias.com $";
+const char Vintage::url[] =         "$Url: " DESPERADO_VINTAGE_URL " $";
 
 const char Vintage::date[] =        "$Date: " DESPERADO_VINTAGE_DATE " $";
 
 const char Vintage::release[] =     "$Release: " DESPERADO_VINTAGE_RELEASE " $";
+
+const char Vintage::version[] =     "$Release: " DESPERADO_VINTAGE_VERSION " $";
+
+const char Vintage::target[] =     "$Release: " DESPERADO_VINTAGE_TARGET " $";
+
+const char Vintage::platform[] =     "$Release: " DESPERADO_VINTAGE_PLATFORM " $";
 
 const char Vintage::build[] =       "$Build: " __DATE__ " " __TIME__ " $";
 
@@ -115,6 +119,12 @@ void Vintage::show(int /* level */, Output* display, int indent) const {
         sp, sizeof(this->date),  this->date);
     printf("%s release[%lu]=\"%s\"\n",
         sp, sizeof(this->release), this->release);
+    printf("%s version[%lu]=\"%s\"\n",
+        sp, sizeof(this->version), this->version);
+    printf("%s target[%lu]=\"%s\"\n",
+        sp, sizeof(this->target), this->target);
+    printf("%s platform[%lu]=\"%s\"\n",
+        sp, sizeof(this->platform), this->platform);
     printf("%s build[%lu]=\"%s\"\n",
         sp, sizeof(this->build), this->build);
 }

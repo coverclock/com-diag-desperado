@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -35,10 +35,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-    $Name:  $
-
-    $Id: ficldesperadoc.txt,v 1.2 2006/08/19 21:20:17 jsloan Exp $
-
 ******************************************************************************/
 
 /**
@@ -50,12 +46,6 @@
  *  the appropriate addresses into the pointer variables. If no dependencies
  *  are required, the defaults are used. (Yes, this is like the v-table in
  *  C++.)
- *
- *  @author $Author: jsloan $
- *
- *  @version    $Revision: 1.2 $
- *
- *  @date   $Date: 2006/08/19 21:20:17 $
  */
 
 #include <stdio.h>

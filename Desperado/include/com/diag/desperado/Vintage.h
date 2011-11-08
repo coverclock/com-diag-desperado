@@ -100,14 +100,24 @@ public:
     static const char url[];
 
     /**
-     *  This NUL-terminated string contains the URI information.
-     */
-    static const char uri[];
-
-    /**
      *  This NUL-terminated string contains the release name.
      */
     static const char release[];
+
+    /**
+     *  This NUL-terminated string contains the version number.
+     */
+    static const char version[];
+
+    /**
+     *  This NUL-terminated string contains the hardware target.
+     */
+    static const char target[];
+
+    /**
+     *  This NUL-terminated string contains the operating system platform.
+     */
+    static const char platform[];
 
     /**
      *  This NUL-terminated string contains the release date.
