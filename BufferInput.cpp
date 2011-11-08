@@ -71,7 +71,7 @@
 BufferInput::BufferInput(char* sp) :
     Input(),
     buffer(sp),
-    size((0 != sp) ? std::strlen(sp) + 1 : 0),
+    size((0 != sp) ? std::strlen(sp) : 0),
     offset(0)
 {
 }
@@ -104,8 +104,6 @@ int BufferInput::operator() () {
     if (0 == this->buffer) {
         errno = EINVAL;
     } else if (this->offset >= this->size) {
-        errno = 0;
-    } else if ('\0' == this->buffer[this->offset]) {
         errno = 0;
     } else {
         rc = this->buffer[this->offset++];
@@ -143,8 +141,6 @@ ssize_t BufferInput::operator() (char* bp, size_t length) {
         rc = 0;
     } else if (this->offset >= this->size) {
         errno = 0;
-    } else if ('\0' == this->buffer[this->offset]) {
-        errno = 0;
     } else if (1 == length) {
     	*bp = '\0';
     	rc = 1;
@@ -153,9 +149,6 @@ ssize_t BufferInput::operator() (char* bp, size_t length) {
         rc = 0;
         while (1 < length) {
             ch = this->buffer[this->offset];
-            if ('\0' == ch) {
-                break;
-            }
             ++this->offset;
             bp[rc++] = ch;
             --length;

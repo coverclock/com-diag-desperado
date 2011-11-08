@@ -36,10 +36,6 @@
 #   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #   Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 #
-#   $Name:  $
-#
-#   $Id: cpdate.sh,v 1.10 2006/12/09 22:57:19 jsloan Exp $
-#
 ###############################################################################
 
 #       

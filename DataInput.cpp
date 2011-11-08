@@ -67,7 +67,7 @@
 DataInput::DataInput(const char* sp) :
     Input(),
     data(sp),
-    size((0 != sp) ? std::strlen(sp) + 1 : 0),
+    size((0 != sp) ? std::strlen(sp) : 0),
     offset(0),
     saved(EOF)
 {
@@ -107,8 +107,6 @@ int DataInput::operator() () {
         this->saved = EOF;
     } else if (this->offset >= this->size) {
         errno = 0;
-    } else if ('\0' == this->data[this->offset]) {
-        errno = 0;
     } else {
         rc = this->data[this->offset++];
         rc = rc & unsignedintmaxof(char);
@@ -143,39 +141,31 @@ ssize_t DataInput::operator() (char* bp, size_t length) {
         errno = EINVAL;
     } else if (0 == length) {
         rc = 0;
-    } else if (this->offset >= this->size) {
-        errno = 0;
-    } else if ('\0' == this->data[this->offset]) {
+    } else if ((this->offset >= this->size) && (EOF == this->saved)) {
         errno = 0;
     } else if (1 == length) {
     	*bp = '\0';
     	rc = 1;
     } else {
-        char ch;
+        char ch = ' ';
         rc = 0;
     	if (EOF != this->saved) {
     		ch = this->saved;
             this->saved = EOF;
-            if ('\0' != ch) {
-            	bp[rc++] = ch;
-            	--length;
-            }
-            if (('\n' == ch) || ('\0' == ch)) {
-            	length = 1;
-            }
+            bp[rc++] = ch;
+            --length;
     	}
-		while (1 < length) {
-			ch = this->data[this->offset];
-			if ('\0' == ch) {
-				break;
+    	if (('\n' != ch) && (this->offset < this->size)) {
+			while (1 < length) {
+				ch = this->data[this->offset];
+				++this->offset;
+				bp[rc++] = ch;
+				--length;
+				if ('\n' == ch) {
+					break;
+				}
 			}
-			++this->offset;
-			bp[rc++] = ch;
-			--length;
-			if ('\n' == ch) {
-				break;
-			}
-		}
+    	}
         bp[rc++] = '\0';
     }
     return rc;

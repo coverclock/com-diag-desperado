@@ -52,7 +52,7 @@ mkdir -p ${ROOT}
 
 for OBJECT in D F N P S B; do
     for METHOD in c l s f b; do
-        for IO in s f x; do
+        for IO in x s f; do
 
             INPUT="${ROOT}/${FILE}"
             OUTPUT="${ROOT}/${OBJECT}${METHOD}${IO}.txt"
@@ -86,7 +86,8 @@ for OBJECT in D F N P S B; do
                 diff -q ${INPUT} ${OUTPUT} >> ${ERROR} 2>&1
                 RC=$?
                 if [ ${RC} -ne 0 ]; then
-                    echo "${CMD}: diff ${OBJECT} ${METHOD} ${IO} ${RC}!"
+                    echo "${CMD}: diff ${OBJECT} ${METHOD} ${IO} ${RC} ${INPUT} ${OUTPUT}!"
+                    diff ${INPUT} ${OUTPUT}
                 fi
                 ERRORS=`expr ${ERRORS} + ${RC}`
             fi

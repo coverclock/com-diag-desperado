@@ -154,7 +154,7 @@ ssize_t DescriptorInput::operator() (char* buffer, size_t size) {
                 size -= fc;
                 rc += fc;
                 here += fc;
-                if (('\n' == *(here - 1)) || ('\0' == *(here - 1))) {
+                if ('\n' == *(here - 1)) {
                     break;
                 }
             } else if (0 == fc) {
@@ -176,7 +176,7 @@ ssize_t DescriptorInput::operator() (char* buffer, size_t size) {
                 break;
             }
         }
-        if ((EOF != rc) && ('\0' != *(here - 1))) {
+        if (EOF != rc) {
             *here = '\0';
             ++rc;
         }

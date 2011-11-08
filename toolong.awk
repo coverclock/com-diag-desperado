@@ -17,10 +17,6 @@
 #	along with this program; if not, write to the Free Software
 #	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
-#	$Name:  $
-#
-#	$Id: toolong.awk,v 1.5 2006/01/09 00:24:49 jsloan Exp $
-#
 #	coverclock@diag.com (Chip Overclock)
 #
 

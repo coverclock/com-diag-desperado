@@ -35,10 +35,6 @@
 #	Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #	Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 #
-#	$Name:  $
-#
-#	$Id: Linux.mk,v 1.42 2007/01/29 15:17:08 jsloan Exp $
-#
 ###############################################################################
 
 #

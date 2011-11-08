@@ -35,10 +35,6 @@
 #	Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #	Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 #
-#	$Name:  $
-#
-#	$Id: Cygwin.mk,v 1.5 2006/09/12 20:23:54 jsloan Exp $
-#
 ###############################################################################
 
 #

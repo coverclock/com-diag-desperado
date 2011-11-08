@@ -105,7 +105,7 @@ public:
     virtual int operator() (int ch);
 
     /**
-     *  Inputs a newline or NUL terminated line into the buffer of
+     *  Inputs a newline terminated line into the buffer of
      *  the specified size. If a newline is encountered, it is input
      *  into the buffer. Guarantees that the buffer is NUL terminated
      *  if it is at least one octet in size. Guarantees that no more
