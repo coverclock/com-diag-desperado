@@ -172,7 +172,34 @@ CXXCAPI int unittestInputOutput(
             char buffer[257];
             ssize_t rc;
             ssize_t rc2;
+            int ch;
+            int ch2;
             while (true) {
+                ch = input();
+                if (EOF == ch) {
+                    if (0 != errno) {
+                        errorf("%s[%d]: [%zu] input()!\n",
+                            __FILE__, __LINE__, inputted);
+                        std::perror("input()");
+                        ++errors;
+                    }
+                    break;
+                }
+                ch2 = input(ch);
+                if (EOF == ch2) {
+                    errorf("%s[%d]: [%zu] input(ch)!\n",
+                        __FILE__, __LINE__, inputted);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
+                if (ch != ch2) {
+                    errorf("%s[%d]: [%zu] (0x%hhx!=0x%hhx)!\n",
+                        __FILE__, __LINE__, inputted, ch, ch2);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
                 rc = input(buffer, sizeof(buffer));
                 if (EOF == rc) {
                     if (0 != errno) {
@@ -230,7 +257,34 @@ CXXCAPI int unittestInputOutput(
             char buffer[16 + 1];
             ssize_t rc;
             ssize_t rc2;
+            int ch;
+            int ch2;
             while (true) {
+                ch = input();
+                if (EOF == ch) {
+                    if (0 != errno) {
+                        errorf("%s[%d]: [%zu] input()!\n",
+                            __FILE__, __LINE__, inputted);
+                        std::perror("input()");
+                        ++errors;
+                    }
+                    break;
+                }
+                ch2 = input(ch);
+                if (EOF == ch2) {
+                    errorf("%s[%d]: [%zu] input(ch)!\n",
+                        __FILE__, __LINE__, inputted);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
+                if (ch != ch2) {
+                    errorf("%s[%d]: [%zu] (0x%hhx!=0x%hhx)!\n",
+                        __FILE__, __LINE__, inputted, ch, ch2);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
                 rc = input(buffer, sizeof(buffer) - 1);
                 if (EOF == rc) {
                     if (0 != errno) {
@@ -292,7 +346,34 @@ CXXCAPI int unittestInputOutput(
             ssize_t rc;
             ssize_t rc2;
             Print outputf(output);
+            int ch;
+            int ch2;
             while (true) {
+                ch = input();
+                if (EOF == ch) {
+                    if (0 != errno) {
+                        errorf("%s[%d]: [%zu] input()!\n",
+                            __FILE__, __LINE__, inputted);
+                        std::perror("input()");
+                        ++errors;
+                    }
+                    break;
+                }
+                ch2 = input(ch);
+                if (EOF == ch2) {
+                    errorf("%s[%d]: [%zu] input(ch)!\n",
+                        __FILE__, __LINE__, inputted);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
+                if (ch != ch2) {
+                    errorf("%s[%d]: [%zu] (0x%hhx!=0x%hhx)!\n",
+                        __FILE__, __LINE__, inputted, ch, ch2);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
                 rc = input(buffer, sizeof(buffer));
                 if (EOF == rc) {
                     if (0 != errno) {
@@ -350,7 +431,34 @@ CXXCAPI int unittestInputOutput(
             char buffer[output.minimum_buffer_size];
             ssize_t rc;
             ssize_t rc2;
+            int ch;
+            int ch2;
             while (true) {
+                ch = input();
+                if (EOF == ch) {
+                    if (0 != errno) {
+                        errorf("%s[%d]: [%zu] input()!\n",
+                            __FILE__, __LINE__, inputted);
+                        std::perror("input()");
+                        ++errors;
+                    }
+                    break;
+                }
+                ch2 = input(ch);
+                if (EOF == ch2) {
+                    errorf("%s[%d]: [%zu] input(ch)!\n",
+                        __FILE__, __LINE__, inputted);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
+                if (ch != ch2) {
+                    errorf("%s[%d]: [%zu] (0x%hhx!=0x%hhx)!\n",
+                        __FILE__, __LINE__, inputted, ch, ch2);
+                    std::perror("input(ch)");
+                    ++errors;
+                    break;
+                }
                 rc = input(buffer, 1, sizeof(buffer));
                 if (EOF == rc) {
                     if (0 != errno) {

@@ -124,7 +124,7 @@ public:
     virtual int operator() (int ch);
 
     /**
-     *  Inputs a newline or NUL terminated line from the buffer into
+     *  Inputs a newline terminated line from the buffer into
      *  the buffer of the specified size. If a newline is read, it is
      *  transferred into the buffer. Guarantees that the buffer is NUL
      *  terminated if it is at least one octet in size. Guarantees that

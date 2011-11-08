@@ -458,7 +458,7 @@ int main(int argc, char **argv, char **) {
         if (0 != outstring) {
             fc = ::desperado_writes(outsocket, so->getBuffer(),
                     so->getOffset(), so->getOffset());
-            if (static_cast<ssize_t>(size) != fc) {
+            if (static_cast<ssize_t>(so->getOffset()) != fc) {
                 std::perror("desperado_writes(outoutsocket,outstring,size)");
                 ++errors;
             }

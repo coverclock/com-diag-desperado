@@ -113,7 +113,7 @@ GENERATED	=	$(CGEN) $(CXXGEN) $(HGEN) $(TXTGEN)
 
 CXXCAPI		=	crcmodel.c barrierApi.c ficlApi.c
 COMMANDS	=	dates cpdate
-SCRIPTS		=	cpdate.sh dates.sh ficlshell-Cygwin.sh ficlshell-Linux.sh ficlshell.sh iso3166.awk prepare.ex prepare.sh toolong.awk unittestInputOutput.sh unittestsuite.sh
+SCRIPTS		=	cpdate.sh dates.sh ficlshell-Cygwin.sh ficlshell-Linux.sh ficlshell.sh iso3166.awk toolong.awk unittestInputOutput.sh unittestsuite.sh
 MAKESFILES	=	Makefile Makefile.ficl.desperado $(MKFILES)
 ANTFILES	=	$(JAVADIR)/build.xml
 EXTRAS		=	doxygen.cf footer.html ficldesperadoc.txt
@@ -380,10 +380,6 @@ mrproper pristine clobber:	clean adjuncts-clean
 # freeze the next relase:       svn copy svn://localhost/desperado/trunk svn://localhost/desperado/tags/$(RELEASE)
 # add a new element:            svn add [filename]
 #
-#	Other stuff:
-#
-# download the latest release:  wget [ -Y on ] ftp://ftp.webcom.com/pub2/jsloan/www/ftp/ desperado-$(RELEASE).tgz
-#
 
 freeze:
 	${SVN} copy ${SVNTRUNK} ${SVNTAG}/$(RELEASE)
@@ -399,7 +395,6 @@ beta:	release
 release:
 	rm -rf $(TMPDIR)/$(BETA)
 	${SVN} export ${SVNTAG}/$(RELEASE)/${PROJECT} $(TMPDIR)/$(BETA)
-	sh prepare.sh $(TMPDIR)/$(BETA)
 	(cd $(TMPDIR); tar cvzf - ./$(BETA) > $(PRODUCT)-$(RELEASE).tgz)
 
 alpha:	prerelease
@@ -407,7 +402,6 @@ alpha:	prerelease
 prerelease:
 	rm -rf $(TMPDIR)/$(ALPHA)
 	${SVN} export ${SVNTRUNK}/${PROJECT} $(TMPDIR)/$(ALPHA)
-	sh prepare.sh $(TMPDIR)/$(ALPHA)
 	(cd $(TMPDIR); tar cvzf - ./$(ALPHA) > $(PRODUCT)-$(PRERELEASE)-ALPHA.tgz)
 
 dist:	distribution

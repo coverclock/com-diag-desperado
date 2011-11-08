@@ -106,10 +106,10 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # You will have to either set LD_LIBRARY_PATH explicitly or run "sudo ldconfig"
 # against this directory to make the run-time loader happy.
 
-#FICLHOME	=	/home/jsloan/src/ficl4.0.31
-#FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
-#FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
-#FICLHOME	=	/cygdrive/c/Users/jsloan/Desktop/Home/Sources/ficl4.0.31
+#FICLHOME	=	$(HOME)/src/ficl4.0.31
+#FICLHOME	=	$(HOME)/arroyo/ficl-4.0.31
+#FICLHOME	=	$(HOME)/diminuto/ficl-4.0.31
+#FICLHOME	=	$(TEMP)/../../../Desktop/Home/Sources/ficl4.0.31
 
 # If you are using Java, specify where it is.
 # Comment out otherwise.
