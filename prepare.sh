@@ -3,7 +3,7 @@
 
 ###############################################################################
 #
-#   Copyright 2005 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#   Copyright 2005 Digital Aggregates Corporation, Colorado, USA.
 #   This file is part of the Digital Aggregates Desperado library.
 #   
 #   This library is free software; you can redistribute it and/or
@@ -35,10 +35,6 @@
 #   Public License along with this library; if not, write to the
 #   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 #   Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
-#
-#   $Name:  $
-#
-#   $Id: prepare.sh,v 1.5 2006/09/12 16:49:22 jsloan Exp $
 #
 ###############################################################################
 

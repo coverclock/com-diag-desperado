@@ -106,7 +106,7 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # You will have to either set LD_LIBRARY_PATH explicitly or run "sudo ldconfig"
 # against this directory to make the run-time loader happy.
 
-FICLHOME	=	/home/jsloan/src/ficl4.0.31
+#FICLHOME	=	/home/jsloan/src/ficl4.0.31
 #FICLHOME	=	/home/jsloan/arroyo/ficl-4.0.31
 #FICLHOME	=	/home/jsloan/diminuto/ficl-4.0.31
 #FICLHOME	=	/cygdrive/c/Users/jsloan/Desktop/Home/Sources/ficl4.0.31
@@ -120,7 +120,7 @@ FICLHOME	=	/home/jsloan/src/ficl4.0.31
 # "sudo ldconfig $JAVAHOME/jre/lib/i386/server". Apparently the normal
 # install process didn't do the ldconfig automatically.
 
-JAVAHOME	=	/usr/lib/jvm/java-6-openjdk
+#JAVAHOME	=	/usr/lib/jvm/java-6-openjdk
 #JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02
 #JAVAHOME	=	/cygdrive/c/java/jdk1.6.0_02

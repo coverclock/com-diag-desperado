@@ -1,7 +1,7 @@
 #	:set ts=4
 #
 #	iso3166.awk: parses lines from RIPE ISO 3166-1 country code list.
-#	Copyright 2003 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+#	Copyright 2003 Digital Aggregates Corporation, Colorado, USA.
 #
 #	This program is free software; you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by

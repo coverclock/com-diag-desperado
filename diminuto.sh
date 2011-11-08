@@ -1,4 +1,4 @@
-# Copyright 2008 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+# Copyright 2008 Digital Aggregates Corporation, Colorado, USA.
 # Installs Desperado and Ficl libraries and provides unit test binaries.
 # Chip Overclock <coverclock@diag.com>
 # usage: sh diminuto.sh <serverip> <login> <password>

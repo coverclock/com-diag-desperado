@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corp., Arvada CO 80001-0587, USA.
+    Copyright 2006 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado Library.
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +16,6 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-    $Name:  $
-
-    $Id: UnitTestJavaVirtualMachine.java,v 1.3 2006/09/11 21:38:41 jsloan Exp $
 
 ******************************************************************************/
 

@@ -84,9 +84,11 @@ CXXCAPI int unittestVintage(void) {
     printf("copyright=\"%s\"\n", Vintage::copyright);
     printf("contact=\"%s\"\n", Vintage::contact);
     printf("url=\"%s\"\n", Vintage::url);
-    printf("uri=\"%s\"\n", Vintage::uri);
     printf("date=\"%s\"\n", Vintage::date);
     printf("release=\"%s\"\n", Vintage::release);
+    printf("version=\"%s\"\n", Vintage::version);
+    printf("target=\"%s\"\n", Vintage::target);
+    printf("platform=\"%s\"\n", Vintage::platform);
     printf("build=\"%s\"\n", Vintage::build);
 
     printf("%s[%d]: end errors=%d\n",
