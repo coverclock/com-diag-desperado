@@ -78,11 +78,11 @@ const char Vintage::date[] =        "$Date: " DESPERADO_VINTAGE_DATE " $";
 
 const char Vintage::release[] =     "$Release: " DESPERADO_VINTAGE_RELEASE " $";
 
-const char Vintage::version[] =     "$Release: " DESPERADO_VINTAGE_VERSION " $";
+const char Vintage::version[] =     "$Version: " DESPERADO_VINTAGE_VERSION " $";
 
-const char Vintage::target[] =     "$Release: " DESPERADO_VINTAGE_TARGET " $";
+const char Vintage::target[] =     "$Target: " DESPERADO_VINTAGE_TARGET " $";
 
-const char Vintage::platform[] =     "$Release: " DESPERADO_VINTAGE_PLATFORM " $";
+const char Vintage::platform[] =     "$Platform: " DESPERADO_VINTAGE_PLATFORM " $";
 
 const char Vintage::build[] =       "$Build: " __DATE__ " " __TIME__ " $";
 
