@@ -66,16 +66,16 @@
 
 
 const char* Logger::labels[] = {
-    "FNST",
-    "FNER",
+    "FINS",
+    "FINR",
     "FINE",
-    "TRCE",
-    "DEBG",
+    "TRAC",
+    "DBUG",
     "INFO",
-    "CNFG",
+    "CONF",
     "NOTE",
     "WARN",
-    "ERRO",
+    "ERRR",
     "SEVR",
     "CRIT",
     "ALRT",
