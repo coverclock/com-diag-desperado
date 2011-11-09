@@ -96,8 +96,11 @@ public:
      *  Any implementation of the formatted output functor below
      *  must guarantee that is can output a formatted buffer of
      *  at least this many characters.
+     *
+     *  Was 256 for eons.
+     *  Increased to 1024 in support of Hayloft.
      */
-    static const size_t minimum_buffer_size = 256;
+    static const size_t minimum_buffer_size = 1024;
 
     /**
      *  This is the maximum number of spaces that can be returned

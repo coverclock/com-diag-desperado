@@ -56,7 +56,7 @@ PRODUCT		=	desperado
 PROJECT		=	Desperado
 RELEASE		=	badger
 MAJOR		=	6
-MINOR		=	1
+MINOR		=	2
 BUILD		=	0
 PRERELEASE	=	cactus
 
