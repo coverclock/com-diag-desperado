@@ -226,7 +226,7 @@ depend dependencies:
 #
 
 V_PRODUCT	=	$(PROJECT)
-V_RELEASE	=	$(PRERELEASE)
+V_RELEASE	=	$(RELEASE)
 V_VERSION	=	$(MAJOR).$(MINOR).$(BUILD)
 V_COPYRIGHT	=	Copyright 2005-$(shell date +%Y) Digital Aggregates Corporation, Colorado, USA.
 V_CONTACT	=	coverclock@diag.com (Chip Overclock)
@@ -252,7 +252,7 @@ vintage:
 	echo "#define DESPERADO_VINTAGE_TARGET \"$(V_TARGET)\"" >> $(V_H)
 	echo "#define DESPERADO_VINTAGE_LICENSE \"$(V_LICENSE)\"" >> $(V_H)
 
-$(V_H):	$(NONSYMBOLS)
+$(V_H):	Makefile $(NONSYMBOLS)
 	make vintage
 
 #
