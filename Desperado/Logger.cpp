@@ -214,8 +214,7 @@ ssize_t Logger::format(
     }
     int octets = ::snprintf(buffer, size, "[%x]%s [%4.4s] ",
             level, stamp, this->labels[level]);
-    ssize_t rc = ::vsnprintf(buffer + octets, sizeof(buffer) - octets,
-                                 format, ap);
+    ssize_t rc = ::vsnprintf(buffer + octets, size - octets, format, ap);
     return octets + rc;
 }
 
