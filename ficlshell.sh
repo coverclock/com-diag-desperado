@@ -103,6 +103,7 @@ echo "    ficlDictionaryLock(d, 0);"
 echo "}"
 echo "#else"
 echo "void desperado_ficl_shell(void* unused) {"
+echo " unused = unused ? unused : 0;"
 echo "}"
 echo "#endif"
 
