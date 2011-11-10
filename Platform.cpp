@@ -66,7 +66,21 @@
 #include "com/diag/desperado/cxxcapi.h"
 
 
-extern CXXCTYPE(Platform)& platform_factory(void);
+#if defined(DESPERADO_PLATFORM_IS_Linux)
+#include "com/diag/desperado/Linux.h"
+typedef CXXCTYPE(Linux) OperatingSystem;
+#elif defined(DESPERADO_PLATFORM_IS_Cygwin)
+#include "com/diag/desperado/Cygwin.h"
+typedef CXXCTYPE(Cygwin) OperatingSystem;
+#elif defined(DESPERADO_PLATFORM_IS_Diminuto)
+#include "com/diag/desperado/Diminuto.h"
+typedef CXXCTYPE(Diminuto) OperatingSystem;
+#elif defined(DESPERADO_PLATFORM_IS_Arroyo)
+#include "com/diag/desperado/Arroyo.h"
+typedef CXXCTYPE(Arroyo) OperatingSystem;
+#else
+#error DESPERADO_PLATFORM_IS_* not defined!
+#endif
 
 
 #include "com/diag/desperado/Begin.h"
@@ -98,7 +112,7 @@ static LeapSeconds leapsecondsrule;
 //  to isolate the "decide what platform to create" logic.
 //
 Platform& Platform::factory() {
-    return platform_factory();
+    return *(new OperatingSystem);
 }
 
 
