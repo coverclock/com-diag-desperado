@@ -59,6 +59,7 @@
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/cxxcapi.h"
 #include "com/diag/desperado/stdarg.h"
+#include "com/diag/desperado/generics.h"
 
 
 #if defined(__cplusplus)
@@ -89,16 +90,14 @@ public:
      *  ssize_t, which is signed. This is so that the output functors
      *  can use a negative ssize_t value to indicate failure.
      */
-    static const size_t maximum_string_length =
-        (~(static_cast<size_t>(1) << ((sizeof(ssize_t) * 8) - 1)));
+    static const size_t maximum_string_length = intmaxof(ssize_t);
 
     /**
      *  Any implementation of the formatted output functor below
      *  must guarantee that is can output a formatted buffer of
      *  at least this many characters.
      *
-     *  Was 256 for eons.
-     *  Increased to 1024 in support of Hayloft.
+     *  (Was 256, increased to 1024 in support of Hayloft.)
      */
     static const size_t minimum_buffer_size = 1024;
 
