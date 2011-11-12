@@ -73,6 +73,11 @@
  *  of great power, with its use comes great responsibility. I have not
  *  given up trying to find a good way to do without it.
  *
+ *  See integers.h for implementations of some of the more useful generics
+ *  as C++ templates. Alas, GNU g++ 4.4.3 doesn't allow you to call functions
+ *  from constant expressions, which is exactly where you most want to use
+ *  these, and even though they can be resolved at compile time.
+ *
  *  Doing without these macros is also difficult. Symbols like INT_MAX
  *  from limits.h are not adequate when doing generic programming, for
  *  example using templates, where the type of a variable cannot be
