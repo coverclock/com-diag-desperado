@@ -44,7 +44,10 @@
  *  @file
  *
  *	Implements some of the more useful macros in generics.h as C++ templates.
- *	Definitely not usable anywhere but in a C++ translation unit.
+ *	Definitely not usable anywhere but in a C++ translation unit. This is not
+ *	as nearly useful as you would hope: GNU g++ 4.4.3. doesn't allow you to use
+ *	these in constant expressions even though they can be resolved at compile
+ *	time.
  *
  *  @author Chip Overclock (coverclock@diag.com)
  */
