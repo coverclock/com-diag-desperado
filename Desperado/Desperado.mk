@@ -705,6 +705,9 @@ timestamps:	tooltimestamps.o $(ARCHIVE)
 coreable:	toolcoreable.o $(ARCHIVE)
 	$(LD) -o coreable toolcoreable.o $(LDFLAGS)
 
+integers:	toolintegers.o $(ARCHIVE)
+	$(LD) -o integers toolintegers.o $(LDFLAGS)
+
 dates:	dates.sh
 	cp dates.sh dates
 	chmod 755 dates
