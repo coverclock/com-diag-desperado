@@ -76,7 +76,9 @@
  *  See integers.h for implementations of some of the more useful generics
  *  as C++ templates. Alas, GNU g++ 4.4.3 doesn't allow you to call functions
  *  from constant expressions, which is exactly where you most want to use
- *  these, and even though they can be resolved at compile time.
+ *  these, and even though they can be resolved at compile time. I believe this
+ *  is because static const expressions are actually supported by the C
+ *  preprocessor as text substitution, not by the compiler.
  *
  *  Doing without these macros is also difficult. Symbols like INT_MAX
  *  from limits.h are not adequate when doing generic programming, for
