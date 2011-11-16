@@ -54,11 +54,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	cactus
+RELEASE		=	dauphin
 MAJOR		=	6
-MINOR		=	3
+MINOR		=	4
 BUILD		=	0
-PRERELEASE	=	dauphin
+PRERELEASE	=	empire
 
 #
 # Indicate the platform and target you are using.

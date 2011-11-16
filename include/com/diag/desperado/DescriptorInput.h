@@ -99,6 +99,13 @@ public:
     int getDescriptor() const;
 
     /**
+     * Returns the number of pushed characters. For this implementation this
+     * will always return zero or one.
+     * @return the number of pushed characters.
+     */
+    size_t getPushed() const;
+
+    /**
      *  Returns the next unsigned character in the file, or EOF if
      *  End Of File has been reached.
      *
@@ -215,6 +222,15 @@ private:
 inline int DescriptorInput::getDescriptor() const {
     return this->descriptor;
 }
+
+
+//
+// Return the number of pushed characters.
+//
+inline size_t DescriptorInput::getPushed() const {
+	return (saved != EOF) ? 1 : 0;
+}
+
 
 #include "com/diag/desperado/End.h"
 

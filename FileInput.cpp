@@ -128,7 +128,7 @@ int FileInput::operator() (int ch) {
     		error = errno;
     	}
     } else {
-        int fc = ungetc(ch, this->file);
+        int fc = std::ungetc(ch, this->file);
         if (EOF != fc) {
             rc = fc;
         } else if (std::feof(this->file)) {
