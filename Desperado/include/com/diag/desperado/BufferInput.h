@@ -165,19 +165,28 @@ public:
 
     /**
      *  Returns a pointer to the buffer.
+     *  @return a pointer to the buffer.
      */
     void* getBuffer() const;
 
     /**
      *  Returns the size of the buffer.
+     *  @return the size of the buffer.
      */
     size_t getSize() const;
 
     /**
      *  Returns the current offset into the buffer, indicating how
      *  many characters have been consumed so far.
+     *  @return the current offset into the buffer.
      */
     size_t getOffset() const;
+
+    /**
+     * Returns the length of the available data.
+     * @return the length of the available data.
+     */
+    size_t getLength() const;
 
     /**
      *  Displays internal information about this object to the specified
@@ -243,6 +252,13 @@ inline size_t BufferInput::getSize() const {
 //
 inline size_t BufferInput::getOffset() const {
     return this->offset;
+}
+
+//
+// Return the length of the buffer.
+//
+inline size_t BufferInput::getLength() const {
+	return (this->size - this->offset);
 }
 
 #include "com/diag/desperado/End.h"

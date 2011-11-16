@@ -157,19 +157,35 @@ public:
 
     /**
      *  Returns a pointer to the data.
+     *  @return a pointer to the data.
      */
     const void* getData() const;
 
     /**
      *  Returns the size of the data.
+     *  @return the size of the data.
      */
     size_t getSize() const;
 
     /**
      *  Returns the current offset into the data, indicating how
      *  many characters have been consumed so far.
+     *  @return an offset into the data.
      */
     size_t getOffset() const;
+
+    /**
+     * Returns the length of the available data.
+     * @return the length of the available data.
+     */
+    size_t getLength() const;
+
+    /**
+     * Returns the number of pushed characters. For this implementation this
+     * will always return zero or one.
+     * @return the number of pushed characters.
+     */
+    size_t getPushed() const;
 
     /**
      *  Displays internal information about this object to the specified
@@ -228,7 +244,7 @@ inline const void* DataInput::getData() const {
 
 
 //
-//  Return a pointer to the data.
+//  Return the total unconsumed size of the data.
 //
 inline size_t DataInput::getSize() const {
     return this->size;
@@ -240,6 +256,20 @@ inline size_t DataInput::getSize() const {
 //
 inline size_t DataInput::getOffset() const {
     return this->offset;
+}
+
+//
+// Return the length of the data.
+//
+inline size_t DataInput::getLength() const {
+	return (this->size - this->offset) + ((saved != EOF) ? 1 : 0);
+}
+
+//
+// Return the number of pushed characters.
+//
+inline size_t DataInput::getPushed() const {
+	return (saved != EOF) ? 1 : 0;
 }
 
 #include "com/diag/desperado/End.h"
