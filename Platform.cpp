@@ -87,6 +87,37 @@ typedef CXXCTYPE(Arroyo) OperatingSystem;
 
 
 //
+//  Allocate and construct a suitable Platform object and return a
+//  reference to it.
+//
+Platform& Platform::factory() {
+    return *(new OperatingSystem);
+}
+
+
+//
+//  This points to the initial default platform object. Although it is a
+//	singleton, it is not lazily constructed. It is done via static
+//	initialization to avoid a chicken-and-egg issue. To use the safe lazy
+//	initialization idiom requires CriticalSection, and CriticalSection requires
+//	Mutex, and Mutex requires Platform. A lot of care has to be taken to avoid
+//	issues with static initialization order.
+//
+static Platform* instant = &(Platform::factory());
+
+
+//
+//	This points to the current system platform object. An application may
+//	create multiple platform objects, but there is only one current system
+//	platform object. It is initially the default platform object created during
+//	static initialization. But the application can set it to be any other
+//	platform object. When this happens, the new platform object is not taken;
+//	it is up to the application to manage its memory.
+//
+Platform* Platform::singleton = instant;
+
+
+//
 //  This forces at least one Vintage object to be linked into any
 //  application that uses Platform, allowing the ident(1) command
 //  to be used against the resulting application.
@@ -104,27 +135,6 @@ static DstNever dstneverrule;
 //  This is the default Leap Seconds rule.
 //
 static LeapSeconds leapsecondsrule;
-
-
-//
-//  Allocate and construct a suitable Platform object and return a
-//  reference to it. This is pushed off into another routine just
-//  to isolate the "decide what platform to create" logic.
-//
-Platform& Platform::factory() {
-    return *(new OperatingSystem);
-}
-
-
-static Platform& instant = Platform::factory();
-
-
-//
-//  This refers to the system platform object. An application may instantiate
-//  many platform objects, but there is only one system platform object.
-//  Although it is a singleton, it is not lazily constructed.
-//
-Platform* Platform::singleton = &instant;
 
 
 //
