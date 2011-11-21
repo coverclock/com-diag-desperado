@@ -56,7 +56,7 @@ PRODUCT		=	desperado
 PROJECT		=	Desperado
 RELEASE		=	dauphin
 MAJOR		=	6
-MINOR		=	4
+MINOR		=	5
 BUILD		=	0
 PRERELEASE	=	empire
 
