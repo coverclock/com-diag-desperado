@@ -178,8 +178,7 @@ CXXCAPI int desperado_portable_barrier(void);
  *  @author coverclock@diag.com (Chip Overclock)
  */
 CXXCINLINE int desperado_memory_barrier(void) {
-    desperado_native_barrier();
-    return 0;
+    return desperado_native_barrier();
 }
 
 
