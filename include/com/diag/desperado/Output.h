@@ -254,7 +254,7 @@ typedef struct Output Output;
  *
  *  @return the output character if successful, EOF otherwise.
  */
-CXXCAPI ssize_t output_c(CXXCTYPE(Output)* o, int c);
+CXXCAPI ssize_t output_c(CXXCTYPE(::com::diag::desperado::, Output)* o, int c);
 
 
 /**
@@ -267,7 +267,7 @@ CXXCAPI ssize_t output_c(CXXCTYPE(Output)* o, int c);
  *
  *  @return a non-negative number if successful, EOF otherwise.
  */
-CXXCAPI ssize_t output_s(CXXCTYPE(Output)* o, const char* s);
+CXXCAPI ssize_t output_s(CXXCTYPE(::com::diag::desperado::, Output)* o, const char* s);
 
 
 /**
@@ -286,7 +286,7 @@ CXXCAPI ssize_t output_s(CXXCTYPE(Output)* o, const char* s);
  *  @return the number of octets output if successful (which
  *          may be zero), EOF otherwise.
  */
-CXXCAPI ssize_t output_n(CXXCTYPE(Output)* o, const char* s, size_t size);
+CXXCAPI ssize_t output_n(CXXCTYPE(::com::diag::desperado::, Output)* o, const char* s, size_t size);
 
 
 /**
@@ -302,7 +302,7 @@ CXXCAPI ssize_t output_n(CXXCTYPE(Output)* o, const char* s, size_t size);
  *
  *  @return a non-negative number if successful, EOF otherwise.
  */
-CXXCAPI ssize_t output_v(CXXCTYPE(Output)* o, const char* format, va_list ap);
+CXXCAPI ssize_t output_v(CXXCTYPE(::com::diag::desperado::, Output)* o, const char* format, va_list ap);
 
 
 /**
@@ -327,7 +327,7 @@ CXXCAPI ssize_t output_v(CXXCTYPE(Output)* o, const char* format, va_list ap);
  *          than maximum including zero) if successful, EOF otherwise.
  */
 CXXCAPI ssize_t output_b(
-	CXXCTYPE(Output)* o,
+	CXXCTYPE(::com::diag::desperado::, Output)* o,
     const void* buffer,
     size_t minimum,
     size_t maximum
@@ -343,7 +343,7 @@ CXXCAPI ssize_t output_b(
  *
  *  @return a non-negative number if successful, EOF otherwise.
  */
-CXXCAPI int output_flush(CXXCTYPE(Output)* o);
+CXXCAPI int output_flush(CXXCTYPE(::com::diag::desperado::, Output)* o);
 
 
 #if !defined(EOF)

@@ -57,7 +57,7 @@
 
 
 #include <pthread.h>
-#include "com/diag/desperado/types.h"
+#include "com/diag/desperado/target.h"
 #include "com/diag/desperado/Object.h"
 #include "com/diag/desperado/Output.h"
 
@@ -122,7 +122,7 @@ public:
      *
      *  @return a thread identifier.
      */
-    identity_t getIdentity() const;
+    uint64_t getIdentity() const;
 
     /**
      *  Displays internal information about this object to the specified
@@ -162,12 +162,12 @@ private:
     /**
      *  This is the identifier of the holder of the mutex.
      */
-    identity_t identity;
+    uint64_t identity;
 
     /**
      *  This is the level of recursion.
      */
-    unsigned int level;
+    uint64_t level;
 
     /**
      *  This is the prior enable/disable state of the thread holding the mutex.
@@ -188,7 +188,7 @@ inline bool Mutex::isLocked() const {
 //
 //  Return identifier of thread holding mutex if any.
 //
-inline identity_t Mutex::getIdentity() const {
+inline uint64_t Mutex::getIdentity() const {
     return this->identity;
 }
 

@@ -139,7 +139,7 @@ CXXCAPI const char* platform_host() {
 }
 
 
-CXXCAPI ssize_t platform_printf(const char* format ...) {
+CXXCAPI ssize_t platform_printf(const char* format, ...) {
     va_list ap;
     ssize_t rc;
 
@@ -151,7 +151,7 @@ CXXCAPI ssize_t platform_printf(const char* format ...) {
 }
 
 
-CXXCAPI ssize_t platform_errorf(const char* format ...) {
+CXXCAPI ssize_t platform_errorf(const char* format, ...) {
     va_list ap;
     ssize_t rc;
 

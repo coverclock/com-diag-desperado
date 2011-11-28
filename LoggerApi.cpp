@@ -35,8 +35,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-
-
 ******************************************************************************/
 
 
@@ -48,8 +46,6 @@
  *  @see    Logger
  *
  *  @author Chip Overclock (coverclock@diag.com)
- *
- *
  */
 
 
@@ -59,10 +55,10 @@
 
 
 #define DESPERADO_LOGGER_API(_FUNCTION_, _LEVEL_) \
-CXXCAPI ssize_t logger_##_FUNCTION_(Logger* logger, const char* format ...) { \
+CXXCAPI ssize_t logger_##_FUNCTION_(Logger* logger, const char* format, ...) { \
     va_list ap; \
     va_start(ap, format); \
-    ssize_t rc = logger->log(Logger::_LEVEL_, format, ap); \
+    ssize_t rc = logger->vlog(Logger::_LEVEL_, format, ap); \
     va_end(ap); \
     return rc; \
 }

@@ -165,9 +165,9 @@ CXXCAPI int dump(ficlVm* pVM, int data, int length);
  *  @return the exit status of the Ficl shell.
  */
 CXXCAPI int ficlsh(
-    CXXCTYPE(Input)& input = *platform_input(),
-    CXXCTYPE(Output)& output = *platform_output(),
-    CXXCTYPE(Output)& error = *platform_error()
+    CXXCTYPE(::com::diag::desperado::, Input)& input = *platform_input(),
+    CXXCTYPE(::com::diag::desperado::, Output)& output = *platform_output(),
+    CXXCTYPE(::com::diag::desperado::, Output)& error = *platform_error()
 );
 
 

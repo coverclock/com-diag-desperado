@@ -281,7 +281,7 @@ public:
      *
      *  @param  format  points to the printf-style format string.
      */
-    ssize_t log(Level level, const char* format ...);
+    ssize_t log(Level level, const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -293,7 +293,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t finest(const char* format ...);
+    ssize_t finest(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -305,7 +305,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t finer(const char* format ...);
+    ssize_t finer(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -317,7 +317,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t fine(const char* format ...);
+    ssize_t fine(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -329,7 +329,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t trace(const char* format ...);
+    ssize_t trace(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -341,7 +341,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t debug(const char* format ...);
+    ssize_t debug(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -353,7 +353,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t information(const char* format ...);
+    ssize_t information(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -365,7 +365,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t configuration(const char* format ...);
+    ssize_t configuration(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -377,7 +377,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t notice(const char* format ...);
+    ssize_t notice(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -389,7 +389,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t warning(const char* format ...);
+    ssize_t warning(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -401,7 +401,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t error(const char* format ...);
+    ssize_t error(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -413,7 +413,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t severe(const char* format ...);
+    ssize_t severe(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -425,7 +425,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t critical(const char* format ...);
+    ssize_t critical(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -437,7 +437,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t alert(const char* format ...);
+    ssize_t alert(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -449,7 +449,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t fatal(const char* format ...);
+    ssize_t fatal(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -461,7 +461,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t emergency(const char* format ...);
+    ssize_t emergency(const char* format, ...);
 
     /**
      *  Formats a variadic argument list and writes the result
@@ -477,7 +477,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    ssize_t print(const char* format ...);
+    ssize_t print(const char* format, ...);
 
 private:
 
@@ -517,7 +517,7 @@ typedef struct Logger Logger;
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_finest(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_finest(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -533,7 +533,7 @@ CXXCAPI ssize_t logger_finest(CXXCTYPE(Logger)* logger, const char* format, ...)
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_finer(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_finer(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -549,7 +549,7 @@ CXXCAPI ssize_t logger_finer(CXXCTYPE(Logger)* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_fine(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_fine(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -565,7 +565,7 @@ CXXCAPI ssize_t logger_fine(CXXCTYPE(Logger)* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_trace(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_trace(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -581,7 +581,7 @@ CXXCAPI ssize_t logger_trace(CXXCTYPE(Logger)* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_debug(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_debug(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -597,7 +597,7 @@ CXXCAPI ssize_t logger_debug(CXXCTYPE(Logger)* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_information(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_information(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -613,7 +613,7 @@ CXXCAPI ssize_t logger_information(CXXCTYPE(Logger)* logger, const char* format,
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_configuration(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_configuration(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -629,7 +629,7 @@ CXXCAPI ssize_t logger_configuration(CXXCTYPE(Logger)* logger, const char* forma
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_notice(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_notice(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -645,7 +645,7 @@ CXXCAPI ssize_t logger_notice(CXXCTYPE(Logger)* logger, const char* format, ...)
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_warning(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_warning(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -661,7 +661,7 @@ CXXCAPI ssize_t logger_warning(CXXCTYPE(Logger)* logger, const char* format, ...
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_error(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_error(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -677,7 +677,7 @@ CXXCAPI ssize_t logger_error(CXXCTYPE(Logger)* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_severe(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_severe(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -693,7 +693,7 @@ CXXCAPI ssize_t logger_severe(CXXCTYPE(Logger)* logger, const char* format, ...)
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_critical(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_critical(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -709,7 +709,7 @@ CXXCAPI ssize_t logger_critical(CXXCTYPE(Logger)* logger, const char* format, ..
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_alert(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_alert(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -725,7 +725,7 @@ CXXCAPI ssize_t logger_alert(CXXCTYPE(Logger)* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_fatal(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_fatal(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -741,7 +741,7 @@ CXXCAPI ssize_t logger_fatal(CXXCTYPE(Logger)* logger, const char* format, ...);
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_emergency(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_emergency(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 /**
@@ -757,7 +757,7 @@ CXXCAPI ssize_t logger_emergency(CXXCTYPE(Logger)* logger, const char* format, .
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI ssize_t logger_print(CXXCTYPE(Logger)* logger, const char* format, ...);
+CXXCAPI ssize_t logger_print(CXXCTYPE(::com::diag::desperado::, Logger)* logger, const char* format, ...);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)

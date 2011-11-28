@@ -769,7 +769,7 @@ CXXCAPI void platform_fatal(
  *
  *  @return a pointer to the platform input object.
  */
-CXXCAPI CXXCTYPE(Input)* platform_input(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, Input)* platform_input(void);
 
 
 /**
@@ -779,7 +779,7 @@ CXXCAPI CXXCTYPE(Input)* platform_input(void);
  *
  *  @return a pointer to the platform output object.
  */
-CXXCAPI CXXCTYPE(Output)* platform_output(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, Output)* platform_output(void);
 
 
 /**
@@ -789,7 +789,7 @@ CXXCAPI CXXCTYPE(Output)* platform_output(void);
  *
  *  @return a pointer to the platform error output object.
  */
-CXXCAPI CXXCTYPE(Output)* platform_error(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, Output)* platform_error(void);
 
 
 /**
@@ -799,7 +799,7 @@ CXXCAPI CXXCTYPE(Output)* platform_error(void);
  *
  *  @return a pointer to the platform dump object.
  */
-CXXCAPI CXXCTYPE(Dump)* platform_dump(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, Dump)* platform_dump(void);
 
 
 /**
@@ -809,7 +809,7 @@ CXXCAPI CXXCTYPE(Dump)* platform_dump(void);
  *
  *  @return a pointer to the platform heap object.
  */
-CXXCAPI CXXCTYPE(Heap)* platform_heap(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, Heap)* platform_heap(void);
 
 
 /**
@@ -819,7 +819,7 @@ CXXCAPI CXXCTYPE(Heap)* platform_heap(void);
  *
  *  @return a pointer to the platform logger object.
  */
-CXXCAPI CXXCTYPE(Logger)* platform_logger(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, Logger)* platform_logger(void);
 
 
 /**

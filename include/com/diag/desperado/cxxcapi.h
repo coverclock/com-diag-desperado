@@ -38,8 +38,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-
-
 ******************************************************************************/
 
 
@@ -62,8 +60,6 @@
  *  @see    M. Cline, "C++ FAQ Lite", 2001-08-15, 29.8
  *
  *  @author Chip Overclock (coverclock@diag.com)
- *
- *
  */
 
 
@@ -150,6 +146,7 @@
 #endif
 
 
+#if defined(__cplusplus)
 /**
  *  @def CXXCINLINE
  *
@@ -162,8 +159,32 @@
  *  has been deprecated by the later ANSI C++ standard but not having
  *  it produces warnings currently for compiles of C translation units.
  */
-#define CXXCINLINE static inline
+# define CXXCINLINE inline
+#else
+/**
+ *  @def CXXCINLINE
+ *
+ *  This symbol is used in both declarations and definitions of
+ *  standalone functions in header files included in both C
+ *  and C++ translation units to suggest that the compiler inline
+ *  the function. Pronounced "sexy-inline".
+ *
+ *  Note that the use of an additional static keyword in this context
+ *  has been deprecated by the later ANSI C++ standard but not having
+ *  it produces warnings currently for compiles of C translation units.
+ */
+# define CXXCINLINE static inline
+#endif
 
+/**
+ * @def CXXCTOKEN
+ *
+ * This exists solely to get around an issue with token replacement in the C
+ * preprocessor. cpp from GCC 4.4.3 is seriously unhappy with using the
+ * preprocessor pasting operator when one of the tokens is a namespace
+ * with the double colon syntax.
+ */
+#define CXXCTOKEN(_TOKEN_) _TOKEN_
 
 #if defined(__cplusplus)
 /**
@@ -174,7 +195,7 @@
  *  has a namespace prefix. C++ symbols will, C symbols will not. Pronounced
  *  "sexy-type".
  */
-# define CXXCTYPE(_TYPE_) ::com::diag::desperado::_TYPE_
+# define CXXCTYPE(_NAMESPACE_, _TYPE_) CXXCTOKEN(_NAMESPACE_)CXXCTOKEN(_TYPE_)
 #else
 /**
  *  @def CXXCTYPE
@@ -184,7 +205,7 @@
  *  has a namespace prefix. C++ symbols will, C symbols will not. Pronounced
  *  "sexy-type".
  */
-# define CXXCTYPE(_TYPE_) _TYPE_
+# define CXXCTYPE(_NAMESPACE_, _TYPE_) _TYPE_
 #endif
 
 

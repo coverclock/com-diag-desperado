@@ -66,7 +66,7 @@
 #include "com/diag/desperado/LogOutput.h"
 #include "com/diag/desperado/Desperado.h"
 
-static int leveltest(const char* ff ...) {
+static int leveltest(const char* ff, ...) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;

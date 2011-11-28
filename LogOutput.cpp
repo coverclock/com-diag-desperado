@@ -92,7 +92,7 @@ int LogOutput::operator() (int c) {
 //
 ssize_t LogOutput::operator() (const char* format, va_list ap) {
     char buffer[minimum_buffer_size];
-    ssize_t size = ::vsnprintf(buffer, minimum_buffer_size, format, ap);
+    ssize_t size = ::vsnprintf(buffer, sizeof(buffer), format, ap);
     int pri;
     const char* e = this->priority(buffer, size, pri);
     size -= e - buffer;

@@ -96,7 +96,7 @@ Output& Print::output() const {
 //
 //  Print a formatted string to the output functor.
 //
-ssize_t Print::operator() (const char* format ...) {
+ssize_t Print::operator() (const char* format, ...) {
     Output& out = this->output();
     va_list ap;
     ssize_t rc;

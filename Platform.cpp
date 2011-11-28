@@ -57,6 +57,7 @@
 #include "com/diag/desperado/littleendian.h"
 #include "com/diag/desperado/lowtohigh.h"
 #include "com/diag/desperado/Platform.h"
+#include "com/diag/desperado/CriticalSection.h"
 #include "com/diag/desperado/Vintage.h"
 #include "com/diag/desperado/Ticks.h"
 #include "com/diag/desperado/TimeZone.h"
@@ -68,16 +69,16 @@
 
 #if defined(DESPERADO_PLATFORM_IS_Linux)
 #include "com/diag/desperado/Linux.h"
-typedef CXXCTYPE(Linux) OperatingSystem;
+typedef CXXCTYPE(::com::diag::desperado::, Linux) OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Cygwin)
 #include "com/diag/desperado/Cygwin.h"
-typedef CXXCTYPE(Cygwin) OperatingSystem;
+typedef CXXCTYPE(::com::diag::desperado::, Cygwin) OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Diminuto)
 #include "com/diag/desperado/Diminuto.h"
-typedef CXXCTYPE(Diminuto) OperatingSystem;
+typedef CXXCTYPE(::com::diag::desperado::, Diminuto) OperatingSystem;
 #elif defined(DESPERADO_PLATFORM_IS_Arroyo)
 #include "com/diag/desperado/Arroyo.h"
-typedef CXXCTYPE(Arroyo) OperatingSystem;
+typedef CXXCTYPE(::com::diag::desperado::, Arroyo) OperatingSystem;
 #else
 #error DESPERADO_PLATFORM_IS_* not defined!
 #endif
@@ -85,6 +86,7 @@ typedef CXXCTYPE(Arroyo) OperatingSystem;
 
 #include "com/diag/desperado/Begin.h"
 
+static Mutex mutex;
 
 //
 //  Allocate and construct a suitable Platform object and return a
@@ -96,14 +98,9 @@ Platform& Platform::factory() {
 
 
 //
-//  This points to the initial default platform object. Although it is a
-//	singleton, it is not lazily constructed. It is done via static
-//	initialization to avoid a chicken-and-egg issue. To use the safe lazy
-//	initialization idiom requires CriticalSection, and CriticalSection requires
-//	Mutex, and Mutex requires Platform. A lot of care has to be taken to avoid
-//	issues with static initialization order.
+//  This points to the initial default platform object.
 //
-static Platform* instant = &(Platform::factory());
+static Platform* instant = 0;
 
 
 //
@@ -114,7 +111,7 @@ static Platform* instant = &(Platform::factory());
 //	platform object. When this happens, the new platform object is not taken;
 //	it is up to the application to manage its memory.
 //
-Platform* Platform::singleton = instant;
+Platform* Platform::singleton = 0;
 
 
 //
@@ -149,7 +146,12 @@ void Platform::instance(Platform& that) {
 //  Get the system platform.
 //
 Platform& Platform::instance() {
-    return *Platform::singleton;
+	CriticalSection guard(mutex);
+	if (singleton == 0) {
+		delete instant;
+		instant = singleton = &(factory());
+	}
+    return *singleton;
 }
 
 

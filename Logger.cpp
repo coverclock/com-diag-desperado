@@ -214,7 +214,7 @@ ssize_t Logger::format(
     }
     int octets = ::snprintf(buffer, size, "[%x]%s [%4.4s] ",
             level, stamp, this->labels[level]);
-    ssize_t rc = ::vsnprintf(buffer + octets, size - octets, format, ap);
+    int rc = ::vsnprintf(buffer + octets, size - octets, format, ap);
     return octets + rc;
 }
 
@@ -238,9 +238,9 @@ ssize_t Logger::emit(const char* buffer, size_t size) {
 #define DESPERADO_LOGGER_BODY(_LEVEL_) \
 	do { \
 		if ((this->PRINT == _LEVEL_) || this->isEnabled(_LEVEL_)) { \
-			char buffer[Output::minimum_buffer_size + 1]; \
-			this->format(buffer, sizeof(buffer), _LEVEL_, format, ap); \
-			rc = this->emit(buffer, sizeof(buffer)); \
+			char buffer[Output::minimum_buffer_size]; \
+			ssize_t size = this->format(buffer, sizeof(buffer), _LEVEL_, format, ap); \
+			rc = this->emit(buffer, size); \
 		} \
 	} while (false)
 
@@ -255,7 +255,7 @@ ssize_t Logger::vlog(Level level, const char* format, va_list ap) {
 //
 //  Log the variadic argument list.
 //
-ssize_t Logger::log(Level level, const char* format ...) {
+ssize_t Logger::log(Level level, const char* format, ...) {
 	ssize_t rc = 0;
     va_list ap;
     va_start(ap, format);
@@ -266,7 +266,7 @@ ssize_t Logger::log(Level level, const char* format ...) {
 
 
 #define DESPERADO_LOGGER(_FUNCTION_, _LEVEL_) \
-ssize_t Logger::_FUNCTION_(const char* format ...) { \
+ssize_t Logger::_FUNCTION_(const char* format, ...) { \
     ssize_t rc = 0; \
     va_list ap; \
     va_start(ap, format); \
