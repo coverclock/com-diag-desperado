@@ -456,7 +456,7 @@ typedef struct Dump Dump;
  *
  *  @return         the number of bytes dumped.
  */
-CXXCAPI size_t dump_bytes(CXXCTYPE(Dump)* d, const void* data, size_t length);
+CXXCAPI size_t dump_bytes(CXXCTYPE(::com::diag::desperado::, Dump)* d, const void* data, size_t length);
 
 
 /**
@@ -474,7 +474,7 @@ CXXCAPI size_t dump_bytes(CXXCTYPE(Dump)* d, const void* data, size_t length);
  *
  *  @return         the number of words dumped.
  */
-CXXCAPI size_t dump_words(CXXCTYPE(Dump)* d, const void* data, size_t length);
+CXXCAPI size_t dump_words(CXXCTYPE(::com::diag::desperado::, Dump)* d, const void* data, size_t length);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)

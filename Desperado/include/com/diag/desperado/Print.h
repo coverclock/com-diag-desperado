@@ -116,7 +116,7 @@ public:
      *  @return the number of characters written to its output
      *          object, or a negative number if error.
      */
-    virtual ssize_t operator() (const char* format ...);
+    virtual ssize_t operator() (const char* format, ...);
 
     /**
      *  Displays internal information about this object to the specified
@@ -169,7 +169,7 @@ private:
  *  @return the number of characters written to its output
  *          object, or a negative number if error.
  */
-CXXCAPI size_t print_f(CXXCTYPE(Output)* o, const char* format, ...);
+CXXCAPI size_t print_f(CXXCTYPE(::com::diag::desperado::, Output)* o, const char* format, ...);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)

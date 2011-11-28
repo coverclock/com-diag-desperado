@@ -57,7 +57,7 @@
 #include "com/diag/desperado/Desperado.h"
 
 
-CXXCAPI size_t print_f(Output* o, const char* format ...) {
+CXXCAPI size_t print_f(Output* o, const char* format, ...) {
     va_list ap;
     ssize_t rc;
 

@@ -417,7 +417,7 @@ typedef struct Heap Heap;
  *  @return a pointer to the suitably aligned memory block of
  *          at least the requested size, or null if an error occurred.
  */
-CXXCAPI void* heap_malloc(CXXCTYPE(Heap)* h, size_t size);
+CXXCAPI void* heap_malloc(CXXCTYPE(::com::diag::desperado::, Heap)* h, size_t size);
 
 
 /**
@@ -433,7 +433,7 @@ CXXCAPI void* heap_malloc(CXXCTYPE(Heap)* h, size_t size);
  *                      realloc(), or calloc().
  *                      It is not an error for this pointer to be null.
  */
-CXXCAPI void heap_free(CXXCTYPE(Heap)* h, void* ptr);
+CXXCAPI void heap_free(CXXCTYPE(::com::diag::desperado::, Heap)* h, void* ptr);
 
 
 /**
@@ -463,7 +463,7 @@ CXXCAPI void heap_free(CXXCTYPE(Heap)* h, void* ptr);
  *  @return a pointer to the suitably aligned memory block of
  *          at least the requested size, or null if an error occurred.
  */
-CXXCAPI void* heap_realloc(CXXCTYPE(Heap)* h, void* ptr, size_t size);
+CXXCAPI void* heap_realloc(CXXCTYPE(::com::diag::desperado::, Heap)* h, void* ptr, size_t size);
 
 
 /**
@@ -482,7 +482,7 @@ CXXCAPI void* heap_realloc(CXXCTYPE(Heap)* h, void* ptr, size_t size);
  *  @return a pointer to the suitably aligned and zeroed memory block of
  *          at least the requested size, or null if an error occurred.
  */
-CXXCAPI void* heap_calloc(CXXCTYPE(Heap)* h, size_t nmemb, size_t size);
+CXXCAPI void* heap_calloc(CXXCTYPE(::com::diag::desperado::, Heap)* h, size_t nmemb, size_t size);
 
 
 #if defined(DESPERADO_HAS_UNITTESTS)

@@ -43,18 +43,18 @@
 /**
  *  @file
  *
- *  Implements the Mutex class.
+ *  Implements the Mutex class. This class can't make use of the Platform class
+ *  during construction, begin(), or end(), because architecturally it sits
+ *  below the Platform class.
  *
  *  @see    Mutex
  *
  *  @author Chip Overclock (coverclock@diag.com)
- *
- *
  */
 
 
+#include <unistd.h>
 #include "com/diag/desperado/generics.h"
-#include "com/diag/desperado/types.h"
 #include "com/diag/desperado/Mutex.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Dump.h"
@@ -62,6 +62,14 @@
 
 
 #include "com/diag/desperado/Begin.h"
+
+
+static uint64_t self() {
+    pid_t pid = ::getpid();
+    pthread_t self = pthread_self();
+    uint64_t identity = pid;
+    return (identity << widthof(self)) | self;
+}
 
 
 //
@@ -96,49 +104,51 @@ Mutex::~Mutex() {
 //  a mutex, but this is sometimes easier said than done.
 //
 bool Mutex::begin() {
-    Platform& platform = Platform::instance();
-    Logger& logger = platform.logger();
+	bool result = false;
 
-    //
-    //  Test for cancellation then disable cancellation of
-    //  this thread.
-    //
+	do {
 
-    pthread_testcancel();
+		if (intmaxof(uint64_t) <= this->level) {
+			break;
+		}
 
-    int save = PTHREAD_CANCEL_ENABLE;
-    pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &save);
+		//
+		//  Test for cancellation then disable cancellation of
+		//  this thread.
+		//
 
-    int rc = pthread_mutex_lock(&(this->mutex));
-    if (0 != rc) {
-        //
-        //  The lock failed. We log an error and return the
-        //  cancel state of this thread to its prior state.
-        //
-        logger.error("%s[%d]: pthread_mutex_lock(%p)=%d\n",
-            __FILE__, __LINE__, &(this->mutex), rc);
-        pthread_setcancelstate(save, 0);
-        return false;
-    }
+		pthread_testcancel();
 
-    //
-    //  We're inside the mutex now and have exclusive access
-    //  to this object.
-    //
+		int save = PTHREAD_CANCEL_ENABLE;
+		pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &save);
 
-    if (0 == this->level) {
-        this->identity = platform.identity();
-        this->state = save;
-    }
+		int rc = pthread_mutex_lock(&(this->mutex));
+		if (0 != rc) {
+			//
+			//  The lock failed. We return the cancel state of this thread
+			//	to its prior state.
+			//
+			pthread_setcancelstate(save, 0);
+			break;
+		}
 
-    if (intmaxof(unsigned int) > this->level) {
-        ++this->level;
-    } else {
-        logger.error("%s[%d]: (%p)->level=0x%x\n",
-            __FILE__, __LINE__, this, level);
-    }
+		//
+		//  We're inside the mutex now and have exclusive access
+		//  to this object.
+		//
 
-    return true;
+		if (0 == this->level) {
+			this->identity = self();
+			this->state = save;
+		}
+
+		++this->level;
+
+		result = true;
+
+	} while (false);
+
+    return result;
 }
 
 
@@ -146,67 +156,64 @@ bool Mutex::begin() {
 //  Unlock.
 //
 bool Mutex::end() {
-    Platform& platform = Platform::instance();
-    Logger& logger = platform.logger();
+	bool result = false;
 
-    //
-    //  We cannot assume we are in the mutex and have exclusive
-    //  access to this object. Hence it could be changing as we
-    //  look at it. Given a non-sequentially consistent memory
-    //  model, the object might lie to us if we do not own it.
-    //  But if we do own it, for sure the checks below will pass.
-    //
+	do {
 
-    int before = this->level;
-    if (0 == before) {
-        logger.error("%s[%d]: level %d==%d\n",
-            __FILE__, __LINE__, before, 0);
-        return false;
-    }
+		//
+		//  We cannot assume we are in the mutex and have exclusive
+		//  access to this object. Hence it could be changing as we
+		//  look at it. Given a non-sequentially consistent memory
+		//  model, the object might lie to us if we do not own it.
+		//  But if we do own it, for sure the checks below will pass.
+		//
 
-    identity_t owner = this->identity;
-    identity_t me = platform.identity();
-    if (owner != me) {
-        logger.error("%s[%d]: identity 0x%016llx!=0x%016llx\n",
-            __FILE__, __LINE__, owner, me);
-        return false;
-    }
+		int before = this->level;
+		if (0 == before) {
+			break;
+		}
 
-    //
-    //  We're pretty sure we are in the mutex and have exclusive
-    //  access to this object.
-    //
+		uint64_t owner = this->identity;
+		uint64_t me = self();
+		if (owner != me) {
+			break;
+		}
 
-    int restore = this->state;
-    --this->level;
+		//
+		//  We're pretty sure we are in the mutex and have exclusive
+		//  access to this object.
+		//
 
-    int rc = pthread_mutex_unlock(&(this->mutex));
-    if (0 != rc) {
-        //
-        //  The unlock failed. We return this object to its
-        //  prior state since we still presumably have exclusive
-        //  access to it.
-        //
-        logger.error("%s[%d]: pthread_mutex_unlock(%p)=%d\n",
-            __FILE__, __LINE__, &(this->mutex), rc);
-        this->level = before;
-        this->identity = owner;
-        this->state = restore;
-        return false;
-    }
+		int restore = this->state;
+		--this->level;
 
-    //
-    //  If we are exiting this mutex, restore the cancel state
-    //  of this thread to its original state upon entry to the
-    //  mutex and test for cancellation.
-    //
+		int rc = pthread_mutex_unlock(&(this->mutex));
+		if (0 != rc) {
+			//
+			//  The unlock failed. We return this object to its
+			//  prior state since we still presumably have exclusive
+			//  access to it.
+			//
+			this->level = before;
+			this->identity = owner;
+			this->state = restore;
+			break;
+		}
 
-    if (0 == before) {
-        pthread_setcancelstate(restore, 0);
-        pthread_testcancel();
-    }
+		//
+		//  If we are exiting this mutex, restore the cancel state
+		//  of this thread to its original state upon entry to the
+		//  mutex and test for cancellation.
+		//
 
-    return true;
+		if (0 == before) {
+			pthread_setcancelstate(restore, 0);
+			pthread_testcancel();
+		}
+
+	} while (false);
+
+    return result;
 }
 
 
@@ -228,7 +235,7 @@ void Mutex::show(int /* level */, Output* display, int indent) const {
     dump.words(&(this->mutexattr), sizeof(this->mutexattr), false, 0,
         indent + 2);
     printf("%s identity=0x%016llx\n", sp, this->identity);
-    printf("%s level=%u%s\n",
+    printf("%s level=%llu%s\n",
         sp, this->level,
         (0 == this->level) ? "=UNLOCKED" : "=LOCKED");
     printf("%s state=%d%s\n",
