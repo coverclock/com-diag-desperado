@@ -54,11 +54,11 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	empire
+RELEASE		=	faust
 MAJOR		=	6
-MINOR		=	5
+MINOR		=	7
 BUILD		=	0
-PRERELEASE	=	faust
+PRERELEASE	=	globe
 
 #
 # Indicate the platform and target you are using.
@@ -106,7 +106,7 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # You will have to either set LD_LIBRARY_PATH explicitly or run "sudo ldconfig"
 # against this directory to make the run-time loader happy.
 
-#FICLHOME	=	$(HOME)/src/ficl4.0.31
+FICLHOME	=	$(HOME)/src/ficl4.0.31
 #FICLHOME	=	$(HOME)/arroyo/ficl-4.0.31
 #FICLHOME	=	$(HOME)/diminuto/ficl-4.0.31
 #FICLHOME	=	$(TEMP)/../../../Desktop/Home/Sources/ficl4.0.31
@@ -120,6 +120,7 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # "sudo ldconfig $JAVAHOME/jre/lib/i386/server". Apparently the normal
 # install process didn't do the ldconfig automatically.
 
+JAVAHOME	=	/usr/lib/jvm/java-6-sun
 #JAVAHOME	=	/usr/lib/jvm/java-6-openjdk
 #JAVAHOME	=	/opt/jdk1.6.0_07
 #JAVAHOME	=	/usr/local/apps/jdk1.6.0_02

@@ -526,16 +526,16 @@ public:
 protected:
 
     /**
+     *  Pointer to the system platform object.
+     */
+    static Platform* singleton;
+
+    /**
      *  Constructor.
      */
     explicit Platform();
 
 private:
-
-    /**
-     *  Pointer to the system platform object.
-     */
-    static Platform* singleton;
 
     /**
      *  Copy constructor.
