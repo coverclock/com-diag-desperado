@@ -120,7 +120,7 @@ ssize_t LogOutput::operator() (
     size_t maximum 
 ) {
 	int pri;
-	const char* s = reinterpret_cast<const char*>(buffer);
+	const char* s = static_cast<const char*>(buffer);
     const char* e = this->priority(s, maximum, pri);
     maximum -= e - s;
     return ou(e, minimum, maximum);

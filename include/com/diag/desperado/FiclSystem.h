@@ -59,9 +59,7 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
-extern "C" {
-#   include "ficl.h"
-}
+#include "com/diag/desperado/Ficl.h"
 #include "com/diag/desperado/cxxcapi.h"
 #include "com/diag/desperado/Platform.h"
 #include "com/diag/desperado/Link.h"
@@ -77,7 +75,7 @@ extern "C" {
  *  is a "FORTH-inspired command language" developed by John Sadler,
  *  a FORTH interpreter written in ANSI C and designed to be embedded
  *  in other applications. Its FORTH dialect is compliant with the ANSI
- *  DPANS94 standard. This class supports Ficl 4.0.31 from
+ *  DPANS94 standard. This class supports Ficl 4.1.0 (formerly 4.0.31) from
  *  <A HREF="http://ficl.sourceforge.net">http://ficl.sourceforge.net</A>.
  *
  *  When an object of the FiclSystem class instantiates,

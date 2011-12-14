@@ -210,8 +210,8 @@ int unittestHeap3() {
 
     for (ii = 0; countof(test) > ii; ++ii) {
         print_f(platform_output(), "%3d 0x%08x 0x%08x %10u\n",
-            ii, reinterpretcastto(uintptr_t,baseline[ii]),
-            reinterpretcastto(uintptr_t,test[ii]),
+            ii, staticcastto(uintptr_t,baseline[ii]),
+            staticcastto(uintptr_t,test[ii]),
             sizes[ii]);
     }
 
@@ -320,7 +320,7 @@ int unittestHeap3() {
                 __FILE__, __LINE__, 0, block[ii], ii);
             ++errors;
         }
-        cp = reinterpretcastto(uint8_t*,block[ii]);
+        cp = staticcastto(uint8_t*,block[ii]);
         for (jj = 0; size > jj; ++jj) {
             if (0 != cp[jj]) {
                 print_f(platform_output(),
@@ -366,7 +366,7 @@ int unittestHeap3() {
                 __FILE__, __LINE__, 0, block[ii], ii);
             ++errors;
         }
-        cp = reinterpretcastto(uint8_t*,block[ii]);
+        cp = staticcastto(uint8_t*,block[ii]);
         for (jj = 0; size > jj; ++jj) {
             if (0 != cp[jj]) {
                 print_f(platform_output(),
@@ -411,7 +411,7 @@ int unittestHeap3() {
                 __FILE__, __LINE__, 0, block[0], size);
             ++errors;
         }
-        cp = reinterpretcastto(uint8_t*,block[0]);
+        cp = staticcastto(uint8_t*,block[0]);
         for (nn = 0; staticcastto(int,set) > nn; ++nn) {
             if (get != cp[nn]) {
                 print_f(platform_output(), "%s[%d]: (%lu!=%lu[%d])!\n",

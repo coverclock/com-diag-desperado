@@ -174,7 +174,7 @@ void Heap::free(void* ptr) {
         tracef("Heap[%p]::free(%p)\n", this, ptr);
     }
 
-    Alignment* optr = reinterpret_cast<Alignment*>(ptr);
+    Alignment* optr = static_cast<Alignment*>(ptr);
 
     if (0 != optr) {
         size_t osize = *(--optr);
@@ -273,7 +273,7 @@ size_t Heap::size(void* ptr) {
         tracef("Heap[%o]::size(%p)\n", this, ptr);
     }
 
-    Alignment* optr = reinterpret_cast<Alignment*>(ptr);
+    Alignment* optr = static_cast<Alignment*>(ptr);
     size_t osize = 0;
 
     if (0 != optr) {

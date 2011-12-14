@@ -294,7 +294,7 @@ int main(int argc, char **argv, char **) {
                     break;
                 }
                 size = status.st_size;
-                instring = reinterpret_cast<char*>(heap.malloc(size));
+                instring = static_cast<char*>(heap.malloc(size));
                 if (0 == instring) {
                     std::perror("instring=heap.malloc(size)");
                     ++errors;
@@ -316,7 +316,7 @@ int main(int argc, char **argv, char **) {
                     ++errors;
                     break;
                 }
-                outstring = reinterpret_cast<char*>(heap.malloc(size));
+                outstring = static_cast<char*>(heap.malloc(size));
                 if (0 == outstring) {
                     std::perror("outstring=heap.malloc(size)");
                     ++errors;
@@ -394,7 +394,7 @@ int main(int argc, char **argv, char **) {
                     break;
                 }
                 size = status.st_size;
-                instring = reinterpret_cast<char*>(heap.malloc(size));
+                instring = static_cast<char*>(heap.malloc(size));
                 if (0 == instring) {
                     std::perror("instring=heap.malloc(size)");
                     ++errors;
@@ -416,7 +416,7 @@ int main(int argc, char **argv, char **) {
                     ++errors;
                     break;
                 }
-                outstring = reinterpret_cast<char*>(heap.malloc(size));
+                outstring = static_cast<char*>(heap.malloc(size));
                 if (0 == outstring) {
                     std::perror("outstring=heap.malloc(size)");
                     ++errors;

@@ -254,7 +254,7 @@ _TYPE_ Crc<_TYPE_>::operator() (
     const void* data,
     size_t size
 ) const {
-    const uint8_t* pointer = reinterpret_cast<const uint8_t*>(data);
+    const uint8_t* pointer = static_cast<const uint8_t*>(data);
     if (!this->reflected) {
         while (size--) {
             state = this->table[

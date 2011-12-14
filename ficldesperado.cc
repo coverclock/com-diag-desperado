@@ -2,7 +2,7 @@
 
 /******************************************************************************
 
-    Copyright 2006 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -50,13 +50,21 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "ficl.h"
-#include "ficldesperado.h"
+#include "desperado.h"
 
 /******************************************************************************/
 
-static void defOut(ficlCallback* cback, char* text) {
-    fputs(text, stdout);
+static void defOut(ficlCallback* callback, char* message) {
+    FICL_IGNORE(callback);
+    if (message != 0)
+        fputs(message, stdout);
+    else
+        fflush(stdout);
+    return;
 }
 
 static void* defMalloc(size_t size) {
@@ -108,7 +116,7 @@ void setFiclDictionaryLockPointer(FiclDictionaryLockFuncPtr p) {
 /******************************************************************************/
 
 void ficlCallbackDefaultTextOut(ficlCallback* cback, char* text) {
-    (*ficlCallbackDefaultTextOutPointer)(cback, text);
+	(*ficlCallbackDefaultTextOutPointer)(cback, text);
 }
 
 void* ficlMalloc(size_t size) {
@@ -123,6 +131,52 @@ void* ficlRealloc(void* p, size_t size) {
 	return (*ficlReallocPointer)(p, size);
 }
 
+#if defined(FICL_MULTITHREAD)
 int ficlDictionaryLock(ficlDictionary* dict, short inc) {
 	return (*ficlDictionaryLockPointer)(dict, inc);
+}
+#endif
+
+/******************************************************************************/
+
+/*
+ * These functions in Ficl 4.1.0 were not in Ficl 4.0.31. There is no equivalent
+ * to them in Platform so for now we just implement them directly.
+ */
+
+int ficlFileTruncate(ficlFile *ff, ficlUnsigned size)
+{
+    return ftruncate(fileno(ff->f), size);
+}
+
+int ficlFileStatus(char *filename, int *status)
+{
+    struct stat statbuf;
+    if (stat(filename, &statbuf) == 0)
+    {
+        *status = statbuf.st_mode;
+        return 0;
+    }
+    *status = ENOENT;
+    return -1;
+}
+
+long ficlFileSize(ficlFile *ff)
+{
+    struct stat statbuf;
+    if (ff == NULL)
+        return -1;
+
+    statbuf.st_size = -1;
+    if (fstat(fileno(ff->f), &statbuf) != 0)
+        return -1;
+
+    return statbuf.st_size;
+}
+
+/******************************************************************************/
+
+void ficlSystemCompilePlatform(ficlSystem *system)
+{
+    return;
 }

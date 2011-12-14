@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#	Copyright 2005 Digital Aggregates Corporation, Colorado, USA.
+#	Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
 #	This file is part of the Digital Aggregates Desperado library.
 #	
 #	This library is free software; you can redistribute it and/or
@@ -38,7 +38,7 @@
 ###############################################################################
 
 #
-#	@memo	Desperado Ficl 4.0.31 Customization Makefile
+#	@memo	Desperado Ficl 4.1.0 Customization Makefile
 #
 #	Requires that FICLHOME be defined upon entry to identify where
 #	the FICL source distribution is located.
@@ -61,25 +61,21 @@ endif
 
 ficl:	ficl-localize ficl-clean ficl-build
 
-ficl-localize:	Makefile.ficl.desperado include/com/diag/desperado/ficllocal.h include/com/diag/desperado/ficldesperado.h ficldesperadoc.txt
-	-mv -i $(FICLHOME)/Makefile.ficl.desperado $(FICLHOME)/Makefile.ficl.desperado-$(TIMESTAMP)
-	cp -i Makefile.ficl.desperado $(FICLHOME)
-	-mv -i $(FICLHOME)/ficllocal.h $(FICLHOME)/ficllocal.h-$(TIMESTAMP)
-	cp -i include/com/diag/desperado/ficllocal.h $(FICLHOME)
-	-mv -i $(FICLHOME)/ficldesperado.h $(FICLHOME)/ficldesperado.h-$(TIMESTAMP)
-	cp -i include/com/diag/desperado/ficldesperado.h $(FICLHOME)
-	-mv -i $(FICLHOME)/ficldesperado.c $(FICLHOME)/ficldesperado.c-$(TIMESTAMP)
-	cp -i ficldesperadoc.txt $(FICLHOME)/ficldesperado.c
+HERE=$(shell pwd)
+
+ficl-localize:	Makefile.ficl.desperado include/com/diag/desperado/ficldesperado.h ficldesperado.cc
+	ln -s -f $(HERE)/include/com/diag/desperado/ficldesperado.h $(FICLHOME)/ficlplatform/desperado.h
+	ln -s -f $(HERE)/ficldesperado.cc $(FICLHOME)/ficlplatform/desperado.c
 
 ficl-build:
 ifdef DYNAMIC
-	( cd $(FICLHOME); $(MAKE) -e -f Makefile.ficl.desperado libficl.a libficl.so )
+	$(MAKE) -e -f $(HERE)/Makefile.ficl.desperado -C $(FICLHOME) libficl.a libficl.so.4.1.0
 else
-	( cd $(FICLHOME); $(MAKE) -e -f Makefile.ficl.desperado libficl.a )
+	$(MAKE) -e -f $(HERE)/Makefile.ficl.desperado -C $(FICLHOME) libficl.a
 endif
 
 ficl-clean:
-	( cd $(FICLHOME); $(MAKE) -e -f Makefile.ficl.desperado clean )
+	$(MAKE) -e -f $(HERE)/Makefile.ficl.desperado -C $(FICLHOME) clean
 
 ficl-install:	ficl-target
 	cp $(FICLHOME)/libficl.a $(INSTALLDIR)
@@ -87,8 +83,8 @@ ficl-install:	ficl-target
 ficl-target:
 ifdef DYNAMIC
 	( cd $(INSTALLDIR); rm -f libficl.so* )
-	cp $(FICLHOME)/libficl.so.4.0.31 $(INSTALLDIR)
-	( cd $(INSTALLDIR); rm -f libficl.so.4.0; ln -s libficl.so.4.0.31 libficl.so.4.0 )
-	( cd $(INSTALLDIR); rm -f libficl.so.4; ln -s libficl.so.4.0.31 libficl.so.4 )
-	( cd $(INSTALLDIR); rm -f libficl.so; ln -s libficl.so.4.0.31 libficl.so )
+	cp $(FICLHOME)/libficl.so.4.1.0 $(INSTALLDIR)
+	( cd $(INSTALLDIR); rm -f libficl.so.4.1; ln -s libficl.so.4.1.0 libficl.so.4.1 )
+	( cd $(INSTALLDIR); rm -f libficl.so.4; ln -s libficl.so.4.1.0 libficl.so.4 )
+	( cd $(INSTALLDIR); rm -f libficl.so; ln -s libficl.so.4.1.0 libficl.so )
 endif

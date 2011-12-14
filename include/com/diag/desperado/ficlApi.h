@@ -68,13 +68,7 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
-#if defined(__CPLUSPLUS)
-extern "C" {
-#endif
-#include "ficl.h"
-#if defined(__CPLUSPLUS)
-}
-#endif
+#include "com/diag/desperado/Ficl.h"
 
 
 /**
@@ -103,7 +97,7 @@ CXXCAPI void desperado_ficl_shell(ficlSystem* system);
  *
  *  @return an integer that is pushed onto the data stack of the Ficl machine.
  */
-typedef int (*desperado_ficl_function)(ficlVm *pVM, ...);
+typedef /* CXXCAPI */ int (*desperado_ficl_function)(ficlVm *pVM, ...);
 
 
 /**

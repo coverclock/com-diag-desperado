@@ -137,10 +137,10 @@ size_t Dump::bytes(
 
     static const size_t bytespergroup = 8;
 
-    const Byte* first = reinterpret_cast<const Byte*>(data);
+    const Byte* first = static_cast<const Byte*>(data);
     const Byte* last = first + length - 1;
     const Byte* pointer =
-        reinterpret_cast<const Byte*>(aligndownby(data, bytespergroup));
+        static_cast<const Byte*>(aligndownby(data, bytespergroup));
     const Byte* here;
     int ch;
 
@@ -223,10 +223,10 @@ size_t Dump::words(
     static const size_t wordspergroup = bytespergroup / sizeof(Word);
 
     const Word* first =
-        reinterpret_cast<const Word*>(alignupby(data, sizeof(Word)));
+        static_cast<const Word*>(alignupby(data, sizeof(Word)));
     const Word* last = first + wordcount - 1;
     const Word* pointer =
-        reinterpret_cast<const Word*>(aligndownby(data, bytespergroup));
+        static_cast<const Word*>(aligndownby(data, bytespergroup));
     const Word* here;
     int ch;
 
@@ -343,7 +343,7 @@ char* Dump::string(
     char* buffer,
     bool reverse
 ) {
-    const char* dd = reinterpret_cast<const char*>(data);
+    const char* dd = static_cast<const char*>(data);
     if (reverse) {
         char* bb = buffer + (length * 2);
         *bb = '\0';

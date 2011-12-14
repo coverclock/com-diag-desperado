@@ -59,9 +59,7 @@
 #if defined(DESPERADO_HAS_FICL)
 
 
-extern "C" {
-#   include "ficl.h"
-}
+#include "com/diag/desperado/Ficl.h"
 #include "com/diag/desperado/target.h"
 #include "com/diag/desperado/FiclSystem.h"
 #include "com/diag/desperado/Output.h"
@@ -75,7 +73,7 @@ extern "C" {
  *  is a "FORTH-inspired command language" developed by John Sadler,
  *  a FORTH interpreter written in ANSI C and designed to be embedded
  *  in other applications. Its FORTH dialect is compliant with the ANSI
- *  DPANS94 standard. This class supports Ficl 4.0.31 from
+ *  DPANS94 standard. This class supports Ficl 4.1.0 (formerly 4.0.31) from
  *  <A HREF="http://ficl.sourceforge.net">http://ficl.sourceforge.net</A>.
  *
  *  When an object of the FiclSystem class instantiates,
@@ -164,10 +162,16 @@ public:
     virtual ~FiclMachine();
 
     /**
-     *  Lines input to the virtual machine from an input functor
-     *  can be no longer than this many bytes.
+     *  Input to the virtual machine from an input functor can be no longer
+     *  than this many bytes until a newline or the end of input is found.
+     *  This works out to 1024 characters (not including a terminating nul).
+     *  The value 1024 goes all the way back to the early days of Forth on the
+     *  first microprocessors. The original Forth editor stored source
+     *  code in units of screens each of which were 16 lines of 64 characters.
+     *  Forth programs can be much larger than this by simple defining new
+     *  words, each of which fit within this limit.
      */
-    static const size_t maximum_buffer_size = Output::minimum_buffer_size;
+    static const size_t maximum_buffer_size = 16 * 64;
 
     /**
      *  Return a pointer to the FiclSystem object for this object.
@@ -204,19 +208,9 @@ public:
      *  Evaluates a stream of characters from an input functor until
      *  it emits end of file. Characters are read a line at a time,
      *  each line being terminated by an unescaped NL character.
-     *
-     *  @param  input       refers to an input functor.
-     *
-     *  @return the exit code from the virtual machine.
-     */
-    virtual int operator() (Input& input);
-
-    /**
-     *  Evaluates a stream of characters from an input functor until
-     *  it emits end of file. Characters are read a line at a time,
-     *  each line being terminated by an unescaped NL character.
-     *  The prompt string is displayed on the platform output device
-     *  before each line is read to facilitate interactive input.
+     *  The prompt string if provided is displayed on the platform
+     *  output device before each line is read to facilitate interactive
+     *  input.
      *
      *  @param  input       refers to an input functor.
      *
@@ -225,7 +219,7 @@ public:
      *
      *  @return the exit code from the virtual machine.
      */
-    virtual int operator() (Input& input, const char* prompt);
+    virtual int operator() (Input& input, const char* prompt = 0);
 
     /**
      *  Evaluates a single NUL-terminated string.

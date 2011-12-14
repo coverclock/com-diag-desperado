@@ -128,7 +128,7 @@ int JavaVirtualMachine::create(const char* options[], size_t noptions) {
         &env, // void**
         &(this->jargs)
     );
-    this->jenv = reinterpret_cast<JNIEnv*>(env);
+    this->jenv = static_cast<JNIEnv*>(env);
 
     if (this->output != 0) {
         Print printf(this->output);

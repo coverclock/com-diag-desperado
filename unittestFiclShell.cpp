@@ -65,8 +65,8 @@
 #include "com/diag/desperado/ficlApi.h"
 #include "com/diag/desperado/FiclShell.h"
 #include "com/diag/desperado/FiclShell.h"
-#include "com/diag/desperado/BufferInput.h"
-#include "com/diag/desperado/BufferInput.h"
+#include "com/diag/desperado/DataInput.h"
+#include "com/diag/desperado/DataInput.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"
@@ -83,8 +83,8 @@ static FiclShell staticficlshell;
 const char script[] =
     ": ++errors ( -- ) unittestFiclShellErrors DUP @ 1 + SWAP ! ;\n"
     ": expected ( N -- E ) 1 + 0 SWAP 0 ?DO I + LOOP ;\n"
-    ": expecting ( RC N -- ) expected DUP ROT DUP ROT\n"
-    "            <> IF   .\" (\" . .\" !=\" . .\" )!\" CR ++errors\n"
+    ": expecting ( RC N -- ) expected DUP ROT DUP ROT "
+    "            <> IF   .\" (\" . .\" !=\" . .\" )!\" CR ++errors "
     "            ELSE . . CR THEN ;\n"
     ": f00 ( -- RC ) unittestFiclShell00 (( )) ;\n"
     ": f01 ( -- RC ) unittestFiclShell01 (( 1 )) ;\n"
@@ -97,7 +97,6 @@ const char script[] =
     ": f08 ( -- RC ) unittestFiclShell08 (( 1 2 3 4 5 6 7 8 )) ;\n"
     ": f09 ( -- RC ) unittestFiclShell09 (( 1 2 3 4 5 6 7 8 9 )) ;\n"
     ": f10 ( -- RC ) unittestFiclShell10 (( 1 2 3 4 5 6 7 8 9 10 )) ;\n"
-    ": f11 ( -- RC ) unittestFiclShell11 (( 1 2 3 4 5 6 7 8 9 10 11 )) ;\n"
     ": v00 ( -- RC ) 0 unittestFiclShell00 ((...)) ;\n"
     ": v01 ( -- RC ) 1 1 unittestFiclShell01 ((...)) ;\n"
     ": v02 ( -- RC ) 1 2 2 unittestFiclShell02 ((...)) ;\n"
@@ -109,7 +108,6 @@ const char script[] =
     ": v08 ( -- RC ) 1 2 3 4 5 6 7 8 8 unittestFiclShell08 ((...)) ;\n"
     ": v09 ( -- RC ) 1 2 3 4 5 6 7 8 9 9 unittestFiclShell09 ((...)) ;\n"
     ": v10 ( -- RC ) 1 2 3 4 5 6 7 8 9 10 10 unittestFiclShell10 ((...)) ;\n"
-    ": v11 ( -- RC ) 1 2 3 4 5 6 7 8 9 10 11 11 unittestFiclShell11 ((...)) ;\n"
     ": t00 ( -- ) f00 0  expecting v00 0  expecting ;\n"
     ": t01 ( -- ) f01 1  expecting v01 1  expecting ;\n"
     ": t02 ( -- ) f02 2  expecting v02 2  expecting ;\n"
@@ -121,11 +119,10 @@ const char script[] =
     ": t08 ( -- ) f08 8  expecting v08 8  expecting ;\n"
     ": t09 ( -- ) f09 9  expecting v09 9  expecting ;\n"
     ": t10 ( -- ) f10 10 expecting v10 10 expecting ;\n"
-    ": t11 ( -- ) f11 . v00 . CR ;\n"
-    ": unittest 0 unittestFiclShellErrors !\n"
-    "           cr .\" begin\" cr\n"
-    "           t00 t01 t02 t03 t04 t05 t06 t07 t08 t09 t10 t11\n"
-    "           .\" end errors=\" unittestFiclShellErrors @ . cr ;\n"
+    ": unittest 0 unittestFiclShellErrors !"
+    "           CR .\" begin\" CR"
+    "           t00 t01 t02 t03 t04 t05 t06 t07 t08 t09 t10"
+    "           .\" end errors=\" unittestFiclShellErrors @ . CR ;\n"
     "unittest\n"
 ;
 
@@ -151,13 +148,13 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
         printf("%s[%d]: shell with pointer\n", __FILE__, __LINE__);
 
         strncpy(buffer, script, sizeof(buffer));
-        BufferInput bufferinput;
-        BufferInput bufferinput2(buffer);
-        bufferinput = bufferinput2;
+        DataInput datainput;
+        DataInput datainput2(buffer);
+        datainput = datainput2;
 
         Input* input = 0;
         if (!interactive) {
-            input = &bufferinput;
+            input = &datainput;
         }
 
         unittestFiclShellValue = -1;
@@ -184,15 +181,15 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
             __FILE__, __LINE__);
 
         strncpy(buffer, script, sizeof(buffer));
-        BufferInput bufferinput3(buffer);
-        bufferinput = bufferinput3;
+        DataInput datainput3(buffer);
+        datainput = datainput3;
 
         unittestFiclShellValue = -1;
 
         {
             FiclShell ficlshell;
 
-            int rc = ficlshell(&bufferinput, "ok> ");
+            int rc = ficlshell(&datainput, "ok> ");
             errors += ::unittestFiclShellErrors;
 
             if (0 > unittestFiclShellValue) {
@@ -211,15 +208,15 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
             __FILE__, __LINE__);
 
         strncpy(buffer, script, sizeof(buffer));
-        BufferInput bufferinput4(buffer);
-        bufferinput = bufferinput4;
+        DataInput datainput4(buffer);
+        datainput = datainput4;
 
         unittestFiclShellValue = -1;
 
         {
             FiclShell ficlshell;
 
-            int rc = ficlshell(bufferinput);
+            int rc = ficlshell(datainput);
             errors += ::unittestFiclShellErrors;
 
             if (0 > unittestFiclShellValue) {
@@ -238,15 +235,15 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
             __FILE__, __LINE__);
 
         strncpy(buffer, script, sizeof(buffer));
-        BufferInput bufferinput5(buffer);
-        bufferinput = bufferinput5;
+        DataInput datainput5(buffer);
+        datainput = datainput5;
 
         unittestFiclShellValue = -1;
 
         {
             FiclShell ficlshell;
 
-            int rc = ficlshell(bufferinput, "ok> ");
+            int rc = ficlshell(datainput, "ok> ");
             errors += ::unittestFiclShellErrors;
 
             if (0 > unittestFiclShellValue) {
