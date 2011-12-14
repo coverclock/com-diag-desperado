@@ -38,7 +38,14 @@
 ###############################################################################
 
 #
-#	@memo	Desperado Ficl 4.1.0 Customization Makefile
+#	@memo	Desperado Ficl 4.1.1 Customization Makefile
+#
+#	Ficl 4.1.1 is Ficl 4.1.0 from SourceForge with the ficl-4.1.0.patch file
+#	applied. It fixes three issues with Ficl 4.1.0: ficl.h won't compile in
+#	C++ translation units, dictionary.c has a mis-bracketed dictionary lock
+#	operation, and vm.c has a bug which results in an endless loop if a Forth
+#	instruction looks like an negative number and the CC compiler produces a
+#	signed enumeration.
 #
 #	Requires that FICLHOME be defined upon entry to identify where
 #	the FICL source distribution is located.
@@ -63,13 +70,16 @@ ficl:	ficl-localize ficl-clean ficl-build
 
 HERE=$(shell pwd)
 
+ficl-patch:	ficl-4.1.0.patch
+	( cd $(FICLHOME); patch -p1 ) < ficl-4.1.0.patch
+
 ficl-localize:	Makefile.ficl.desperado include/com/diag/desperado/ficldesperado.h ficldesperado.cc
 	ln -s -f $(HERE)/include/com/diag/desperado/ficldesperado.h $(FICLHOME)/ficlplatform/desperado.h
 	ln -s -f $(HERE)/ficldesperado.cc $(FICLHOME)/ficlplatform/desperado.c
 
 ficl-build:
 ifdef DYNAMIC
-	$(MAKE) -e -f $(HERE)/Makefile.ficl.desperado -C $(FICLHOME) libficl.a libficl.so.4.1.0
+	$(MAKE) -e -f $(HERE)/Makefile.ficl.desperado -C $(FICLHOME) libficl.a libficl.so.4.1.1
 else
 	$(MAKE) -e -f $(HERE)/Makefile.ficl.desperado -C $(FICLHOME) libficl.a
 endif
@@ -83,7 +93,7 @@ ficl-install:	ficl-target
 ficl-target:
 ifdef DYNAMIC
 	( cd $(INSTALLDIR); rm -f libficl.so* )
-	cp $(FICLHOME)/libficl.so.4.1.0 $(INSTALLDIR)
+	cp $(FICLHOME)/libficl.so.4.1.1 $(INSTALLDIR)
 	( cd $(INSTALLDIR); rm -f libficl.so.4.1; ln -s libficl.so.4.1.0 libficl.so.4.1 )
 	( cd $(INSTALLDIR); rm -f libficl.so.4; ln -s libficl.so.4.1.0 libficl.so.4 )
 	( cd $(INSTALLDIR); rm -f libficl.so; ln -s libficl.so.4.1.0 libficl.so )

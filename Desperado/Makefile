@@ -103,6 +103,12 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # If you are using Ficl, specify where it is.
 # Comment out otherwise.
 
+# Note that Ficl 4.1.0 needs to have the ficl-4.1.0.patch file applied to
+# fix three issues resulting in [1] ficl.h won't compile with C++,
+# [2] dictionary.c locks mutex twice instead of locking and unlocking it, and
+# [3] vm.c enters endless loop if GCC generates signed enumerations and a
+# Forth instruction appears to be a negative number.
+
 # You will have to either set LD_LIBRARY_PATH explicitly or run "sudo ldconfig"
 # against this directory to make the run-time loader happy.
 

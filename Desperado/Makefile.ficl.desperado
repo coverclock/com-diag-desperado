@@ -12,7 +12,7 @@ LIB = $(CROSS_COMPILE)ar cr
 RANLIB = $(CROSS_COMPILE)ranlib
 
 MAJOR = 4
-MINOR = 1.0
+MINOR = 1.1
 
 ficl: main.o $(HEADERS) libficl.a
 	$(CC) main.o -o ficl -L. -lficl -lm
