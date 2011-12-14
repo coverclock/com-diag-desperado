@@ -62,8 +62,8 @@
 #include "com/diag/desperado/Word.h"
 #include "com/diag/desperado/FileInput.h"
 #include "com/diag/desperado/FileInput.h"
-#include "com/diag/desperado/BufferInput.h"
-#include "com/diag/desperado/BufferInput.h"
+#include "com/diag/desperado/DataInput.h"
+#include "com/diag/desperado/DataInput.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Dump.h"
@@ -275,13 +275,13 @@ CXXCAPI int unittestWord(void*, int interactive) {
 
     Input* input = &Platform::instance().input();
     char testbuffer[sizeof(sample)];
-    BufferInput bufferinput;
+    DataInput datainput;
 
     if (!interactive) {
         strncpy(testbuffer, sample, sizeof(testbuffer));
-        BufferInput newbufferinput(testbuffer);
-        bufferinput = newbufferinput;
-        input = &bufferinput;
+        DataInput newdatainput(testbuffer);
+        datainput = newdatainput;
+        input = &datainput;
     }
 
     Word parser2;

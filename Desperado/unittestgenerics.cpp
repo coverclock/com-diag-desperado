@@ -382,7 +382,7 @@ CXXCAPI int unittestgenerics(void) {
     uint8_t* rpointer;
     uint8_t* xpointer;
 
-    rpointer = reinterpret_cast<uint8_t*>(aligndownto(cpointer, uint64_t));
+    rpointer = static_cast<uint8_t*>(aligndownto(cpointer, uint64_t));
     xpointer = reinterpret_cast<uint8_t*>(&(align.dd[0]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)! (nominal)\n",
@@ -397,7 +397,7 @@ CXXCAPI int unittestgenerics(void) {
         }
     }
 
-    rpointer = reinterpret_cast<uint8_t*>(aligndownto(cpointer, uint32_t));
+    rpointer = static_cast<uint8_t*>(aligndownto(cpointer, uint32_t));
     xpointer = reinterpret_cast<uint8_t*>(&(align.ll[1]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)!\n",
@@ -407,7 +407,7 @@ CXXCAPI int unittestgenerics(void) {
         ++errors;
     }
 
-    rpointer = reinterpret_cast<uint8_t*>(aligndownto(cpointer, uint16_t));
+    rpointer = static_cast<uint8_t*>(aligndownto(cpointer, uint16_t));
     xpointer = reinterpret_cast<uint8_t*>(&(align.ss[3]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)!\n",
@@ -417,7 +417,7 @@ CXXCAPI int unittestgenerics(void) {
         ++errors;
     }
 
-    rpointer = reinterpret_cast<uint8_t*>(aligndownto(cpointer, uint8_t));
+    rpointer = static_cast<uint8_t*>(aligndownto(cpointer, uint8_t));
     xpointer = reinterpret_cast<uint8_t*>(&(align.cc[7]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)!\n",
@@ -429,7 +429,7 @@ CXXCAPI int unittestgenerics(void) {
 
     printf("%s[%d]: alignupto\n", __FILE__, __LINE__);
 
-    rpointer = reinterpret_cast<uint8_t*>(alignupto(cpointer, uint64_t));
+    rpointer = static_cast<uint8_t*>(alignupto(cpointer, uint64_t));
     xpointer = reinterpret_cast<uint8_t*>(&(align.dd[1]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)! (nominal)\n",
@@ -444,7 +444,7 @@ CXXCAPI int unittestgenerics(void) {
         }
     }
 
-    rpointer = reinterpret_cast<uint8_t*>(alignupto(cpointer, uint32_t));
+    rpointer = static_cast<uint8_t*>(alignupto(cpointer, uint32_t));
     xpointer = reinterpret_cast<uint8_t*>(&(align.ll[2]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)!\n",
@@ -454,7 +454,7 @@ CXXCAPI int unittestgenerics(void) {
         ++errors;
     }
 
-    rpointer = reinterpret_cast<uint8_t*>(alignupto(cpointer, uint16_t));
+    rpointer = static_cast<uint8_t*>(alignupto(cpointer, uint16_t));
     xpointer = reinterpret_cast<uint8_t*>(&(align.ss[4]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)!\n",
@@ -464,8 +464,8 @@ CXXCAPI int unittestgenerics(void) {
         ++errors;
     }
 
-    rpointer = reinterpret_cast<uint8_t*>(alignupto(cpointer, uint8_t));
-    xpointer = reinterpret_cast<uint8_t*>(&(align.cc[7]));
+    rpointer = static_cast<uint8_t*>(alignupto(cpointer, uint8_t));
+    xpointer = static_cast<uint8_t*>(&(align.cc[7]));
     if (xpointer != rpointer) {
         errorf("%s[%d]: (0x%08x!=0x%08x)!\n",
             __FILE__, __LINE__, reinterpret_cast<uintptr_t>(xpointer),

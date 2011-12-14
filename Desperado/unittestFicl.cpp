@@ -63,14 +63,12 @@
 #include "com/diag/desperado/cxxcapi.h"
 #include "com/diag/desperado/ficlApi.h"
 #include "com/diag/desperado/ficlApi.h"
-#include "com/diag/desperado/ficllocal.h"
-#include "com/diag/desperado/ficllocal.h"
 #include "com/diag/desperado/FiclSystem.h"
 #include "com/diag/desperado/FiclSystem.h"
 #include "com/diag/desperado/FiclMachine.h"
 #include "com/diag/desperado/FiclMachine.h"
-#include "com/diag/desperado/BufferInput.h"
-#include "com/diag/desperado/BufferInput.h"
+#include "com/diag/desperado/DataInput.h"
+#include "com/diag/desperado/DataInput.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Print.h"
 #include "com/diag/desperado/Platform.h"
@@ -107,13 +105,13 @@ public:
     static int unittestFiclMethodCXX(int x, char y) { return x + y; }
 };
 
-const char sample[] =
-    "2 2 + . cr hello world\n"
-    "1 2 unittestFiclFunctionC dup .\n"
-    "unittestFiclInt32Two dup @ .\n"
-    "!\n"
-    "unittestFiclInt32Two @ .\n"
-    "*\n"
+static const char SAMPLE1[] =
+    "2 2 + . cr hello world "
+    "1 2 unittestFiclFunctionC dup . cr "
+    "unittestFiclInt32Two dup . cr dup @ . cr "
+    "swap dup . cr swap dup . cr ! "
+    "unittestFiclInt32Two dup . cr @ . cr "
+    "* dup . cr"
 ;
 
 extern "C" {
@@ -236,7 +234,7 @@ CXXCAPI int unittestFicl(void*, int interactive) {
 
         printf("%s[%d]: script\n", __FILE__, __LINE__);
 
-        char script[] = {
+        static const char SCRIPT1[] = {
             ": hello .\" Hello, \" ;\n"
             ": world .\" world! \" cr ;\n"
             ": Suggestion: .\" for the interactive test try entering: \" cr "
@@ -244,7 +242,7 @@ CXXCAPI int unittestFicl(void*, int interactive) {
             "Suggestion: "
         };
 
-        BufferInput batch(script);
+        DataInput batch(SCRIPT1);
 
         rc = machine1(batch);
         printf("%s[%d]: Ficl returns %d\n",
@@ -283,17 +281,32 @@ CXXCAPI int unittestFicl(void*, int interactive) {
 
         system.extras();
 
+        printf("%s[%d]: variables\n", __FILE__, __LINE__);
+
+        printf("%s[%d]: unittestFiclInt32Two=%p=%d\n",
+        	__FILE__, __LINE__,
+         	&unittestFiclInt32Two,
+      		&unittestFiclInt32Two);
+
+        char pointers[] = { "unittestFiclInt32Two . cr\n" };
+        machine2(pointers);
+
+        printf("%s[%d]: functions\n", __FILE__, __LINE__);
+
+        char functions[] = { "4 5 unittestFiclFunctionC . cr\n" };
+        machine2(functions);
+
         printf("%s[%d]: interactive\n", __FILE__, __LINE__);
 
         Input* input = &Platform::instance().input();
-        char buffer[sizeof(script)];
-        BufferInput bufferinput;
+        DataInput datainput;
+        const char * prompt = "ok> ";
 
         if (!interactive) {
-            strncpy(buffer, sample, sizeof(buffer));
-            BufferInput newbufferinput(buffer);
-            bufferinput = newbufferinput;
-            input = &bufferinput;
+            DataInput newdatainput(SAMPLE1);
+            datainput = newdatainput;
+            input = &datainput;
+            prompt = 0;
         }
 
         unittestFiclInt32Two = 2;
@@ -307,7 +320,7 @@ CXXCAPI int unittestFicl(void*, int interactive) {
         machine2.push(four);
         machine2.push(five);
 
-        rc = machine2(*input, "ficl> ");
+        rc = machine2(*input, prompt);
         printf("%s[%d]: Ficl returns %d\n",
             __FILE__, __LINE__, rc);
         machine2.show();

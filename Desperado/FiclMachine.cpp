@@ -168,37 +168,7 @@ int FiclMachine::operator() () {
 
 
 //
-//  Do a batch interpretation.
-//
-int FiclMachine::operator() (Input& input) {
-    char buffer[this->maximum_buffer_size + 1];
-    size_t ii;
-    int rc;
-    int ch;
-
-    (*this)();
-
-    do {
-        ii = 0;
-        ch = input();
-        while ((EOF != ch) && (sizeof(buffer) > ii)) {
-            buffer[ii++] = ch;
-            if ('\n' == ch) {
-                break;
-            }
-            ch = input();
-        }
-        buffer[ii++] = '\0';
-        (Platform::instance().output())(buffer);
-        rc = ficlVmEvaluate(this->ficlmachine, buffer);
-    } while ((FICL_VM_STATUS_USER_EXIT != rc) && (EOF != ch));
-
-    return rc;
-}
-
-
-//
-//  Do an interactive interpretation.
+//  Do an interactive (prompt != 0) or batch (prompt == 0) interpretation.
 //
 int FiclMachine::operator() (Input& input, const char* prompt) {
     char buffer[this->maximum_buffer_size + 1];
@@ -209,10 +179,13 @@ int FiclMachine::operator() (Input& input, const char* prompt) {
     (*this)();
 
     do {
-        (Platform::instance().output())(prompt);
+        if (prompt != 0) { (Platform::instance().output())(prompt); }
         ii = 0;
         ch = input();
-        while ((EOF != ch) && (sizeof(buffer) > ii)) {
+        while ((EOF != ch) && ((sizeof(buffer) - 1) > ii)) {
+#if 0
+        	fprintf(stderr, "FiclMachine@%p: %d 0x%x '%c'\n", this, ch, ch, ch);
+#endif
             buffer[ii++] = ch;
             if ('\n' == ch) {
                 break;
@@ -220,6 +193,10 @@ int FiclMachine::operator() (Input& input, const char* prompt) {
             ch = input();
         }
         buffer[ii++] = '\0';
+        if (prompt == 0) { (Platform::instance().output())(buffer); }
+#if 0
+        fprintf(stderr, "FiclMachine@%p: \"%s\"\n", this, buffer);
+#endif
         rc = ficlVmEvaluate(this->ficlmachine, buffer);
     } while ((FICL_VM_STATUS_USER_EXIT != rc) && (EOF != ch));
 

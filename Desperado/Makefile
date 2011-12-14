@@ -56,7 +56,7 @@ PRODUCT		=	desperado
 PROJECT		=	Desperado
 RELEASE		=	globe
 MAJOR		=	6
-MINOR		=	7
+MINOR		=	8
 BUILD		=	0
 PRERELEASE	=	hawkeye
 
@@ -106,7 +106,8 @@ SVNTAG		=	${SVNPROTO}://${SVNHOST}/${PRODUCT}/tags
 # You will have to either set LD_LIBRARY_PATH explicitly or run "sudo ldconfig"
 # against this directory to make the run-time loader happy.
 
-FICLHOME	=	$(HOME)/src/ficl4.0.31
+FICLHOME	=	$(HOME)/src/ficl-4.1.0
+#FICLHOME	=	$(HOME)/src/ficl4.0.31
 #FICLHOME	=	$(HOME)/arroyo/ficl-4.0.31
 #FICLHOME	=	$(HOME)/diminuto/ficl-4.0.31
 #FICLHOME	=	$(TEMP)/../../../Desktop/Home/Sources/ficl4.0.31

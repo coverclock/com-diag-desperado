@@ -62,7 +62,7 @@
 #include "com/diag/desperado/Input.h"
 #include "com/diag/desperado/Output.h"
 #include "com/diag/desperado/Platform.h"
-#include "ficl.h"
+#include "com/diag/desperado/Ficl.h"
 
 
 /**

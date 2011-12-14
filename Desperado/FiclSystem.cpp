@@ -79,7 +79,11 @@ CXXCAPI void desperadoCallbackDefaultTextOut(
 #if defined(DESPERADO_HAS_DEBUGGING)
     out("ficlCallbackDefaultTextOut: ");
 #endif
-    out(text);
+    if (text != 0) {
+    	out(text);
+    } else {
+    	out();
+    }
 }
 
 
@@ -90,12 +94,16 @@ CXXCAPI void desperadoCallbackTextOut(
     ficlCallback* callback,
     char* text
 ) {
-    FiclSystem* obj = reinterpret_cast<FiclSystem*>(callback->context);
+    FiclSystem* obj = static_cast<FiclSystem*>(callback->context);
     Output& out = obj->output();
 #if defined(DESPERADO_HAS_DEBUGGING)
     out("ficlCallbackDesperadoTextOut: ");
 #endif
-    out(text);
+    if (text != 0) {
+    	out(text);
+    } else {
+    	out();
+    }
 }
 
 
@@ -106,12 +114,16 @@ CXXCAPI void desperadoCallbackErrorOut(
     ficlCallback* callback,
     char* text
 ) {
-    FiclSystem* obj = reinterpret_cast<FiclSystem*>(callback->context);
-    Output& err = obj->error();
+    FiclSystem* obj = static_cast<FiclSystem*>(callback->context);
+    Output& out = obj->error();
 #if defined(DESPERADO_HAS_DEBUGGING)
-    err("ficlCallbackDesperadoErrorOut: ");
+    out("ficlCallbackDesperadoErrorOut: ");
 #endif
-    err(text);
+    if (text != 0) {
+    	out(text);
+    } else {
+    	out();
+    }
 }
 
 
@@ -127,8 +139,8 @@ CXXCAPI void* desperadoMalloc(
 ) {
 #if defined(DESPERADO_HAS_DEBUGGING)
     Output& err = Platform::instance().error();
-    Print errorf(err);
-    errorf("ficlDesperadoMalloc(%lu)\n", size);
+    Print printf(err);
+    printf("ficlDesperadoMalloc(%lu)\n", size);
 #endif
     return FiclSystem::heap().malloc(size);
 }
@@ -146,8 +158,8 @@ CXXCAPI void desperadoFree(
 ) {
 #if defined(DESPERADO_HAS_DEBUGGING)
     Output& err = Platform::instance().error();
-    Print errorf(err);
-    errorf("ficlDesperadoFree(%p)\n", p);
+    Print printf(err);
+    printf("ficlDesperadoFree(%p)\n", p);
 #endif
     FiclSystem::heap().free(p);
 }
@@ -180,14 +192,15 @@ CXXCAPI void* desperadoRealloc(
 //  does not bracket its lock and unlock operations correctly.
 //  A glance at the 4.0.31 source code will suggest that perhaps
 //  ficlDictionaryLookup() locks the dictionary upon exit when
-//  it should probably be unlocking it.
+//  it should probably be unlocking it. Ficl 4.1.0 appears to do
+//	the same.
 //
 CXXCAPI int desperadoDictionaryLock(
     ficlDictionary* dictionary,
     short lockIncrement
 ) {
     ficlSystem* s = dictionary->system;
-    FiclSystem* o = reinterpret_cast<FiclSystem*>(s->callback.context);
+    FiclSystem* o = static_cast<FiclSystem*>(s->callback.context);
 #if defined(DESPERADO_HAS_DEBUGGING)
     Print printf;
     printf("ficlDictionaryLock(%p,%d)\n", dictionary, lockIncrement);
@@ -195,6 +208,9 @@ CXXCAPI int desperadoDictionaryLock(
     bool rc = (FICL_FALSE != lockIncrement) ? o->lock() : o->unlock();
     return rc ? 0 : -1;
 }
+
+
+#include "com/diag/desperado/Begin.h"
 
 
 Heap* FiclSystem::ficlheap = 0;
@@ -207,13 +223,10 @@ Heap* FiclSystem::ficlheap = 0;
 FiclSystem* FiclSystem::findFiclSystem(ficlVm* pVM) {
     FiclSystem* ps = 0;
     if (pVM != 0) {
-        ps = reinterpret_cast<FiclSystem*>(pVM->callback.context);
+        ps = static_cast<FiclSystem*>(pVM->callback.context);
     }
     return ps;
 }
-
-
-#include "com/diag/desperado/Begin.h"
 
 
 //

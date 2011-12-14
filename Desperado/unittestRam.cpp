@@ -105,7 +105,7 @@ CXXCAPI int unittestRam(void) {
 
     printf("%s[%d]: 8 bits\n", __FILE__, __LINE__);
 
-    uint8_t* pointer8 = reinterpret_cast<uint8_t*>(pointer);
+    uint8_t* pointer8 = static_cast<uint8_t*>(pointer);
 
     printf("%s[%d]: data\n", __FILE__, __LINE__);
     volatile uint8_t data8 = uint8_Ram.data(pointer8);
@@ -131,7 +131,7 @@ CXXCAPI int unittestRam(void) {
 
     printf("%s[%d]: 16 bits\n", __FILE__, __LINE__);
 
-    uint16_t* pointer16 = reinterpret_cast<uint16_t*>(pointer);
+    uint16_t* pointer16 = static_cast<uint16_t*>(pointer);
 
     printf("%s[%d]: data\n", __FILE__, __LINE__);
     volatile uint16_t data16 = uint16_Ram.data(pointer16);
@@ -157,7 +157,7 @@ CXXCAPI int unittestRam(void) {
 
     printf("%s[%d]: 32 bits\n", __FILE__, __LINE__);
 
-    uint32_t* pointer32 = reinterpret_cast<uint32_t*>(pointer);
+    uint32_t* pointer32 = static_cast<uint32_t*>(pointer);
 
     printf("%s[%d]: data\n", __FILE__, __LINE__);
     volatile uint32_t data32 = uint32_Ram.data(pointer32);
@@ -183,7 +183,7 @@ CXXCAPI int unittestRam(void) {
 
     printf("%s[%d]: 64 bits\n", __FILE__, __LINE__);
 
-    uint64_t* pointer64 = reinterpret_cast<uint64_t*>(pointer);
+    uint64_t* pointer64 = static_cast<uint64_t*>(pointer);
 
     printf("%s[%d]: data\n", __FILE__, __LINE__);
     volatile uint64_t data64 = uint64_Ram.data(pointer64);

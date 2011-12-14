@@ -144,7 +144,7 @@
  *  Generates a null pointer to an object of type _TYPE_.
  */
 #define nullpointerto(_TYPE_) \
-    reinterpretcastto(_TYPE_*, 0)
+    staticcastto(_TYPE_*, 0)
 
 
 /**
@@ -158,7 +158,7 @@
  */
 #if 0
 #define desperado_offsetof(_STRUCT_, _MEMBER_) \
-    staticcastto(size_t, reinterpretcastto(char*, &(nullpointerto(_STRUCT_)->_MEMBER_)) - reinterpretcastto(char*, nullpointerto(_STRUCT_)))
+    reinterpretcastto(size_t, staticcastto(char*, &(nullpointerto(_STRUCT_)->_MEMBER_)) - staticcastto(char*, nullpointerto(_STRUCT_)))
 #else
 #define desperado_offsetof(_STRUCT_, _MEMBER_) \
     staticcastto(size_t, reinterpretcastto(uintptr_t, &(nullpointerto(_STRUCT_)->_MEMBER_)) - reinterpretcastto(uintptr_t, nullpointerto(_STRUCT_)))

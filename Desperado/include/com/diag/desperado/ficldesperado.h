@@ -56,11 +56,13 @@
  *
  */
 
+
+#include "ficl.h"
+
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
-
-#include "ficl.h"
 
 typedef void (*FiclCallbackDefaultTextOutFuncPtr)(ficlCallback*, char* text);
 typedef void* (*FiclMallocFuncPtr)(size_t size);

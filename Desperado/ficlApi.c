@@ -173,7 +173,6 @@ int desperado_ficl_proxy(
         );
         break;
     case 10:
-    default:
         rc = (*fp)(
             pVM,
             argv[0],
@@ -188,7 +187,10 @@ int desperado_ficl_proxy(
             argv[9]
         );
         break;
-    }
+    default:
+    	rc = -1;
+    	break;
+   }
 
     return rc;
 }

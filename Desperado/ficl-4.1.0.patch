@@ -1,0 +1,47 @@
+diff -purN ficl-4.1.0-org/dictionary.c ficl-4.1.0/dictionary.c
+--- ficl-4.1.0-org/dictionary.c	2010-09-12 09:14:52.000000000 -0600
++++ ficl-4.1.0/dictionary.c	2011-12-14 09:00:16.627842465 -0700
+@@ -619,7 +619,7 @@ ficlWord *ficlDictionaryLookup(ficlDicti
+         word = ficlHashLookup(hash, name, hashCode);
+     }
+ 
+-    ficlDictionaryLock(dictionary, FICL_TRUE);
++    ficlDictionaryLock(dictionary, FICL_FALSE); /* < coverclock@diag.com */
+     return word;
+ }
+ 
+diff -purN ficl-4.1.0-org/ficl.h ficl-4.1.0/ficl.h
+--- ficl-4.1.0-org/ficl.h	2010-10-03 03:52:12.000000000 -0600
++++ ficl-4.1.0/ficl.h	2011-12-14 09:00:53.427842405 -0700
+@@ -1039,7 +1039,9 @@ enum ficlInstruction
+ 
+     ficlInstructionFourByteTrick = 0x10000000
+ };
++#if !defined(__cplusplus) /* < coverclock@diag.com */
+ typedef intptr_t ficlInstruction;
++#endif /* < coverclock@diag.com */
+ 
+ 
+ /* 
+diff -purN ficl-4.1.0-org/vm.c ficl-4.1.0/vm.c
+--- ficl-4.1.0-org/vm.c	2010-09-13 12:43:04.000000000 -0600
++++ ficl-4.1.0/vm.c	2011-12-14 14:29:19.087842343 -0700
+@@ -295,7 +295,6 @@ void ficlVmInnerLoop(ficlVm *vm, ficlWor
+ 
+ 	for (;;)
+ 	{
+-
+ 		if (once)
+ 		{
+ 			if (!count--)
+@@ -2300,7 +2299,9 @@ FMINUSROLL:
+ 				** in "i" (our local cache of *ip), and *jump* to the
+ 				** top of the switch statement.  --lch
+ 				*/
+-				if ((ficlInstruction)fw->code < ficlInstructionLast)
++				/* v coverclock@diag.com */
++				if (((ficlInstruction)fw->code > ficlInstructionInvalid) && ((ficlInstruction)fw->code < ficlInstructionLast))
++				/* ^ coverclock@diag.com */
+ 				{
+ 					instruction = (ficlInstruction)fw->code;
+ 					goto AGAIN;

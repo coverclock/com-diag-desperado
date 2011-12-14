@@ -63,6 +63,7 @@
 #include "com/diag/desperado/BufferOutput.h"
 #include "com/diag/desperado/BufferOutput.h"
 #include "com/diag/desperado/DataInput.h"
+#include "com/diag/desperado/DataInput.h"
 #include "com/diag/desperado/DescriptorInput.h"
 #include "com/diag/desperado/DescriptorInput.h"
 #include "com/diag/desperado/DescriptorOutput.h"

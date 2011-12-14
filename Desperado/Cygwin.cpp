@@ -344,7 +344,7 @@ identity_t Cygwin::identity() {
     pid_t pid = ::getpid();
     pthread_t tid = pthread_self();
     identity_t process_id = static_cast<identity_t>(pid);
-    identity_t thread_id = reinterpret_cast<identity_t>(tid);
+    identity_t thread_id = static_cast<identity_t>(tid);
     return (process_id << widthof(tid)) | thread_id;
 }
 

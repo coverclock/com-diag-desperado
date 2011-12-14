@@ -425,7 +425,7 @@ CXXCAPI int unittestHeap(void) {
                 __FILE__, __LINE__, size, actual, ii);
             ++errors;
         }
-        cp = reinterpretcastto(uint8_t*,block[ii]);
+        cp = staticcastto(uint8_t*,block[ii]);
         for (int jj = 0; staticcastto(int,size) > jj; ++jj) {
             if (0 != cp[jj]) {
                 errorf("%s[%d]: (%p!=%p[%lu][%lu])!\n",
@@ -490,7 +490,7 @@ CXXCAPI int unittestHeap(void) {
                 __FILE__, __LINE__, size, actual, ii);
             ++errors;
         }
-        cp = reinterpretcastto(uint8_t*,block[ii]);
+        cp = staticcastto(uint8_t*,block[ii]);
         for (size_t jj = 0; size > jj; ++jj) {
             if (0 != cp[jj]) {
                 errorf("%s[%d]: (%p!=%p[%lu][%lu])!\n",
@@ -556,7 +556,7 @@ CXXCAPI int unittestHeap(void) {
                 __FILE__, __LINE__, size, actual, size);
             ++errors;
         }
-        cp = reinterpretcastto(uint8_t*,block[0]);
+        cp = staticcastto(uint8_t*,block[0]);
         for (int ii = 0; staticcastto(int,set) > ii; ++ii) {
             if (get != cp[ii]) {
                 errorf("%s[%d]: (%lu!=%lu[%lu])!\n",
