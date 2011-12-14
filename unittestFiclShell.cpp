@@ -80,7 +80,7 @@ CXXCAPI int unittestFiclShellErrors;
 
 static FiclShell staticficlshell;
 
-const char script[] =
+const char SCRIPT1[] =
     ": ++errors ( -- ) unittestFiclShellErrors DUP @ 1 + SWAP ! ;\n"
     ": expected ( N -- E ) 1 + 0 SWAP 0 ?DO I + LOOP ;\n"
     ": expecting ( RC N -- ) expected DUP ROT DUP ROT "
@@ -143,13 +143,10 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
 
     if (!interactive) {
 
-        char buffer[sizeof(script)];
-
         printf("%s[%d]: shell with pointer\n", __FILE__, __LINE__);
 
-        strncpy(buffer, script, sizeof(buffer));
         DataInput datainput;
-        DataInput datainput2(buffer);
+        DataInput datainput2(SCRIPT1);
         datainput = datainput2;
 
         Input* input = 0;
@@ -180,8 +177,7 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
         printf("%s[%d]: shell with pointer and prompt\n",
             __FILE__, __LINE__);
 
-        strncpy(buffer, script, sizeof(buffer));
-        DataInput datainput3(buffer);
+        DataInput datainput3(SCRIPT1);
         datainput = datainput3;
 
         unittestFiclShellValue = -1;
@@ -207,8 +203,7 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
         printf("%s[%d]: shell with reference\n",
             __FILE__, __LINE__);
 
-        strncpy(buffer, script, sizeof(buffer));
-        DataInput datainput4(buffer);
+        DataInput datainput4(SCRIPT1);
         datainput = datainput4;
 
         unittestFiclShellValue = -1;
@@ -234,8 +229,7 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
         printf("%s[%d]: shell with reference and prompt\n",
             __FILE__, __LINE__);
 
-        strncpy(buffer, script, sizeof(buffer));
-        DataInput datainput5(buffer);
+        DataInput datainput5(SCRIPT1);
         datainput = datainput5;
 
         unittestFiclShellValue = -1;
@@ -261,7 +255,8 @@ CXXCAPI int unittestFiclShell(void*, int interactive) {
         printf("%s[%d]: shell with string\n",
             __FILE__, __LINE__);
 
-        strncpy(buffer, script, sizeof(buffer));
+        char buffer[sizeof(SCRIPT1)];
+        strncpy(buffer, SCRIPT1, sizeof(buffer));
 
         unittestFiclShellValue = -1;
 
