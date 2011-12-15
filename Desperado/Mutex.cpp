@@ -64,7 +64,7 @@
 #include "com/diag/desperado/Begin.h"
 
 
-static uint64_t self() {
+static Mutex::identity_t self() {
     pid_t pid = ::getpid();
     pthread_t self = pthread_self();
     uint64_t identity = pid;
@@ -108,7 +108,8 @@ bool Mutex::begin() {
 
 	do {
 
-		if (intmaxof(uint64_t) <= this->level) {
+		level_t before = this->level;
+		if (intmaxof(uint64_t) <= before) {
 			break;
 		}
 
@@ -119,7 +120,7 @@ bool Mutex::begin() {
 
 		pthread_testcancel();
 
-		int save = PTHREAD_CANCEL_ENABLE;
+		state_t save = PTHREAD_CANCEL_ENABLE;
 		pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &save);
 
 		int rc = pthread_mutex_lock(&(this->mutex));
@@ -168,24 +169,28 @@ bool Mutex::end() {
 		//  But if we do own it, for sure the checks below will pass.
 		//
 
-		int before = this->level;
+		level_t before = this->level;
 		if (0 == before) {
 			break;
 		}
 
-		uint64_t owner = this->identity;
-		uint64_t me = self();
+		identity_t owner = this->identity;
+		identity_t me = self();
 		if (owner != me) {
 			break;
 		}
 
 		//
 		//  We're pretty sure we are in the mutex and have exclusive
-		//  access to this object.
+		//  access to this object, but only until we do the unlock.
+		//	Once the unlock succeeds, we cannot assume any of this
+		//	object's fields are ours to write or that reading them
+		//	will return the value we read previously.
 		//
 
-		int restore = this->state;
+		state_t restore = this->state;
 		--this->level;
+		level_t after = this->level;
 
 		int rc = pthread_mutex_unlock(&(this->mutex));
 		if (0 != rc) {
@@ -195,8 +200,6 @@ bool Mutex::end() {
 			//  access to it.
 			//
 			this->level = before;
-			this->identity = owner;
-			this->state = restore;
 			break;
 		}
 
@@ -206,10 +209,12 @@ bool Mutex::end() {
 		//  mutex and test for cancellation.
 		//
 
-		if (0 == before) {
+		if (0 == after) {
 			pthread_setcancelstate(restore, 0);
 			pthread_testcancel();
 		}
+
+		result = true;
 
 	} while (false);
 

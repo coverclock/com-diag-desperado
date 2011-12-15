@@ -51,17 +51,13 @@
  *  This header file can included from both C++ and C translation units.
  *
  *  @author Chip Overclock (coverclock@diag.com)
- *
- *
  */
 
 
 #include "com/diag/desperado/target.h"
 
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+#include "com/diag/desperado/Begin.h"
 
 
 /**
@@ -96,9 +92,7 @@ typedef uint64_t seconds_t;
 typedef uint64_t identity_t;
 
 
-#if defined(__cplusplus)
-}
-#endif
+#include "com/diag/desperado/End.h"
 
 
 #endif

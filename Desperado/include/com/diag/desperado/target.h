@@ -60,13 +60,10 @@
  */
 
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
-/* (as required per ISO C99 for limits of integral types to be defined) */
+/* (As required per ISO C99 for limits of integral types to be defined...) */
 #define __STDC_LIMIT_MACROS (1)
-#include <stdint.h>
-/* (except it does not define these useful ones) */
+#include "com/diag/desperado/stdint.h"
+/* (... except it does not define these useful ones.) */
 #if !defined(UINT8_MIN)
 #   define UINT8_MIN   (0)
 #endif
@@ -82,9 +79,6 @@ extern "C" {
 #include <sys/types.h>
 #if defined(__GNUC__)
 #  include <endian.h>
-#endif
-#if defined(__cplusplus)
-}
 #endif
 
 

@@ -1,10 +1,13 @@
-//* vim: set ts=4 expandtab shiftwidth=4: */
+#ifndef _COM_DIAG_DESPERADO_STDINT_H_
+#define _COM_DIAG_DESPERADO_STDINT_H_
+
+/* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
-
+    
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -35,63 +38,32 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
+
+
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Implements the Desperado select-based I/O ready indication.
+ *  Defines the stdint types.
+ * 
+ *  This can be included from either a C or a C++ translation unit.
  *
  *  @author Chip Overclock (coverclock@diag.com)
+ *
+ * ISO C++0x defines <cstdint> but it's considered experimental in GCC 4.4.3
+ * and using it generates a warning. So when everyone gets comfortable with it
+ * enable its use below.
  */
 
-
 #if !0
-#include <sys/select.h>
+#   include <stdint.h>
+#elif defined(__cplusplus)
+#   include <cstdint>
 #else
-#include <sys/time.h>
-#include <sys/types.h>
-#include <unistd.h>
+#   include <stdint.h>
 #endif
-#include <cstring>
-#include "com/diag/desperado/ready.h"
 
 
-CXXCAPI int desperado_descriptor_ready(int fd) {
-	int result = 0;
-
-	fd_set readable;
-	FD_ZERO(&readable);
-	FD_SET(fd, &readable);
-
-	fd_set writeable;
-	FD_ZERO(&writeable);
-	FD_SET(fd, &writeable);
-
-	fd_set exceptional;
-	FD_ZERO(&exceptional);
-	FD_SET(fd, &exceptional);
-
-	struct timeval timeout;
-	std::memset(&timeout, 0, sizeof(timeout));
-
-	int rc = ::select(fd + 1, &readable, &writeable, &exceptional, &timeout);
-	if (0 < rc) {
-		if (FD_ISSET(fd, &readable)) {
-			result |= DESPERADO_DESCRIPTOR_READY_READ;
-		}
-		if (FD_ISSET(fd, &writeable)) {
-			result |= DESPERADO_DESCRIPTOR_READY_WRITE;
-		}
-		if (FD_ISSET(fd, &exceptional)) {
-			result |= DESPERADO_DESCRIPTOR_READY_EXCEPTION;
-		}
-	} else if (0 > rc) {
-		result |= DESPERADO_DESCRIPTOR_READY_ERROR;
-	} else {
-		// Do nothing.
-	}
-
-	return result;
-}
+#endif

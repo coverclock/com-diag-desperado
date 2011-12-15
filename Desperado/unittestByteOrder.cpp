@@ -245,7 +245,7 @@ CXXCAPI int unittestByteOrder(void) {
     // suggests that the situation is even more complicated than this,
     // so disable this code if it doesn't fly on your target.
 
-#if 1
+#if !0
     errors += testFloatSwap<float64_t, uint64_t, uint64_t>
         (__FILE__, __LINE__, 2.7182818284590452354, 0x6957148b0abf0540ULL);
     errors += testFloatSwap<float32_t, uint32_t, uint32_t>
