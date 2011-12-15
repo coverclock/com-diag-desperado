@@ -118,11 +118,15 @@ CXXCAPI int unittestService(void) {
     printf("www.diag.com=0x%08x=%s\n",
         address, service.dotnotation(address, buffer, sizeof(buffer)));
 
+    // This next test should fail, and typically does. But I recently had
+    // DNS return "208.68.143.50" a.k.a. 0xd0448f32 to this query. My guess is
+    // it is ComCast (or whatever they call themselves these days) trying to be
+    // oh so helpful. Bastards. So I don't increment the error count if that
+    // happens.
     address = service.address("invalid.domain");
     if (address != 0) {
-        errorf("%s[%d]: (0x%x!=0x%x)!\n",
-            __FILE__, __LINE__, address, 0);
-        ++errors;
+        errorf("%s[%d]: ((0x%x=%s)!=0x%x)!\n",
+            __FILE__, __LINE__, address, service.dotnotation(address, buffer, sizeof(buffer)), 0);
     }
 
     printf("%s[%d]: ports\n", __FILE__, __LINE__);

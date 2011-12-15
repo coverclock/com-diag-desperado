@@ -38,8 +38,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-
-
 ******************************************************************************/
 
 
@@ -51,8 +49,6 @@
  *  @see    Mutex
  *
  *  @author Chip Overclock (coverclock@diag.com)
- *
- *
  */
 
 
@@ -82,6 +78,25 @@
 class Mutex : public Object {
 
 public:
+
+	/**
+	 * This is the type of a variable that contains the identity of a mutex
+	 * holder. It may or may not be the same, in terms of both type and
+	 * value encoding, as the identity_t used by Platform.
+	 */
+	typedef uint64_t identity_t;
+
+	/**
+	 * This is the type of a variable that contains the recursion level of a
+	 * mutex.
+	 */
+	typedef uint64_t level_t;
+
+	/**
+	 * This is the type of a variable that contains the cancellation state of
+	 * a thread using a mutex.
+	 */
+	typedef int state_t;
 
     /**
      *  Constructor.
@@ -122,7 +137,7 @@ public:
      *
      *  @return a thread identifier.
      */
-    uint64_t getIdentity() const;
+    identity_t getIdentity() const;
 
     /**
      *  Displays internal information about this object to the specified
@@ -162,17 +177,17 @@ private:
     /**
      *  This is the identifier of the holder of the mutex.
      */
-    uint64_t identity;
+    identity_t identity;
 
     /**
      *  This is the level of recursion.
      */
-    uint64_t level;
+    level_t level;
 
     /**
      *  This is the prior enable/disable state of the thread holding the mutex.
      */
-    int state;
+    state_t state;
 
 };
 
@@ -188,7 +203,7 @@ inline bool Mutex::isLocked() const {
 //
 //  Return identifier of thread holding mutex if any.
 //
-inline uint64_t Mutex::getIdentity() const {
+inline Mutex::identity_t Mutex::getIdentity() const {
     return this->identity;
 }
 

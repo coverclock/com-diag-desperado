@@ -38,8 +38,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-
-
 ******************************************************************************/
 
 
@@ -51,8 +49,6 @@
  *  @see    Platform
  *
  *  @author Chip Overclock (coverclock@diag.com)
- *
- *
  */
 
 
@@ -677,7 +673,7 @@ inline DaylightSavingTime& Platform::getDaylightSavingTime() const {
  *
  *  @return the frequency of the platform clock in Hertz.
  */
-CXXCAPI ticks_t platform_frequency(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, ticks_t) platform_frequency(void);
 
 
 /**
@@ -686,7 +682,7 @@ CXXCAPI ticks_t platform_frequency(void);
  *  @return the time of day in absolute ticks of duration since
  *          the platform epoch.
  */
-CXXCAPI ticks_t platform_time(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, ticks_t) platform_time(void);
 
 
 /**
@@ -696,7 +692,7 @@ CXXCAPI ticks_t platform_time(void);
  *  @return the relative time in relative ticks of duration since
  *          this object was constructed.
  */
-CXXCAPI ticks_t platform_elapsed(void);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, ticks_t) platform_elapsed(void);
 
 
 /**
@@ -716,7 +712,7 @@ CXXCAPI ticks_t platform_elapsed(void);
  *          depending on the scheduling granularity and whether an
  *          asynchronous event caused the method to return prematurely.
  */
-CXXCAPI ticks_t platform_yield(ticks_t ticks, int premature);
+CXXCAPI CXXCTYPE(::com::diag::desperado::, ticks_t) platform_yield(CXXCTYPE(::com::diag::desperado::, ticks_t) ticks, int premature);
 
 
 /**
@@ -728,7 +724,7 @@ CXXCAPI ticks_t platform_yield(ticks_t ticks, int premature);
  *
  *  @return the identity of the caller.
  */
-CXXCAPI identity_t platform_identity();
+CXXCAPI CXXCTYPE(::com::diag::desperado::, identity_t) platform_identity();
 
 
 /**

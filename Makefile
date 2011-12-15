@@ -54,11 +54,12 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-RELEASE		=	globe
+POSTRELEASE	=	globe
+RELEASE		=	hawkeye
+PRERELEASE	=	inspiration
 MAJOR		=	6
 MINOR		=	8
 BUILD		=	0
-PRERELEASE	=	hawkeye
 
 #
 # Indicate the platform and target you are using.
