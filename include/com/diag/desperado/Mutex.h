@@ -94,7 +94,9 @@ public:
      *
      *  @oaram block	if true causes the calling thread to be uncancellable
      *  				from the time the mutex is initially locked until it is
-     *  				finally unlocked, which is the default behavior.
+     *  				finally unlocked, which is the default behavior. Setting
+     *  				this parameter to false is really dangerous since
+     *  				canceled threads can leave the mutex permanently locked.
      *
      *  @return true if successful, false otherwise.
      */
