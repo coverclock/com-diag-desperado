@@ -35,8 +35,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-
-
 ******************************************************************************/
 
 
@@ -64,22 +62,16 @@
 #include "com/diag/desperado/Begin.h"
 
 
-static Mutex::identity_t self() {
-    pid_t pid = ::getpid();
-    pthread_t self = pthread_self();
-    uint64_t identity = pid;
-    return (identity << widthof(self)) | self;
-}
-
-
 //
 //  Constructor.
 //
 Mutex::Mutex() :
     identity(0),
     level(0),
+    uncancellable(false),
     state(PTHREAD_CANCEL_ENABLE)
 {
+	pthread_spin_init(&(this->spin), 0);
     pthread_mutexattr_init(&(this->mutexattr));
     pthread_mutexattr_settype(&(this->mutexattr), PTHREAD_MUTEX_RECURSIVE);
     pthread_mutex_init(&(this->mutex), &(this->mutexattr));
@@ -92,54 +84,59 @@ Mutex::Mutex() :
 Mutex::~Mutex() {
     pthread_mutex_destroy(&(this->mutex));
     pthread_mutexattr_destroy(&(this->mutexattr));
+    pthread_spin_destroy(&(this->spin));
 }
 
 
 //
-//  Lock. This has the unfortunate side effect of making threads
+//  Lock. This may have the unfortunate side effect of making threads
 //  waiting on mutexen uncancellable. The alternative would be to
 //  allow threads to be cancelled between taking the mutex and
 //  becoming uncancellable, leaving the mutex locked. As a rule,
 //  threads should not perform blocking operations while holding
 //  a mutex, but this is sometimes easier said than done.
 //
-bool Mutex::begin() {
+bool Mutex::begin(bool block) {
 	bool result = false;
 
 	do {
 
-		level_t before = this->level;
-		if (intmaxof(uint64_t) <= before) {
+		// We can't allow memory to change while we look at the following
+		// fields. So we force any other threads on other processors to
+		// busy wait until we're done.
+
+		pthread_spin_lock(&(this->spin));
+
+		int before = this->level;
+		if (intmaxof(int) <= before) {
+			pthread_spin_unlock(&(this->spin));
 			break;
 		}
 
-		//
-		//  Test for cancellation then disable cancellation of
-		//  this thread.
-		//
+		// If we intend to block cancellation while we hold the mutex, we have
+		// to do so before we lock the mutex. That means we are barred from
+		// being canceled while we're waiting on the mutex.
 
-		pthread_testcancel();
+		int save = PTHREAD_CANCEL_ENABLE;
+		if ((0 == before) && block) {
+			pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &save);
+		}
 
-		state_t save = PTHREAD_CANCEL_ENABLE;
-		pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &save);
+		pthread_spin_unlock(&(this->spin));
 
 		int rc = pthread_mutex_lock(&(this->mutex));
 		if (0 != rc) {
-			//
-			//  The lock failed. We return the cancel state of this thread
-			//	to its prior state.
-			//
-			pthread_setcancelstate(save, 0);
+			if ((0 == before) && block) {
+				pthread_setcancelstate(save, 0);
+			}
 			break;
 		}
 
-		//
-		//  We're inside the mutex now and have exclusive access
-		//  to this object.
-		//
+		// We now know we own this mutex.
 
-		if (0 == this->level) {
-			this->identity = self();
+		if (0 == before) {
+			this->identity = pthread_self();
+			this->uncancellable = block;
 			this->state = save;
 		}
 
@@ -161,57 +158,42 @@ bool Mutex::end() {
 
 	do {
 
-		//
-		//  We cannot assume we are in the mutex and have exclusive
-		//  access to this object. Hence it could be changing as we
-		//  look at it. Given a non-sequentially consistent memory
-		//  model, the object might lie to us if we do not own it.
-		//  But if we do own it, for sure the checks below will pass.
-		//
+		// We can't allow memory to change while we look at the following
+		// fields. So we force any other threads on other processors to
+		// busy wait until we're done.
 
-		level_t before = this->level;
-		if (0 == before) {
+		pthread_spin_lock(&(this->spin));
+
+		int before = this->level;
+		if (0 >= before) {
+			pthread_spin_unlock(&(this->spin));
 			break;
 		}
 
-		identity_t owner = this->identity;
-		identity_t me = self();
-		if (owner != me) {
+		pthread_t owner = this->identity;
+		if (pthread_equal(owner, pthread_self()) == 0) {
+			pthread_spin_unlock(&(this->spin));
 			break;
 		}
 
-		//
-		//  We're pretty sure we are in the mutex and have exclusive
-		//  access to this object, but only until we do the unlock.
-		//	Once the unlock succeeds, we cannot assume any of this
-		//	object's fields are ours to write or that reading them
-		//	will return the value we read previously.
-		//
+		// We now know we own this mutex. But once we unlock it, we can't make
+		// any assumptions about the state of any variables in this object. So
+		// we make local copies of them to use following the unlock.
 
-		state_t restore = this->state;
+		int block = this->uncancellable;
+		int restore = this->state;
 		--this->level;
-		level_t after = this->level;
+
+		pthread_spin_unlock(&(this->spin));
 
 		int rc = pthread_mutex_unlock(&(this->mutex));
 		if (0 != rc) {
-			//
-			//  The unlock failed. We return this object to its
-			//  prior state since we still presumably have exclusive
-			//  access to it.
-			//
 			this->level = before;
 			break;
 		}
 
-		//
-		//  If we are exiting this mutex, restore the cancel state
-		//  of this thread to its original state upon entry to the
-		//  mutex and test for cancellation.
-		//
-
-		if (0 == after) {
+		if ((1 == before) && block) {
 			pthread_setcancelstate(restore, 0);
-			pthread_testcancel();
 		}
 
 		result = true;
@@ -239,10 +221,13 @@ void Mutex::show(int /* level */, Output* display, int indent) const {
     printf("%s mutexattr:\n", sp);
     dump.words(&(this->mutexattr), sizeof(this->mutexattr), false, 0,
         indent + 2);
-    printf("%s identity=0x%016llx\n", sp, this->identity);
-    printf("%s level=%llu%s\n",
+    printf("%s identity=0x%08x\n", sp, this->identity);
+    printf("%s level=%u%s\n",
         sp, this->level,
         (0 == this->level) ? "=UNLOCKED" : "=LOCKED");
+    printf("%s uncancellable=%d%s\n",
+        sp, this->uncancellable,
+        this->uncancellable ? "=UNCANCELLABLE" : "=CANCELLABLE");
     printf("%s state=%d%s\n",
         sp, this->state,
         (PTHREAD_CANCEL_ENABLE == this->state)

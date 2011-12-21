@@ -79,25 +79,6 @@ class Mutex : public Object {
 
 public:
 
-	/**
-	 * This is the type of a variable that contains the identity of a mutex
-	 * holder. It may or may not be the same, in terms of both type and
-	 * value encoding, as the identity_t used by Platform.
-	 */
-	typedef uint64_t identity_t;
-
-	/**
-	 * This is the type of a variable that contains the recursion level of a
-	 * mutex.
-	 */
-	typedef uint64_t level_t;
-
-	/**
-	 * This is the type of a variable that contains the cancellation state of
-	 * a thread using a mutex.
-	 */
-	typedef int state_t;
-
     /**
      *  Constructor.
      */
@@ -111,9 +92,13 @@ public:
     /**
      *  Locks the mutex.
      *
+     *  @oaram block	if true causes the calling thread to be uncancellable
+     *  				from the time the mutex is initially locked until it is
+     *  				finally unlocked, which is the default behavior.
+     *
      *  @return true if successful, false otherwise.
      */
-    virtual bool begin();
+    virtual bool begin(bool block = true);
 
     /**
      *  Unlocks the mutex.
@@ -133,11 +118,23 @@ public:
     bool isLocked() const;
 
     /**
+     *  Returns true if the locking the mutex made the calling thread
+     *  uncancellable, false otherwise. This is useful for debugging, but
+     *  caution should be exercised when using this algorithmically, because
+     *  this has no bearing on whether the thread may have been uncancellable
+     *  before the mutex was locked
+     *
+     *  @return true of locking the mutex made the calling thread uncancellable,
+     *          false otherwise.
+     */
+    bool isUncancellable() const;
+
+    /**
      *  Returns the identifier of the thread holding the mutex.
      *
      *  @return a thread identifier.
      */
-    identity_t getIdentity() const;
+    pthread_t getIdentity() const;
 
     /**
      *  Displays internal information about this object to the specified
@@ -165,9 +162,10 @@ public:
 private:
 
     /**
-     *  This is the POSIX pthread mutex.
+     * This is a POSIX spin lock which only has an effect on multi-processor
+     * shared memory systems.
      */
-    pthread_mutex_t mutex;
+    pthread_spinlock_t spin;
 
     /**
      *  This is the POSIX pthread mutex attribute.
@@ -175,19 +173,31 @@ private:
     pthread_mutexattr_t mutexattr;
 
     /**
+     *  This is the POSIX pthread mutex.
+     */
+    pthread_mutex_t mutex;
+
+    /**
      *  This is the identifier of the holder of the mutex.
      */
-    identity_t identity;
+    pthread_t identity;
 
     /**
      *  This is the level of recursion.
      */
-    level_t level;
+    int level;
 
     /**
-     *  This is the prior enable/disable state of the thread holding the mutex.
+     *	This is true if cancellation is blocked while the mutex is locked and
+     *	is only valid if the mutex is locked.
      */
-    state_t state;
+    bool uncancellable;
+
+    /**
+     *  This is the prior enable/disable state of the thread holding the mutex
+     *  and is only valid if cancellation is blocked and the mutex is locked.
+     */
+    int state;
 
 };
 
@@ -199,11 +209,18 @@ inline bool Mutex::isLocked() const {
     return (0 < this->level);
 }
 
+//
+//  Return true if locked, false otherwise.
+//
+inline bool Mutex::isUncancellable() const {
+    return this->uncancellable;
+}
+
 
 //
 //  Return identifier of thread holding mutex if any.
 //
-inline Mutex::identity_t Mutex::getIdentity() const {
+inline pthread_t Mutex::getIdentity() const {
     return this->identity;
 }
 
