@@ -1,11 +1,8 @@
-#ifndef _COM_DIAG_DESPERADO_CRITICALSECTION_H_
-#define _COM_DIAG_DESPERADO_CRITICALSECTION_H_
-
 /* vim: set ts=4 expandtab shiftwidth=4: */
 
 /******************************************************************************
 
-    Copyright 2006-2011 Digital Aggregates Corporation, Colorado, USA.
+    Copyright 2011 Digital Aggregates Corporation, Colorado, USA.
     This file is part of the Digital Aggregates Desperado library.
     
     This library is free software; you can redistribute it and/or
@@ -38,84 +35,41 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-
-
 ******************************************************************************/
 
 
 /**
  *  @file
  *
- *  Declares the CriticalSection class.
+ *  Implements the CriticalSection class.
  *
  *  @see    CriticalSection
  *
  *  @author Chip Overclock (coverclock@diag.com)
- *
- *
  */
 
 
-#include "com/diag/desperado/Mutex.h"
+#include "com/diag/desperado/CriticalSection.h"
 
 
 #include "com/diag/desperado/Begin.h"
 
-/**
- *  Given a Mutex, locks it upon construction, and unlocks it
- *  upon destruction, allowing a Mutex to be automatically
- *  locked and unlocked as the critical section goes in and out
- *  of scope. This exploits the "Resource Acquisition is Initialization"
- *  idiom. Note however that the calling thread is still made uncancelable
- *  (because when the thread is canceled testing suggests the destructor
- *  is not called).
- *
- *  @see    B. Stroustrup, <I>The C++ Programming Language</I>,
- *          3rd edition, pp 366-367, "resource acquisition is
- *          initialization"
- *
- *  @author coverclock@diag.com (Chip Overclock)
- */
-class CriticalSection {
+//
+//  Constructor.
+//
+CriticalSection::CriticalSection(Mutex& mutexr) :
+    mutex(mutexr)
+{
+    this->mutex.begin(false);
+}
 
-public:
 
-    /**
-     *  Constructor.
-     *
-     *  @param  mutexr      refers to a mutex object.
-     */
-    explicit CriticalSection(Mutex& mutexr);
+//
+//  Destructor.
+//
+CriticalSection::~CriticalSection() {
+    this->mutex.end();
+}
 
-    /**
-     *  Destructor.
-     */
-    virtual ~CriticalSection();
-
-    /**
-     *  This is a reference to the mutex.
-     */
-    Mutex& mutex;
-
-private:
-
-    /**
-     *  Copy constructor. POISONED.
-     *
-     *  @param that refers to an R-value object of this type.
-     */
-    CriticalSection(const CriticalSection& that);
-
-    /**
-     *  Assignment operator. POISONED.
-     *
-     *  @param that refers to an R-value object of this type.
-     */
-    CriticalSection& operator=(const CriticalSection& that);
-
-};
 
 #include "com/diag/desperado/End.h"
-
-
-#endif

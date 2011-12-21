@@ -154,6 +154,7 @@ CXXCAPI int desperado_portable_barrier(void);
 
 #if !defined(desperado_native_barrier)
 #   define desperado_native_barrier() desperado_portable_barrier()
+#	warning Using desperado_portable_barrier!
 #endif
 
 

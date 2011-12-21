@@ -89,55 +89,35 @@ Mutex::~Mutex() {
 
 
 //
-//  Lock. This may have the unfortunate side effect of making threads
-//  waiting on mutexen uncancellable. The alternative would be to
-//  allow threads to be cancelled between taking the mutex and
-//  becoming uncancellable, leaving the mutex locked. As a rule,
-//  threads should not perform blocking operations while holding
-//  a mutex, but this is sometimes easier said than done.
+//  Lock.
 //
 bool Mutex::begin(bool block) {
 	bool result = false;
 
 	do {
 
-		// We can't allow memory to change while we look at the following
-		// fields. So we force any other threads on other processors to
-		// busy wait until we're done.
-
-		pthread_spin_lock(&(this->spin));
-
-		int before = this->level;
-		if (intmaxof(int) <= before) {
-			pthread_spin_unlock(&(this->spin));
-			break;
-		}
-
-		// If we intend to block cancellation while we hold the mutex, we have
-		// to do so before we lock the mutex. That means we are barred from
-		// being canceled while we're waiting on the mutex.
-
-		int save = PTHREAD_CANCEL_ENABLE;
-		if ((0 == before) && block) {
-			pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &save);
-		}
-
-		pthread_spin_unlock(&(this->spin));
+		// We cannot access any of the variables in this object, other than the
+		// mutex itself, until we lock the mutex. I'm also assuming the mutex
+		// lock does some kind of memory barrier.
 
 		int rc = pthread_mutex_lock(&(this->mutex));
 		if (0 != rc) {
-			if ((0 == before) && block) {
-				pthread_setcancelstate(save, 0);
-			}
 			break;
 		}
 
-		// We now know we own this mutex.
+		// If this is the first level of a possibly recursive mutex lock,
+		// initialize all the fields in the object. We relying on the
+		// fact that cancellation is deferred and there are no cancellation
+		// points between the mutex lock and the set cancel state.
 
-		if (0 == before) {
+		if (0 == this->level) {
 			this->identity = pthread_self();
 			this->uncancellable = block;
-			this->state = save;
+			if (block) {
+				int save = PTHREAD_CANCEL_ENABLE;
+				pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &save);
+				this->state = save;
+			}
 		}
 
 		++this->level;
@@ -158,21 +138,20 @@ bool Mutex::end() {
 
 	do {
 
+		// We don't know yet whether or not we own this mutex.
 		// We can't allow memory to change while we look at the following
 		// fields. So we force any other threads on other processors to
-		// busy wait until we're done.
+		// busy wait until we're done. We must not perform any blocking
+		// operations until we release the spin lock. I'm also assuming
+		// the spin lock does some kind of memory barrier.
 
 		pthread_spin_lock(&(this->spin));
 
-		int before = this->level;
-		if (0 >= before) {
-			pthread_spin_unlock(&(this->spin));
-			break;
-		}
+		bool valid = (0 != pthread_equal(this->identity, pthread_self())) && (0 < this->level);
 
-		pthread_t owner = this->identity;
-		if (pthread_equal(owner, pthread_self()) == 0) {
-			pthread_spin_unlock(&(this->spin));
+		pthread_spin_unlock(&(this->spin));
+
+		if (!valid) {
 			break;
 		}
 
@@ -180,19 +159,22 @@ bool Mutex::end() {
 		// any assumptions about the state of any variables in this object. So
 		// we make local copies of them to use following the unlock.
 
-		int block = this->uncancellable;
-		int restore = this->state;
 		--this->level;
 
-		pthread_spin_unlock(&(this->spin));
+		int nesting = this->level;
+		bool block = this->uncancellable;
+		int restore = this->state;
 
 		int rc = pthread_mutex_unlock(&(this->mutex));
 		if (0 != rc) {
-			this->level = before;
+			++this->level;
 			break;
 		}
 
-		if ((1 == before) && block) {
+		// We waited until now to set the cancel state so we didn't have to
+		// restore it in case the mutex unlock failed.
+
+		if ((0 == nesting) && block) {
 			pthread_setcancelstate(restore, 0);
 		}
 
