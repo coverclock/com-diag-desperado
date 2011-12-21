@@ -164,6 +164,20 @@ public:
 private:
 
     /**
+     *  Copy constructor. POISONED.
+     *
+     *  @param that refers to an R-value object of this type.
+     */
+    Mutex(const Mutex& that);
+
+    /**
+     *  Assignment operator. POISONED.
+     *
+     *  @param that refers to an R-value object of this type.
+     */
+    Mutex& operator=(const Mutex& that);
+
+    /**
      * This is a POSIX spin lock which only has an effect on multi-processor
      * shared memory systems.
      */
