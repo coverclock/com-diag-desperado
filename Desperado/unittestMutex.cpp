@@ -97,13 +97,13 @@ CXXCAPI int unittestMutex(void) {
         ++errors;
     }
 
-    printf("%s[%d]: mutex end\n", __FILE__, __LINE__);
-
-    locked = mutex.isLocked();
-    if (!locked) {
-        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, true);
+    bool uncancellable = mutex.isUncancellable();
+    if (!uncancellable) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, true);
         ++errors;
     }
+
+    printf("%s[%d]: mutex end\n", __FILE__, __LINE__);
 
     mutex.show();
     DEBUG_TRACE(mutex.end());
@@ -117,18 +117,18 @@ CXXCAPI int unittestMutex(void) {
 
     printf("%s[%d]: mutex recursion\n", __FILE__, __LINE__);
 
-    locked = mutex.isLocked();
-    if (locked) {
-        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, false);
-        ++errors;
-    }
-
     mutex.show();
     DEBUG_TRACE(mutex.begin());
 
     locked = mutex.isLocked();
     if (!locked) {
         errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, true);
+        ++errors;
+    }
+
+    uncancellable = mutex.isUncancellable();
+    if (!uncancellable) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, true);
         ++errors;
     }
 
@@ -140,6 +140,12 @@ CXXCAPI int unittestMutex(void) {
     locked = mutex.isLocked();
     if (!locked) {
         errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, true);
+        ++errors;
+    }
+
+    uncancellable = mutex.isUncancellable();
+    if (!uncancellable) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, true);
         ++errors;
     }
 
@@ -156,6 +162,12 @@ CXXCAPI int unittestMutex(void) {
     locked = mutex.isLocked();
     if (!locked) {
         errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, true);
+        ++errors;
+    }
+
+    uncancellable = mutex.isUncancellable();
+    if (!uncancellable) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, true);
         ++errors;
     }
 
@@ -210,27 +222,21 @@ CXXCAPI int unittestMutex(void) {
 
     printf("%s[%d]: critical section\n", __FILE__, __LINE__);
 
-    locked = mutex.isLocked();
-    if (locked) {
-        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, false);
-        ++errors;
-    }
-
     DEBUG_TRACE(((void)0));
     mutex.show();
     {
-        locked = mutex.isLocked();
-        if (locked) {
-            errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, false);
-            ++errors;
-        }
-
         DEBUG_TRACE(CriticalSection one(mutex));
         mutex.show();
         {
             locked = mutex.isLocked();
             if (!locked) {
                 errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, true);
+                ++errors;
+            }
+
+            uncancellable = mutex.isUncancellable();
+            if (uncancellable) {
+                errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, true);
                 ++errors;
             }
 

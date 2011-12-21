@@ -65,7 +65,10 @@
  *  Given a Mutex, locks it upon construction, and unlocks it
  *  upon destruction, allowing a Mutex to be automatically
  *  locked and unlocked as the critical section goes in and out
- *  of scope.
+ *  of scope. This exploits the "Resource Acquisition is Initialization"
+ *  idiom. Because of this, this object does not make the calling thread
+ *  uncancellable, since the Mutex is guaranteed to be unlocked when
+ *  the stack variable goes out of scope.
  *
  *  @see    B. Stroustrup, <I>The C++ Programming Language</I>,
  *          3rd edition, pp 366-367, "resource acquisition is
@@ -103,7 +106,7 @@ public:
 inline CriticalSection::CriticalSection(Mutex& mutexr) :
     mutex(mutexr)
 {
-    this->mutex.begin();
+    this->mutex.begin(false);
 }
 
 
