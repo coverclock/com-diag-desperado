@@ -235,7 +235,7 @@ CXXCAPI int unittestMutex(void) {
             }
 
             uncancellable = mutex.isUncancellable();
-            if (uncancellable) {
+            if (!uncancellable) {
                 errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, true);
                 ++errors;
             }
@@ -276,6 +276,42 @@ CXXCAPI int unittestMutex(void) {
         }
     }
     DEBUG_TRACE(((void)0));
+    mutex.show();
+
+    locked = mutex.isLocked();
+    if (locked) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, false);
+        ++errors;
+    }
+
+    printf("%s[%d]: mutex begin cancellable\n", __FILE__, __LINE__);
+
+    locked = mutex.isLocked();
+    if (locked) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, false);
+        ++errors;
+    }
+
+    mutex.show();
+    DEBUG_TRACE(mutex.begin(false));
+    mutex.show();
+
+    locked = mutex.isLocked();
+    if (!locked) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, locked, true);
+        ++errors;
+    }
+
+    uncancellable = mutex.isUncancellable();
+    if (uncancellable) {
+        errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, false);
+        ++errors;
+    }
+
+    printf("%s[%d]: mutex end cancellable\n", __FILE__, __LINE__);
+
+    mutex.show();
+    DEBUG_TRACE(mutex.end());
     mutex.show();
 
     locked = mutex.isLocked();
