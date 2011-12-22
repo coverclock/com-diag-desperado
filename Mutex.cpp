@@ -175,7 +175,8 @@ bool Mutex::end() {
 		// restore it in case the mutex unlock failed.
 
 		if ((0 == nesting) && block) {
-			pthread_setcancelstate(restore, 0);
+			int dontcare;
+			pthread_setcancelstate(restore, &dontcare);
 		}
 
 		result = true;
