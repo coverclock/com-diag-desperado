@@ -161,21 +161,7 @@ public:
      */
     virtual void show(int level = 0, Output* display = 0, int indent = 0) const;
 
-private:
-
-    /**
-     *  Copy constructor. POISONED.
-     *
-     *  @param that refers to an R-value object of this type.
-     */
-    Mutex(const Mutex& that);
-
-    /**
-     *  Assignment operator. POISONED.
-     *
-     *  @param that refers to an R-value object of this type.
-     */
-    Mutex& operator=(const Mutex& that);
+protected:
 
     /**
      * This is a POSIX spin lock which only has an effect on multi-processor
@@ -214,6 +200,22 @@ private:
      *  and is only valid if cancellation is blocked and the mutex is locked.
      */
     int state;
+
+private:
+
+    /**
+     *  Copy constructor. POISONED.
+     *
+     *  @param that refers to an R-value object of this type.
+     */
+    Mutex(const Mutex& that);
+
+    /**
+     *  Assignment operator. POISONED.
+     *
+     *  @param that refers to an R-value object of this type.
+     */
+    Mutex& operator=(const Mutex& that);
 
 };
 

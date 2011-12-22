@@ -60,7 +60,7 @@
 CriticalSection::CriticalSection(Mutex& mutexr) :
     mutex(mutexr)
 {
-    this->mutex.begin(false);
+    this->mutex.begin(true);
 }
 
 

@@ -66,9 +66,8 @@
  *  upon destruction, allowing a Mutex to be automatically
  *  locked and unlocked as the critical section goes in and out
  *  of scope. This exploits the "Resource Acquisition is Initialization"
- *  idiom. Note however that the calling thread is still made uncancelable
- *  (because when the thread is canceled testing suggests the destructor
- *  is not called).
+ *  idiom. Note however that in this implementation the calling thread is
+ *  still made uncancellable.
  *
  *  @see    B. Stroustrup, <I>The C++ Programming Language</I>,
  *          3rd edition, pp 366-367, "resource acquisition is
@@ -91,6 +90,8 @@ public:
      *  Destructor.
      */
     virtual ~CriticalSection();
+
+protected:
 
     /**
      *  This is a reference to the mutex.

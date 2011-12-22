@@ -235,7 +235,7 @@ CXXCAPI int unittestMutex(void) {
             }
 
             uncancellable = mutex.isUncancellable();
-            if (uncancellable) {
+            if (!uncancellable) {
                 errorf("%s[%d]: (%d!=%d)!\n", __FILE__, __LINE__, uncancellable, true);
                 ++errors;
             }
