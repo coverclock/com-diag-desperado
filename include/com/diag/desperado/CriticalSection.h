@@ -38,8 +38,6 @@
     Free Software Foundation, Inc., 59 Temple Place, Suite 330,
     Boston, MA 02111-1307 USA, or http://www.gnu.org/copyleft/lesser.txt.
 
-
-
 ******************************************************************************/
 
 
@@ -66,8 +64,7 @@
  *  upon destruction, allowing a Mutex to be automatically
  *  locked and unlocked as the critical section goes in and out
  *  of scope. This exploits the "Resource Acquisition is Initialization"
- *  idiom. Note however that in this implementation the calling thread is
- *  still made uncancellable.
+ *  idiom.
  *
  *  @see    B. Stroustrup, <I>The C++ Programming Language</I>,
  *          3rd edition, pp 366-367, "resource acquisition is
@@ -82,9 +79,13 @@ public:
     /**
      *  Constructor.
      *
-     *  @param  mutexr      refers to a mutex object.
+     *  @param  mutexr	refers to a mutex object.
+     *
+     *  @oaram	disable	if true causes the calling thread to be uncancellable
+     *  				when an object of this type is in scope. This is the
+     *  				default behavior.
      */
-    explicit CriticalSection(Mutex& mutexr);
+    explicit CriticalSection(Mutex& mutexr, bool disable = true);
 
     /**
      *  Destructor.
@@ -97,6 +98,19 @@ protected:
      *  This is a reference to the mutex.
      */
     Mutex& mutex;
+
+    /**
+     *	This is true if cancellation is blocked while the mutex is locked. Its
+     *	value is only valid if the mutex is locked.
+     */
+    bool disabled;
+
+    /**
+     *  This is the prior enable/disable state of the thread that initially
+     *  constructed an object of this type. Its value is only valid if the
+     *  thread was made uncancellable by the constructor.
+     */
+    int state;
 
 private:
 
