@@ -67,10 +67,13 @@
 
 static Mutex staticMutex;
 
+static int level = 0;
+
 CXXCAPI int unittestMutex(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;
+    bool result;
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
@@ -81,65 +84,84 @@ CXXCAPI int unittestMutex(void) {
     printf("%s[%d]: mutex begin\n", __FILE__, __LINE__);
 
     mutex.show();
-    DEBUG_TRACE(mutex.begin());
+    if (!(result = mutex.begin())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
 
     printf("%s[%d]: mutex end\n", __FILE__, __LINE__);
 
     mutex.show();
-    DEBUG_TRACE(mutex.end());
+    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
 
     printf("%s[%d]: mutex recursion\n", __FILE__, __LINE__);
 
     mutex.show();
-    DEBUG_TRACE(mutex.begin());
+    if (!(result = mutex.begin())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
-    DEBUG_TRACE(mutex.begin());
+    if (!(result = mutex.attempt())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
-    DEBUG_TRACE(mutex.begin());
+    if (!(result = mutex.begin())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
-    DEBUG_TRACE(mutex.end());
+    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
-    DEBUG_TRACE(mutex.end());
+    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
-    DEBUG_TRACE(mutex.end());
+    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
     mutex.show();
 
     printf("%s[%d]: critical section\n", __FILE__, __LINE__);
 
-    DEBUG_TRACE(((void)0));
-    mutex.show();
+    struct MyCriticalSection : public CriticalSection {
+    	explicit MyCriticalSection(Mutex& mutexr, bool disable = true)
+    		: CriticalSection(mutexr, disable)
+    	{
+    		++level;
+    	}
+    	virtual ~MyCriticalSection() {
+    		--level;
+    	}
+    	int getStatus() { return this->status; }
+    	bool getDisabled() { return this->disabled; }
+    };
+
     {
-        DEBUG_TRACE(CriticalSection one(mutex));
+        MyCriticalSection one(mutex);
+        if (!(result = one.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+        if (!(result = one.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+        if (level != 1) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 1); ++errors; }
         mutex.show();
         {
-            DEBUG_TRACE(CriticalSection two(mutex));
+            MyCriticalSection two(mutex);
+            if (!(result = two.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+            if (!(result = two.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+            if (level != 2) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 2); ++errors; }
             mutex.show();
-            DEBUG_TRACE(((void)0));
         }   
-        DEBUG_TRACE(((void)0));
+        if (level != 1) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 1); ++errors; }
         mutex.show();
     }
-    DEBUG_TRACE(((void)0));
+    if (level != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 0); ++errors; }
     mutex.show();
 
     printf("%s[%d]: critical section enabled\n", __FILE__, __LINE__);
 
-    DEBUG_TRACE(((void)0));
-    mutex.show();
     {
-        DEBUG_TRACE(CriticalSection one(mutex, false));
+        MyCriticalSection one(mutex, false);
+        if (!(result = one.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+        if ((result = one.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, false); ++errors; }
+        if (level != 1) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 1); ++errors; }
         mutex.show();
         {
-            DEBUG_TRACE(CriticalSection two(mutex, false));
+            MyCriticalSection two(mutex, false);
+            if (!(result = two.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+            if ((result = two.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, false); ++errors; }
+            if (level != 2) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 2); ++errors; }
             mutex.show();
-            DEBUG_TRACE(((void)0));
         }
-        DEBUG_TRACE(((void)0));
+        if (level != 1) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 1); ++errors; }
         mutex.show();
     }
-    DEBUG_TRACE(((void)0));
+    if (level != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 0); ++errors; }
     mutex.show();
 
     printf("%s[%d]: end errors=%d\n",

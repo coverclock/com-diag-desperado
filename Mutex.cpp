@@ -87,6 +87,14 @@ bool Mutex::begin() {
 
 
 //
+//  Try lock.
+//
+bool Mutex::attempt() {
+	return (::pthread_mutex_trylock(&(this->mutex)) == 0);
+}
+
+
+//
 //  Unlock.
 //
 bool Mutex::end() {

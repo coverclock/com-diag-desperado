@@ -60,7 +60,8 @@
 CriticalSection::CriticalSection(Mutex& mutexr, bool disable) :
     mutex(mutexr),
 	disabled(disable),
-	state(PTHREAD_CANCEL_ENABLE)
+	state(PTHREAD_CANCEL_ENABLE),
+	status(0)
 {
 	// Note that this object isn't being shared between threads, only the mutex.
     if (this->disabled) {
@@ -68,7 +69,7 @@ CriticalSection::CriticalSection(Mutex& mutexr, bool disable) :
     		this->disabled = false;
     	}
     }
-    this->mutex.begin();
+    this->status = this->mutex.begin();
 }
 
 
@@ -76,7 +77,7 @@ CriticalSection::CriticalSection(Mutex& mutexr, bool disable) :
 //  Destructor.
 //
 CriticalSection::~CriticalSection() {
-    this->mutex.end();
+	this->status = this->mutex.end();
 	// Note that this object isn't being shared between threads, only the mutex.
 	if (this->disabled) {
 		int dontcare;

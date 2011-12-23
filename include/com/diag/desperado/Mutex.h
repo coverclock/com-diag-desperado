@@ -99,6 +99,15 @@ public:
     virtual bool begin();
 
     /**
+     *  Tries to lock the mutex but returns false instead of blocking if the
+     *  mutex is locked by another thread of control. (Not recommended for
+     *  applications, but useful in unit testing.)
+     *
+     *  @return true if successful, false otherwise.
+     */
+    virtual bool attempt();
+
+    /**
      *  Unlocks the mutex.
      *
      *  @return true if successful, false otherwise.
