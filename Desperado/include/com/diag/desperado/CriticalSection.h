@@ -112,6 +112,12 @@ protected:
      */
     int state;
 
+    /**
+     * This is the return code, zero or an error number, returned by pthreads.
+     * Used for unit testing.
+     */
+    int status;
+
 private:
 
     /**
