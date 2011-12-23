@@ -81,24 +81,24 @@ Mutex::~Mutex() {
 //
 //  Lock.
 //
-bool Mutex::begin() {
-	return (::pthread_mutex_lock(&(this->mutex)) == 0);
+int Mutex::begin() {
+	return ::pthread_mutex_lock(&(this->mutex));
 }
 
 
 //
 //  Try lock.
 //
-bool Mutex::attempt() {
-	return (::pthread_mutex_trylock(&(this->mutex)) == 0);
+int Mutex::attempt() {
+	return ::pthread_mutex_trylock(&(this->mutex));
 }
 
 
 //
 //  Unlock.
 //
-bool Mutex::end() {
-	return (::pthread_mutex_unlock(&(this->mutex)) == 0);
+int Mutex::end() {
+	return ::pthread_mutex_unlock(&(this->mutex));
 }
 
 

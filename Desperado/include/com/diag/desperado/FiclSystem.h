@@ -398,7 +398,7 @@ inline ficlSystemInformation& FiclSystem::getNativeInformation() {
 //  Lock the mutex associated with this object.
 //
 inline bool FiclSystem::lock() {
-    return this->mutex.begin();
+    return (this->mutex.begin() == 0);
 }
 
 
@@ -406,7 +406,7 @@ inline bool FiclSystem::lock() {
 //  Unlock the mutex associated with this object.
 //
 inline bool FiclSystem::unlock() {
-    return this->mutex.end();
+    return (this->mutex.end() == 0);
 }
 
 #include "com/diag/desperado/End.h"
