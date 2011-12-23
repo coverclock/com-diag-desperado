@@ -57,10 +57,18 @@
 //
 //  Constructor.
 //
-CriticalSection::CriticalSection(Mutex& mutexr) :
-    mutex(mutexr)
+CriticalSection::CriticalSection(Mutex& mutexr, bool disable) :
+    mutex(mutexr),
+	disabled(disable),
+	state(PTHREAD_CANCEL_ENABLE)
 {
-    this->mutex.begin(true);
+	// Note that this object isn't being shared between threads, only the mutex.
+    if (this->disabled) {
+    	if (pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &(this->state)) != 0) {
+    		this->disabled = false;
+    	}
+    }
+    this->mutex.begin();
 }
 
 
@@ -69,6 +77,11 @@ CriticalSection::CriticalSection(Mutex& mutexr) :
 //
 CriticalSection::~CriticalSection() {
     this->mutex.end();
+	// Note that this object isn't being shared between threads, only the mutex.
+	if (this->disabled) {
+		int dontcare;
+		pthread_setcancelstate(this->state, &dontcare);
+	}
 }
 
 

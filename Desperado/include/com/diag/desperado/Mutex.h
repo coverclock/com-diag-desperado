@@ -64,6 +64,8 @@
  *  Implements a mutual exclusion lock, or mutex, for POSIX pthreads.
  *  The mutex allows recursion: if the same thread locks the mutex
  *  more than once without releasing it, the thread does not deadlock.
+ *  However, begin() (lock) and end() (unlock) operations must be
+ *  correctly bracketed.
  *
  *  @see    D. Butenhof, <I>Programming with POSIX Threads</I>,
  *          Addison-Wesley, 1997
@@ -92,15 +94,9 @@ public:
     /**
      *  Locks the mutex.
      *
-     *  @oaram block	if true causes the calling thread to be uncancellable
-     *  				from the time the mutex is initially locked until it is
-     *  				finally unlocked, which is the default behavior. Setting
-     *  				this parameter to false is really dangerous since
-     *  				canceled threads can leave the mutex permanently locked.
-     *
      *  @return true if successful, false otherwise.
      */
-    virtual bool begin(bool block = true);
+    virtual bool begin();
 
     /**
      *  Unlocks the mutex.
@@ -108,35 +104,6 @@ public:
      *  @return true if successful, false otherwise.
      */
     virtual bool end();
-
-    /**
-     *  Returns true if the mutex is locked, false otherwise. This
-     *  is useful for debugging, but caution should be exercised when
-     *  using this algorithmically. The mutex may have become locked
-     *  or unlocked right after the call to this method.
-     *
-     *  @return true of the mutex is locked, false otherwise.
-     */
-    bool isLocked() const;
-
-    /**
-     *  Returns true if the locking the mutex made the calling thread
-     *  uncancellable, false otherwise. This is useful for debugging, but
-     *  caution should be exercised when using this algorithmically, because
-     *  this has no bearing on whether the thread may have been uncancellable
-     *  before the mutex was locked
-     *
-     *  @return true of locking the mutex made the calling thread uncancellable,
-     *          false otherwise.
-     */
-    bool isUncancellable() const;
-
-    /**
-     *  Returns the identifier of the thread holding the mutex.
-     *
-     *  @return a thread identifier.
-     */
-    pthread_t getIdentity() const;
 
     /**
      *  Displays internal information about this object to the specified
@@ -164,42 +131,14 @@ public:
 protected:
 
     /**
-     * This is a POSIX spin lock which only has an effect on multi-processor
-     * shared memory systems.
-     */
-    pthread_spinlock_t spin;
-
-    /**
      *  This is the POSIX pthread mutex attribute.
      */
-    pthread_mutexattr_t mutexattr;
+    ::pthread_mutexattr_t mutexattr;
 
     /**
      *  This is the POSIX pthread mutex.
      */
-    pthread_mutex_t mutex;
-
-    /**
-     *  This is the identifier of the holder of the mutex.
-     */
-    pthread_t identity;
-
-    /**
-     *  This is the level of recursion.
-     */
-    int level;
-
-    /**
-     *	This is true if cancellation is blocked while the mutex is locked and
-     *	is only valid if the mutex is locked.
-     */
-    bool uncancellable;
-
-    /**
-     *  This is the prior enable/disable state of the thread holding the mutex
-     *  and is only valid if cancellation is blocked and the mutex is locked.
-     */
-    int state;
+    ::pthread_mutex_t mutex;
 
 private:
 
@@ -218,29 +157,6 @@ private:
     Mutex& operator=(const Mutex& that);
 
 };
-
-
-//
-//  Return true if locked, false otherwise.
-//
-inline bool Mutex::isLocked() const {
-    return (0 < this->level);
-}
-
-//
-//  Return true if locked, false otherwise.
-//
-inline bool Mutex::isUncancellable() const {
-    return this->uncancellable;
-}
-
-
-//
-//  Return identifier of thread holding mutex if any.
-//
-inline pthread_t Mutex::getIdentity() const {
-    return this->identity;
-}
 
 #include "com/diag/desperado/End.h"
 
