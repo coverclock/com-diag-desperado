@@ -94,25 +94,25 @@ public:
     /**
      *  Locks the mutex.
      *
-     *  @return true if successful, false otherwise.
+     *  @return 0 for success or an error number otherwise.
      */
-    virtual bool begin();
+    virtual int begin();
 
     /**
      *  Tries to lock the mutex but returns false instead of blocking if the
      *  mutex is locked by another thread of control. (Not recommended for
      *  applications, but useful in unit testing.)
      *
-     *  @return true if successful, false otherwise.
+     *  @return 0 for success or an error number otherwise.
      */
-    virtual bool attempt();
+    virtual int attempt();
 
     /**
      *  Unlocks the mutex.
      *
-     *  @return true if successful, false otherwise.
+     *  @return 0 for success or an error number otherwise.
      */
-    virtual bool end();
+    virtual int end();
 
     /**
      *  Displays internal information about this object to the specified

@@ -73,7 +73,8 @@ CXXCAPI int unittestMutex(void) {
     Print printf(Platform::instance().output());
     Print errorf(Platform::instance().error());
     int errors = 0;
-    bool result;
+    int status;
+    bool disabled;
 
     printf("%s[%d]: begin\n", __FILE__, __LINE__);
 
@@ -84,29 +85,29 @@ CXXCAPI int unittestMutex(void) {
     printf("%s[%d]: mutex begin\n", __FILE__, __LINE__);
 
     mutex.show();
-    if (!(result = mutex.begin())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.begin()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
 
     printf("%s[%d]: mutex end\n", __FILE__, __LINE__);
 
     mutex.show();
-    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.end()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
 
     printf("%s[%d]: mutex recursion\n", __FILE__, __LINE__);
 
     mutex.show();
-    if (!(result = mutex.begin())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.begin()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
-    if (!(result = mutex.attempt())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.attempt()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
-    if (!(result = mutex.begin())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.begin()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
-    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.end()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
-    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.end()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
-    if (!(result = mutex.end())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+    if ((status = mutex.end()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
     mutex.show();
 
     printf("%s[%d]: critical section\n", __FILE__, __LINE__);
@@ -126,14 +127,14 @@ CXXCAPI int unittestMutex(void) {
 
     {
         MyCriticalSection one(mutex);
-        if (!(result = one.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
-        if (!(result = one.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+        if ((status = one.getStatus()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
+        if (!(disabled = one.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, disabled, true); ++errors; }
         if (level != 1) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 1); ++errors; }
         mutex.show();
         {
             MyCriticalSection two(mutex);
-            if (!(result = two.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
-            if (!(result = two.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
+            if ((status = two.getStatus()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
+            if (!(disabled = two.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, disabled, true); ++errors; }
             if (level != 2) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 2); ++errors; }
             mutex.show();
         }   
@@ -147,14 +148,14 @@ CXXCAPI int unittestMutex(void) {
 
     {
         MyCriticalSection one(mutex, false);
-        if (!(result = one.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
-        if ((result = one.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, false); ++errors; }
+        if ((status = one.getStatus()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
+        if ((disabled = one.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, disabled, false); ++errors; }
         if (level != 1) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 1); ++errors; }
         mutex.show();
         {
             MyCriticalSection two(mutex, false);
-            if (!(result = two.getStatus())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, true); ++errors; }
-            if ((result = two.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, result, false); ++errors; }
+            if ((status = two.getStatus()) != 0) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, status, 0); ++errors; }
+            if ((disabled = two.getDisabled())) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, disabled, false); ++errors; }
             if (level != 2) { errorf("%s[%d]: %d!=%d!\n", __FILE__, __LINE__, level, 2); ++errors; }
             mutex.show();
         }

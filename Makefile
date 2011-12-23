@@ -57,8 +57,8 @@ PROJECT		=	Desperado
 POSTRELEASE	=	globe
 RELEASE		=	hawkeye
 PRERELEASE	=	inspiration
-MAJOR		=	6
-MINOR		=	9
+MAJOR		=	7
+MINOR		=	0
 BUILD		=	0
 
 #
