@@ -54,9 +54,9 @@
 DOMAIN		=	diag.com
 PRODUCT		=	desperado
 PROJECT		=	Desperado
-POSTRELEASE	=	globe
-RELEASE		=	hawkeye
-PRERELEASE	=	inspiration
+POSTRELEASE	=	hawkeye
+RELEASE		=	inspiration
+PRERELEASE	=	jackrabbit
 MAJOR		=	7
 MINOR		=	0
 BUILD		=	0
