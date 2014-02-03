@@ -59,7 +59,7 @@ RELEASE		=	inspiration
 PRERELEASE	=	jackrabbit
 MAJOR		=	7
 MINOR		=	1
-BUILD		=	0
+BUILD		=	1
 
 #
 # Indicate the platform and target you are using.
