@@ -101,12 +101,12 @@ o   support for 64-bit integral types.
 
 Contact:
 
-    Chip Overclock
-    mailto:coverclock@diag.com
-    Digital Aggregates Corporation
-    3440 Youngfield Street, Suite 209
-    Wheat Ridge CO 80033 USA
-    +1 303 940 9064
+	Chip Overclock
+	Digital Aggregates Corporation
+	3440 Youngfield Street, #209
+	Wheat Ridge CO 80033 USA
+	http://www.diag.com
+	mailto:coverclock@diag.com
 
 ----------------------------------------------------------------------
 
@@ -157,73 +157,12 @@ ACKNOWLEDGEMENTS
 
 This software is an original work of its author(s).
 
-Portions of this library were inspired by, but do not incorporate,
-in any way make use of, are not based upon, and are probably
-completely incompatible with, software that may be the intellectual
-property of the following people and organizations:
-
-    Avaya Inc.
-    1300 West 120th Avenue
-    Westminster CO 80234 USA
-
-    Cognitive Solutions
-	4403 Table Mountain Drive
-	Suite A
-	Golden CO 80403 USA
-
-    Nachum Dershowitz
-    Department of Computer Science
-    Tel Aviv University
-    Tel Aviv ISR
-
-    Keil Software, Inc.
-    1501 10th Street, Suite 110
-    Plano TX 75074 USA
-
-    Lance Latham
-    Resource Management Systems
-    Fredericksburg TX USA
-
-    LGS Innovations, LLC
-	Westmoor Technology Center Building 9
-	11300 Westmoor Circle
-	Westminster CO 80021 USA
-
-    Lucent Technologies Inc.
-    11900 North Pecos Street
-    Westminster CO 80234 USA
-
-    Monta Vista Software Inc.
-    1237 East Arques Avenue
-    Sunnyvale CA 94085 USA
-
-    Edward M. Reingold
-    Department of Computer Science
-    Illinois Institute of Technology
-    Chicago IL USA
-
-    University Corporation for Atmospheric Research
-    1850 Table Mesa Drive
-    Boulder CO 80303 USA
-
-    Wright State University
-    3640 Colonel Glenn Highway
-    Dayton OH 45435-0001 USA
-
-The author(s) would like to acknowledge these people and organizations
-for their work in the problem domains addressed by this library.
-
-Portions of this software make use of freely available and unrestricted
-software that may be copyrighted by the following people and
-organizations:
+Portions of this software make use of freely available software that may be
+copyrighted by the following people and organizations:
 
     Michael Barr
     Netrino, LLC
     Annapolis MD USA
-
-    Jack Ganssle
-    The Ganssle Group
-    Baltimore MD USA
 
     John Sadler
 
