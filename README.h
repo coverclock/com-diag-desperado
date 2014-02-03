@@ -75,16 +75,22 @@ limitations under the License.
 
 ABSTRACT
 
-This file is part of the Digital Aggregates Corporation Desperado
-library. Desperado is an open source library of object-oriented
-software components written in C++. It implements design patterns
-that the author(s) has found to be both useful and common in embedded
-applications. It was developed as mechanism for the author(s) to both
-learn and teach.
+This file is part of the Digital Aggregates Corporation Desperado package.
+Desperado is an open source library of object-oriented software components
+written in C++. It implements design patterns that the author has found to be
+both useful and common in embedded applications. The most useful portions
+of Desperado have been forked into another project called Desperadito with a
+much simpler build framework. Desperadito also includes a partial fork of the
+Hayloft project. All that Desperadito lacks is the Java and FORTH related
+interface classes from Desperado. It is likely that that is the project you
+really want to use. Never the less, portions of Desperado (mostly prior to the
+Desperadito fork) have legitimately found their way into the commercial products
+of some of the Corporation's clients, so don't be surprised if you see this
+code elsewhere in your travels.
 
-It is licensed under a modified GNU Lesser General Public License
-to allow it to be incorporated into proprietary software or
-firmware without restriction or viral licensing implication.
+Desperado is licensed under a modified GNU Lesser General Public License to
+allow it to be incorporated into proprietary software or firmware without
+restriction or viral licensing implication.
 
 Desperado requires
 
