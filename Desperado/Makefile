@@ -87,7 +87,7 @@ DYNAMIC		=	shared
 # The public directory will be assumed to have include and lib subdirectories.
 #
 
-TMPDIR		=	/tmp
+TMPDIR		=	/var/tmp
 #PUBDIR		=	/usr/local
 PUBDIR		=	/opt/diminuto/buildroot/usr/local
 
