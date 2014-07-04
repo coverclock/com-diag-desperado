@@ -5,7 +5,7 @@
 
 /*******************************************************************************
 
-Copyright 2005-2011 Digital Aggregates Corporation, Colorado, USA.
+Copyright 2005-2014 Digital Aggregates Corporation, Colorado, USA.
 
 ----------------------------------------------------------------------
 
