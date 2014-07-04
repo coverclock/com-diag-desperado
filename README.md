@@ -79,8 +79,11 @@ restriction or viral licensing implication.
 Desperado requires
 
 o   ANSI C++ and ANSI C99-compilant compilers,
+
 o   a POSIX-compliant operating system and run-time library, including
+
 o   POSIX threads, and
+
 o   support for 64-bit integral types.
 
 CONTACT
