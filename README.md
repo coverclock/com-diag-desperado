@@ -3,6 +3,10 @@ com-diag-desperado
 
 Copyright 2005-2014 Digital Aggregates Corporation, Colorado, USA.
 
+DEPRECATED
+
+2017-04-14: see instead <https://github.com/coverclock/com-diag-grandote>
+
 LICENSES
 
 The C and C++ portions of this library are licensed under a modified
